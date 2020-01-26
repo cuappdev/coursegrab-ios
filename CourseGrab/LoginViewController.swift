@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  CourseGrab
 //
 //  Created by Daniel Vebman on 1/26/20.
@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        view.backgroundColor = .white
     }
 
 
