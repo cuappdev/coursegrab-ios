@@ -2,6 +2,11 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+CourseGrab/GoogleService-Info.plist
+CourseGrab/Keys.plist
+
+*.DS_Store
+
 ## User settings
 xcuserdata/
 
