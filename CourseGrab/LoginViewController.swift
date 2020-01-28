@@ -12,10 +12,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    private let stackView = UIStackView()
-    private let titleLabel = UILabel()
     private let logoView = UIImageView()
     private let signInButton = GIDSignInButton()
+    private let stackView = UIStackView()
+    private let titleLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +27,13 @@ class LoginViewController: UIViewController {
         // Automatically sign in the user.
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
 
-        setUpStackView()
-        setUpTitleLabel()
-        setUpLogoView()
-        setUpSignInButton()
+        setupStackView()
+        setupTitleLabel()
+        setupLogoView()
+        setupSignInButton()
     }
 
-    private func setUpStackView() {
+    private func setupStackView() {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-    private func setUpTitleLabel() {
+    private func setupTitleLabel() {
         titleLabel.text = "CourseGrab"
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
@@ -54,7 +54,7 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(titleLabel)
     }
 
-    private func setUpLogoView() {
+    private func setupLogoView() {
         logoView.image = UIImage(named: "image")
         logoView.contentMode = .scaleAspectFit
         stackView.addArrangedSubview(logoView)
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-    private func setUpSignInButton() {
+    private func setupSignInButton() {
         stackView.addArrangedSubview(signInButton)
     }
 
