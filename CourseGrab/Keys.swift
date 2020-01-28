@@ -10,7 +10,7 @@ import Foundation
 
 struct Keys {
     
-    static let googleClientID = Keys.keyDict["google-client-id"] as? String
+    static let googleClientID = Keys.keyDict["google-client-id"] as! String
 
     private static let keyDict: NSDictionary = {
         guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),

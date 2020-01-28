@@ -17,7 +17,7 @@
 		C877FC0E23DE6B89004D06EA /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */; };
 		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
 		C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D52C23E0D70A0007E488 /* Keys.swift */; };
-		C8A3D52F23E0D70B0007E488 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8A3D52D23E0D70A0007E488 /* Keys.plist */; };
+		C8A3D53623E0DE360007E488 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8A3D53523E0DE360007E488 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +36,7 @@
 		C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		C8A3D52C23E0D70A0007E488 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
-		C8A3D52D23E0D70A0007E488 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		C8A3D53523E0DE360007E488 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
 				C824DF2B23E0C23500731590 /* GoogleService-Info.plist */,
 				064348A523DE151D007F5F9F /* Info.plist */,
-				C8A3D52D23E0D70A0007E488 /* Keys.plist */,
+				C8A3D53523E0DE360007E488 /* Keys.plist */,
 				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				06E163A423DE34C7008FF7AD /* Podfile */,
 			);
@@ -166,7 +166,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8A3D52F23E0D70B0007E488 /* Keys.plist in Resources */,
+				C8A3D53623E0DE360007E488 /* Keys.plist in Resources */,
 				C824DF2C23E0C23500731590 /* GoogleService-Info.plist in Resources */,
 				064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */,
 				064348A123DE151D007F5F9F /* Assets.xcassets in Resources */,
