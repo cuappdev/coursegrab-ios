@@ -81,7 +81,7 @@ extension LoginViewController: GIDSignInDelegate {
             return
         }
         let coursesViewController = CoursesViewController()
-        let coursesNavigationController = CoursesNavigationController(rootViewController: coursesViewController)
+        let coursesNavigationController = MainNavigationController(rootViewController: coursesViewController)
         coursesNavigationController.modalPresentationStyle = .fullScreen
         present(coursesNavigationController, animated: false)
     }
@@ -90,5 +90,6 @@ extension LoginViewController: GIDSignInDelegate {
         // Perform any operations when the user disconnects from app here.
         // ...
     }
+    
 }
 

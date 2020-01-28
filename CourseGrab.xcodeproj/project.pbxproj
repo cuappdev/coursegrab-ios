@@ -14,10 +14,10 @@
 		064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 064348A223DE151D007F5F9F /* LaunchScreen.storyboard */; };
 		85B7209D1C37F77FD0A7F126 /* Pods_CourseGrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */; };
 		C824DF2C23E0C23500731590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C824DF2B23E0C23500731590 /* GoogleService-Info.plist */; };
-		C824DF2E23E0C27E00731590 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C824DF2D23E0C27E00731590 /* Keys.plist */; };
-		C824DF3023E0C49600731590 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C824DF2F23E0C49600731590 /* Keys.swift */; };
 		C877FC0E23DE6B89004D06EA /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */; };
-		C877FC1023DE6E07004D06EA /* CoursesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* CoursesNavigationController.swift */; };
+		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
+		C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D52C23E0D70A0007E488 /* Keys.swift */; };
+		C8A3D52F23E0D70B0007E488 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8A3D52D23E0D70A0007E488 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,15 +28,15 @@
 		064348A023DE151D007F5F9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		064348A323DE151D007F5F9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		064348A523DE151D007F5F9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06E163A423DE34C7008FF7AD /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		06E163A423DE34C7008FF7AD /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96351132E2528A1085B69A7A /* Pods-CourseGrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.debug.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.debug.xcconfig"; sourceTree = "<group>"; };
 		C824DF2B23E0C23500731590 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C824DF2D23E0C27E00731590 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
-		C824DF2F23E0C49600731590 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
-		C877FC0F23DE6E07004D06EA /* CoursesNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesNavigationController.swift; sourceTree = "<group>"; };
+		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		C8A3D52C23E0D70A0007E488 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		C8A3D52D23E0D70A0007E488 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,14 +76,14 @@
 				0643489923DE1519007F5F9F /* SceneDelegate.swift */,
 				0643489B23DE1519007F5F9F /* LoginViewController.swift */,
 				C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */,
-				C877FC0F23DE6E07004D06EA /* CoursesNavigationController.swift */,
+				C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */,
 				064348A023DE151D007F5F9F /* Assets.xcassets */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
 				C824DF2B23E0C23500731590 /* GoogleService-Info.plist */,
-				C824DF2D23E0C27E00731590 /* Keys.plist */,
 				064348A523DE151D007F5F9F /* Info.plist */,
+				C8A3D52D23E0D70A0007E488 /* Keys.plist */,
+				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				06E163A423DE34C7008FF7AD /* Podfile */,
-				C824DF2F23E0C49600731590 /* Keys.swift */,
 			);
 			path = CourseGrab;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C824DF2E23E0C27E00731590 /* Keys.plist in Resources */,
+				C8A3D52F23E0D70B0007E488 /* Keys.plist in Resources */,
 				C824DF2C23E0C23500731590 /* GoogleService-Info.plist in Resources */,
 				064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */,
 				064348A123DE151D007F5F9F /* Assets.xcassets in Resources */,
@@ -240,9 +240,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0643489C23DE1519007F5F9F /* LoginViewController.swift in Sources */,
-				C824DF3023E0C49600731590 /* Keys.swift in Sources */,
+				C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */,
 				C877FC0E23DE6B89004D06EA /* CoursesViewController.swift in Sources */,
-				C877FC1023DE6E07004D06EA /* CoursesNavigationController.swift in Sources */,
+				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
 				0643489A23DE1519007F5F9F /* SceneDelegate.swift in Sources */,
 			);
