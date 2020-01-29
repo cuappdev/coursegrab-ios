@@ -82,11 +82,10 @@ extension LoginViewController: GIDSignInDelegate {
             }
             return
         }
-        let coursesViewController = CoursesViewController()
-        let mainNavigationController = MainNavigationController(rootViewController: coursesViewController)
-        mainNavigationController.modalPresentationStyle = .fullScreen
-        present(mainNavigationController, animated: false)
-        
+
+        let navigationController = MainNavigationController(rootViewController: HomeViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: false)
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

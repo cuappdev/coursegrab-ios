@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  HomeViewController.swift
 //  CourseGrab
 //
 //  Created by Reade Plunkett on 1/26/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UITableViewController {
+class HomeViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,6 @@ class MainViewController: UITableViewController {
 
 // MARK: - UITableViewDataSource
 
-extension MainViewController {
+extension HomeViewController {
 
 }
