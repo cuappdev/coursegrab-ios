@@ -12,10 +12,11 @@ class SearchDetailTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "INFO 1998"
         tableView.separatorInset = .zero
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "settingsIcon"),
+            image: UIImage(named: "icon_settings"),
             style: .plain,
             target: self,
             action: nil

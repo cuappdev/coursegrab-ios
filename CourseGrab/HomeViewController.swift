@@ -16,13 +16,13 @@ class HomeViewController: UITableViewController {
         view.backgroundColor = .white
         title = "CourseGrab"
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "settingsIcon"),
+            image: UIImage(named: "icon_settings"),
             style: .plain,
             target: self,
             action: nil
         )
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "searchIcon"),
+            image: UIImage(named: "icon_search"),
             style: .plain,
             target: self,
             action: nil
