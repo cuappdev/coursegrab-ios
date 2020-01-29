@@ -18,6 +18,8 @@
 		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
 		C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D52C23E0D70A0007E488 /* Keys.swift */; };
 		C8A3D53623E0DE360007E488 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8A3D53523E0DE360007E488 /* Keys.plist */; };
+		C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */; };
+		C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		C8A3D52C23E0D70A0007E488 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		C8A3D53523E0DE360007E488 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewController.swift; sourceTree = "<group>"; };
+		C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +78,8 @@
 			children = (
 				0643489723DE1519007F5F9F /* AppDelegate.swift */,
 				0643489923DE1519007F5F9F /* SceneDelegate.swift */,
-				0643489B23DE1519007F5F9F /* LoginViewController.swift */,
-				C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */,
 				C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */,
+				C8A3D53B23E23D610007E488 /* Controllers */,
 				064348A023DE151D007F5F9F /* Assets.xcassets */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
 				C824DF2B23E0C23500731590 /* GoogleService-Info.plist */,
@@ -94,6 +97,41 @@
 				8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C8A3D53B23E23D610007E488 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C8A3D53F23E23E540007E488 /* Login */,
+				C8A3D54023E23E5D0007E488 /* Home */,
+				C8A3D53C23E23E130007E488 /* Search */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C8A3D53C23E23E130007E488 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */,
+				C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C8A3D53F23E23E540007E488 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0643489B23DE1519007F5F9F /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		C8A3D54023E23E5D0007E488 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		D0E2779A889C5714B178D99B /* Pods */ = {
@@ -244,6 +282,8 @@
 				C877FC0E23DE6B89004D06EA /* CoursesViewController.swift in Sources */,
 				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
+				C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */,
+				C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */,
 				0643489A23DE1519007F5F9F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
