@@ -78,7 +78,6 @@
 		0643489623DE1519007F5F9F /* CourseGrab */ = {
 			isa = PBXGroup;
 			children = (
-				B6596CFD23DE3A5C007072D8 /* Models */,
 				B654C59423DE38F400F05141 /* Extensions */,
 				0643489723DE1519007F5F9F /* AppDelegate.swift */,
 				0643489923DE1519007F5F9F /* SceneDelegate.swift */,
@@ -105,12 +104,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		B6596CFD23DE3A5C007072D8 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B6FAEF0D23DE57300076B239 /* Section.swift */,
-			);
-			name = Models;
 		7B5D621EDA87C295389BD920 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
