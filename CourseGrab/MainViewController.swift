@@ -1,5 +1,5 @@
 //
-//  CoursesViewController.swift
+//  MainViewController.swift
 //  CourseGrab
 //
 //  Created by Reade Plunkett on 1/26/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CoursesViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
