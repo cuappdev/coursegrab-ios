@@ -4,6 +4,7 @@ target 'CourseGrab' do
   use_frameworks!
 
   # Pods for CourseGrab
-  pod 'SnapKit' 
+  pod 'SnapKit'
+  pod 'GoogleSignIn'
 
 end
