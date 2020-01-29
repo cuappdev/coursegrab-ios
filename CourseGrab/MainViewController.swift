@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,5 +28,11 @@ class MainViewController: UIViewController {
             action: nil
         )
     }
+
+}
+
+// MARK: - UITableViewDataSource
+
+extension MainViewController {
 
 }

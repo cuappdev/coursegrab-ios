@@ -71,6 +71,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: GIDSignInDelegate {
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
@@ -80,10 +81,10 @@ extension LoginViewController: GIDSignInDelegate {
             }
             return
         }
-        let coursesViewController = CoursesViewController()
-        let coursesNavigationController = MainNavigationController(rootViewController: coursesViewController)
-        coursesNavigationController.modalPresentationStyle = .fullScreen
-        present(coursesNavigationController, animated: false)
+
+        let navigationController = MainNavigationController(rootViewController: MainViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: false)
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
