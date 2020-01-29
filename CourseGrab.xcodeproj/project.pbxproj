@@ -12,6 +12,9 @@
 		0643489C23DE1519007F5F9F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0643489B23DE1519007F5F9F /* LoginViewController.swift */; };
 		064348A123DE151D007F5F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 064348A023DE151D007F5F9F /* Assets.xcassets */; };
 		064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 064348A223DE151D007F5F9F /* LaunchScreen.storyboard */; };
+		B654C59123DE38DB00F05141 /* UIColor+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59023DE38DB00F05141 /* UIColor+Shared.swift */; };
+		B654C59323DE38ED00F05141 /* UIFont+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Shared.swift */; };
+		B6FAEF0E23DE57300076B239 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF0D23DE57300076B239 /* Section.swift */; };
 		85B7209D1C37F77FD0A7F126 /* Pods_CourseGrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */; };
 		C824DF2C23E0C23500731590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C824DF2B23E0C23500731590 /* GoogleService-Info.plist */; };
 		C877FC0E23DE6B89004D06EA /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */; };
@@ -28,7 +31,10 @@
 		064348A023DE151D007F5F9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		064348A323DE151D007F5F9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		064348A523DE151D007F5F9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06E163A423DE34C7008FF7AD /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		06E163A423DE34C7008FF7AD /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		B654C59023DE38DB00F05141 /* UIColor+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Shared.swift"; sourceTree = "<group>"; };
+		B654C59223DE38ED00F05141 /* UIFont+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Shared.swift"; sourceTree = "<group>"; };
+		B6FAEF0D23DE57300076B239 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96351132E2528A1085B69A7A /* Pods-CourseGrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.debug.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.debug.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +78,8 @@
 		0643489623DE1519007F5F9F /* CourseGrab */ = {
 			isa = PBXGroup;
 			children = (
+				B6596CFD23DE3A5C007072D8 /* Models */,
+				B654C59423DE38F400F05141 /* Extensions */,
 				0643489723DE1519007F5F9F /* AppDelegate.swift */,
 				0643489923DE1519007F5F9F /* SceneDelegate.swift */,
 				0643489B23DE1519007F5F9F /* LoginViewController.swift */,
@@ -88,6 +96,21 @@
 			path = CourseGrab;
 			sourceTree = "<group>";
 		};
+		B654C59423DE38F400F05141 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B654C59023DE38DB00F05141 /* UIColor+Shared.swift */,
+				B654C59223DE38ED00F05141 /* UIFont+Shared.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B6596CFD23DE3A5C007072D8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B6FAEF0D23DE57300076B239 /* Section.swift */,
+			);
+			name = Models;
 		7B5D621EDA87C295389BD920 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,11 +262,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6FAEF0E23DE57300076B239 /* Section.swift in Sources */,
 				0643489C23DE1519007F5F9F /* LoginViewController.swift in Sources */,
+				B654C59323DE38ED00F05141 /* UIFont+Shared.swift in Sources */,
 				C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */,
 				C877FC0E23DE6B89004D06EA /* CoursesViewController.swift in Sources */,
 				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
+				B654C59123DE38DB00F05141 /* UIColor+Shared.swift in Sources */,
 				0643489A23DE1519007F5F9F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
