@@ -12,9 +12,13 @@
 		0643489C23DE1519007F5F9F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0643489B23DE1519007F5F9F /* LoginViewController.swift */; };
 		064348A123DE151D007F5F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 064348A023DE151D007F5F9F /* Assets.xcassets */; };
 		064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 064348A223DE151D007F5F9F /* LaunchScreen.storyboard */; };
+		06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06734A0023E246C800214A3D /* HomeTableViewCell.swift */; };
+		06B0A52923E247C7001ED66A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B0A52823E247C7001ED66A /* Section.swift */; };
 		85B7209D1C37F77FD0A7F126 /* Pods_CourseGrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */; };
+		B654C59123DE38DB00F05141 /* UIColor+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59023DE38DB00F05141 /* UIColor+Shared.swift */; };
+		B654C59323DE38ED00F05141 /* UIFont+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Shared.swift */; };
 		C824DF2C23E0C23500731590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C824DF2B23E0C23500731590 /* GoogleService-Info.plist */; };
-		C877FC0E23DE6B89004D06EA /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */; };
+		C877FC0E23DE6B89004D06EA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0D23DE6B89004D06EA /* MainViewController.swift */; };
 		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
 		C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D52C23E0D70A0007E488 /* Keys.swift */; };
 		C8A3D53623E0DE360007E488 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8A3D53523E0DE360007E488 /* Keys.plist */; };
@@ -28,12 +32,16 @@
 		064348A023DE151D007F5F9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		064348A323DE151D007F5F9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		064348A523DE151D007F5F9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06E163A423DE34C7008FF7AD /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		06734A0023E246C800214A3D /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		06B0A52823E247C7001ED66A /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		06E163A423DE34C7008FF7AD /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96351132E2528A1085B69A7A /* Pods-CourseGrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.debug.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.debug.xcconfig"; sourceTree = "<group>"; };
+		B654C59023DE38DB00F05141 /* UIColor+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Shared.swift"; sourceTree = "<group>"; };
+		B654C59223DE38ED00F05141 /* UIFont+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Shared.swift"; sourceTree = "<group>"; };
 		C824DF2B23E0C23500731590 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
+		C877FC0D23DE6B89004D06EA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		C8A3D52C23E0D70A0007E488 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		C8A3D53523E0DE360007E488 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -72,10 +80,12 @@
 		0643489623DE1519007F5F9F /* CourseGrab */ = {
 			isa = PBXGroup;
 			children = (
+				B654C59423DE38F400F05141 /* Extensions */,
 				0643489723DE1519007F5F9F /* AppDelegate.swift */,
 				0643489923DE1519007F5F9F /* SceneDelegate.swift */,
 				0643489B23DE1519007F5F9F /* LoginViewController.swift */,
-				C877FC0D23DE6B89004D06EA /* CoursesViewController.swift */,
+				06734A0023E246C800214A3D /* HomeTableViewCell.swift */,
+				C877FC0D23DE6B89004D06EA /* MainViewController.swift */,
 				C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */,
 				064348A023DE151D007F5F9F /* Assets.xcassets */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
@@ -84,6 +94,7 @@
 				C8A3D53523E0DE360007E488 /* Keys.plist */,
 				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				06E163A423DE34C7008FF7AD /* Podfile */,
+				06B0A52823E247C7001ED66A /* Section.swift */,
 			);
 			path = CourseGrab;
 			sourceTree = "<group>";
@@ -94,6 +105,15 @@
 				8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B654C59423DE38F400F05141 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B654C59023DE38DB00F05141 /* UIColor+Shared.swift */,
+				B654C59223DE38ED00F05141 /* UIFont+Shared.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D0E2779A889C5714B178D99B /* Pods */ = {
@@ -240,10 +260,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0643489C23DE1519007F5F9F /* LoginViewController.swift in Sources */,
+				B654C59323DE38ED00F05141 /* UIFont+Shared.swift in Sources */,
 				C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */,
-				C877FC0E23DE6B89004D06EA /* CoursesViewController.swift in Sources */,
+				C877FC0E23DE6B89004D06EA /* MainViewController.swift in Sources */,
 				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
+				06B0A52923E247C7001ED66A /* Section.swift in Sources */,
+				06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
+				B654C59123DE38DB00F05141 /* UIColor+Shared.swift in Sources */,
 				0643489A23DE1519007F5F9F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,7 +406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZGMCXU7X3U;
 				INFOPLIST_FILE = CourseGrab/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -402,7 +426,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZGMCXU7X3U;
 				INFOPLIST_FILE = CourseGrab/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
