@@ -15,12 +15,6 @@ class SearchDetailTableViewController: UITableViewController {
         
         title = "INFO 1998"
         tableView.separatorInset = .zero
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "icon_settings"),
-            style: .plain,
-            target: self,
-            action: nil
-        )
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -28,6 +22,7 @@ class SearchDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 { return 110 }
         return 42
     }
 
@@ -36,6 +31,12 @@ class SearchDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = SearchDetailCardTableViewCell()
+            cell.configure(title: "Intro to Digital Product Design", subtitle: "KEVIN CHAN")
+            return cell
+        }
+
         let cell = SearchDetailTableViewCell()
         cell.configure(title: "LEC 001 / W 7:30PM", isOpen: Bool.random(), isTracked: Bool.random())
         return cell

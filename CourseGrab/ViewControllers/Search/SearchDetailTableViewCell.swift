@@ -18,8 +18,8 @@ class SearchDetailTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         setupStatusView(isOpen: false)
-        setuptitleLabel()
-        setupTrackingbutton()
+        setupTitleLabel()
+        setupTrackingButton()
     }
 
     private func setupStatusView(isOpen: Bool) {
@@ -39,9 +39,9 @@ class SearchDetailTableViewCell: UITableViewCell {
         }
     }
 
-    private func setuptitleLabel() {
-        contentView.addSubview(titleLabel)
+    private func setupTitleLabel() {
         titleLabel.font = ._14Semibold
+        contentView.addSubview(titleLabel)
 
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(statusView.snp.right).offset(12)
@@ -49,7 +49,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         }
     }
 
-    private func setupTrackingbutton() {
+    private func setupTrackingButton() {
         trackingButton.layer.cornerRadius = 2
         trackingButton.layer.borderWidth = 1
         trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
@@ -79,8 +79,8 @@ class SearchDetailTableViewCell: UITableViewCell {
             trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         } else {
             trackingButton.setTitle("TRACK", for: .normal)
-            trackingButton.setTitleColor(.black, for: .normal)
-            trackingButton.layer.borderColor = UIColor.black.cgColor
+            trackingButton.setTitleColor(.courseGrabBlack, for: .normal)
+            trackingButton.layer.borderColor = UIColor.courseGrabBlack.cgColor
         }
     }
 

@@ -17,6 +17,7 @@
 		B654C59123DE38DB00F05141 /* UIColor+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59023DE38DB00F05141 /* UIColor+Shared.swift */; };
 		B654C59323DE38ED00F05141 /* UIFont+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Shared.swift */; };
 		C824DF2C23E0C23500731590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C824DF2B23E0C23500731590 /* GoogleService-Info.plist */; };
+		C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */; };
 		C877FC0E23DE6B89004D06EA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0D23DE6B89004D06EA /* HomeViewController.swift */; };
 		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
 		C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D52C23E0D70A0007E488 /* Keys.swift */; };
@@ -41,6 +42,7 @@
 		B654C59023DE38DB00F05141 /* UIColor+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Shared.swift"; sourceTree = "<group>"; };
 		B654C59223DE38ED00F05141 /* UIFont+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Shared.swift"; sourceTree = "<group>"; };
 		C824DF2B23E0C23500731590 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCardTableViewCell.swift; sourceTree = "<group>"; };
 		C877FC0D23DE6B89004D06EA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = ../HomeViewController.swift; sourceTree = "<group>"; };
 		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		C8A3D52C23E0D70A0007E488 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */,
+				C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */,
 				C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */,
 			);
 			path = Search;
@@ -314,6 +317,7 @@
 			files = (
 				C8A3D54223E24BEC0007E488 /* LoginViewController.swift in Sources */,
 				B654C59323DE38ED00F05141 /* UIFont+Shared.swift in Sources */,
+				C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */,
 				C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */,
 				C877FC0E23DE6B89004D06EA /* HomeViewController.swift in Sources */,
 				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
