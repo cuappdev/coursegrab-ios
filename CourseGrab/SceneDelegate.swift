@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = scene as? UIWindowScene else { return }
 
-        let searchDetailViewController = SearchDetailTableViewController()
-        let mainNavigationController = MainNavigationController(rootViewController: searchDetailViewController)
+//        let searchDetailViewController = SearchDetailTableViewController()
+        let mainNavigationController = MainNavigationController(rootViewController: HomeViewController())
         //mainNavigationController.modalPresentationStyle = .fullScreen
         //present(mainNavigationController, animated: false)
 
