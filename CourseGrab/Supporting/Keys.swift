@@ -1,5 +1,5 @@
 //
-//  Keys.swift
+//  Secrets.swift
 //  CourseGrab
 //
 //  Created by Reade Plunkett on 1/28/20.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Keys {
+struct Secrets {
     
-    static let googleClientID = Keys.keyDict["google-client-id"] as! String
+    static let googleClientID = Secrets.keyDict["google-client-id"] as! String
 
     private static let keyDict: NSDictionary = {
         guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
