@@ -88,7 +88,7 @@
 				C8A3D53B23E23D610007E488 /* ViewControllers */,
 				06777ABB23E24E55005C74AC /* Models */,
 				B654C59423DE38F400F05141 /* Extensions */,
-				06777ABC23E24E72005C74AC /* Supporting files */,
+				06777ABC23E24E72005C74AC /* Supporting */,
 			);
 			path = CourseGrab;
 			sourceTree = "<group>";
@@ -101,7 +101,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		06777ABC23E24E72005C74AC /* Supporting files */ = {
+		06777ABC23E24E72005C74AC /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
 				064348A023DE151D007F5F9F /* Assets.xcassets */,
@@ -111,7 +111,7 @@
 				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
 			);
-			path = "Supporting files";
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		7B5D621EDA87C295389BD920 /* Frameworks */ = {
