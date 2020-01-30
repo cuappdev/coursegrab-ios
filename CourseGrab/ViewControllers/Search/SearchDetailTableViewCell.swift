@@ -17,6 +17,7 @@ class SearchDetailTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        selectionStyle = .none
         setupStatusView(isOpen: false)
         setupTitleLabel()
         setupTrackingButton()
@@ -70,7 +71,6 @@ class SearchDetailTableViewCell: UITableViewCell {
 
     func configure(title: String, isOpen: Bool, isTracked: Bool) {
         titleLabel.text = title
-
         setupStatusView(isOpen: isOpen)
 
         if isTracked {
