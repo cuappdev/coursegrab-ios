@@ -37,7 +37,7 @@ class SearchDetailTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SearchDetailTableViewCell()
-        cell.configure(title: "LEC 001 / W 7:30PM", isOpen: true, isTracked: true)
+        cell.configure(title: "LEC 001 / W 7:30PM", isOpen: Bool.random(), isTracked: Bool.random())
         return cell
     }
 
