@@ -26,6 +26,16 @@ class HomeViewController: UITableViewController {
                 title: "NBA 3000: Designing New Ventures"
             )
         )
+        sections.append(
+            Section(
+                catalogNum: 224,
+                courseNum: 6006,
+                section: "LAB 409 / W 2:30PM",
+                status: .open,
+                subjectCode: "PHY",
+                title: "INFO 1998: Intro to Digital Product Design"
+            )
+        )
 
         view.backgroundColor = .white
         title = "CourseGrab"
@@ -42,6 +52,8 @@ class HomeViewController: UITableViewController {
             action: nil
         )
         
+        tableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 24, right: 0)
+        tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: cellReuseId)
     }
@@ -62,4 +74,29 @@ extension HomeViewController {
         return cell
     }
 
+}
+
+// MARK: - UITableViewDelegate
+
+extension HomeViewController {
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        
+        let label = UILabel()
+        label.text = "2 Available"
+        label.font = .boldSystemFont(ofSize: 20)
+        label.textColor = .courseGrabGreen
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.top.equalTo(headerView)
+            make.bottom.equalTo(headerView).inset(4)
+            make.left.equalTo(headerView).offset(26)
+        }
+        
+        return headerView
+    }
+    
 }

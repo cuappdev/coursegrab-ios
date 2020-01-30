@@ -26,6 +26,7 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
     
+    private let container = UIView()
     private let courseLabel = UILabel()
     private let enrollButton = UIButton(type: .roundedRect)
     private let removeButton = UIButton(type: .roundedRect)
@@ -40,17 +41,27 @@ class HomeTableViewCell: UITableViewCell {
         
         selectionStyle = .none
         
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.clipsToBounds = false
+        container.layer.cornerRadius = 5
+        container.layer.shadowColor = UIColor.black.cgColor
+        container.layer.shadowOpacity = 0.5
+        container.layer.shadowRadius = 2
+        container.layer.shadowOffset = .zero
+        container.backgroundColor = .white
+        contentView.addSubview(container)
+        
         courseLabel.translatesAutoresizingMaskIntoConstraints = false
         courseLabel.font = .boldSystemFont(ofSize: 14)
         courseLabel.textColor = .courseGrabGray
-        contentView.addSubview(courseLabel)
+        container.addSubview(courseLabel)
         
         enrollButton.translatesAutoresizingMaskIntoConstraints = false
         enrollButton.layer.cornerRadius = 2
         enrollButton.setTitleColor(.white, for: .normal)
         enrollButton.setTitle("ENROLL", for: .normal)
         enrollButton.backgroundColor = .black
-        contentView.addSubview(enrollButton)
+        container.addSubview(enrollButton)
         
         removeButton.translatesAutoresizingMaskIntoConstraints = false
         removeButton.layer.cornerRadius = 2
@@ -58,43 +69,50 @@ class HomeTableViewCell: UITableViewCell {
         removeButton.setTitle("REMOVE", for: .normal)
         removeButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         removeButton.layer.borderWidth = 1
-        contentView.addSubview(removeButton)
+        container.addSubview(removeButton)
         
         sectionLabel.translatesAutoresizingMaskIntoConstraints = false
         sectionLabel.font = .boldSystemFont(ofSize: 14)
         sectionLabel.textColor = .courseGrabGray
-        contentView.addSubview(sectionLabel)
+        container.addSubview(sectionLabel)
         
         statusBadge.translatesAutoresizingMaskIntoConstraints = false
         statusBadge.contentMode = .scaleAspectFit
-        contentView.addSubview(statusBadge)
+        container.addSubview(statusBadge)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .systemFont(ofSize: 16)
         titleLabel.numberOfLines = 0
-        contentView.addSubview(titleLabel)
+        container.addSubview(titleLabel)
         
         // setup constraints
         
+        container.snp.makeConstraints { make in
+            make.topMargin.equalTo(contentView).offset(6)
+            make.bottomMargin.equalTo(contentView).inset(6)
+            make.leadingMargin.equalTo(20)
+            make.trailingMargin.equalTo(contentView).inset(20)
+        }
+        
         courseLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
-            make.trailing.equalTo(contentView).inset(16)
+            make.trailing.equalTo(container).inset(16)
         }
         
         enrollButton.snp.makeConstraints { make in
             make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-            make.leading.equalTo(contentView.snp.centerX).offset(4.5)
+            make.leading.equalTo(container.snp.centerX).offset(9)
             make.height.equalTo(24)
-            make.trailing.equalTo(contentView).inset(16)
-            make.bottom.equalTo(contentView).inset(16)
+            make.trailing.equalTo(container).inset(16)
+            make.bottom.equalTo(container).inset(16)
         }
         
         removeButton.snp.makeConstraints { make in
             make.top.equalTo(sectionLabel.snp.bottom).offset(12)
             make.leading.equalTo(16)
             make.height.equalTo(24)
-            make.trailing.equalTo(contentView.snp.centerX).inset(4.5)
-            make.bottom.equalTo(contentView).inset(16)
+            make.trailing.equalTo(container.snp.centerX).inset(9)
+            make.bottom.equalTo(container).inset(16)
         }
         
         sectionLabel.snp.makeConstraints { make in
@@ -104,7 +122,7 @@ class HomeTableViewCell: UITableViewCell {
         
         statusBadge.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
-            make.trailing.equalTo(contentView).inset(16)
+            make.trailing.equalTo(container).inset(16)
             make.height.equalTo(16)
             make.width.equalTo(16)
         }
