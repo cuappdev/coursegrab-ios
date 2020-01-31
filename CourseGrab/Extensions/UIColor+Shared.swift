@@ -10,10 +10,11 @@ import UIKit
 
 extension UIColor {
 
-    static let courseGrabBlack = UIColor(red: 27.0 / 255.0, green: 31.0 / 255.0, blue: 35.0 / 255.0, alpha: 1.0)
-    static let courseGrabBorder = UIColor(red: 209.0 / 255.0, green: 213.0 / 255.0, blue: 218.0 / 255.0, alpha: 1.0)
-    static let courseGrabGreen = UIColor(red: 71.0 / 255.0, green: 199.0 / 255.0, blue: 83.0 / 255.0, alpha: 1.0)
-    static let courseGrabGray = UIColor(red: 106.0 / 255.0, green: 105.0 / 255.0, blue: 125.0 / 255.0, alpha: 1.0)
-    static let courseGrabRuby = UIColor(red: 202.0 / 255.0, green: 66.0 / 255.0, blue: 56.0 / 255.0, alpha: 1.0)
+    static let courseGrabBlack = UIColor(red: 27 / 255, green: 31 / 255, blue: 35 / 255, alpha: 1)
+    static let courseGrabBorder = UIColor(red: 209 / 255, green: 213 / 255, blue: 218 / 255, alpha: 1)
+    static let courseGrabGreen = UIColor(red: 71 / 255, green: 199 / 255, blue: 83 / 255, alpha: 1)
+    static let courseGrabGray = UIColor(red: 106 / 255, green: 105 / 255, blue: 125 / 255, alpha: 1)
+    static let courseGrabRuby = UIColor(red: 202 / 255, green: 66 / 255, blue: 56 / 255, alpha: 1)
+    static let courseGrabYellow = UIColor(red: 248 / 255, green: 205 / 255, blue: 85 / 255, alpha: 1)
 
 }

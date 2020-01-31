@@ -17,12 +17,28 @@ class HomeTableViewCell: UITableViewCell {
             guard let section = section else { return }
             
             courseLabel.text = String(section.courseNum)
+            enrollButton.isHidden = section.status != .open
             sectionLabel.text = section.section
-            statusBadge.image = UIImage(named: "image") // TODO: Update status badge
+            statusBadge.image = section.status.icon
             titleLabel.text = section.title
-            
-            // configure remove/enroll buttons depending on whether user is tracking section
-            // update constraints on buttons accordingly
+
+            if section.status == .open {
+                removeButton.snp.makeConstraints { make in
+                    make.top.equalTo(sectionLabel.snp.bottom).offset(12)
+                    make.leading.equalTo(16)
+                    make.height.equalTo(24)
+                    make.trailing.equalTo(container.snp.centerX).inset(9)
+                    make.bottom.equalTo(container).inset(16)
+                }
+            } else {
+                removeButton.snp.remakeConstraints { make in
+                    make.top.equalTo(sectionLabel.snp.bottom).offset(12)
+                    make.leading.equalTo(16)
+                    make.height.equalTo(24)
+                    make.trailing.equalTo(container).inset(16)
+                    make.bottom.equalTo(container).inset(16)
+                }
+            }
         }
     }
     
@@ -31,7 +47,7 @@ class HomeTableViewCell: UITableViewCell {
     private let enrollButton = UIButton(type: .roundedRect)
     private let removeButton = UIButton(type: .roundedRect)
     private let sectionLabel = UILabel()
-    private let statusBadge = UIImageView() // TODO: Make image a property of Status
+    private let statusBadge = UIImageView()
     private let titleLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,7 +61,7 @@ class HomeTableViewCell: UITableViewCell {
         container.clipsToBounds = false
         container.layer.cornerRadius = 5
         container.layer.shadowColor = UIColor.black.cgColor
-        container.layer.shadowOpacity = 0.5
+        container.layer.shadowOpacity = 0.3
         container.layer.shadowRadius = 2
         container.layer.shadowOffset = .zero
         container.backgroundColor = .white
@@ -60,6 +76,7 @@ class HomeTableViewCell: UITableViewCell {
         enrollButton.layer.cornerRadius = 2
         enrollButton.setTitleColor(.white, for: .normal)
         enrollButton.setTitle("ENROLL", for: .normal)
+        enrollButton.titleLabel?.font = .systemFont(ofSize: 12)
         enrollButton.backgroundColor = .black
         container.addSubview(enrollButton)
         
@@ -67,6 +84,7 @@ class HomeTableViewCell: UITableViewCell {
         removeButton.layer.cornerRadius = 2
         removeButton.setTitleColor(.courseGrabRuby, for: .normal)
         removeButton.setTitle("REMOVE", for: .normal)
+        removeButton.titleLabel?.font = .systemFont(ofSize: 12)
         removeButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         removeButton.layer.borderWidth = 1
         container.addSubview(removeButton)
@@ -86,7 +104,7 @@ class HomeTableViewCell: UITableViewCell {
         container.addSubview(titleLabel)
         
         // setup constraints
-        
+
         container.snp.makeConstraints { make in
             make.topMargin.equalTo(contentView).offset(6)
             make.bottomMargin.equalTo(contentView).inset(6)
@@ -121,7 +139,7 @@ class HomeTableViewCell: UITableViewCell {
         }
         
         statusBadge.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel)
+            make.top.equalTo(titleLabel).offset(2)
             make.trailing.equalTo(container).inset(16)
             make.height.equalTo(16)
             make.width.equalTo(16)

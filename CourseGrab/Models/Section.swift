@@ -7,9 +7,38 @@
 //
 
 import Foundation
+import UIKit
 
 enum Status: String, Codable {
     case closed, open, waitlist
+
+    var icon: UIImage {
+        let contextSize = CGSize(width: 72, height: 72)
+        let renderer = UIGraphicsImageRenderer(size: contextSize)
+        return renderer.image { context in
+            switch self {
+            case .closed:
+                UIColor.courseGrabRuby.setFill()
+                let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: contextSize), cornerRadius: contextSize.height / 8).cgPath
+                context.cgContext.addPath(path)
+                context.cgContext.closePath()
+                context.cgContext.fillPath()
+            case .open:
+                UIColor.courseGrabGreen.setFill()
+                let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: contextSize), cornerRadius: contextSize.height / 2).cgPath
+                context.cgContext.addPath(path)
+                context.cgContext.closePath()
+                context.cgContext.fillPath()
+            case .waitlist:
+                UIColor.courseGrabYellow.setFill()
+                context.cgContext.move(to: CGPoint(x: 0, y: contextSize.height * (2 + sqrt(3)) / 4))
+                context.cgContext.addLine(to: CGPoint(x: contextSize.width, y: contextSize.height * (2 + sqrt(3)) / 4))
+                context.cgContext.addLine(to: CGPoint(x: contextSize.width / 2, y: contextSize.height * (2 - sqrt(3)) / 4))
+                context.cgContext.closePath()
+                context.cgContext.fillPath()
+            }
+        }
+    }
 }
 
 struct Section: Codable {
