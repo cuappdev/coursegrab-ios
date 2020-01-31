@@ -61,7 +61,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         contentView.addSubview(statusView)
 
         statusView.snp.makeConstraints { make in
-            make.height.width.equalTo(16)
+            make.size.equalTo(16)
             make.leading.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
         }

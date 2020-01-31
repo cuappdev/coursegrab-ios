@@ -60,8 +60,8 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         cardView.addSubview(subtitleLabel)
 
         subtitleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.bottom.equalToSuperview().offset(-16)
+            make.leading.trailing.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-16)
         }
     }
 
@@ -71,8 +71,7 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         cardView.addSubview(titleLabel)
 
         titleLabel.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.top.trailing.equalToSuperview().inset(16)
         }
     }
 
