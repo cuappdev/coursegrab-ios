@@ -20,5 +20,6 @@ struct Section: Codable {
     let status: Status
     let subjectCode: String
     let title: String
+    let isTracking: Bool
     
 }
