@@ -18,24 +18,51 @@ class SearchDetailTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         selectionStyle = .none
-        setupStatusView(isOpen: false)
+        setupStatusView(status: .closed)
         setupTitleLabel()
         setupTrackingButton()
     }
 
-    private func setupStatusView(isOpen: Bool) {
-        if isOpen {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Public configure
+
+    func configure(section: Section) {
+        titleLabel.text = section.section
+        setupStatusView(status: section.status)
+
+        if section.isTracking {
+            trackingButton.setTitle("REMOVE", for: .normal)
+            trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
+            trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+        } else {
+            trackingButton.setTitle("TRACK", for: .normal)
+            trackingButton.setTitleColor(.courseGrabBlack, for: .normal)
+            trackingButton.layer.borderColor = UIColor.courseGrabBlack.cgColor
+        }
+    }
+
+    // MARK - Private helpers
+
+    private func setupStatusView(status: Status) {
+        switch status {
+        case .closed:
+            statusView.backgroundColor = .courseGrabRuby
+            statusView.layer.cornerRadius = 2
+        case .open:
             statusView.backgroundColor = .courseGrabGreen
             statusView.layer.cornerRadius = 8
-        } else {
-            statusView.backgroundColor = .courseGrabRuby
+        case .waitlist:
+            statusView.backgroundColor = .yellow
             statusView.layer.cornerRadius = 2
         }
         contentView.addSubview(statusView)
 
         statusView.snp.makeConstraints { make in
             make.height.width.equalTo(16)
-            make.left.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
         }
     }
@@ -45,7 +72,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
 
         titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(statusView.snp.right).offset(12)
+            make.leading.equalTo(statusView.snp.trailing).offset(12)
             make.centerY.equalToSuperview()
         }
     }
@@ -60,27 +87,8 @@ class SearchDetailTableViewCell: UITableViewCell {
         trackingButton.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.width.equalTo(90)
-            make.right.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
-        }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func configure(title: String, isOpen: Bool, isTracked: Bool) {
-        titleLabel.text = title
-        setupStatusView(isOpen: isOpen)
-
-        if isTracked {
-            trackingButton.setTitle("REMOVE", for: .normal)
-            trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
-            trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
-        } else {
-            trackingButton.setTitle("TRACK", for: .normal)
-            trackingButton.setTitleColor(.courseGrabBlack, for: .normal)
-            trackingButton.layer.borderColor = UIColor.courseGrabBlack.cgColor
         }
     }
 

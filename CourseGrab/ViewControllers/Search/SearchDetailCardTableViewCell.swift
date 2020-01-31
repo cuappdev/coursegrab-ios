@@ -27,16 +27,28 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public configure
+
+    func configure(title: String, subtitle: String) {
+        titleLabel.text = title
+        subtitleLabel.text = subtitle
+    }
+
+    // MARK - Private helpers
+
     private func setupCardView() {
         cardView.layer.cornerRadius = 4
         cardView.layer.borderWidth = 1
         cardView.layer.borderColor = UIColor.courseGrabBorder.cgColor
         cardView.backgroundColor = .white
+        cardView.layer.shadowColor = UIColor.black.cgColor
+        cardView.layer.shadowOpacity = 0.1
+        cardView.layer.shadowOffset = .zero
+        cardView.layer.shadowRadius = 4
         contentView.addSubview(cardView)
 
         cardView.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-20)
-            make.left.equalToSuperview().offset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(76)
             make.centerY.equalToSuperview()
         }
@@ -48,8 +60,8 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         cardView.addSubview(subtitleLabel)
 
         subtitleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.right.bottom.equalToSuperview().offset(-16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.bottom.equalToSuperview().offset(-16)
         }
     }
 
@@ -59,14 +71,9 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         cardView.addSubview(titleLabel)
 
         titleLabel.snp.makeConstraints { make in
-            make.left.top.equalToSuperview().offset(16)
-            make.right.equalToSuperview().offset(-16)
+            make.leading.top.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
-    }
-
-    func configure(title: String, subtitle: String) {
-        titleLabel.text = title
-        subtitleLabel.text = subtitle
     }
 
 }

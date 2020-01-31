@@ -10,11 +10,23 @@ import UIKit
 
 class SearchDetailTableViewController: UITableViewController {
 
+    private enum CellIdentifier: String {
+
+        case card
+        case section
+
+    }
+
+    let section = Section(catalogNum: 1234, courseNum: 1998, section: "LEC 001", status: .open, subjectCode: "INFO", title: "Intro to Digital Product Design", isTracking: true)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "INFO 1998"
+        title = "\(section.subjectCode) \(section.courseNum)"
         tableView.separatorInset = .zero
+
+        tableView.register(SearchDetailCardTableViewCell.self, forCellReuseIdentifier: CellIdentifier.card.rawValue)
+        tableView.register(SearchDetailTableViewCell.self, forCellReuseIdentifier: CellIdentifier.section.rawValue)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -22,8 +34,7 @@ class SearchDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 { return 110 }
-        return 42
+        return indexPath.row == 0 ? 110 : 42
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,13 +43,13 @@ class SearchDetailTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = SearchDetailCardTableViewCell()
-            cell.configure(title: "Intro to Digital Product Design", subtitle: "KEVIN CHAN")
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.card.rawValue) as! SearchDetailCardTableViewCell
+            cell.configure(title: section.title, subtitle: "KEVIN CHAN")
             return cell
         }
 
-        let cell = SearchDetailTableViewCell()
-        cell.configure(title: "LEC 001 / W 7:30PM", isOpen: Bool.random(), isTracked: Bool.random())
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.section.rawValue) as! SearchDetailTableViewCell
+        cell.configure(section: section)
         return cell
     }
 
