@@ -16,10 +16,10 @@ struct Section: Codable {
 
     let catalogNum: Int
     let courseNum: Int
+    let isTracking: Bool
     let section: String
     let status: Status
     let subjectCode: String
     let title: String
-    let isTracking: Bool
     
 }
