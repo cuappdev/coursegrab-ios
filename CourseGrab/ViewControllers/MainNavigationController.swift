@@ -19,6 +19,7 @@ class MainNavigationController: UINavigationController {
         navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navigationBar.isTranslucent = false
         navigationBar.barStyle = .black
+        navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont._20Semibold]
     }
 
 }
