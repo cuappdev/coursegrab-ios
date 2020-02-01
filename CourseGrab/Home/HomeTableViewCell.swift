@@ -12,36 +12,6 @@ import SnapKit
 
 class HomeTableViewCell: UITableViewCell {
     
-    var section: Section? {
-        didSet {
-            guard let section = section else { return }
-            
-            courseLabel.text = String(section.courseNum)
-            enrollButton.isHidden = section.status != .open
-            sectionLabel.text = section.section
-            statusBadge.image = section.status.icon
-            titleLabel.text = section.title
-
-            if section.status == .open {
-                removeButton.snp.makeConstraints { make in
-                    make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-                    make.leading.equalTo(16)
-                    make.height.equalTo(24)
-                    make.trailing.equalTo(container.snp.centerX).inset(9)
-                    make.bottom.equalTo(container).inset(16)
-                }
-            } else {
-                removeButton.snp.remakeConstraints { make in
-                    make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-                    make.leading.equalTo(16)
-                    make.height.equalTo(24)
-                    make.trailing.equalTo(container).inset(16)
-                    make.bottom.equalTo(container).inset(16)
-                }
-            }
-        }
-    }
-    
     private let container = UIView()
     private let courseLabel = UILabel()
     private let enrollButton = UIButton(type: .roundedRect)
@@ -53,7 +23,7 @@ class HomeTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // setup appearance
+        // Setup appearance
         
         selectionStyle = .none
         
@@ -103,26 +73,26 @@ class HomeTableViewCell: UITableViewCell {
         titleLabel.numberOfLines = 0
         container.addSubview(titleLabel)
         
-        // setup constraints
+        // Setup constraints
 
         container.snp.makeConstraints { make in
-            make.topMargin.equalTo(contentView).offset(6)
-            make.bottomMargin.equalTo(contentView).inset(6)
-            make.leadingMargin.equalTo(20)
-            make.trailingMargin.equalTo(contentView).inset(20)
+            make.top.equalToSuperview().offset(6)
+            make.bottom.equalToSuperview().inset(6)
+            make.leading.equalTo(20)
+            make.trailing.equalToSuperview().inset(20)
         }
         
         courseLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(12)
-            make.trailing.equalTo(container).inset(16)
+            make.trailing.equalToSuperview().inset(16)
         }
         
         enrollButton.snp.makeConstraints { make in
             make.top.equalTo(sectionLabel.snp.bottom).offset(12)
             make.leading.equalTo(container.snp.centerX).offset(9)
             make.height.equalTo(24)
-            make.trailing.equalTo(container).inset(16)
-            make.bottom.equalTo(container).inset(16)
+            make.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(16)
         }
         
         removeButton.snp.makeConstraints { make in
@@ -130,7 +100,7 @@ class HomeTableViewCell: UITableViewCell {
             make.leading.equalTo(16)
             make.height.equalTo(24)
             make.trailing.equalTo(container.snp.centerX).inset(9)
-            make.bottom.equalTo(container).inset(16)
+            make.bottom.equalToSuperview().inset(16)
         }
         
         sectionLabel.snp.makeConstraints { make in
@@ -140,20 +110,44 @@ class HomeTableViewCell: UITableViewCell {
         
         statusBadge.snp.makeConstraints { make in
             make.top.equalTo(titleLabel).offset(2)
-            make.trailing.equalTo(container).inset(16)
-            make.height.equalTo(16)
-            make.width.equalTo(16)
+            make.trailing.equalToSuperview().inset(16)
+            make.size.equalTo(16)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(16)
-            make.leading.equalTo(16)
+            make.top.leading.equalTo(16)
             make.trailing.equalTo(statusBadge.snp.leading).inset(12)
         }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(for section: Section) {
+        courseLabel.text = String(section.courseNum)
+        enrollButton.isHidden = section.status != .open
+        sectionLabel.text = section.section
+        statusBadge.image = section.status.icon
+        titleLabel.text = section.title
+
+        if section.status == .open {
+            removeButton.snp.makeConstraints { make in
+                make.top.equalTo(sectionLabel.snp.bottom).offset(12)
+                make.leading.equalTo(16)
+                make.height.equalTo(24)
+                make.trailing.equalTo(container.snp.centerX).inset(9)
+                make.bottom.equalTo(container).inset(16)
+            }
+        } else {
+            removeButton.snp.remakeConstraints { make in
+                make.top.equalTo(sectionLabel.snp.bottom).offset(12)
+                make.leading.equalTo(16)
+                make.height.equalTo(24)
+                make.trailing.equalTo(container).inset(16)
+                make.bottom.equalTo(container).inset(16)
+            }
+        }
     }
     
 }

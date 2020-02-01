@@ -10,7 +10,7 @@ import UIKit
 
 class HomeViewController: UITableViewController {
 
-    private let cellReuseId = "cell"
+    private let homeCellReuseId = "homeCellReuseId"
     private var sections: [Section] = []
 
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class HomeViewController: UITableViewController {
 
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: cellReuseId)
+        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
     }
 
 }
@@ -77,8 +77,8 @@ extension HomeViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as! HomeTableViewCell
-        cell.section = sections[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
+        cell.configure(for: sections[indexPath.row])
         return cell
     }
 
