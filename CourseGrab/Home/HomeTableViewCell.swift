@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class HomeTableViewCell: UITableViewCell {
     
@@ -27,7 +27,6 @@ class HomeTableViewCell: UITableViewCell {
         
         selectionStyle = .none
         
-        container.translatesAutoresizingMaskIntoConstraints = false
         container.clipsToBounds = false
         container.layer.cornerRadius = 5
         container.layer.shadowColor = UIColor.black.cgColor
@@ -37,39 +36,33 @@ class HomeTableViewCell: UITableViewCell {
         container.backgroundColor = .white
         contentView.addSubview(container)
         
-        courseLabel.translatesAutoresizingMaskIntoConstraints = false
-        courseLabel.font = .boldSystemFont(ofSize: 14)
+        courseLabel.font = ._14Bold
         courseLabel.textColor = .courseGrabGray
         container.addSubview(courseLabel)
         
-        enrollButton.translatesAutoresizingMaskIntoConstraints = false
         enrollButton.layer.cornerRadius = 2
         enrollButton.setTitleColor(.white, for: .normal)
         enrollButton.setTitle("ENROLL", for: .normal)
-        enrollButton.titleLabel?.font = .systemFont(ofSize: 12)
+        enrollButton.titleLabel?.font = ._12Regular
         enrollButton.backgroundColor = .black
         container.addSubview(enrollButton)
         
-        removeButton.translatesAutoresizingMaskIntoConstraints = false
         removeButton.layer.cornerRadius = 2
         removeButton.setTitleColor(.courseGrabRuby, for: .normal)
         removeButton.setTitle("REMOVE", for: .normal)
-        removeButton.titleLabel?.font = .systemFont(ofSize: 12)
+        removeButton.titleLabel?.font = ._12Regular
         removeButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         removeButton.layer.borderWidth = 1
         container.addSubview(removeButton)
         
-        sectionLabel.translatesAutoresizingMaskIntoConstraints = false
-        sectionLabel.font = .boldSystemFont(ofSize: 14)
+        sectionLabel.font = ._14Bold
         sectionLabel.textColor = .courseGrabGray
         container.addSubview(sectionLabel)
         
-        statusBadge.translatesAutoresizingMaskIntoConstraints = false
         statusBadge.contentMode = .scaleAspectFit
         container.addSubview(statusBadge)
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = .systemFont(ofSize: 16)
+        titleLabel.font = ._16Regular
         titleLabel.numberOfLines = 0
         container.addSubview(titleLabel)
         
