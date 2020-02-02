@@ -44,7 +44,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         }
     }
 
-    // MARK - Private helpers
+    // MARK: - Private helpers
 
     private func setupStatusView(status: Status) {
         switch status {

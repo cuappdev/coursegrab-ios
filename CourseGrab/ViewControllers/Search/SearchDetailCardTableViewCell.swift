@@ -34,7 +34,7 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         subtitleLabel.text = subtitle
     }
 
-    // MARK - Private helpers
+    // MARK: - Private helpers
 
     private func setupCardView() {
         cardView.layer.cornerRadius = 4
@@ -56,7 +56,7 @@ class SearchDetailCardTableViewCell: UITableViewCell {
 
     private func setupSubtitleLabel() {
         subtitleLabel.font = ._14Semibold
-        subtitleLabel.textColor = .courseGrabGrey
+        subtitleLabel.textColor = .courseGrabGray
         cardView.addSubview(subtitleLabel)
 
         subtitleLabel.snp.makeConstraints { make in

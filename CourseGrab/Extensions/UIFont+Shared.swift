@@ -10,6 +10,7 @@ import UIKit
 
 extension UIFont {
 
+    static let _12Regular = UIFont.systemFont(ofSize: 12)
     static let _14Regular = UIFont.systemFont(ofSize: 14)
     static let _16Regular = UIFont.systemFont(ofSize: 16)
     static let _18Regular = UIFont.systemFont(ofSize: 18)
@@ -22,8 +23,9 @@ extension UIFont {
     static let _18Semibold = UIFont.systemFont(ofSize: 18, weight: .semibold)
     static let _20Semibold = UIFont.systemFont(ofSize: 20, weight: .semibold)
 
-    static let _20Bold = UIFont.systemFont(ofSize: 20, weight: .bold)
-    static let _30Bold = UIFont.systemFont(ofSize: 30, weight: .bold)
-    static let _36Bold = UIFont.systemFont(ofSize: 36, weight: .bold)
+    static let _14Bold = UIFont.boldSystemFont(ofSize: 14)
+    static let _20Bold = UIFont.boldSystemFont(ofSize: 20)
+    static let _30Bold = UIFont.boldSystemFont(ofSize: 30)
+    static let _36Bold = UIFont.boldSystemFont(ofSize: 36)
 
 }
