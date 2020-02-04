@@ -20,7 +20,7 @@ class SearchDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         title = "\(section.subjectCode) \(section.courseNum)"
-        tableView.separatorInset = .zero
+        tableView.separatorStyle = .none
 
         tableView.register(SearchDetailCardTableViewCell.self, forCellReuseIdentifier: CellIdentifier.card.rawValue)
         tableView.register(SearchDetailTableViewCell.self, forCellReuseIdentifier: CellIdentifier.section.rawValue)
