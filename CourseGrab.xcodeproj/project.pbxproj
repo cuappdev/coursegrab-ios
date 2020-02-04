@@ -42,6 +42,7 @@
 		06675D0B23E2856D00AF1884 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		06675D0D23E2859F00AF1884 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		06734A0023E246C800214A3D /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		067F000123E918C400F78B36 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		06B0A52823E247C7001ED66A /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +125,7 @@
 				0645C7BD23E27ED60083BB82 /* Keys.plist */,
 				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
+				067F000123E918C400F78B36 /* Podfile */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";

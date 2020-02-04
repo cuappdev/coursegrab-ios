@@ -8,15 +8,17 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class SearchViewController: UIViewController {
 
     private var popRecognizer: InteractivePopRecognizer?
+    private let textField = UITextField()
 
     override func viewDidLoad() {
         view.backgroundColor = .white
 
-        let textField = UITextField()
+        textField.frame.size.width = view.frame.width - textField.frame.origin.x - 40
         textField.attributedPlaceholder = NSAttributedString(
             string: "Search for a course",
             attributes: [
@@ -46,13 +48,25 @@ class SearchViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        guard let navigationController = navigationController else { return }
-        popRecognizer = InteractivePopRecognizer(controller: navigationController)
-        navigationController.interactivePopGestureRecognizer?.delegate = popRecognizer
+        setupPopGesture()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        textField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        textField.resignFirstResponder()
     }
 
     @objc func back() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func setupPopGesture() {
+        guard let navigationController = navigationController, popRecognizer == nil else { return }
+        popRecognizer = InteractivePopRecognizer(controller: navigationController)
+        navigationController.interactivePopGestureRecognizer?.delegate = popRecognizer
     }
 
 }
