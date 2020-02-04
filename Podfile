@@ -6,5 +6,6 @@ target 'CourseGrab' do
   # Pods for CourseGrab
   pod 'SnapKit'
   pod 'GoogleSignIn'
+  pod 'Tactile'
 
 end
