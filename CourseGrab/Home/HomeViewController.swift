@@ -48,7 +48,6 @@ class HomeViewController: UITableViewController {
         ]
 
         // Setup navigation bar
-        
         let titleLabel = UILabel()
         titleLabel.text = "CourseGrab"
         titleLabel.textColor = .white
@@ -65,7 +64,6 @@ class HomeViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
 
         // Setup tableView
-        
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
@@ -110,8 +108,8 @@ extension HomeViewController {
         navigationItem.rightBarButtonItem = nil
         navigationItem.titleView = nil
 
-        // Add views back to navigationBar but so that they aren't
-        // controlled by autolayout and we can animate them.
+        // Add views back to the navigationBar, but so that they aren't controlled by
+        // autolayout and we can animate them.
         leftButton.frame = leftButtonFrame
         navigationBar.addSubview(leftButton)
         rightButton.frame = rightButtonFrame
@@ -119,16 +117,14 @@ extension HomeViewController {
         titleLabel.frame = titleLabelFrame
         navigationBar.addSubview(titleLabel)
 
-        // Update the search button to look like a back button. We
-        // have to update the frame because the images are not the
-        // same size.
+        // Update the search button to look like a back button. We have to update the
+        // frame because the images are not the same size.
         rightButton.setImage(.backIcon, for: .normal)
         rightButton.sizeToFit()
         rightButton.frame.origin.y = rightButtonFrame.origin.y + (rightButtonFrame.height - rightButton.frame.height) / 2
 
-        // Create the textField and transform it so it is a little
-        // off from the final destination. We will animate the
-        // transform away for a swiping effect.
+        // Create the textField and transform it so it is a little off from the final
+        // destination. We will animate the transform away for a swiping effect.
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "Search for a course",
@@ -147,9 +143,8 @@ extension HomeViewController {
         textField.center.y = leftButton.center.y
         textField.transform = CGAffineTransform(translationX: 20, y: 0)
 
-        // Perform the animations, where we hide the views we
-        // don't want anymore and transform them to create the
-        // swiping effect.
+        // Perform the animations, where we hide the views we don't want anymore and
+        // transform them to create the swiping effect.
         UIView.animate(withDuration: 0.3, animations: {
             leftButton.alpha = 0
             leftButton.transform = CGAffineTransform(translationX: -20, y: 0)
@@ -162,15 +157,14 @@ extension HomeViewController {
             textField.alpha = 1
             textField.transform = .identity
         }) { _ in
-            // Remove the views from the navigationBar. We don't
-            // want them staying there!
+            // Remove the views from the navigationBar. We don't want them staying there!
             leftButton.removeFromSuperview()
             rightButton.removeFromSuperview()
             titleLabel.removeFromSuperview()
             textField.removeFromSuperview()
 
-            // Remove the transform from the right button so it
-            // doesn't affect us when we don't expect it.
+            // Remove the transform from the right button so it doesn't affect us when
+            // we don't expect it.
             rightButton.transform = .identity
         }
 

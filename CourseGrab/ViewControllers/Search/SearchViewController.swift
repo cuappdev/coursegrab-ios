@@ -19,7 +19,6 @@ class SearchViewController: UIViewController {
         view.backgroundColor = .white
 
         // Setup navigationBar
-        
         textField.frame.size.width = view.frame.width - 80
         textField.attributedPlaceholder = NSAttributedString(
             string: "Search for a course",
