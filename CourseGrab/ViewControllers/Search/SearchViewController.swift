@@ -28,6 +28,7 @@ class SearchViewController: UIViewController {
                 .font: UIFont._20Medium
             ]
         )
+        textField.font = ._20Medium
 
         let backButton = UIButton(type: .system)
         backButton.setImage(.backIcon, for: .normal)
