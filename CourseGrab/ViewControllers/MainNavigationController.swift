@@ -8,14 +8,16 @@
 
 import UIKit
 
+// MARK: - InteractivePopRecognizer
+
 class InteractivePopRecognizer: NSObject, UIGestureRecognizerDelegate {
 
     // Source: https://stackoverflow.com/a/41248703/5078779
 
     private var navigationController: UINavigationController
 
-    init(controller: UINavigationController) {
-        self.navigationController = controller
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
 
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -27,6 +29,8 @@ class InteractivePopRecognizer: NSObject, UIGestureRecognizerDelegate {
     }
     
 }
+
+// MARK: - MainNavigationController
 
 class MainNavigationController: UINavigationController {
 
@@ -41,27 +45,9 @@ class MainNavigationController: UINavigationController {
         navigationBar.barStyle = .black
         navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont._20Semibold]
 
-        navigationBar.backIndicatorImage = UIImage.backIcon?.withInsets(UIEdgeInsets(top: 0, left: 8, bottom: 2.5, right: 0))
+        // Add insets to the back button so it perfectly aligns with the HomeViewController back button.
+        navigationBar.backIndicatorImage = UIImage.backIcon?.with(insets: UIEdgeInsets(top: 0, left: 8, bottom: 2.5, right: 0))
         navigationBar.backIndicatorTransitionMaskImage = .backIcon
-    }
-
-}
-
-extension UIImage {
-
-    func withInsets(_ insets: UIEdgeInsets) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(
-            CGSize(width: size.width + insets.left + insets.right,
-                   height: size.height + insets.top + insets.bottom),
-            false,
-            self.scale)
-
-        let origin = CGPoint(x: insets.left, y: insets.top)
-        self.draw(at: origin)
-        let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        return imageWithInsets
     }
 
 }

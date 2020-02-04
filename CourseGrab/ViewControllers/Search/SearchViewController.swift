@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import SnapKit
+import Tactile
 
 class SearchViewController: UIViewController {
 
@@ -18,7 +18,9 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .white
 
-        textField.frame.size.width = view.frame.width - textField.frame.origin.x - 40
+        // Setup navigationBar
+        
+        textField.frame.size.width = view.frame.width - 80
         textField.attributedPlaceholder = NSAttributedString(
             string: "Search for a course",
             attributes: [
@@ -29,24 +31,22 @@ class SearchViewController: UIViewController {
 
         let backButton = UIButton(type: .system)
         backButton.setImage(.backIcon, for: .normal)
-        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+        backButton.on(.touchUpInside, back)
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.leftBarButtonItems = [
             UIBarButtonItem(customView: backButton),
             UIBarButtonItem(customView: textField)
         ]
-
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(banana)))
     }
 
-    @objc func banana() {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .red
-        navigationController?.pushViewController(vc, animated: true)
-        vc.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(banana)))
-    }
+}
 
+
+// MARK: - View lifecycle
+
+extension SearchViewController {
+    
     override func viewWillAppear(_ animated: Bool) {
         setupPopGesture()
     }
@@ -59,14 +59,14 @@ class SearchViewController: UIViewController {
         textField.resignFirstResponder()
     }
 
-    @objc func back() {
+    private func back(_ button: UIButton) {
         navigationController?.popViewController(animated: true)
     }
     
     private func setupPopGesture() {
         guard let navigationController = navigationController, popRecognizer == nil else { return }
-        popRecognizer = InteractivePopRecognizer(controller: navigationController)
+        popRecognizer = InteractivePopRecognizer(navigationController: navigationController)
         navigationController.interactivePopGestureRecognizer?.delegate = popRecognizer
     }
-
+    
 }
