@@ -56,6 +56,7 @@ class HomeViewController: UITableViewController {
 
         let settingsButton = UIButton(type: .system)
         settingsButton.setImage(.settingsIcon, for: .normal)
+        settingsButton.on(.touchUpInside, showSettings)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: settingsButton)
 
         let searchButton = UIButton(type: .system)
@@ -91,6 +92,10 @@ extension HomeViewController {
 // MARK: - Show view controllers
 
 extension HomeViewController {
+
+    private func showSettings(_ button: UIButton) {
+        present(SettingsViewController(), animated: false)
+    }
 
     private func showSearch(_ button: UIButton) {
         // Grab navigation bar views and frames

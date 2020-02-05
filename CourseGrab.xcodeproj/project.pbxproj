@@ -18,6 +18,7 @@
 		06675D0E23E2859F00AF1884 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06675D0D23E2859F00AF1884 /* HomeViewController.swift */; };
 		06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06734A0023E246C800214A3D /* HomeTableViewCell.swift */; };
 		06B0A52923E247C7001ED66A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B0A52823E247C7001ED66A /* Section.swift */; };
+		06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */; };
 		85B7209D1C37F77FD0A7F126 /* Pods_CourseGrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */; };
 		B654C59123DE38DB00F05141 /* UIColor+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59023DE38DB00F05141 /* UIColor+Shared.swift */; };
 		B654C59323DE38ED00F05141 /* UIFont+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Shared.swift */; };
@@ -44,6 +45,7 @@
 		06734A0023E246C800214A3D /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		067F000123E918C400F78B36 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		06B0A52823E247C7001ED66A /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96351132E2528A1085B69A7A /* Pods-CourseGrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.debug.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +132,14 @@
 			path = Supporting;
 			sourceTree = "<group>";
 		};
+		06DB5E8623EB77BC00F8D924 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		7B5D621EDA87C295389BD920 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +166,7 @@
 				C8A3D54523E24C6C0007E488 /* Home */,
 				062891B823E8F52800B6D698 /* Search */,
 				C8A3D53C23E23E130007E488 /* SearchDetail */,
+				06DB5E8623EB77BC00F8D924 /* Settings */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -338,6 +349,7 @@
 				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
 				06B0A52923E247C7001ED66A /* Section.swift in Sources */,
 				06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */,
+				06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */,
 				063C67D323E9089F00A40895 /* UIImage+Shared.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
 				062891B723E8F51F00B6D698 /* SearchViewController.swift in Sources */,
