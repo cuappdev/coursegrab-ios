@@ -83,7 +83,7 @@ extension LoginViewController: GIDSignInDelegate {
             return
         }
 
-        let navigationController = MainNavigationController(rootViewController: HomeViewController())
+        let navigationController = MainNavigationController(rootViewController: HomeTableViewController())
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: false)
     }

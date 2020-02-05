@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  HomeTableViewController.swift
 //  CourseGrab
 //
 //  Created by Reade Plunkett on 1/26/20.
@@ -9,7 +9,7 @@
 import UIKit
 import Tactile
 
-class HomeViewController: UITableViewController {
+class HomeTableViewController: UITableViewController {
 
     private let homeCellReuseId = "homeCellReuseId"
     private var sections: [Section] = []
@@ -75,7 +75,7 @@ class HomeViewController: UITableViewController {
 
 // MARK: - UITableViewDataSource
 
-extension HomeViewController {
+extension HomeTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count
@@ -91,7 +91,7 @@ extension HomeViewController {
 
 // MARK: - Show view controllers
 
-extension HomeViewController {
+extension HomeTableViewController {
 
     private func showSettings(_ button: UIButton) {
         present(SettingsViewController(), animated: false)
