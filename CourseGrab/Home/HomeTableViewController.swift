@@ -18,7 +18,7 @@ class HomeTableViewController: UITableViewController {
     private let homeCellReuseId = "homeCellReuseId"
     private let homeHeaderReuseId = "homeHeaderReuseId"
     private var tableSections: [TableSection] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -140,7 +140,7 @@ extension HomeTableViewController {
 extension HomeTableViewController {
 
     private func showSettings(_ button: UIButton) {
-        present(SettingsViewController(), animated: false)
+        present(SettingsViewController(), animated: true)
     }
 
     private func showSearch(_ button: UIButton) {

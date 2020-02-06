@@ -12,6 +12,7 @@ import SnapKit
 
 class SettingsViewController: UIViewController {
 
+    private var transitionAnimator = SettingsAnimator()
     private let contentView = UIView()
     private let stackView = UIStackView()
 
@@ -20,6 +21,7 @@ class SettingsViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overCurrentContext
+        transitioningDelegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -106,29 +108,9 @@ class SettingsViewController: UIViewController {
         logoutButton.contentHorizontalAlignment = .right
         accountStackView.addArrangedSubview(logoutButton)
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        view.backgroundColor = .clear
-
+    
+    override func viewDidLayoutSubviews() {
         contentView.roundCorners(corners: [.topLeft, .topRight], radius: 10)
-        contentView.transform = CGAffineTransform(translationX: 0, y: contentView.frame.height)
-
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            self.contentView.transform = .identity
-        })
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        })
-    }
-
-    private func dismiss() {
-        let transform = CGAffineTransform(translationX: 0, y: self.contentView.frame.height)
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.backgroundColor = .clear
-            self.contentView.transform = transform
-        }) { _ in
-            self.dismiss(animated: false)
-        }
     }
 
 }
@@ -147,14 +129,14 @@ extension SettingsViewController {
         switch gesture.state {
         case .changed:
             contentView.transform = CGAffineTransform(translationX: 0, y: min(max(0, translation), contentView.frame.height))
-            view.backgroundColor = UIColor.black.withAlphaComponent(0.4 - panFraction * 0.4)
+            view.backgroundColor = UIColor.black.withAlphaComponent(min(0.4, 0.4 - panFraction * 0.4))
             
             if velocity > 0 && lastPanFraction < dismissalFraction && panFraction > dismissalFraction {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             }
         case .ended, .cancelled:
             if panFraction > dismissalFraction {
-                dismiss()
+                dismiss(animated: true)
             } else {
                 UIView.animate(withDuration: 0.2) {
                     self.contentView.transform = .identity
@@ -170,8 +152,24 @@ extension SettingsViewController {
     
     private func tap(_ gesture: UITapGestureRecognizer) {
         if !contentView.frame.contains(gesture.location(in: view)) {
-            dismiss()
+            dismiss(animated: true)
         }
+    }
+    
+}
+
+// MARK: - Transitioning delegate
+
+extension SettingsViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transitionAnimator.isPresenting = true
+        return transitionAnimator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transitionAnimator.isPresenting = false
+        return transitionAnimator
     }
     
 }
