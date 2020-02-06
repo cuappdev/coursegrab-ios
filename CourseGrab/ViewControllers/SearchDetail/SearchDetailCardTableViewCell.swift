@@ -10,7 +10,7 @@ import UIKit
 
 class SearchDetailCardTableViewCell: UITableViewCell {
 
-    private let cardView = UIView()
+    private let containerView = UIView()
     private let subtitleLabel = UILabel()
     private let titleLabel = UILabel()
 
@@ -20,27 +20,27 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         // Setup appearance
 
         isUserInteractionEnabled = false
-        cardView.layer.cornerRadius = 4
-        cardView.layer.borderWidth = 1
-        cardView.layer.borderColor = UIColor.courseGrabBorder.cgColor
-        cardView.backgroundColor = .white
-        cardView.layer.shadowColor = UIColor.black.cgColor
-        cardView.layer.shadowOpacity = 0.1
-        cardView.layer.shadowOffset = .zero
-        cardView.layer.shadowRadius = 4
-        contentView.addSubview(cardView)
+        containerView.layer.cornerRadius = 4
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.courseGrabBorder.cgColor
+        containerView.backgroundColor = .white
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.1
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowRadius = 4
+        contentView.addSubview(containerView)
 
         subtitleLabel.font = ._14Semibold
         subtitleLabel.textColor = .courseGrabGray
-        cardView.addSubview(subtitleLabel)
+        containerView.addSubview(subtitleLabel)
 
         titleLabel.font = ._16Semibold
         titleLabel.textColor = .black
-        cardView.addSubview(titleLabel)
+        containerView.addSubview(titleLabel)
 
         // Setup constraints
 
-        cardView.snp.makeConstraints { make in
+        containerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(76)
             make.centerY.equalToSuperview()

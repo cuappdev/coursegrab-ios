@@ -7,13 +7,14 @@
 //
 
 import Foundation
-import UIKit
 import Tactile
+import UIKit
 
 class SearchTableViewController: UITableViewController {
 
-    private let searchCellReuseId = "searchCellReuseId"
+
     private var popRecognizer: InteractivePopRecognizer?
+    private let searchCellReuseId = "searchCellReuseId"
     private var sections: [Section] = []
     private let textField = UITextField()
 
@@ -33,7 +34,7 @@ class SearchTableViewController: UITableViewController {
             Section(
                 catalogNum: 51,
                 courseNum: 29424,
-                isTracking: true,
+                isTracking: false,
                 section: "DIS 005 / TR 1:25PM",
                 status: .closed,
                 subjectCode: "CS",
@@ -42,7 +43,7 @@ class SearchTableViewController: UITableViewController {
             Section(
                 catalogNum: 12,
                 courseNum: 5010,
-                isTracking: false,
+                isTracking: true,
                 section: "LEC 002 / W 2:10PM",
                 status: .waitlist,
                 subjectCode: "PE",
