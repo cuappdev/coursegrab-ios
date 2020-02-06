@@ -62,7 +62,7 @@ class HomeTableViewCell: UITableViewCell {
         statusBadge.contentMode = .scaleAspectFit
         container.addSubview(statusBadge)
         
-        titleLabel.font = ._16Regular
+        titleLabel.font = ._16Semibold
         titleLabel.numberOfLines = 0
         container.addSubview(titleLabel)
         
@@ -109,7 +109,7 @@ class HomeTableViewCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(16)
-            make.trailing.equalTo(statusBadge.snp.leading).inset(12)
+            make.trailing.equalTo(statusBadge.snp.leading).inset(-12)
         }
     }
     

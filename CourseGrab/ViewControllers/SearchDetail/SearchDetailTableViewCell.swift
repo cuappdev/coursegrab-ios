@@ -10,17 +10,40 @@ import UIKit
 
 class SearchDetailTableViewCell: UITableViewCell {
 
-    private var trackingButton = UIButton()
-    private var statusView = UIView()
-    private var titleLabel = UILabel()
+    private let trackingButton = UIButton()
+    private let statusView = UIView()
+    private let titleLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        // Setup appearance
+
         selectionStyle = .none
         setupStatusView(status: .closed)
-        setupTitleLabel()
-        setupTrackingButton()
+
+        titleLabel.font = ._14Semibold
+        contentView.addSubview(titleLabel)
+
+        trackingButton.layer.cornerRadius = 2
+        trackingButton.layer.borderWidth = 1
+        trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+        trackingButton.titleLabel?.font = ._12Semibold
+        contentView.addSubview(trackingButton)
+
+        // Setup constraints
+
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(statusView.snp.trailing).offset(12)
+            make.centerY.equalToSuperview()
+        }
+
+        trackingButton.snp.makeConstraints { make in
+            make.height.equalTo(24)
+            make.width.equalTo(90)
+            make.trailing.equalToSuperview().offset(-20)
+            make.centerY.equalToSuperview()
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -63,31 +86,6 @@ class SearchDetailTableViewCell: UITableViewCell {
         statusView.snp.makeConstraints { make in
             make.size.equalTo(16)
             make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-        }
-    }
-
-    private func setupTitleLabel() {
-        titleLabel.font = ._14Semibold
-        contentView.addSubview(titleLabel)
-
-        titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(statusView.snp.trailing).offset(12)
-            make.centerY.equalToSuperview()
-        }
-    }
-
-    private func setupTrackingButton() {
-        trackingButton.layer.cornerRadius = 2
-        trackingButton.layer.borderWidth = 1
-        trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
-        trackingButton.titleLabel?.font = ._12Semibold
-        contentView.addSubview(trackingButton)
-        
-        trackingButton.snp.makeConstraints { make in
-            make.height.equalTo(24)
-            make.width.equalTo(90)
-            make.trailing.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
         }
     }

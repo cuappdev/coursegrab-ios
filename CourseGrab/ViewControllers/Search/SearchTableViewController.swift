@@ -12,14 +12,48 @@ import Tactile
 
 class SearchTableViewController: UITableViewController {
 
+    private let searchCellReuseId = "searchCellReuseId"
     private var popRecognizer: InteractivePopRecognizer?
+    private var sections: [Section] = []
     private let textField = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        sections = [
+            Section(
+                catalogNum: 103,
+                courseNum: 15821,
+                isTracking: true,
+                section: "LEC 001 / TR 1:25PM",
+                status: .open,
+                subjectCode: "NBA",
+                title: "NBA 3000: Designing New Ventures"
+            ),
+            Section(
+                catalogNum: 51,
+                courseNum: 29424,
+                isTracking: true,
+                section: "DIS 005 / TR 1:25PM",
+                status: .closed,
+                subjectCode: "CS",
+                title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
+            ),
+            Section(
+                catalogNum: 12,
+                courseNum: 5010,
+                isTracking: false,
+                section: "LEC 002 / W 2:10PM",
+                status: .waitlist,
+                subjectCode: "PE",
+                title: "Introductory Rock Climbing"
+            )
+        ]
+
+        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: searchCellReuseId)
 
         // Setup navigationBar
         textField.frame.size.width = view.frame.width - 80
@@ -43,37 +77,24 @@ class SearchTableViewController: UITableViewController {
         ]
     }
 
+}
+
+extension SearchTableViewController {
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "12 Results"
-    }
-
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.contentView.backgroundColor = .white
-        header.textLabel?.font = ._20Bold
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return sections.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: searchCellReuseId, for: indexPath) as! SearchTableViewCell
+        cell.configure(for: sections[indexPath.row])
         return cell
     }
-
+    
 }
 
 
