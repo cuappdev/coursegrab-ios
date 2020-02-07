@@ -6,8 +6,8 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class HomeTableViewHeader: UITableViewHeaderFooterView {
 
@@ -25,7 +25,7 @@ class HomeTableViewHeader: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(tableSection: HomeViewController.TableSection, section: Int) {
+    func configure(tableSection: HomeTableViewController.TableSection, section: Int) {
         switch tableSection {
         case .available(let sections):
             titleLabel.text = "\(sections.count) Available"

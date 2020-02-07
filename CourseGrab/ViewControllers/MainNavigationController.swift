@@ -45,7 +45,7 @@ class MainNavigationController: UINavigationController {
         navigationBar.barStyle = .black
         navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont._20Semibold]
 
-        // Add insets to the back button so it perfectly aligns with the HomeViewController back button.
+        // Add insets to the back button so it perfectly aligns with the HomeTableViewController back button.
         navigationBar.backIndicatorImage = UIImage.backIcon?.with(insets: UIEdgeInsets(top: 0, left: 8, bottom: 2.5, right: 0))
         navigationBar.backIndicatorTransitionMaskImage = .backIcon
     }

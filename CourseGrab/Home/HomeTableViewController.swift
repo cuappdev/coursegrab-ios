@@ -1,15 +1,15 @@
 //
-//  HomeViewController.swift
+//  HomeTableViewController.swift
 //  CourseGrab
 //
 //  Created by Reade Plunkett on 1/26/20.
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
-import UIKit
 import Tactile
+import UIKit
 
-class HomeViewController: UITableViewController {
+class HomeTableViewController: UITableViewController {
 
     enum TableSection {
         case available([Section]), awaiting([Section])
@@ -81,6 +81,7 @@ class HomeViewController: UITableViewController {
 
         let settingsButton = UIButton(type: .system)
         settingsButton.setImage(.settingsIcon, for: .normal)
+        settingsButton.on(.touchUpInside, showSettings)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: settingsButton)
 
         let searchButton = UIButton(type: .system)
@@ -103,15 +104,14 @@ class HomeViewController: UITableViewController {
 
 // MARK: - UITableViewDataSource
 
-extension HomeViewController {
+extension HomeTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return tableSections.count
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:
-                    homeHeaderReuseId) as! HomeTableViewHeader
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
         headerView.configure(tableSection: tableSections[section], section: section)
         return headerView
     }
@@ -136,7 +136,11 @@ extension HomeViewController {
 
 // MARK: - Show view controllers
 
-extension HomeViewController {
+extension HomeTableViewController {
+
+    private func showSettings(_ button: UIButton) {
+        present(SettingsViewController(), animated: true)
+    }
 
     private func showSearch(_ button: UIButton) {
         // Grab navigation bar views and frames
