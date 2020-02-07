@@ -1,51 +1,76 @@
 //
-//  HomeViewController.swift
+//  HomeTableViewController.swift
 //  CourseGrab
 //
 //  Created by Reade Plunkett on 1/26/20.
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
-import UIKit
 import Tactile
+import UIKit
 
-class HomeViewController: UITableViewController {
+class HomeTableViewController: UITableViewController {
+
+    enum TableSection {
+        case available([Section]), awaiting([Section])
+    }
 
     private let homeCellReuseId = "homeCellReuseId"
-    private var sections: [Section] = []
+    private let homeHeaderReuseId = "homeHeaderReuseId"
+    private var tableSections: [TableSection] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sections = [
+        let availableSections = [
             Section(
-                catalogNum: 103,
-                courseNum: 15821,
-                isTracking: true,
-                section: "LEC 001 / TR 1:25PM",
-                status: .open,
-                subjectCode: "NBA",
-                title: "NBA 3000: Designing New Ventures"
-            ),
-            Section(
-                catalogNum: 51,
-                courseNum: 29424,
-                isTracking: true,
-                section: "DIS 005 / TR 1:25PM",
-                status: .closed,
-                subjectCode: "CS",
-                title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
-            ),
-            Section(
-                catalogNum: 12,
-                courseNum: 5010,
-                isTracking: true,
-                section: "LEC 002 / W 2:10PM",
-                status: .waitlist,
-                subjectCode: "PE",
-                title: "Introductory Rock Climbing"
-            )
-        ]
+            catalogNum: 103,
+            courseNum: 15821,
+            isTracking: true,
+            section: "LEC 001 / TR 1:25PM",
+            status: .open,
+            subjectCode: "NBA",
+            title: "NBA 3000: Designing New Ventures"
+        ),
+        Section(
+            catalogNum: 51,
+            courseNum: 29424,
+            isTracking: true,
+            section: "DIS 005 / TR 1:25PM",
+            status: .open,
+            subjectCode: "CS",
+            title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
+            )]
+        let awaitingSections = [
+        Section(
+            catalogNum: 12,
+            courseNum: 5010,
+            isTracking: true,
+            section: "LEC 002 / W 2:10PM",
+            status: .waitlist,
+            subjectCode: "PE",
+            title: "Introductory Rock Climbing"
+        ),
+        Section(
+            catalogNum: 12345,
+            courseNum: 5010,
+            isTracking: true,
+            section: "LEC 001 / M 2:10PM",
+            status: .closed,
+            subjectCode: "ENGL",
+            title: "Introductory Creative Writing"
+        ),
+        Section(
+            catalogNum: 12345,
+            courseNum: 5010,
+            isTracking: true,
+            section: "LEC 001 / M 2:10PM",
+            status: .closed,
+            subjectCode: "ENGL",
+            title: "Advanced Creative Writing"
+        )]
+
+        tableSections = [.available(availableSections), .awaiting(awaitingSections)]
 
         // Setup navigation bar
         let titleLabel = UILabel()
@@ -56,6 +81,7 @@ class HomeViewController: UITableViewController {
 
         let settingsButton = UIButton(type: .system)
         settingsButton.setImage(.settingsIcon, for: .normal)
+        settingsButton.on(.touchUpInside, showSettings)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: settingsButton)
 
         let searchButton = UIButton(type: .system)
@@ -64,9 +90,13 @@ class HomeViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
 
         // Setup tableView
+        tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.showsVerticalScrollIndicator = false
+        tableView.register(HomeTableViewHeader.self,
+        forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
     }
 
@@ -74,23 +104,43 @@ class HomeViewController: UITableViewController {
 
 // MARK: - UITableViewDataSource
 
-extension HomeViewController {
+extension HomeTableViewController {
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return tableSections.count
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
+        headerView.configure(tableSection: tableSections[section], section: section)
+        return headerView
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections.count
+        switch tableSections[section] {
+        case .available(let sections), .awaiting(let sections):
+            return sections.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
-        cell.configure(for: sections[indexPath.row])
-        return cell
+        switch tableSections[indexPath.section] {
+        case .available(let sections), .awaiting(let sections):
+            let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
+            cell.configure(for: sections[indexPath.row])
+            return cell
+        }
     }
 
 }
 
 // MARK: - Show view controllers
 
-extension HomeViewController {
+extension HomeTableViewController {
+
+    private func showSettings(_ button: UIButton) {
+        present(SettingsViewController(), animated: true)
+    }
 
     private func showSearch(_ button: UIButton) {
         // Grab navigation bar views and frames

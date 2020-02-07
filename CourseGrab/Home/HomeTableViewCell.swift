@@ -125,7 +125,7 @@ class HomeTableViewCell: UITableViewCell {
         titleLabel.text = section.title
 
         if section.status == .open {
-            removeButton.snp.makeConstraints { make in
+            removeButton.snp.remakeConstraints { make in
                 make.top.equalTo(sectionLabel.snp.bottom).offset(12)
                 make.leading.equalTo(16)
                 make.height.equalTo(24)
