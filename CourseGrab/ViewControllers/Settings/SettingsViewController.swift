@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class SettingsViewController: UIViewController {
 
-    private var transitionAnimator = SettingsAnimator()
     private let contentView = UIView()
     private let stackView = UIStackView()
 
     private var lastPanFraction: CGFloat = 0
+    private var transitionAnimator = SettingsAnimator()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -44,12 +44,11 @@ class SettingsViewController: UIViewController {
         
         // Setup constraints
         contentView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview()
+            make.bottom.width.equalToSuperview()
         }
         
         stackView.snp.makeConstraints { make in
-            make.width.height.equalToSuperview()
+            make.size.equalToSuperview()
         }
         
         // Setup children
@@ -96,11 +95,13 @@ class SettingsViewController: UIViewController {
         
         let accountStackView = UIStackView()
         stackView.addArrangedSubview(accountStackView)
+
         let accountLabel = UILabel()
         accountLabel.font = ._16Semibold
         accountLabel.textColor = .courseGrabDarkGray
         accountLabel.text = "dov3@cornell.edu" // placeholder
         accountStackView.addArrangedSubview(accountLabel)
+        
         let logoutButton = UIButton(type: .system)
         logoutButton.setTitle("Sign Out", for: .normal)
         logoutButton.setTitleColor(.courseGrabRuby, for: .normal)

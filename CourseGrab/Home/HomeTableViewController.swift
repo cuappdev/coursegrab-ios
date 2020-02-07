@@ -6,8 +6,8 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
-import UIKit
 import Tactile
+import UIKit
 
 class HomeTableViewController: UITableViewController {
 
@@ -18,7 +18,7 @@ class HomeTableViewController: UITableViewController {
     private let homeCellReuseId = "homeCellReuseId"
     private let homeHeaderReuseId = "homeHeaderReuseId"
     private var tableSections: [TableSection] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -111,8 +111,7 @@ extension HomeTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:
-                    homeHeaderReuseId) as! HomeTableViewHeader
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
         headerView.configure(tableSection: tableSections[section], section: section)
         return headerView
     }

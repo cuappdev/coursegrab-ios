@@ -6,8 +6,8 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class HomeTableViewHeader: UITableViewHeaderFooterView {
 
