@@ -6,6 +6,7 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
+import SPPermissions
 import Tactile
 import UIKit
 
@@ -98,8 +99,65 @@ class HomeTableViewController: UITableViewController {
         tableView.register(HomeTableViewHeader.self,
         forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
+
+        if (!UserDefaults.standard.didPromptPermission) {
+            displayPermissionModal()
+        }
     }
 
+    func displayPermissionModal() {
+        let controller = SPPermissions.dialog([.notification])
+        controller.titleText = "Get In Your Courses"
+        controller.footerText = "Push notifications enhance the CourseGrab experience."
+        controller.dataSource = self
+        controller.delegate = self
+        controller.present(on: self)
+    }
+
+}
+
+extension HomeTableViewController: SPPermissionsDataSource {
+
+    func configure(_ cell: SPPermissionTableViewCell, for permission: SPPermission) -> SPPermissionTableViewCell {
+        cell.permissionTitleLabel.text = "Push Notifications"
+        cell.permissionDescriptionLabel.text = "Let us notify you when a section opens!"
+        cell.button.allowTitle = "Allow"
+        cell.button.allowedTitle = "Allowed"
+        cell.iconView.color = .courseGrabGreen
+        cell.button.allowedBackgroundColor = .courseGrabGreen
+        cell.button.allowBackgroundColor = .courseGrabGreen
+        cell.button.allowTitleColor = .white
+        return cell
+    }
+}
+extension HomeTableViewController: SPPermissionsDelegate {
+
+    func didAllow(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func didDenied(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func didHide(permissions ids: [Int]) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func deniedData(for permission: SPPermission) -> SPPermissionDeniedAlertData? {
+        if permission == .notification {
+            let data = SPPermissionDeniedAlertData()
+            data.alertOpenSettingsDeniedPermissionTitle = "Permission denied"
+            data.alertOpenSettingsDeniedPermissionDescription = "If you would like to receive push notifications for your courses, go to settings."
+            data.alertOpenSettingsDeniedPermissionButtonTitle = "Settings"
+            data.alertOpenSettingsDeniedPermissionCancelTitle = "Cancel"
+            return data
+        } else {
+            // If returned nil, alert will not show.
+            return nil
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
