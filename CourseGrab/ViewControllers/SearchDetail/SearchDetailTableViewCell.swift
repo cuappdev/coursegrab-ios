@@ -10,9 +10,9 @@ import UIKit
 
 class SearchDetailTableViewCell: UITableViewCell {
 
-    private let trackingButton = UIButton()
     private let statusView = UIView()
     private let titleLabel = UILabel()
+    private let trackingButton = UIButton()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -19,7 +19,8 @@ class SearchDetailCardTableViewCell: UITableViewCell {
 
         // Setup appearance
 
-        isUserInteractionEnabled = false
+        selectionStyle = .none
+
         containerView.layer.cornerRadius = 4
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.courseGrabBorder.cgColor

@@ -12,7 +12,6 @@ import UIKit
 
 class SearchTableViewController: UITableViewController {
 
-
     private var popRecognizer: InteractivePopRecognizer?
     private let searchCellReuseId = "searchCellReuseId"
     private var sections: [Section] = []
@@ -82,10 +81,6 @@ class SearchTableViewController: UITableViewController {
 
 extension SearchTableViewController {
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count
     }
@@ -94,6 +89,10 @@ extension SearchTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: searchCellReuseId, for: indexPath) as! SearchTableViewCell
         cell.configure(for: sections[indexPath.row])
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        present(SearchDetailTableViewController(), animated: true, completion: nil)
     }
     
 }

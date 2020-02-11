@@ -20,16 +20,12 @@ class SearchDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         title = "\(section.subjectCode) \(section.courseNum)"
-        tableView.separatorStyle = .none
+        tableView.separatorInset = .zero
 
         tableView.register(SearchDetailCardTableViewCell.self, forCellReuseIdentifier: CellIdentifier.card.rawValue)
         tableView.register(SearchDetailTableViewCell.self, forCellReuseIdentifier: CellIdentifier.section.rawValue)
     }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.row == 0 ? 110 : 42
     }
