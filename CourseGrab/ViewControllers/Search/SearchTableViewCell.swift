@@ -50,7 +50,7 @@ class SearchTableViewCell: UITableViewCell {
         trackingButton.layer.cornerRadius = 2
         trackingButton.layer.borderWidth = 1
         trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
-        trackingButton.titleLabel?.font = ._12Semibold
+        trackingButton.titleLabel?.font = ._12Medium
         trackingButton.setTitle("REMOVE", for: .normal)
         trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
         trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor

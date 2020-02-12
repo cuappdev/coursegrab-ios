@@ -36,26 +36,26 @@ class HomeTableViewCell: UITableViewCell {
         containerView.backgroundColor = .white
         contentView.addSubview(containerView)
         
-        courseLabel.font = ._14Bold
+        courseLabel.font = ._14Medium
         courseLabel.textColor = .courseGrabGray
         containerView.addSubview(courseLabel)
         
         enrollButton.layer.cornerRadius = 2
         enrollButton.setTitleColor(.white, for: .normal)
         enrollButton.setTitle("ENROLL", for: .normal)
-        enrollButton.titleLabel?.font = ._12Regular
+        enrollButton.titleLabel?.font = ._12Medium
         enrollButton.backgroundColor = .black
         containerView.addSubview(enrollButton)
         
         removeButton.layer.cornerRadius = 2
         removeButton.setTitleColor(.courseGrabRuby, for: .normal)
         removeButton.setTitle("REMOVE", for: .normal)
-        removeButton.titleLabel?.font = ._12Regular
+        removeButton.titleLabel?.font = ._12Medium
         removeButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         removeButton.layer.borderWidth = 1
         containerView.addSubview(removeButton)
         
-        sectionLabel.font = ._14Bold
+        sectionLabel.font = ._14Medium
         sectionLabel.textColor = .courseGrabGray
         containerView.addSubview(sectionLabel)
         

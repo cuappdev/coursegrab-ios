@@ -28,7 +28,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         trackingButton.layer.cornerRadius = 2
         trackingButton.layer.borderWidth = 1
         trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
-        trackingButton.titleLabel?.font = ._12Semibold
+        trackingButton.titleLabel?.font = ._12Medium
         contentView.addSubview(trackingButton)
 
         // Setup constraints

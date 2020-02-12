@@ -31,7 +31,7 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         containerView.layer.shadowRadius = 4
         contentView.addSubview(containerView)
 
-        subtitleLabel.font = ._14Semibold
+        subtitleLabel.font = ._14Medium
         subtitleLabel.textColor = .courseGrabGray
         containerView.addSubview(subtitleLabel)
 

@@ -15,6 +15,7 @@ extension UIFont {
     static let _16Regular = UIFont.systemFont(ofSize: 16)
     static let _18Regular = UIFont.systemFont(ofSize: 18)
 
+    static let _12Medium = UIFont.systemFont(ofSize: 12, weight: .medium)
     static let _14Medium = UIFont.systemFont(ofSize: 14, weight: .medium)
     static let _20Medium = UIFont.systemFont(ofSize: 20, weight: .medium)
 
