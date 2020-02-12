@@ -22,9 +22,14 @@
 		06B0A52923E247C7001ED66A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B0A52823E247C7001ED66A /* Section.swift */; };
 		06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */; };
 		85B7209D1C37F77FD0A7F126 /* Pods_CourseGrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */; };
+		B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503423F08ACF00B38C52 /* Endpoints.swift */; };
+		B616503723F08CA100B38C52 /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503623F08CA100B38C52 /* Body.swift */; };
+		B616503923F0945D00B38C52 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503823F0945D00B38C52 /* Response.swift */; };
+		B616503D23F0C2E200B38C52 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503C23F0C2E200B38C52 /* UserDefaults.swift */; };
 		B654C59123DE38DB00F05141 /* UIColor+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59023DE38DB00F05141 /* UIColor+Shared.swift */; };
 		B654C59323DE38ED00F05141 /* UIFont+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Shared.swift */; };
 		B6FAEF1B23E9FC5B0076B239 /* HomeTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */; };
+		B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1C23EB83C70076B239 /* Course.swift */; };
 		C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */; };
 		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
 		C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D52C23E0D70A0007E488 /* Keys.swift */; };
@@ -48,15 +53,20 @@
 		06675D0B23E2856D00AF1884 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		06675D0D23E2859F00AF1884 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		06734A0023E246C800214A3D /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
-		067F000123E918C400F78B36 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		067F000123E918C400F78B36 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		06B0A52823E247C7001ED66A /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96351132E2528A1085B69A7A /* Pods-CourseGrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.debug.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.debug.xcconfig"; sourceTree = "<group>"; };
+		B616503423F08ACF00B38C52 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		B616503623F08CA100B38C52 /* Body.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
+		B616503823F0945D00B38C52 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		B616503C23F0C2E200B38C52 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		B654C59023DE38DB00F05141 /* UIColor+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Shared.swift"; sourceTree = "<group>"; };
 		B654C59223DE38ED00F05141 /* UIFont+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Shared.swift"; sourceTree = "<group>"; };
 		B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewHeader.swift; sourceTree = "<group>"; };
+		B6FAEF1C23EB83C70076B239 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCardTableViewCell.swift; sourceTree = "<group>"; };
 		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		C8A3D52C23E0D70A0007E488 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
@@ -110,6 +120,7 @@
 				0643489923DE1519007F5F9F /* SceneDelegate.swift */,
 				C8A3D53B23E23D610007E488 /* ViewControllers */,
 				06777ABB23E24E55005C74AC /* Models */,
+				B616503323F08A6900B38C52 /* Network */,
 				B654C59423DE38F400F05141 /* Extensions */,
 				06777ABC23E24E72005C74AC /* Supporting */,
 			);
@@ -120,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				06B0A52823E247C7001ED66A /* Section.swift */,
+				B6FAEF1C23EB83C70076B239 /* Course.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -155,6 +167,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B616503323F08A6900B38C52 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B616503423F08ACF00B38C52 /* Endpoints.swift */,
+				B616503623F08CA100B38C52 /* Body.swift */,
+				B616503823F0945D00B38C52 /* Response.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		B654C59423DE38F400F05141 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +184,7 @@
 				B654C59223DE38ED00F05141 /* UIFont+Shared.swift */,
 				063C67D223E9089F00A40895 /* UIImage+Shared.swift */,
 				0656EE9123EBA0A30031CB2A /* UIView+Shared.swift */,
+				B616503C23F0C2E200B38C52 /* UserDefaults.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -357,12 +380,17 @@
 				0656EE9423EBBDEB0031CB2A /* SettingsAnimator.swift in Sources */,
 				C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */,
 				C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */,
+				B616503923F0945D00B38C52 /* Response.swift in Sources */,
 				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
+				B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */,
 				06B0A52923E247C7001ED66A /* Section.swift in Sources */,
 				06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */,
 				06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */,
 				063C67D323E9089F00A40895 /* UIImage+Shared.swift in Sources */,
+				B616503723F08CA100B38C52 /* Body.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
+				B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */,
+				B616503D23F0C2E200B38C52 /* UserDefaults.swift in Sources */,
 				B6FAEF1B23E9FC5B0076B239 /* HomeTableViewHeader.swift in Sources */,
 				062891B723E8F51F00B6D698 /* SearchViewController.swift in Sources */,
 				C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */,
