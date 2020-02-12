@@ -41,7 +41,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         trackingButton.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.width.equalTo(90)
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().inset(20)
             make.centerY.equalToSuperview()
         }
     }

@@ -83,49 +83,53 @@ class SearchTableViewCell: UITableViewCell {
             make.top.bottom.leading.equalToSuperview().inset(16)
         }
 
+        divider.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(1)
+            //make.top.equalTo(titleLabel.snp.bottom).offset(11)
+            make.bottom.equalToSuperview().inset(44)
+        }
+
+        statusBadge.snp.makeConstraints { make in
+            make.size.equalTo(16)
+            make.leading.equalToSuperview().offset(16)
+            make.top.equalTo(divider.snp.bottom).offset(12)
+            make.bottom.equalToSuperview().inset(16)
+        }
+
+        subtitleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(statusBadge.snp.trailing).offset(12)
+            make.centerY.equalTo(statusBadge.snp.centerY)
+        }
+
+        trackingButton.snp.makeConstraints { make in
+            make.height.equalTo(24)
+            make.width.equalTo(90)
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalTo(subtitleLabel.snp.centerY)
+        }
+
     }
 
     func configure(for section: Section) {
         titleLabel.text = section.title
+        divider.isHidden = !section.isTracking
+        trackingButton.isHidden = !section.isTracking
+        statusBadge.isHidden = !section.isTracking
+        statusBadge.image = section.status.icon
+        subtitleLabel.isHidden = !section.isTracking
+        subtitleLabel.text = section.section
 
         if section.isTracking {
-            divider.isHidden = false
-            trackingButton.isHidden = false
-            statusBadge.isHidden = false
-            statusBadge.image = section.status.icon
-            subtitleLabel.isHidden = false
-            subtitleLabel.text = section.section
-
             titleLabel.snp.remakeConstraints { make in
                 make.leading.top.equalToSuperview().inset(16)
                 make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
                 make.bottom.equalTo(divider.snp.top).offset(-11)
             }
-
-            divider.snp.makeConstraints { make in
-                make.width.equalToSuperview()
-                make.height.equalTo(1)
-                make.top.equalTo(titleLabel.snp.bottom).offset(11)
-                make.bottom.equalToSuperview().inset(44)
-            }
-
-            statusBadge.snp.makeConstraints { make in
-                make.size.equalTo(16)
-                make.leading.equalToSuperview().offset(16)
-                make.top.equalTo(divider.snp.bottom).offset(12)
-                make.bottom.equalToSuperview().inset(16)
-            }
-
-            subtitleLabel.snp.makeConstraints { make in
-                make.leading.equalTo(statusBadge.snp.trailing).offset(12)
-                make.centerY.equalTo(statusBadge.snp.centerY)
-            }
-
-            trackingButton.snp.makeConstraints { make in
-                make.height.equalTo(24)
-                make.width.equalTo(90)
-                make.trailing.equalToSuperview().inset(16)
-                make.centerY.equalTo(subtitleLabel.snp.centerY)
+        } else {
+            titleLabel.snp.remakeConstraints { make in
+                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
+                make.top.bottom.leading.equalToSuperview().inset(16)
             }
         }
     }

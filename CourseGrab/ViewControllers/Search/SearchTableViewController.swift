@@ -29,24 +29,6 @@ class SearchTableViewController: UITableViewController {
                 status: .open,
                 subjectCode: "NBA",
                 title: "NBA 3000: Designing New Ventures"
-            ),
-            Section(
-                catalogNum: 51,
-                courseNum: 29424,
-                isTracking: false,
-                section: "DIS 005 / TR 1:25PM",
-                status: .closed,
-                subjectCode: "CS",
-                title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
-            ),
-            Section(
-                catalogNum: 12,
-                courseNum: 5010,
-                isTracking: true,
-                section: "LEC 002 / W 2:10PM",
-                status: .waitlist,
-                subjectCode: "PE",
-                title: "Introductory Rock Climbing"
             )
         ]
 
@@ -92,7 +74,7 @@ extension SearchTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        present(SearchDetailTableViewController(), animated: true, completion: nil)
+        navigationController?.pushViewController(SearchDetailTableViewController(), animated: true)
     }
     
 }

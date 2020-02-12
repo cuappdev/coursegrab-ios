@@ -84,8 +84,7 @@ class HomeTableViewCell: UITableViewCell {
             make.top.equalTo(sectionLabel.snp.bottom).offset(12)
             make.leading.equalTo(containerView.snp.centerX).offset(9)
             make.height.equalTo(24)
-            make.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(16)
+            make.trailing.bottom.equalToSuperview().inset(16)
         }
         
         removeButton.snp.makeConstraints { make in
@@ -130,15 +129,14 @@ class HomeTableViewCell: UITableViewCell {
                 make.leading.equalTo(16)
                 make.height.equalTo(24)
                 make.trailing.equalTo(containerView.snp.centerX).inset(9)
-                make.bottom.equalTo(containerView).inset(16)
+                make.bottom.equalToSuperview().inset(16)
             }
         } else {
             removeButton.snp.remakeConstraints { make in
                 make.top.equalTo(sectionLabel.snp.bottom).offset(12)
                 make.leading.equalTo(16)
                 make.height.equalTo(24)
-                make.trailing.equalTo(containerView).inset(16)
-                make.bottom.equalTo(containerView).inset(16)
+                make.trailing.bottom.equalToSuperview().inset(16)
             }
         }
     }
