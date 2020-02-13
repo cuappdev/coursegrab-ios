@@ -6,6 +6,7 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
+import SPPermissions
 import Tactile
 import UIKit
 
@@ -24,51 +25,51 @@ class HomeTableViewController: UITableViewController {
 
         let availableSections = [
             Section(
-            catalogNum: 103,
-            courseNum: 15821,
-            isTracking: true,
-            section: "LEC 001 / TR 1:25PM",
-            status: .open,
-            subjectCode: "NBA",
-            title: "NBA 3000: Designing New Ventures"
-        ),
-        Section(
-            catalogNum: 51,
-            courseNum: 29424,
-            isTracking: true,
-            section: "DIS 005 / TR 1:25PM",
-            status: .open,
-            subjectCode: "CS",
-            title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
+                catalogNum: 103,
+                courseNum: 15821,
+                isTracking: true,
+                section: "LEC 001 / TR 1:25PM",
+                status: .open,
+                subjectCode: "NBA",
+                title: "NBA 3000: Designing New Ventures"
+            ),
+            Section(
+                catalogNum: 51,
+                courseNum: 29424,
+                isTracking: true,
+                section: "DIS 005 / TR 1:25PM",
+                status: .open,
+                subjectCode: "CS",
+                title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
             )]
         let awaitingSections = [
-        Section(
-            catalogNum: 12,
-            courseNum: 5010,
-            isTracking: true,
-            section: "LEC 002 / W 2:10PM",
-            status: .waitlist,
-            subjectCode: "PE",
-            title: "Introductory Rock Climbing"
-        ),
-        Section(
-            catalogNum: 12345,
-            courseNum: 5010,
-            isTracking: true,
-            section: "LEC 001 / M 2:10PM",
-            status: .closed,
-            subjectCode: "ENGL",
-            title: "Introductory Creative Writing"
-        ),
-        Section(
-            catalogNum: 12345,
-            courseNum: 5010,
-            isTracking: true,
-            section: "LEC 001 / M 2:10PM",
-            status: .closed,
-            subjectCode: "ENGL",
-            title: "Advanced Creative Writing"
-        )]
+            Section(
+                catalogNum: 12,
+                courseNum: 5010,
+                isTracking: true,
+                section: "LEC 002 / W 2:10PM",
+                status: .waitlist,
+                subjectCode: "PE",
+                title: "Introductory Rock Climbing"
+            ),
+            Section(
+                catalogNum: 12345,
+                courseNum: 5010,
+                isTracking: true,
+                section: "LEC 001 / M 2:10PM",
+                status: .closed,
+                subjectCode: "ENGL",
+                title: "Introductory Creative Writing"
+            ),
+            Section(
+                catalogNum: 12345,
+                courseNum: 5010,
+                isTracking: true,
+                section: "LEC 001 / M 2:10PM",
+                status: .closed,
+                subjectCode: "ENGL",
+                title: "Advanced Creative Writing"
+            )]
 
         tableSections = [.available(availableSections), .awaiting(awaitingSections)]
 
@@ -94,10 +95,70 @@ class HomeTableViewController: UITableViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.showsVerticalScrollIndicator = false
-        tableView.register(HomeTableViewHeader.self,
-        forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
+        tableView.register(HomeTableViewHeader.self, forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
+
+        if (!UserDefaults.standard.didPromptPermission) {
+            displayPermissionModal()
+        }
+    }
+
+    func displayPermissionModal() {
+        let controller = SPPermissions.dialog([.notification])
+        controller.titleText = "Get In Your Courses"
+        controller.footerText = "Push notifications enhance the CourseGrab experience."
+        controller.dataSource = self
+        controller.delegate = self
+        controller.present(on: self)
+    }
+
+}
+
+// MARK: - SPPermissionsDataSource
+
+extension HomeTableViewController: SPPermissionsDataSource {
+
+    func configure(_ cell: SPPermissionTableViewCell, for permission: SPPermission) -> SPPermissionTableViewCell {
+        cell.permissionTitleLabel.text = "Notifications"
+        cell.permissionDescriptionLabel.text = "We'll tell you when a section opens!"
+        cell.iconView.color = .courseGrabGreen
+        cell.button.allowTitle = "Allow"
+        cell.button.allowedTitle = "Allowed"
+        cell.button.allowedBackgroundColor = .courseGrabGreen
+        cell.button.allowBackgroundColor = .courseGrabGreen
+        cell.button.allowTitleColor = .white
+        return cell
+    }
+}
+
+// MARK: - SPPermissionsDelegate
+
+extension HomeTableViewController: SPPermissionsDelegate {
+
+    func didAllow(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func didDenied(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func didHide(permissions ids: [Int]) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func deniedData(for permission: SPPermission) -> SPPermissionDeniedAlertData? {
+        if permission == .notification {
+            let data = SPPermissionDeniedAlertData()
+            data.alertOpenSettingsDeniedPermissionTitle = "Permission denied"
+            data.alertOpenSettingsDeniedPermissionDescription = "If you would like to receive push notifications for your courses, go to settings."
+            data.alertOpenSettingsDeniedPermissionButtonTitle = "Settings"
+            data.alertOpenSettingsDeniedPermissionCancelTitle = "Cancel"
+            return data
+        } else {
+            // If returned nil, alert will not show.
+            return nil
+        }
     }
 
 }
