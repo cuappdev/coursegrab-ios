@@ -30,10 +30,52 @@ class InteractivePopRecognizer: NSObject, UIGestureRecognizerDelegate {
     
 }
 
+// MARK: - BigHitNavigationBar
+
+private class BigHitNavigationBar: UINavigationBar {
+
+    private let tapOffset: CGFloat = 40
+
+    weak var navigationController: UINavigationController?
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if bounds.insetBy(dx: 0, dy: -tapOffset).contains(point), let item = navigationController?.topViewController?.navigationItem {
+            var candidateViews = [
+                item.backBarButtonItem?.customView,
+                item.leftBarButtonItem?.customView,
+                item.rightBarButtonItem?.customView
+                ].compactMap { $0 }
+            item.leftBarButtonItems?.compactMap { $0.customView }.forEach { candidateViews.append($0) }
+            item.rightBarButtonItems?.compactMap { $0.customView }.forEach { candidateViews.append($0) }
+
+            for view in candidateViews {
+                let viewFrame = view.convert(view.frame, to: self).insetBy(dx: -tapOffset, dy: -tapOffset)
+                if viewFrame.contains(point) {
+                    return view
+                }
+            }
+        }
+
+        return super.hitTest(point, with: event)
+    }
+
+}
+
+
 // MARK: - MainNavigationController
 
 class MainNavigationController: UINavigationController {
 
+    override init(rootViewController: UIViewController) {
+        super.init(navigationBarClass: BigHitNavigationBar.self, toolbarClass: nil)
+        (navigationBar as? BigHitNavigationBar)?.navigationController = self
+        setViewControllers([rootViewController], animated: false)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
