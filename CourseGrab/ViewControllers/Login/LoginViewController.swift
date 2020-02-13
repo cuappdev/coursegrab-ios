@@ -14,60 +14,51 @@ class LoginViewController: UIViewController {
 
     private let logoView = UIImageView()
     private let signInButton = GIDSignInButton()
-    private let stackView = UIStackView()
     private let titleLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
 
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         // Automatically sign in the user.
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
 
-        setupStackView()
-        setupTitleLabel()
-        setupLogoView()
-        setupSignInButton()
-    }
+        // Setup appearance
 
-    private func setupStackView() {
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .center
-        stackView.spacing = 40
-        view.addSubview(stackView)
+        view.backgroundColor = .white
+        
+        logoView.image = UIImage(named: "coursegrab-logo")
+        logoView.contentMode = .scaleAspectFit
+        view.addSubview(logoView)
+        view.addSubview(signInButton)
 
-        stackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(32)
-            make.centerY.equalToSuperview()
-        }
-    }
-
-    private func setupTitleLabel() {
         titleLabel.text = "CourseGrab"
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
-        titleLabel.font = .systemFont(ofSize: 36, weight: .bold)
-        stackView.addArrangedSubview(titleLabel)
-    }
+        titleLabel.font = ._44Bold
+        view.addSubview(titleLabel)
 
-    private func setupLogoView() {
-        logoView.image = UIImage(named: "image")
-        logoView.contentMode = .scaleAspectFit
-        stackView.addArrangedSubview(logoView)
+        // Setup constraints
 
         logoView.snp.makeConstraints { make in
-            make.height.equalTo(128)
+            make.centerY.centerX.equalToSuperview()
+            make.size.equalTo(250)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(logoView.snp.top).offset(22)
+            make.centerX.equalToSuperview()
+        }
+        signInButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(logoView.snp.bottom)
         }
     }
 
-    private func setupSignInButton() {
-        stackView.addArrangedSubview(signInButton)
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
+    
 }
 
 extension LoginViewController: GIDSignInDelegate {

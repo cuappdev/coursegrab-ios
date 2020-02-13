@@ -4,8 +4,10 @@ target 'CourseGrab' do
   use_frameworks!
 
   # Pods for CourseGrab
-  pod 'SnapKit'
+  pod 'FutureNova', :git => 'https://github.com/cuappdev/ios-networking.git'
   pod 'GoogleSignIn'
+  pod 'SnapKit'
+  pod 'SPPermissions/Notification'
   pod 'Tactile'
 
 end

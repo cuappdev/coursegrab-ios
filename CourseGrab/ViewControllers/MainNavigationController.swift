@@ -61,7 +61,6 @@ private class BigHitNavigationBar: UINavigationBar {
 
 }
 
-
 // MARK: - MainNavigationController
 
 class MainNavigationController: UINavigationController {

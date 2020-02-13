@@ -11,9 +11,9 @@ import UIKit
 
 extension UIImage {
 
-    static let backIcon = UIImage(named: "icon_back")
-    static let searchIcon = UIImage(named: "icon_search")
-    static let settingsIcon = UIImage(named: "icon_settings")
+    static let backIcon = UIImage(named: "icon-back")
+    static let searchIcon = UIImage(named: "icon-search")
+    static let settingsIcon = UIImage(named: "icon-settings")
 
     func with(insets: UIEdgeInsets) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(

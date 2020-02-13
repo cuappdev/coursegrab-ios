@@ -160,7 +160,7 @@ extension HomeTableViewController: SPPermissionsDelegate {
             return nil
         }
     }
-
+    
 }
 
 // MARK: - UITableViewDataSource
