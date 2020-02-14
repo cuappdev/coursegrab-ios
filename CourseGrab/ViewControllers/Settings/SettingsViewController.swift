@@ -123,7 +123,7 @@ extension SettingsViewController {
     private func pan(_ gesture: UIPanGestureRecognizer) {
         let dismissalFraction: CGFloat = 20 / contentView.frame.height
         
-        let translation = gesture.translation(in: view).y / 6
+        let translation = gesture.translation(in: view).y
         let velocity = gesture.velocity(in: view).y
         let panFraction = translation / contentView.frame.height
         

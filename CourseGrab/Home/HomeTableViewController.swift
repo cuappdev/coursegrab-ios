@@ -25,51 +25,51 @@ class HomeTableViewController: UITableViewController {
 
         let availableSections = [
             Section(
-            catalogNum: 103,
-            courseNum: 15821,
-            isTracking: true,
-            section: "LEC 001 / TR 1:25PM",
-            status: .open,
-            subjectCode: "NBA",
-            title: "NBA 3000: Designing New Ventures"
-        ),
-        Section(
-            catalogNum: 51,
-            courseNum: 29424,
-            isTracking: true,
-            section: "DIS 005 / TR 1:25PM",
-            status: .open,
-            subjectCode: "CS",
-            title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
+                catalogNum: 103,
+                courseNum: 15821,
+                isTracking: true,
+                section: "LEC 001 / TR 1:25PM",
+                status: .open,
+                subjectCode: "NBA",
+                title: "NBA 3000: Designing New Ventures"
+            ),
+            Section(
+                catalogNum: 51,
+                courseNum: 29424,
+                isTracking: true,
+                section: "DIS 005 / TR 1:25PM",
+                status: .open,
+                subjectCode: "CS",
+                title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
             )]
         let awaitingSections = [
-        Section(
-            catalogNum: 12,
-            courseNum: 5010,
-            isTracking: true,
-            section: "LEC 002 / W 2:10PM",
-            status: .waitlist,
-            subjectCode: "PE",
-            title: "Introductory Rock Climbing"
-        ),
-        Section(
-            catalogNum: 12345,
-            courseNum: 5010,
-            isTracking: true,
-            section: "LEC 001 / M 2:10PM",
-            status: .closed,
-            subjectCode: "ENGL",
-            title: "Introductory Creative Writing"
-        ),
-        Section(
-            catalogNum: 12345,
-            courseNum: 5010,
-            isTracking: true,
-            section: "LEC 001 / M 2:10PM",
-            status: .closed,
-            subjectCode: "ENGL",
-            title: "Advanced Creative Writing"
-        )]
+            Section(
+                catalogNum: 12,
+                courseNum: 5010,
+                isTracking: true,
+                section: "LEC 002 / W 2:10PM",
+                status: .waitlist,
+                subjectCode: "PE",
+                title: "Introductory Rock Climbing"
+            ),
+            Section(
+                catalogNum: 12345,
+                courseNum: 5010,
+                isTracking: true,
+                section: "LEC 001 / M 2:10PM",
+                status: .closed,
+                subjectCode: "ENGL",
+                title: "Introductory Creative Writing"
+            ),
+            Section(
+                catalogNum: 12345,
+                courseNum: 5010,
+                isTracking: true,
+                section: "LEC 001 / M 2:10PM",
+                status: .closed,
+                subjectCode: "ENGL",
+                title: "Advanced Creative Writing"
+            )]
 
         tableSections = [.available(availableSections), .awaiting(awaitingSections)]
 
@@ -95,9 +95,7 @@ class HomeTableViewController: UITableViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.showsVerticalScrollIndicator = false
-        tableView.register(HomeTableViewHeader.self,
-        forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
+        tableView.register(HomeTableViewHeader.self, forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
 
         if (!UserDefaults.standard.didPromptPermission) {
@@ -116,20 +114,25 @@ class HomeTableViewController: UITableViewController {
 
 }
 
+// MARK: - SPPermissionsDataSource
+
 extension HomeTableViewController: SPPermissionsDataSource {
 
     func configure(_ cell: SPPermissionTableViewCell, for permission: SPPermission) -> SPPermissionTableViewCell {
-        cell.permissionTitleLabel.text = "Push Notifications"
-        cell.permissionDescriptionLabel.text = "Let us notify you when a section opens!"
+        cell.permissionTitleLabel.text = "Notifications"
+        cell.permissionDescriptionLabel.text = "We'll tell you when a section opens!"
+        cell.iconView.color = .courseGrabGreen
         cell.button.allowTitle = "Allow"
         cell.button.allowedTitle = "Allowed"
-        cell.iconView.color = .courseGrabGreen
         cell.button.allowedBackgroundColor = .courseGrabGreen
         cell.button.allowBackgroundColor = .courseGrabGreen
         cell.button.allowTitleColor = .white
         return cell
     }
 }
+
+// MARK: - SPPermissionsDelegate
+
 extension HomeTableViewController: SPPermissionsDelegate {
 
     func didAllow(permission: SPPermission) {

@@ -18,12 +18,15 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        navigationController?.setNavigationBarHidden(true, animated: false)
+
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         // Automatically sign in the user.
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+
+        // Setup appearance
+
+        view.backgroundColor = .white
         
         logoView.image = UIImage(named: "coursegrab-logo")
         logoView.contentMode = .scaleAspectFit
@@ -36,10 +39,8 @@ class LoginViewController: UIViewController {
         titleLabel.font = ._44Bold
         view.addSubview(titleLabel)
 
-        setupViews()
-    }
-    
-    private func setupViews() {
+        // Setup constraints
+
         logoView.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
             make.size.equalTo(250)
@@ -52,6 +53,11 @@ class LoginViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(logoView.snp.bottom)
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
 }
