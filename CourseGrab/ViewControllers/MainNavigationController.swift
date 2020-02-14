@@ -44,9 +44,13 @@ private class BigHitNavigationBar: UINavigationBar {
                 item.backBarButtonItem?.customView,
                 item.leftBarButtonItem?.customView,
                 item.rightBarButtonItem?.customView
-                ].compactMap { $0 }
-            item.leftBarButtonItems?.compactMap { $0.customView }.forEach { candidateViews.append($0) }
-            item.rightBarButtonItems?.compactMap { $0.customView }.forEach { candidateViews.append($0) }
+            ].compactMap { $0 }
+            item.leftBarButtonItems?
+                .compactMap { $0.customView }
+                .forEach { candidateViews.append($0) }
+            item.rightBarButtonItems?
+                .compactMap { $0.customView }
+                .forEach { candidateViews.append($0) }
 
             for view in candidateViews {
                 let viewFrame = view.convert(view.frame, to: self).insetBy(dx: -tapOffset, dy: -tapOffset)
