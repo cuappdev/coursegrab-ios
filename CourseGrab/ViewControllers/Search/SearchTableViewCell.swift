@@ -11,8 +11,8 @@ import UIKit
 class SearchTableViewCell: UITableViewCell {
 
     private let arrowImageView = UIImageView()
-    private let divider = UIView()
     private let containerView = UIView()
+    private let divider = UIView()
     private let statusBadge = UIImageView()
     private let subtitleLabel = UILabel()
     private let titleLabel = UILabel()
@@ -57,12 +57,12 @@ class SearchTableViewCell: UITableViewCell {
         containerView.addSubview(trackingButton)
 
         statusBadge.contentMode = .scaleAspectFit
-        containerView.addSubview(statusBadge)
         statusBadge.isHidden = true
+        containerView.addSubview(statusBadge)
 
         subtitleLabel.font = ._14Semibold
-        containerView.addSubview(subtitleLabel)
         subtitleLabel.isHidden = true
+        containerView.addSubview(subtitleLabel)
 
         // Setup constraints
 
@@ -79,14 +79,13 @@ class SearchTableViewCell: UITableViewCell {
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
+            make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
             make.top.bottom.leading.equalToSuperview().inset(16)
         }
 
         divider.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.equalTo(1)
-            //make.top.equalTo(titleLabel.snp.bottom).offset(11)
             make.bottom.equalToSuperview().inset(44)
         }
 
@@ -123,12 +122,12 @@ class SearchTableViewCell: UITableViewCell {
         if section.isTracking {
             titleLabel.snp.remakeConstraints { make in
                 make.leading.top.equalToSuperview().inset(16)
-                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
+                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
                 make.bottom.equalTo(divider.snp.top).offset(-11)
             }
         } else {
             titleLabel.snp.remakeConstraints { make in
-                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
+                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
                 make.top.bottom.leading.equalToSuperview().inset(16)
             }
         }

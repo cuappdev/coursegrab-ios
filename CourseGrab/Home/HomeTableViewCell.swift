@@ -108,7 +108,7 @@ class HomeTableViewCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(16)
-            make.trailing.equalTo(statusBadge.snp.leading).offset(-12)
+            make.trailing.equalTo(statusBadge.snp.leading).inset(12)
         }
     }
     
