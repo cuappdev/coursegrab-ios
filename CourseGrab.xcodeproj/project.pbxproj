@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		062891B723E8F51F00B6D698 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062891B623E8F51F00B6D698 /* SearchViewController.swift */; };
 		063C67D323E9089F00A40895 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063C67D223E9089F00A40895 /* UIImage+Extensions.swift */; };
+		062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062891B623E8F51F00B6D698 /* SearchTableViewController.swift */; };
 		0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0643489723DE1519007F5F9F /* AppDelegate.swift */; };
 		0643489A23DE1519007F5F9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0643489923DE1519007F5F9F /* SceneDelegate.swift */; };
 		064348A123DE151D007F5F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 064348A023DE151D007F5F9F /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1C23EB83C70076B239 /* Course.swift */; };
 		C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */; };
 		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
+		C87CA7A623EA0E6E00242E1F /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CA7A523EA0E6E00242E1F /* SearchTableViewCell.swift */; };
 		C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D52C23E0D70A0007E488 /* Keys.swift */; };
 		C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */; };
 		C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */; };
@@ -41,6 +43,7 @@
 /* Begin PBXFileReference section */
 		062891B623E8F51F00B6D698 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		063C67D223E9089F00A40895 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		062891B623E8F51F00B6D698 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		0643489423DE1519007F5F9F /* CourseGrab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourseGrab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0643489723DE1519007F5F9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0643489923DE1519007F5F9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 		B6FAEF1C23EB83C70076B239 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCardTableViewCell.swift; sourceTree = "<group>"; };
 		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		C87CA7A523EA0E6E00242E1F /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		C8A3D52C23E0D70A0007E488 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewController.swift; sourceTree = "<group>"; };
 		C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -90,7 +94,8 @@
 		062891B823E8F52800B6D698 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				062891B623E8F51F00B6D698 /* SearchViewController.swift */,
+				062891B623E8F51F00B6D698 /* SearchTableViewController.swift */,
+				C87CA7A523EA0E6E00242E1F /* SearchTableViewCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -392,11 +397,13 @@
 				B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */,
 				B616503D23F0C2E200B38C52 /* UserDefaults+Extensions.swift in Sources */,
 				B6FAEF1B23E9FC5B0076B239 /* HomeTableViewHeader.swift in Sources */,
-				062891B723E8F51F00B6D698 /* SearchViewController.swift in Sources */,
+				06675D0E23E2859F00AF1884 /* HomeTableViewController.swift in Sources */,
+				062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */,
 				C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */,
 				C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */,
 				B654C59123DE38DB00F05141 /* UIColor+Extensions.swift in Sources */,
 				06675D0E23E2859F00AF1884 /* HomeTableViewController.swift in Sources */,
+				C87CA7A623EA0E6E00242E1F /* SearchTableViewCell.swift in Sources */,
 				0643489A23DE1519007F5F9F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,7 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9W8TDKYZ6C;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/CourseGrab/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -556,7 +563,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9W8TDKYZ6C;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/CourseGrab/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

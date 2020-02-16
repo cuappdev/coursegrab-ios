@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  SearchTableViewController.swift
 //  CourseGrab
 //
 //  Created by Daniel Vebman on 2/3/20.
@@ -7,16 +7,35 @@
 //
 
 import Foundation
-import UIKit
 import Tactile
+import UIKit
 
-class SearchViewController: UIViewController {
+class SearchTableViewController: UITableViewController {
 
     private var popRecognizer: InteractivePopRecognizer?
+    private let searchCellReuseId = "searchCellReuseId"
+    private var sections: [Section] = []
     private let textField = UITextField()
 
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        super.viewDidLoad()
+
+        sections = [
+            Section(
+                catalogNum: 103,
+                courseNum: 15821,
+                isTracking: true,
+                section: "LEC 001 / TR 1:25PM",
+                status: .open,
+                subjectCode: "NBA",
+                title: "NBA 3000: Designing New Ventures"
+            )
+        ]
+
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: searchCellReuseId)
 
         // Setup navigationBar
         textField.frame.size.width = view.frame.width - 80
@@ -42,10 +61,30 @@ class SearchViewController: UIViewController {
 
 }
 
+// MARK: - Datasource
+
+extension SearchTableViewController {
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: searchCellReuseId, for: indexPath) as! SearchTableViewCell
+        cell.configure(for: sections[indexPath.row])
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(SearchDetailTableViewController(), animated: true)
+    }
+    
+}
+
 
 // MARK: - View lifecycle
 
-extension SearchViewController {
+extension SearchTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupPopGesture()

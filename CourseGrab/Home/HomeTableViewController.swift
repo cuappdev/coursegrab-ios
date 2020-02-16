@@ -280,7 +280,8 @@ extension HomeTableViewController {
         }
 
         // Create and present the SearchViewController by fading it in.
-        let searchViewController = SearchViewController()
+        let searchViewController = SearchTableViewController()
+        searchViewController.view.frame = view.frame
         UIView.transition(from: view, to: searchViewController.view, duration: 0.3, options: .transitionCrossDissolve) { _ in
             self.navigationController?.pushViewController(searchViewController, animated: false)
 
