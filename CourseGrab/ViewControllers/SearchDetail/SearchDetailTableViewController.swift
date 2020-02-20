@@ -14,7 +14,7 @@ class SearchDetailTableViewController: UITableViewController {
         case card, section
     }
 
-    let section = Section(catalogNum: 1234, courseNum: 1998, isTracking: true, section: "LEC 001", status: .open, subjectCode: "INFO", title: "Intro to Digital Product Design")
+    let section = Section(catalogNum: 1234, courseNum: 1998, isTracking: true, section: "LEC 001 / TR 1:25PM", status: .open, subjectCode: "INFO", title: "Intro to Digital Product Design")
 
     override func viewDidLoad() {
         super.viewDidLoad()

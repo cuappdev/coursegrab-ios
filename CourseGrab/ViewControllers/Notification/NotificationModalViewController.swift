@@ -40,12 +40,14 @@ class NotificationModalViewController: UIViewController {
 
         availableLabel.text = "AVAILABLE NOW"
         availableLabel.textAlignment = .center
+        availableLabel.adjustsFontSizeToFitWidth = true
         availableLabel.font = ._24Bold
         availableLabel.textColor = .courseGrabGreen
         view.addSubview(availableLabel)
 
         courseTitleLabel.text = section.title.uppercased()
         courseTitleLabel.textAlignment = .center
+        courseTitleLabel.adjustsFontSizeToFitWidth = true
         courseTitleLabel.numberOfLines = 0
         courseTitleLabel.font = ._24Bold
         courseTitleLabel.textColor = .white
@@ -53,6 +55,7 @@ class NotificationModalViewController: UIViewController {
 
         sectionLabel.text = section.section.uppercased()
         sectionLabel.textAlignment = .center
+        sectionLabel.adjustsFontSizeToFitWidth = true
         sectionLabel.numberOfLines = 0
         sectionLabel.font = ._20Semibold
         sectionLabel.textColor = .white
@@ -64,18 +67,21 @@ class NotificationModalViewController: UIViewController {
 
         courseIDTitleLabel.text = "COURSE ID"
         courseIDTitleLabel.textAlignment = .center
+        courseIDTitleLabel.adjustsFontSizeToFitWidth = true
         courseIDTitleLabel.font = ._16Bold
         courseIDTitleLabel.textColor = .courseGrabBorder
         courseIDStackView.addArrangedSubview(courseIDTitleLabel)
 
         courseIDLabel.text = "\(section.courseNum)"
         courseIDLabel.textAlignment = .center
+        courseIDLabel.adjustsFontSizeToFitWidth = true
         courseIDLabel.font = ._60Bold
         courseIDLabel.textColor = .white
         courseIDStackView.addArrangedSubview(courseIDLabel)
 
         homeButton.setTitle("BACK TO HOME", for: .normal)
         homeButton.titleLabel?.font = ._18Semibold
+        homeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         homeButton.setTitleColor(.white, for: .normal)
         homeButton.on(.touchUpInside, presentHomeViewController)
         view.addSubview(homeButton)

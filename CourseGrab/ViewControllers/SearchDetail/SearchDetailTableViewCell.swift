@@ -23,6 +23,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         setupStatusView(status: .closed)
 
         titleLabel.font = ._14Semibold
+        titleLabel.adjustsFontSizeToFitWidth = true
         contentView.addSubview(titleLabel)
 
         trackingButton.layer.cornerRadius = 2
@@ -33,15 +34,16 @@ class SearchDetailTableViewCell: UITableViewCell {
 
         // Setup constraints
 
-        titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(statusView.snp.trailing).offset(12)
-            make.centerY.equalToSuperview()
-        }
-
         trackingButton.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.width.equalTo(90)
             make.trailing.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview()
+        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(statusView.snp.trailing).offset(12)
+            make.trailing.equalTo(trackingButton.snp.leading).offset(-12)
             make.centerY.equalToSuperview()
         }
     }
