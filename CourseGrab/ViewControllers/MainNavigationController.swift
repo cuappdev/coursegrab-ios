@@ -93,6 +93,14 @@ class MainNavigationController: UINavigationController {
         // Add insets to the back button so it perfectly aligns with the HomeTableViewController back button.
         navigationBar.backIndicatorImage = UIImage.backIcon?.with(insets: UIEdgeInsets(top: 0, left: 8, bottom: 2.5, right: 0))
         navigationBar.backIndicatorTransitionMaskImage = .backIcon
+
+        becomeFirstResponder()
+    }
+
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            pushViewController(NotificationModalViewController(), animated: true)
+        }
     }
 
 }
