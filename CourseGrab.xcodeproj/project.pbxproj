@@ -18,6 +18,7 @@
 		06675D0E23E2859F00AF1884 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06675D0D23E2859F00AF1884 /* HomeTableViewController.swift */; };
 		06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06734A0023E246C800214A3D /* HomeTableViewCell.swift */; };
 		06B0A52923E247C7001ED66A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B0A52823E247C7001ED66A /* Section.swift */; };
+		06C9B9DA23FDF7900025CA8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B9D923FDF7900025CA8E /* User.swift */; };
 		06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */; };
 		85B7209D1C37F77FD0A7F126 /* Pods_CourseGrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */; };
 		B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503423F08ACF00B38C52 /* Endpoints.swift */; };
@@ -55,6 +56,7 @@
 		06734A0023E246C800214A3D /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		067F000123E918C400F78B36 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		06B0A52823E247C7001ED66A /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		06C9B9D923FDF7900025CA8E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,8 +138,9 @@
 		06777ABB23E24E55005C74AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				06B0A52823E247C7001ED66A /* Section.swift */,
 				B6FAEF1C23EB83C70076B239 /* Course.swift */,
+				06B0A52823E247C7001ED66A /* Section.swift */,
+				06C9B9D923FDF7900025CA8E /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				B654C59323DE38ED00F05141 /* UIFont+Extensions.swift in Sources */,
 				0656EE9423EBBDEB0031CB2A /* SettingsAnimator.swift in Sources */,
 				C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */,
+				06C9B9DA23FDF7900025CA8E /* User.swift in Sources */,
 				C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */,
 				B616503923F0945D00B38C52 /* Response.swift in Sources */,
 				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
@@ -544,7 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZGMCXU7X3U;
 				INFOPLIST_FILE = "$(SRCROOT)/CourseGrab/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -565,7 +569,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZGMCXU7X3U;
 				INFOPLIST_FILE = "$(SRCROOT)/CourseGrab/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
