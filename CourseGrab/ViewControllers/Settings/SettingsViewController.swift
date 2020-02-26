@@ -91,6 +91,7 @@ class SettingsViewController: UIViewController {
             for: .normal
         )
         calendarButton.contentHorizontalAlignment = .left
+        calendarButton.on(.touchUpInside, openCalendar)
         stackView.addArrangedSubview(calendarButton)
         
         let accountStackView = UIStackView()
@@ -108,6 +109,12 @@ class SettingsViewController: UIViewController {
         logoutButton.titleLabel?.font = ._16Semibold
         logoutButton.contentHorizontalAlignment = .right
         accountStackView.addArrangedSubview(logoutButton)
+    }
+
+    private func openCalendar(_ button: UIButton) {
+        if let url = URL(string: "https://registrar.cornell.edu/academic-calendar") {
+            UIApplication.shared.open(url)
+        }
     }
     
     override func viewDidLayoutSubviews() {
