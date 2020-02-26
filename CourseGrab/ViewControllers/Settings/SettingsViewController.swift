@@ -103,12 +103,13 @@ class SettingsViewController: UIViewController {
         accountLabel.text = "dov3@cornell.edu" // placeholder
         accountStackView.addArrangedSubview(accountLabel)
         
-        let logoutButton = UIButton(type: .system)
-        logoutButton.setTitle("Sign Out", for: .normal)
-        logoutButton.setTitleColor(.courseGrabRuby, for: .normal)
-        logoutButton.titleLabel?.font = ._16Semibold
-        logoutButton.contentHorizontalAlignment = .right
-        accountStackView.addArrangedSubview(logoutButton)
+        let signOutButton = UIButton(type: .system)
+        signOutButton.setTitle("Sign Out", for: .normal)
+        signOutButton.setTitleColor(.courseGrabRuby, for: .normal)
+        signOutButton.titleLabel?.font = ._16Semibold
+        signOutButton.on(.touchUpInside, signOut)
+        signOutButton.contentHorizontalAlignment = .right
+        accountStackView.addArrangedSubview(signOutButton)
     }
 
     private func openCalendar(_ button: UIButton) {
@@ -119,6 +120,16 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         contentView.roundCorners(corners: [.topLeft, .topRight], radius: 10)
+    }
+
+}
+
+extension SettingsViewController {
+
+    private func signOut(_ button: UIButton) {
+        dismiss(animated: true) {
+            User.current?.signOut()
+        }
     }
 
 }

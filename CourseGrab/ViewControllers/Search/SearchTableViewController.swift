@@ -14,28 +14,20 @@ class SearchTableViewController: UITableViewController {
 
     private var popRecognizer: InteractivePopRecognizer?
     private let searchCellReuseId = "searchCellReuseId"
+    private let searchHeaderReuseId = "searchHeaderReuseId"
     private var sections: [Section] = []
     private let textField = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sections = [
-            Section(
-                catalogNum: 103,
-                courseNum: 15821,
-                isTracking: true,
-                section: "LEC 001 / TR 1:25PM",
-                status: .open,
-                subjectCode: "NBA",
-                title: "NBA 3000: Designing New Ventures"
-            )
-        ]
+        sections = []
 
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: searchCellReuseId)
+        tableView.register(SearchTableViewHeader.self, forHeaderFooterViewReuseIdentifier: searchHeaderReuseId)
 
         // Setup navigationBar
         textField.frame.size.width = view.frame.width - 80
@@ -74,9 +66,15 @@ extension SearchTableViewController {
         cell.configure(for: sections[indexPath.row])
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(SearchDetailTableViewController(), animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: searchHeaderReuseId) as! SearchTableViewHeader
+        headerView.configure(numResults: sections.count)
+        return headerView
     }
     
 }
