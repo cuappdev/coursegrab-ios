@@ -21,8 +21,6 @@ class LoginViewController: UIViewController {
 
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        // Automatically sign in the user.
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
 
         // Setup appearance
 
@@ -59,7 +57,11 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+    }
+
 }
 
 extension LoginViewController: GIDSignInDelegate {
