@@ -13,11 +13,11 @@ class NotificationModalViewController: UIViewController {
 
     private let availableLabel = UILabel()
     private let courseIDLabel = UILabel()
+    private let courseIDStackView = UIStackView()
     private let courseIDTitleLabel = UILabel()
     private let courseTitleLabel = UILabel()
     private let homeButton = UIButton()
     private let sectionLabel = UILabel()
-    private let courseIDStackView = UIStackView()
     private let studentCenterButton = UIButton()
 
     private let section = Section(
@@ -48,7 +48,7 @@ class NotificationModalViewController: UIViewController {
         courseTitleLabel.text = section.title.uppercased()
         courseTitleLabel.textAlignment = .center
         courseTitleLabel.adjustsFontSizeToFitWidth = true
-        courseTitleLabel.numberOfLines = 0
+        courseTitleLabel.numberOfLines = 2
         courseTitleLabel.font = ._24Bold
         courseTitleLabel.textColor = .white
         view.addSubview(courseTitleLabel)
@@ -56,7 +56,6 @@ class NotificationModalViewController: UIViewController {
         sectionLabel.text = section.section.uppercased()
         sectionLabel.textAlignment = .center
         sectionLabel.adjustsFontSizeToFitWidth = true
-        sectionLabel.numberOfLines = 0
         sectionLabel.font = ._20Semibold
         sectionLabel.textColor = .white
         view.addSubview(sectionLabel)
@@ -98,11 +97,14 @@ class NotificationModalViewController: UIViewController {
         // Setup constraints
 
         availableLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(91)
+            let constaint = UIScreen.main.nativeBounds.height == 1136 ? 40 : 91
+            make.top.equalToSuperview().inset(constaint)
+            make.leading.trailing.equalToSuperview().inset(91)
         }
 
         courseTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(availableLabel.snp.bottom).offset(47)
+            let constaint = UIScreen.main.nativeBounds.height == 1136 ? 24 : 43
+            make.top.equalTo(availableLabel.snp.bottom).offset(constaint)
             make.leading.trailing.equalToSuperview().inset(20)
         }
 
@@ -116,8 +118,9 @@ class NotificationModalViewController: UIViewController {
         }
 
         homeButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(145)
-            make.leading.trailing.equalToSuperview().inset(117)
+            let constaint = UIScreen.main.nativeBounds.height == 1136 ? 50 : 145
+            make.bottom.equalToSuperview().inset(constaint)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
 
         studentCenterButton.snp.makeConstraints { make in
@@ -129,7 +132,8 @@ class NotificationModalViewController: UIViewController {
     }
 
     private func presentHomeViewController(_ button: UIButton) {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     private func openStudentCenter(_ button: UIButton) {
