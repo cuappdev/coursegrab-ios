@@ -33,10 +33,9 @@ class NotificationModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Setup appearance
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.backgroundColor = .black
-
-        // Setup appearance
 
         availableLabel.text = "AVAILABLE NOW"
         availableLabel.textAlignment = .center
@@ -95,15 +94,14 @@ class NotificationModalViewController: UIViewController {
         view.addSubview(studentCenterButton)
 
         // Setup constraints
-
         availableLabel.snp.makeConstraints { make in
-            let constaint = UIScreen.main.nativeBounds.height == 1136 ? 40 : 91
+            let constaint = isOlderModel() ? 40 : 91
             make.top.equalToSuperview().inset(constaint)
             make.leading.trailing.equalToSuperview().inset(91)
         }
 
         courseTitleLabel.snp.makeConstraints { make in
-            let constaint = UIScreen.main.nativeBounds.height == 1136 ? 24 : 43
+            let constaint = isOlderModel() ? 24 : 43
             make.top.equalTo(availableLabel.snp.bottom).offset(constaint)
             make.leading.trailing.equalToSuperview().inset(20)
         }
@@ -118,7 +116,7 @@ class NotificationModalViewController: UIViewController {
         }
 
         homeButton.snp.makeConstraints { make in
-            let constaint = UIScreen.main.nativeBounds.height == 1136 ? 50 : 145
+            let constaint = isOlderModel() ? 50 : 145
             make.bottom.equalToSuperview().inset(constaint)
             make.leading.trailing.equalToSuperview().inset(20)
         }
@@ -129,6 +127,13 @@ class NotificationModalViewController: UIViewController {
             make.height.equalTo(56)
             make.bottom.equalTo(homeButton.snp.top).offset(-24)
         }
+    }
+
+    private func isOlderModel() -> Bool {
+        if UIScreen.main.nativeBounds.height == 1136 || UIScreen.main.nativeBounds.height == 1334 || UIScreen.main.nativeBounds.height == 1920 || UIScreen.main.nativeBounds.height == 2208 {
+            return true
+        }
+        return false
     }
 
     private func presentHomeViewController(_ button: UIButton) {
