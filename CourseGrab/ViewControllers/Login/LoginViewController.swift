@@ -19,7 +19,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
 
         // Setup appearance
@@ -64,29 +63,3 @@ class LoginViewController: UIViewController {
     }
 
 }
-
-extension LoginViewController: GIDSignInDelegate {
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-
-        if let error = error {
-            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                // User is not signed in or have signed out
-            } else {
-                //print("\(error.localizedDescription)")
-            }
-            return
-        }
-
-        let navigationController = MainNavigationController(rootViewController: HomeTableViewController())
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: false)
-    }
-
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
-    }
-    
-}
-
