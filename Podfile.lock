@@ -69,6 +69,7 @@ PODS:
   - SPPermissions/Notification (5.2.6):
     - SPPermissions/Core
   - Tactile (3.0.1)
+  - Wormholy (1.5.1)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -77,6 +78,7 @@ DEPENDENCIES:
   - SnapKit
   - SPPermissions/Notification
   - Tactile
+  - Wormholy
 
 SPEC REPOS:
   trunk:
@@ -97,6 +99,7 @@ SPEC REPOS:
     - SnapKit
     - SPPermissions
     - Tactile
+    - Wormholy
 
 EXTERNAL SOURCES:
   FutureNova:
@@ -126,7 +129,8 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPPermissions: a11dd5e68bcbf0b7de7b4ba86ba008e77ae66abd
   Tactile: 266a3ddd39e670205de3987ded0414d9206ae300
+  Wormholy: f01b096b449a9fcab864a10f7e5b5693b1225c88
 
-PODFILE CHECKSUM: 52bcfd977ab4d0add5b623cd09bd54b179b33555
+PODFILE CHECKSUM: 9da27daa7b1c16a33ffd768b35c3a09faace879d
 
 COCOAPODS: 1.8.4

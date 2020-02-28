@@ -12,7 +12,7 @@ extension UserDefaults {
 
     var didPromptPermission: Bool {
         get {
-            return UserDefaults.standard.value(forKey: "didPromptPermission") as? Bool ?? false
+            return UserDefaults.standard.bool(forKey: "didPromptPermission")
         }
         set(bool) {
             UserDefaults.standard.set(bool, forKey: "didPromptPermission")

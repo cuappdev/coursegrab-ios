@@ -10,6 +10,7 @@ import Foundation
 
 struct Secrets {
     
+    static let serverHost = Secrets.keyDict["server-host"] as! String
     static let googleClientID = Secrets.keyDict["google-client-id"] as! String
 
     private static let keyDict: NSDictionary = {

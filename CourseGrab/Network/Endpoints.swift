@@ -15,30 +15,30 @@ extension Endpoint {
         Endpoint.config.keyDecodingStrategy = .convertFromSnakeCase
         Endpoint.config.keyEncodingStrategy = .convertToSnakeCase
 
-        // Dummy configuration for the time being.
         #if LOCAL
-            Endpoint.config.scheme = "http"
-            Endpoint.config.port = 5000
+        Endpoint.config.scheme = "http"
+        Endpoint.config.port = 5000
         #else
-            Endpoint.config.scheme = "https"
+        Endpoint.config.scheme = "https"
         #endif
-            Endpoint.config.host = "dog.ceo"
-            Endpoint.config.commonPath = "/api"
+        Endpoint.config.host = Secrets.serverHost
+        Endpoint.config.commonPath = "/api"
     }
 
     static var headers: [String: String] {
-        // This will be changed once the user model is implemented.
-        return [
-            "Authorization": "Bearer <access_token>"
-        ]
+        if let token = User.current?.sessionAuthorization?.sessionToken {
+            return ["Authorization": token]
+        } else {
+            return [:]
+        }
     }
 
-    static func userAuthenticate(with token: String) -> Endpoint {
-        let body = sessionBody(token: token) 
-        return Endpoint(path: "/initialize/session/", body: body)
+    static func initializeSession(with token: String) -> Endpoint {
+        let body = SessionBody(token: token)
+        return Endpoint(path: "/session/initialize/", body: body)
     }
 
-    static func userUpdateSession() -> Endpoint {
+    static func updateSession() -> Endpoint {
         return Endpoint(path: "/auth/session/update/", headers: headers)
     }
 
@@ -47,13 +47,18 @@ extension Endpoint {
     }
 
     static func trackCourse(catalogNum: Int) -> Endpoint {
-        let body = coursePostBody(courseId: catalogNum)
+        let body = CoursePostBody(courseId: catalogNum)
         return Endpoint(path: "/courses/track/", headers: headers, body: body)
     }
 
-    static func unTrackCourse(catalogNum: Int) -> Endpoint {
-        let body = coursePostBody(courseId: catalogNum)
+    static func untrackCourse(catalogNum: Int) -> Endpoint {
+        let body = CoursePostBody(courseId: catalogNum)
         return Endpoint(path: "/courses/untrack/", headers: headers, body: body)
+    }
+    
+    static func searchCourse(query: String) -> Endpoint {
+        let body = QueryBody(query: query)
+        return Endpoint(path: "/courses/search/", headers: headers, body: body)
     }
 
 }

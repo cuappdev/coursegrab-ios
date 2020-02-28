@@ -10,5 +10,6 @@ target 'CourseGrab' do
   pod 'SnapKit'
   pod 'SPPermissions/Notification'
   pod 'Tactile'
+  pod 'Wormholy', :configurations => ['Debug']
 
 end

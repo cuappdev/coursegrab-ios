@@ -22,12 +22,53 @@ struct User {
     let email: String
     let name: String
     let id: String
+    
+    var sessionAuthorization: SessionAuthorization? {
+        get {
+            if let data = UserDefaults.standard.data(forKey: "sessionAuth"),
+                let auth = try? JSONDecoder().decode(SessionAuthorization.self, from: data) {
+                return auth
+            } else {
+                return nil
+            }
+        }
+        nonmutating set(token) {
+            if let data = try? JSONEncoder().encode(token) {
+                UserDefaults.standard.set(data, forKey: "sessionAuth")
+            }
+        }
+    }
+    
+    var googleToken: String? {
+        get {
+            return UserDefaults.standard.string(forKey: "googleToken")
+        }
+        nonmutating set(token) {
+            UserDefaults.standard.set(token, forKey: "googleToken")
+        }
+    }
 
 }
 
 // MARK: - Methods
 
 extension User {
+    
+    func initializeSession() {
+        guard let token = googleToken else { return }
+        NetworkManager.shared.intializeSession(googleToken: token).observe { response in
+            switch response {
+            case .value(let value):
+                if value.success {
+                    User.current?.sessionAuthorization = value.data
+                } else {
+                    print("No success")
+                }
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
 
     func signOut() {
         do {
