@@ -57,9 +57,4 @@ class LoginViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
-    }
-
 }
