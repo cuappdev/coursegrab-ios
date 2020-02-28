@@ -61,6 +61,7 @@ class SearchTableViewCell: UITableViewCell {
         containerView.addSubview(statusBadge)
 
         subtitleLabel.font = ._14Semibold
+        subtitleLabel.adjustsFontSizeToFitWidth = true
         subtitleLabel.isHidden = true
         containerView.addSubview(subtitleLabel)
 
@@ -96,16 +97,17 @@ class SearchTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview().inset(16)
         }
 
-        subtitleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(statusBadge.snp.trailing).offset(12)
-            make.centerY.equalTo(statusBadge.snp.centerY)
-        }
-
         trackingButton.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.width.equalTo(90)
             make.trailing.equalToSuperview().inset(16)
             make.centerY.equalTo(subtitleLabel.snp.centerY)
+        }
+
+        subtitleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(statusBadge.snp.trailing).offset(12)
+            make.trailing.equalTo(trackingButton.snp.leading).offset(-12)
+            make.centerY.equalTo(statusBadge.snp.centerY)
         }
 
     }

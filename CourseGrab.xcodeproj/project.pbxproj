@@ -15,7 +15,6 @@
 		064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 064348A223DE151D007F5F9F /* LaunchScreen.storyboard */; };
 		0656EE9223EBA0A30031CB2A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0656EE9123EBA0A30031CB2A /* UIView+Extensions.swift */; };
 		0656EE9423EBBDEB0031CB2A /* SettingsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0656EE9323EBBDEB0031CB2A /* SettingsAnimator.swift */; };
-		06675D0E23E2859F00AF1884 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06675D0D23E2859F00AF1884 /* HomeTableViewController.swift */; };
 		06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06734A0023E246C800214A3D /* HomeTableViewCell.swift */; };
 		06B0A52923E247C7001ED66A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B0A52823E247C7001ED66A /* Section.swift */; };
 		06C9B9DA23FDF7900025CA8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B9D923FDF7900025CA8E /* User.swift */; };
@@ -26,7 +25,6 @@
 		B616503923F0945D00B38C52 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503823F0945D00B38C52 /* Response.swift */; };
 		B616503D23F0C2E200B38C52 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503C23F0C2E200B38C52 /* UserDefaults+Extensions.swift */; };
 		B643598823FDF7940049270B /* SearchTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643598723FDF7940049270B /* SearchTableViewHeader.swift */; };
-		B643598F23FE066D0049270B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B643598D23FE066D0049270B /* GoogleService-Info.plist */; };
 		B643599023FE066D0049270B /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B643598E23FE066D0049270B /* Keys.plist */; };
 		B654C59123DE38DB00F05141 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59023DE38DB00F05141 /* UIColor+Extensions.swift */; };
 		B654C59323DE38ED00F05141 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */; };
@@ -39,6 +37,9 @@
 		C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */; };
 		C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */; };
 		C8A3D54223E24BEC0007E488 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D54123E24BEC0007E488 /* LoginViewController.swift */; };
+		C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */; };
+		C8E8A1A42409967A00A0D4D8 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */; };
+		C8E8A1A62409973100A0D4D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8E8A1A52409973100A0D4D8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +67,6 @@
 		B616503823F0945D00B38C52 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		B616503C23F0C2E200B38C52 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		B643598723FDF7940049270B /* SearchTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewHeader.swift; sourceTree = "<group>"; };
-		B643598D23FE066D0049270B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B643598E23FE066D0049270B /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		B654C59023DE38DB00F05141 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
@@ -79,6 +79,9 @@
 		C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewController.swift; sourceTree = "<group>"; };
 		C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewCell.swift; sourceTree = "<group>"; };
 		C8A3D54123E24BEC0007E488 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModalViewController.swift; sourceTree = "<group>"; };
+		C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		C8E8A1A52409973100A0D4D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,7 @@
 				0643489523DE1519007F5F9F /* Products */,
 				D0E2779A889C5714B178D99B /* Pods */,
 				7B5D621EDA87C295389BD920 /* Frameworks */,
+				C8E8A1A22409964500A0D4D8 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,8 +154,8 @@
 			children = (
 				064348A023DE151D007F5F9F /* Assets.xcassets */,
 				064348A523DE151D007F5F9F /* Info.plist */,
-				B643598D23FE066D0049270B /* GoogleService-Info.plist */,
 				B643598E23FE066D0049270B /* Keys.plist */,
+				C8E8A1A52409973100A0D4D8 /* GoogleService-Info.plist */,
 				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
 				067F000123E918C400F78B36 /* Podfile */,
@@ -207,6 +211,7 @@
 				062891B823E8F52800B6D698 /* Search */,
 				C8A3D53C23E23E130007E488 /* SearchDetail */,
 				06DB5E8623EB77BC00F8D924 /* Settings */,
+				C8B3FD9523FDF2060001F961 /* Notification */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -232,12 +237,28 @@
 		C8A3D54523E24C6C0007E488 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				06675D0D23E2859F00AF1884 /* HomeTableViewController.swift */,
+				C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */,
 				B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */,
 				06734A0023E246C800214A3D /* HomeTableViewCell.swift */,
 			);
 			name = Home;
 			path = ../Home;
+			sourceTree = "<group>";
+		};
+		C8B3FD9523FDF2060001F961 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		C8E8A1A22409964500A0D4D8 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				06675D0D23E2859F00AF1884 /* HomeTableViewController.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		D0E2779A889C5714B178D99B /* Pods */ = {
@@ -311,9 +332,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B643599023FE066D0049270B /* Keys.plist in Resources */,
+				C8E8A1A62409973100A0D4D8 /* GoogleService-Info.plist in Resources */,
 				064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */,
 				064348A123DE151D007F5F9F /* Assets.xcassets in Resources */,
-				B643598F23FE066D0049270B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,12 +424,12 @@
 				B616503D23F0C2E200B38C52 /* UserDefaults+Extensions.swift in Sources */,
 				B643598823FDF7940049270B /* SearchTableViewHeader.swift in Sources */,
 				B6FAEF1B23E9FC5B0076B239 /* HomeTableViewHeader.swift in Sources */,
-				06675D0E23E2859F00AF1884 /* HomeTableViewController.swift in Sources */,
+				C8E8A1A42409967A00A0D4D8 /* HomeTableViewController.swift in Sources */,
+				C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */,
 				062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */,
 				C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */,
 				C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */,
 				B654C59123DE38DB00F05141 /* UIColor+Extensions.swift in Sources */,
-				06675D0E23E2859F00AF1884 /* HomeTableViewController.swift in Sources */,
 				C87CA7A623EA0E6E00242E1F /* SearchTableViewCell.swift in Sources */,
 				0643489A23DE1519007F5F9F /* SceneDelegate.swift in Sources */,
 			);
