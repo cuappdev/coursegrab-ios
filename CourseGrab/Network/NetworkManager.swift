@@ -64,7 +64,7 @@ class NetworkManager {
             }
         }
 
-        if expiration < Date() {
+        if expiration <= Date() {
             return updateSession().transformed { response in
                 user.sessionAuthorization = response.data
             }
