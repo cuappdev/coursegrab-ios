@@ -56,7 +56,7 @@ extension User {
     
     func initializeSession() {
         guard let token = googleToken else { return }
-        NetworkManager.shared.intializeSession(googleToken: token).observe { response in
+        NetworkManager.shared.initializeSession(googleToken: token).observe { response in
             switch response {
             case .value(let value):
                 if value.success {

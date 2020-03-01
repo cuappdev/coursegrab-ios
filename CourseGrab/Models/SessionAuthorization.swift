@@ -9,8 +9,8 @@
 import Foundation
 
 struct SessionAuthorization: Codable {
-    
-    let sessionExpiration: String
+
+    let sessionExpiration: Date
     let sessionToken: String
     let updateToken: String
     
