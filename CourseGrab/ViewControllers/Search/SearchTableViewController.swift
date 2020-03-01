@@ -79,7 +79,6 @@ extension SearchTableViewController {
     
 }
 
-
 // MARK: - View lifecycle
 
 extension SearchTableViewController {
