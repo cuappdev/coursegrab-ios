@@ -86,6 +86,7 @@ extension SearchTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupPopGesture()
+        tableView.isScrollEnabled = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -94,6 +95,7 @@ extension SearchTableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         textField.resignFirstResponder()
+        tableView.isScrollEnabled = false
     }
 
     private func back(_ button: UIButton) {
