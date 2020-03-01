@@ -26,6 +26,8 @@
 		B616503D23F0C2E200B38C52 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503C23F0C2E200B38C52 /* UserDefaults+Extensions.swift */; };
 		B643598823FDF7940049270B /* SearchTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643598723FDF7940049270B /* SearchTableViewHeader.swift */; };
 		B643599023FE066D0049270B /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B643598E23FE066D0049270B /* Keys.plist */; };
+		B64359942405FC250049270B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64359932405FC250049270B /* NetworkManager.swift */; };
+		B6435996240728F20049270B /* SessionAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6435995240728F20049270B /* SessionAuthorization.swift */; };
 		B654C59123DE38DB00F05141 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59023DE38DB00F05141 /* UIColor+Extensions.swift */; };
 		B654C59323DE38ED00F05141 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */; };
 		B6FAEF1B23E9FC5B0076B239 /* HomeTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */; };
@@ -68,6 +70,8 @@
 		B616503C23F0C2E200B38C52 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		B643598723FDF7940049270B /* SearchTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewHeader.swift; sourceTree = "<group>"; };
 		B643598E23FE066D0049270B /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		B64359932405FC250049270B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = "/Users/mathewscullin/Documents/coursegrab-ios/CourseGrab/Network/NetworkManager.swift"; sourceTree = "<absolute>"; };
+		B6435995240728F20049270B /* SessionAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionAuthorization.swift; sourceTree = "<group>"; };
 		B654C59023DE38DB00F05141 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewHeader.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 			children = (
 				B6FAEF1C23EB83C70076B239 /* Course.swift */,
 				06B0A52823E247C7001ED66A /* Section.swift */,
+				B6435995240728F20049270B /* SessionAuthorization.swift */,
 				06C9B9D923FDF7900025CA8E /* User.swift */,
 			);
 			path = Models;
@@ -183,6 +188,7 @@
 		B616503323F08A6900B38C52 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B64359932405FC250049270B /* NetworkManager.swift */,
 				B616503423F08ACF00B38C52 /* Endpoints.swift */,
 				B616503623F08CA100B38C52 /* Body.swift */,
 				B616503823F0945D00B38C52 /* Response.swift */,
@@ -418,6 +424,8 @@
 				06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */,
 				06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */,
 				063C67D323E9089F00A40895 /* UIImage+Extensions.swift in Sources */,
+				B6435996240728F20049270B /* SessionAuthorization.swift in Sources */,
+				B64359942405FC250049270B /* NetworkManager.swift in Sources */,
 				B616503723F08CA100B38C52 /* Body.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
 				B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */,

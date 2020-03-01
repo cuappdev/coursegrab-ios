@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 enum Status: String, Codable {
+    
     case closed, open, waitlist
 
     var icon: UIImage {
@@ -39,6 +40,7 @@ enum Status: String, Codable {
             }
         }
     }
+    
 }
 
 struct Section: Codable {

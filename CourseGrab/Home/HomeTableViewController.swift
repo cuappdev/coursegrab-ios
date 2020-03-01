@@ -129,6 +129,7 @@ extension HomeTableViewController: SPPermissionsDataSource {
         cell.button.allowTitleColor = .white
         return cell
     }
+    
 }
 
 // MARK: - SPPermissionsDelegate

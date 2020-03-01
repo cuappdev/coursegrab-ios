@@ -10,14 +10,21 @@ import Foundation
 
 // MARK: - Request Bodies
 
-internal struct sessionBody: Codable {
+struct SessionBody: Codable {
+    
     let token: String
+    let isIos = true
+    
 }
 
-internal struct coursePostBody: Codable {
+struct CoursePostBody: Codable {
+    
     let courseId: Int
+    
 }
 
-internal struct queryBody: Codable {
+struct QueryBody: Codable {
+    
     let query: String
+    
 }
