@@ -101,6 +101,8 @@ class HomeTableViewController: UITableViewController {
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
         }
+
+        view = InternetErrorView()
     }
 
     func displayPermissionModal() {
