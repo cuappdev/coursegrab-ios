@@ -23,55 +23,7 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let availableSections = [
-            Section(
-                catalogNum: 103,
-                courseNum: 15821,
-                isTracking: true,
-                section: "LEC 001 / TR 1:25PM",
-                status: .open,
-                subjectCode: "NBA",
-                title: "NBA 3000: Designing New Ventures"
-            ),
-            Section(
-                catalogNum: 51,
-                courseNum: 29424,
-                isTracking: true,
-                section: "DIS 005 / TR 1:25PM",
-                status: .open,
-                subjectCode: "CS",
-                title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
-            )]
-        let awaitingSections = [
-            Section(
-                catalogNum: 12,
-                courseNum: 5010,
-                isTracking: true,
-                section: "LEC 002 / W 2:10PM",
-                status: .waitlist,
-                subjectCode: "PE",
-                title: "Introductory Rock Climbing"
-            ),
-            Section(
-                catalogNum: 12345,
-                courseNum: 5010,
-                isTracking: true,
-                section: "LEC 001 / M 2:10PM",
-                status: .closed,
-                subjectCode: "ENGL",
-                title: "Introductory Creative Writing"
-            ),
-            Section(
-                catalogNum: 12345,
-                courseNum: 5010,
-                isTracking: true,
-                section: "LEC 001 / M 2:10PM",
-                status: .closed,
-                subjectCode: "ENGL",
-                title: "Advanced Creative Writing"
-            )]
-
-        tableSections = [.available(availableSections), .awaiting(awaitingSections)]
+        getAllTrackedCourses()
 
         // Setup navigation bar
         let titleLabel = UILabel()
@@ -110,6 +62,42 @@ class HomeTableViewController: UITableViewController {
         controller.dataSource = self
         controller.delegate = self
         controller.present(on: self)
+    }
+
+}
+
+// MARK: - Networking
+
+extension HomeTableViewController {
+
+    private func getAllTrackedCourses() {
+        NetworkManager.shared.getAllTrackedCourses().observe { result in
+            switch result {
+            case .value(let response):
+                let available = response.data.filter { $0.status == .open }
+                if !available.isEmpty {
+                    self.tableSections.append(.available(available))
+                }
+                let awaiting = response.data.filter { $0.status != .open }
+                if !awaiting.isEmpty {
+                    self.tableSections.append(.awaiting(awaiting))
+                }
+                var newSections: IndexSet = []
+
+                if newSections.count > 0 {
+                    (0..<self.tableSections.count).forEach { newSections.insert($0) }
+                    self.tableView.insertSections(newSections, with: .automatic)
+                } else {
+                    self.showEmptyState()
+                }
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
+
+    private func showEmptyState() {
+        print("Empty!")
     }
 
 }

@@ -55,7 +55,10 @@ struct User {
 extension User {
     
     func initializeSession() {
-        guard let token = googleToken else { return }
+        guard let token = googleToken else {
+            print("No token")
+            return
+        }
         NetworkManager.shared.initializeSession(googleToken: token).observe { response in
             switch response {
             case .value(let value):
@@ -71,6 +74,8 @@ extension User {
     }
 
     func signOut() {
+        sessionAuthorization = nil
+        googleToken = nil
         do {
             // TODO: Unsubscribe from notifications
             try Auth.auth().signOut()
