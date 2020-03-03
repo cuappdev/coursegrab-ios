@@ -102,7 +102,9 @@ class HomeTableViewController: UITableViewController {
             displayPermissionModal()
         }
 
-        view = InternetErrorView()
+        // TODO: Set the view on error after networking is merged
+        // view = InternetErrorView()
+        // view = NoTrackedCoursesView()
     }
 
     func displayPermissionModal() {
