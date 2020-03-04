@@ -23,7 +23,7 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getAllTrackedCourses()
+//        getAllTrackedCourses()
 
         // Setup navigation bar
         let titleLabel = UILabel()

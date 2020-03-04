@@ -22,8 +22,7 @@ class NetworkManager {
     }
     
     func updateSession() -> Future<Response<SessionAuthorization>> {
-        return validateToken()
-            .chained { self.networking(Endpoint.updateSession()).decode() }
+        return networking(Endpoint.updateSession()).decode()
     }
     
     func getAllTrackedCourses() -> Future<Response<[Section]>> {
@@ -66,7 +65,6 @@ class NetworkManager {
 
         if expiration <= Date() {
             return updateSession().transformed { response in
-                print("Update session")
                 user.sessionAuthorization = response.data
             }
         } else {

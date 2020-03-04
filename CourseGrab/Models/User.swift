@@ -25,16 +25,25 @@ struct User {
     
     var sessionAuthorization: SessionAuthorization? {
         get {
-            if let data = UserDefaults.standard.data(forKey: "sessionAuth"),
-                let auth = try? JSONDecoder().decode(SessionAuthorization.self, from: data) {
-                return auth
+            if let dict = UserDefaults.standard.value(forKey: "sessionAuth") as? [String: Any],
+                let sessionToken = dict["sessionToken"] as? String,
+                let updateToken = dict["updateToken"] as? String,
+                let sessionExpiration = dict["sessionExpiration"] as? Date {
+                return SessionAuthorization(sessionExpiration: sessionExpiration, sessionToken: sessionToken, updateToken: updateToken)
             } else {
                 return nil
             }
         }
         nonmutating set(token) {
-            if let data = try? JSONEncoder().encode(token) {
-                UserDefaults.standard.set(data, forKey: "sessionAuth")
+            if let token = token {
+                let dict: [String: Any] = [
+                    "sessionToken": token.sessionToken,
+                    "updateToken": token.updateToken,
+                    "sessionExpiration": token.sessionExpiration,
+                ]
+                UserDefaults.standard.set(dict, forKey: "sessionAuth")
+            } else {
+                UserDefaults.standard.set(nil, forKey: "sessionAuth")
             }
         }
     }
