@@ -103,8 +103,12 @@ class HomeTableViewController: UITableViewController {
         }
 
         // TODO: Set the view on error after networking is merged
-        // view = InternetErrorView()
-        // view = NoTrackedCoursesView()
+
+        // No Internet
+//        view = HomeErrorView(frame: .zero, title: "No Internet Connection", subtitle: "Tap the search icon to start adding courses", icon: Status.closed.icon)
+
+        // No Tracked Courses
+//        view = HomeErrorView(frame: .zero, title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
     }
 
     func displayPermissionModal() {

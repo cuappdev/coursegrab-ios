@@ -1,37 +1,35 @@
 //
-//  NoTrackedCoursesView.swift
+//  HomeErrorView.swift
 //  CourseGrab
 //
-//  Created by Reade Plunkett on 3/1/20.
+//  Created by Reade Plunkett on 3/4/20.
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
 import UIKit
 
-class NoTrackedCoursesView: UIView {
+class HomeErrorView: UIView {
 
     private let imageView = UIImageView()
-    private let status = Status.open
     private let subtitleLabel = UILabel()
     private let titleLabel = UILabel()
 
-    override init(frame: CGRect) {
+    init(frame: CGRect, title: String, subtitle: String, icon: UIImage) {
         super.init(frame: frame)
-
         backgroundColor = .white
 
-        imageView.image = status.icon
+        imageView.image = icon
         imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
 
         titleLabel.font = ._20Medium
         titleLabel.textColor = .black
-        titleLabel.text = "No Courses Currently Tracked"
+        titleLabel.text = title
         addSubview(titleLabel)
 
         subtitleLabel.font = ._18Medium
         subtitleLabel.textColor = .courseGrabLightGray
-        subtitleLabel.text = "Tap the search icon to start adding courses"
+        subtitleLabel.text = subtitle
         addSubview(subtitleLabel)
 
 
@@ -56,4 +54,5 @@ class NoTrackedCoursesView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }

@@ -31,8 +31,6 @@
 		B6FAEF1B23E9FC5B0076B239 /* HomeTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */; };
 		B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1C23EB83C70076B239 /* Course.swift */; };
 		C819FB9B240C3ED20071CB5C /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C819FB9A240C3ED20071CB5C /* Keys.plist */; };
-		C819FBA1240C6B730071CB5C /* InternetErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C819FBA0240C6B730071CB5C /* InternetErrorView.swift */; };
-		C819FBA3240C7D0A0071CB5C /* NoTrackedCoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C819FBA2240C7D0A0071CB5C /* NoTrackedCoursesView.swift */; };
 		C853AC5A240C3D8600AD7FF2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C853AC59240C3D8600AD7FF2 /* NetworkManager.swift */; };
 		C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */; };
 		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
@@ -44,6 +42,7 @@
 		C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */; };
 		C8E8A1A42409967A00A0D4D8 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */; };
 		C8E8A1A62409973100A0D4D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8E8A1A52409973100A0D4D8 /* GoogleService-Info.plist */; };
+		C8FA8E7424105F51008DA6B5 /* HomeErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FA8E7324105F51008DA6B5 /* HomeErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,8 +76,6 @@
 		B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewHeader.swift; sourceTree = "<group>"; };
 		B6FAEF1C23EB83C70076B239 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C819FB9A240C3ED20071CB5C /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
-		C819FBA0240C6B730071CB5C /* InternetErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetErrorView.swift; sourceTree = "<group>"; };
-		C819FBA2240C7D0A0071CB5C /* NoTrackedCoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTrackedCoursesView.swift; sourceTree = "<group>"; };
 		C853AC59240C3D8600AD7FF2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCardTableViewCell.swift; sourceTree = "<group>"; };
 		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
@@ -90,6 +87,7 @@
 		C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModalViewController.swift; sourceTree = "<group>"; };
 		C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		C8E8A1A52409973100A0D4D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C8FA8E7324105F51008DA6B5 /* HomeErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,8 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */,
-				C819FBA0240C6B730071CB5C /* InternetErrorView.swift */,
-				C819FBA2240C7D0A0071CB5C /* NoTrackedCoursesView.swift */,
+				C8FA8E7324105F51008DA6B5 /* HomeErrorView.swift */,
 				B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */,
 				06734A0023E246C800214A3D /* HomeTableViewCell.swift */,
 			);
@@ -431,7 +428,6 @@
 				06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */,
 				063C67D323E9089F00A40895 /* UIImage+Extensions.swift in Sources */,
 				B6435996240728F20049270B /* SessionAuthorization.swift in Sources */,
-				C819FBA3240C7D0A0071CB5C /* NoTrackedCoursesView.swift in Sources */,
 				B616503723F08CA100B38C52 /* Body.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
 				C853AC5A240C3D8600AD7FF2 /* NetworkManager.swift in Sources */,
@@ -442,8 +438,8 @@
 				C8E8A1A42409967A00A0D4D8 /* HomeTableViewController.swift in Sources */,
 				C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */,
 				062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */,
-				C819FBA1240C6B730071CB5C /* InternetErrorView.swift in Sources */,
 				C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */,
+				C8FA8E7424105F51008DA6B5 /* HomeErrorView.swift in Sources */,
 				C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */,
 				B654C59123DE38DB00F05141 /* UIColor+Extensions.swift in Sources */,
 				C87CA7A623EA0E6E00242E1F /* SearchTableViewCell.swift in Sources */,
