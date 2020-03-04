@@ -83,9 +83,8 @@ extension HomeTableViewController {
                     self.tableSections.append(.awaiting(awaiting))
                 }
                 var newSections: IndexSet = []
-
+                (0..<self.tableSections.count).forEach { newSections.insert($0) }
                 if newSections.count > 0 {
-                    (0..<self.tableSections.count).forEach { newSections.insert($0) }
                     self.tableView.insertSections(newSections, with: .automatic)
                 } else {
                     self.showEmptyState()
