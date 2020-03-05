@@ -174,6 +174,10 @@ extension SettingsViewController {
             dismiss(animated: true)
         }
     }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
 }
 

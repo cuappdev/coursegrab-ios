@@ -15,13 +15,11 @@ class SearchTableViewController: UITableViewController {
     private var popRecognizer: InteractivePopRecognizer?
     private let searchCellReuseId = "searchCellReuseId"
     private let searchHeaderReuseId = "searchHeaderReuseId"
-    private var sections: [Section] = []
+    private var courses: [Course] = []
     private let textField = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        sections = []
 
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
@@ -31,6 +29,7 @@ class SearchTableViewController: UITableViewController {
 
         // Setup navigationBar
         textField.frame.size.width = view.frame.width - 80
+        textField.on(.editingChanged, textDidChange)
         textField.attributedPlaceholder = NSAttributedString(
             string: "Search for a course",
             attributes: [
@@ -53,32 +52,70 @@ class SearchTableViewController: UITableViewController {
 
 }
 
+// MARK: - Networking
+
+extension SearchTableViewController {
+
+    private func textDidChange(_ textField: UITextField) {
+        // TODO: Ignore old requests and skip every 0.2 seconds
+        guard let text = textField.text, text.count > 2 else {
+            DispatchQueue.main.async {
+                self.courses.removeAll()
+                self.tableView.reloadData()
+            }
+            return
+        }
+
+        NetworkManager.shared.searchCourse(query: text).observe { result in
+            switch result {
+            case .value(let response):
+                DispatchQueue.main.async {
+                    self.courses = response.data
+                    self.tableView.reloadData()
+                }
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
+
+}
+
 // MARK: - Datasource
 
 extension SearchTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections.count
+        return courses.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: searchCellReuseId, for: indexPath) as! SearchTableViewCell
-        cell.configure(for: sections[indexPath.row])
+        cell.configure(for: courses[indexPath.row])
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(SearchDetailTableViewController(), animated: true)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: searchHeaderReuseId) as! SearchTableViewHeader
-        headerView.configure(numResults: sections.count)
+        headerView.configure(numResults: courses.count)
         return headerView
     }
     
 }
 
+// MARK: - Delegate
+
+extension SearchTableViewController {
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        textField.resignFirstResponder()
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(SearchDetailTableViewController(course: courses[indexPath.row]), animated: true)
+    }
+
+}
 
 // MARK: - View lifecycle
 
@@ -86,6 +123,7 @@ extension SearchTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupPopGesture()
+        tableView.isScrollEnabled = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -94,6 +132,7 @@ extension SearchTableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         textField.resignFirstResponder()
+        tableView.isScrollEnabled = false
     }
 
     private func back(_ button: UIButton) {

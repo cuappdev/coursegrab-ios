@@ -25,8 +25,16 @@ extension Endpoint {
         Endpoint.config.commonPath = "/api"
     }
 
-    static var headers: [String: String] {
+    static var standardHeaders: [String: String] {
         if let token = User.current?.sessionAuthorization?.sessionToken {
+            return ["Authorization": token]
+        } else {
+            return [:]
+        }
+    }
+
+    static var updateHeaders: [String: String] {
+        if let token = User.current?.sessionAuthorization?.updateToken {
             return ["Authorization": token]
         } else {
             return [:]
@@ -39,26 +47,26 @@ extension Endpoint {
     }
 
     static func updateSession() -> Endpoint {
-        return Endpoint(path: "/auth/session/update/", headers: headers)
+        return Endpoint(path: "/session/update/", headers: updateHeaders, method: .post)
     }
 
     static func getAllTrackedCourses() -> Endpoint {
-        return Endpoint(path: "/users/tracking/", headers: headers)
+        return Endpoint(path: "/users/tracking/", headers: standardHeaders)
     }
 
     static func trackCourse(catalogNum: Int) -> Endpoint {
         let body = CoursePostBody(courseId: catalogNum)
-        return Endpoint(path: "/courses/track/", headers: headers, body: body)
+        return Endpoint(path: "/courses/track/", headers: standardHeaders, body: body)
     }
 
     static func untrackCourse(catalogNum: Int) -> Endpoint {
         let body = CoursePostBody(courseId: catalogNum)
-        return Endpoint(path: "/courses/untrack/", headers: headers, body: body)
+        return Endpoint(path: "/courses/untrack/", headers: standardHeaders, body: body)
     }
     
     static func searchCourse(query: String) -> Endpoint {
         let body = QueryBody(query: query)
-        return Endpoint(path: "/courses/search/", headers: headers, body: body)
+        return Endpoint(path: "/courses/search/", headers: standardHeaders, body: body)
     }
 
 }

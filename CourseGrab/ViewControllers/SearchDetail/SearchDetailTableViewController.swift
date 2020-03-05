@@ -14,36 +14,59 @@ class SearchDetailTableViewController: UITableViewController {
         case card, section
     }
 
-    let section = Section(catalogNum: 1234, courseNum: 1998, isTracking: true, section: "LEC 001 / TR 1:25PM", status: .open, subjectCode: "INFO", title: "Intro to Digital Product Design")
+    private let course: Course
+
+    init(course: Course) {
+        self.course = course
+        super.init(style: .plain)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "\(section.subjectCode) \(section.courseNum)"
+        title = "\(course.subjectCode) \(course.courseNum)"
         tableView.separatorInset = .zero
 
         tableView.register(SearchDetailCardTableViewCell.self, forCellReuseIdentifier: CellIdentifier.card.rawValue)
         tableView.register(SearchDetailTableViewCell.self, forCellReuseIdentifier: CellIdentifier.section.rawValue)
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.isScrollEnabled = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tableView.isScrollEnabled = false
+    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 110 : 42
+        return indexPath.section == 0 ? 110 : 42
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 14
+        return section == 0 ? 1 : course.sections.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.card.rawValue) as! SearchDetailCardTableViewCell
-            cell.configure(title: section.title, subtitle: "KEVIN CHAN")
+            cell.configure(title: course.title, subtitle: "KEVIN CHAN") // TODO: Get PROF name
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.section.rawValue) as! SearchDetailTableViewCell
+            cell.configure(section: course.sections[indexPath.row])
             return cell
         }
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.section.rawValue) as! SearchDetailTableViewCell
-        cell.configure(section: section)
-        return cell
     }
 
 }

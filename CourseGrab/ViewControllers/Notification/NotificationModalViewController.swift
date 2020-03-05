@@ -16,9 +16,9 @@ class NotificationModalViewController: UIViewController {
     private let courseIDStackView = UIStackView()
     private let courseIDTitleLabel = UILabel()
     private let courseTitleLabel = UILabel()
-    private let homeButton = UIButton()
+    private let homeButton = UIButton(type: .system)
     private let sectionLabel = UILabel()
-    private let studentCenterButton = UIButton()
+    private let studentCenterButton = UIButton(type: .roundedRect)
 
     private let section = Section(
         catalogNum: 51,
@@ -145,6 +145,10 @@ class NotificationModalViewController: UIViewController {
         if let url = URL(string: "https://www.studentcenter.cornell.edu/") {
             UIApplication.shared.open(url)
         }
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
 }

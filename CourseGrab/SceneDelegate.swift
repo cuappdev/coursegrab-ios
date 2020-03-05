@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         Auth.auth().addStateDidChangeListener { (auth, user) in
             // TODO: Register user for notifications
-            User.current?.initializeSession()
 
             let newVC = user == nil ? LoginViewController() : MainNavigationController(rootViewController: HomeTableViewController())
             if let currentVC = self.topViewController() {
