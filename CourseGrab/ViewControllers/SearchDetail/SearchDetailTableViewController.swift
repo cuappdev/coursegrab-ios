@@ -30,7 +30,6 @@ class SearchDetailTableViewController: UITableViewController {
         
         title = "\(course.subjectCode) \(course.courseNum)"
         tableView.separatorInset = .zero
-
         tableView.register(SearchDetailCardTableViewCell.self, forCellReuseIdentifier: CellIdentifier.card.rawValue)
         tableView.register(SearchDetailTableViewCell.self, forCellReuseIdentifier: CellIdentifier.section.rawValue)
     }
@@ -44,9 +43,9 @@ class SearchDetailTableViewController: UITableViewController {
         super.viewWillDisappear(animated)
         tableView.isScrollEnabled = false
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 110 : 42
+        return indexPath.section == 0 ? UITableView.automaticDimension : 42
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

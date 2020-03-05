@@ -23,7 +23,7 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        getAllTrackedCourses()
+        getAllTrackedCourses()
 
         // Setup navigation bar
         let titleLabel = UILabel()
@@ -53,14 +53,6 @@ class HomeTableViewController: UITableViewController {
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
         }
-
-        // TODO: Set the view on error after networking is merged
-
-        // No Internet
-//        view = HomeErrorView(frame: .zero, title: "No Internet Connection", subtitle: "Tap the search icon to start adding courses", icon: Status.closed.icon)
-
-        // No Tracked Courses
-//        view = HomeErrorView(frame: .zero, title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
     }
 
     func displayPermissionModal() {
@@ -99,12 +91,21 @@ extension HomeTableViewController {
                 }
             case .error(let error):
                 print(error)
+                self.showErrorState()
             }
         }
     }
 
     private func showEmptyState() {
-        print("Empty!")
+        DispatchQueue.main.async {
+            self.view = HomeErrorView(frame: .zero, title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+        }
+    }
+
+    private func showErrorState() {
+        DispatchQueue.main.async {
+            self.view = HomeErrorView(frame: .zero, title: "No Internet Connection", subtitle: "Tap the search icon to start adding courses", icon: Status.closed.icon)
+        }
     }
 
 }

@@ -38,6 +38,7 @@ class SearchTableViewController: UITableViewController {
             ]
         )
         textField.font = ._20Medium
+        textField.autocorrectionType = .no
 
         let backButton = UIButton(type: .system)
         backButton.setImage(.backIcon, for: .normal)
@@ -59,9 +60,11 @@ extension SearchTableViewController {
     private func textDidChange(_ textField: UITextField) {
         // TODO: Ignore old requests and skip every 0.2 seconds
         guard let text = textField.text, text.count > 2 else {
-            DispatchQueue.main.async {
-                self.courses.removeAll()
-                self.tableView.reloadData()
+            if courses.count > 0 {
+                DispatchQueue.main.async {
+                    self.courses.removeAll()
+                    self.tableView.reloadData()
+                }
             }
             return
         }
@@ -70,8 +73,10 @@ extension SearchTableViewController {
             switch result {
             case .value(let response):
                 DispatchQueue.main.async {
-                    self.courses = response.data
-                    self.tableView.reloadData()
+                    if !response.data.isEmpty {
+                        self.courses = response.data
+                        self.tableView.reloadData()
+                    }
                 }
             case .error(let error):
                 print(error)

@@ -13,6 +13,7 @@ class SearchDetailTableViewCell: UITableViewCell {
     private let statusView = UIView()
     private let titleLabel = UILabel()
     private let trackingButton = UIButton()
+    private var section: Section!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,6 +56,7 @@ class SearchDetailTableViewCell: UITableViewCell {
     // MARK: - Public configure
 
     func configure(section: Section) {
+        self.section = section
         titleLabel.text = section.section
         setupStatusView(status: section.status)
 
@@ -62,10 +64,12 @@ class SearchDetailTableViewCell: UITableViewCell {
             trackingButton.setTitle("REMOVE", for: .normal)
             trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
             trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+            trackingButton.on(.touchUpInside, removeCourse)
         } else {
             trackingButton.setTitle("TRACK", for: .normal)
             trackingButton.setTitleColor(.courseGrabBlack, for: .normal)
             trackingButton.layer.borderColor = UIColor.courseGrabBlack.cgColor
+            trackingButton.on(.touchUpInside, trackCourse)
         }
     }
 
@@ -90,6 +94,39 @@ class SearchDetailTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
         }
+    }
+
+    private func trackCourse(_ button: UIButton) {
+
+        NetworkManager.shared.trackCourse(catalogNum: section.catalogNum).observe { result in
+            switch result {
+            case .value(let response):
+                print(response.data)
+            case .error(let error):
+                print(error)
+            }
+        }
+
+        trackingButton.setTitle("REMOVE", for: .normal)
+        trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
+        trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+        trackingButton.on(.touchUpInside, removeCourse)
+    }
+
+    private func removeCourse(_ button: UIButton) {
+        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+            switch result {
+            case .value(let response):
+                break
+            case .error(let error):
+                break
+            }
+        }
+
+        trackingButton.setTitle("TRACK", for: .normal)
+        trackingButton.setTitleColor(.courseGrabBlack, for: .normal)
+        trackingButton.layer.borderColor = UIColor.courseGrabBlack.cgColor
+        trackingButton.on(.touchUpInside, trackCourse)
     }
 
 }

@@ -21,6 +21,7 @@ class SearchDetailCardTableViewCell: UITableViewCell {
 
         selectionStyle = .none
 
+        containerView.clipsToBounds = false
         containerView.layer.cornerRadius = 4
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.courseGrabBorder.cgColor
@@ -43,14 +44,15 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         // Setup constraints
 
         containerView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(12)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(76)
             make.centerY.equalToSuperview()
         }
 
         subtitleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-16)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.bottom.equalToSuperview().inset(16)
         }
 
         titleLabel.snp.makeConstraints { make in
