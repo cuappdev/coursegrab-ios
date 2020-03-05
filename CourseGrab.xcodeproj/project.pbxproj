@@ -16,6 +16,8 @@
 		0656EE9223EBA0A30031CB2A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0656EE9123EBA0A30031CB2A /* UIView+Extensions.swift */; };
 		0656EE9423EBBDEB0031CB2A /* SettingsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0656EE9323EBBDEB0031CB2A /* SettingsAnimator.swift */; };
 		06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06734A0023E246C800214A3D /* HomeTableViewCell.swift */; };
+		067D5022240C28F400ADE062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 067D5021240C28F400ADE062 /* GoogleService-Info.plist */; };
+		067D5024240C298E00ADE062 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067D5023240C298E00ADE062 /* NetworkManager.swift */; };
 		06B0A52923E247C7001ED66A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B0A52823E247C7001ED66A /* Section.swift */; };
 		06C9B9DA23FDF7900025CA8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B9D923FDF7900025CA8E /* User.swift */; };
 		06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */; };
@@ -41,7 +43,6 @@
 		C8A3D54223E24BEC0007E488 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D54123E24BEC0007E488 /* LoginViewController.swift */; };
 		C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */; };
 		C8E8A1A42409967A00A0D4D8 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */; };
-		C8E8A1A62409973100A0D4D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8E8A1A52409973100A0D4D8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,8 @@
 		0656EE9323EBBDEB0031CB2A /* SettingsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAnimator.swift; sourceTree = "<group>"; };
 		06675D0D23E2859F00AF1884 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		06734A0023E246C800214A3D /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		067D5021240C28F400ADE062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		067D5023240C298E00ADE062 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		067F000123E918C400F78B36 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		06B0A52823E247C7001ED66A /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		06C9B9D923FDF7900025CA8E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -86,7 +89,6 @@
 		C8A3D54123E24BEC0007E488 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModalViewController.swift; sourceTree = "<group>"; };
 		C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
-		C8E8A1A52409973100A0D4D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +164,7 @@
 				064348A023DE151D007F5F9F /* Assets.xcassets */,
 				064348A523DE151D007F5F9F /* Info.plist */,
 				B643598E23FE066D0049270B /* Keys.plist */,
-				C8E8A1A52409973100A0D4D8 /* GoogleService-Info.plist */,
+				067D5021240C28F400ADE062 /* GoogleService-Info.plist */,
 				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
 				067F000123E918C400F78B36 /* Podfile */,
@@ -190,8 +192,9 @@
 		B616503323F08A6900B38C52 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B616503423F08ACF00B38C52 /* Endpoints.swift */,
 				B616503623F08CA100B38C52 /* Body.swift */,
+				B616503423F08ACF00B38C52 /* Endpoints.swift */,
+				067D5023240C298E00ADE062 /* NetworkManager.swift */,
 				B616503823F0945D00B38C52 /* Response.swift */,
 				C2E8CE0924107160005ADA25 /* NetworkManager.swift */,
 			);
@@ -340,7 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B643599023FE066D0049270B /* Keys.plist in Resources */,
-				C8E8A1A62409973100A0D4D8 /* GoogleService-Info.plist in Resources */,
+				067D5022240C28F400ADE062 /* GoogleService-Info.plist in Resources */,
 				064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */,
 				064348A123DE151D007F5F9F /* Assets.xcassets in Resources */,
 			);
@@ -430,6 +433,7 @@
 				B6435996240728F20049270B /* SessionAuthorization.swift in Sources */,
 				B616503723F08CA100B38C52 /* Body.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
+				067D5024240C298E00ADE062 /* NetworkManager.swift in Sources */,
 				B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */,
 				B616503D23F0C2E200B38C52 /* UserDefaults+Extensions.swift in Sources */,
 				B643598823FDF7940049270B /* SearchTableViewHeader.swift in Sources */,

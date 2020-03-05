@@ -95,10 +95,4 @@ class MainNavigationController: UINavigationController {
         navigationBar.backIndicatorTransitionMaskImage = .backIcon
     }
 
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            pushViewController(NotificationModalViewController(), animated: true)
-        }
-    }
-
 }
