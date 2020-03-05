@@ -101,7 +101,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         NetworkManager.shared.trackCourse(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):
-                print(response.data)
+                print(response)
             case .error(let error):
                 print(error)
             }
@@ -117,6 +117,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):
+                print(response)
                 break
             case .error(let error):
                 break

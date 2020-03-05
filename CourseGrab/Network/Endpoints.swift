@@ -56,12 +56,12 @@ extension Endpoint {
 
     static func trackCourse(catalogNum: Int) -> Endpoint {
         let body = CoursePostBody(courseId: catalogNum)
-        return Endpoint(path: "/courses/track/", headers: standardHeaders, body: body)
+        return Endpoint(path: "/sections/track/", headers: standardHeaders, body: body)
     }
 
     static func untrackCourse(catalogNum: Int) -> Endpoint {
         let body = CoursePostBody(courseId: catalogNum)
-        return Endpoint(path: "/courses/untrack/", headers: standardHeaders, body: body)
+        return Endpoint(path: "/sections/untrack/", headers: standardHeaders, body: body)
     }
     
     static func searchCourse(query: String) -> Endpoint {
