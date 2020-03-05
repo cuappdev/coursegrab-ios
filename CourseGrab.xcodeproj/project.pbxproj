@@ -80,6 +80,7 @@
 		B6FAEF1C23EB83C70076B239 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C819FB9A240C3ED20071CB5C /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		C853AC59240C3D8600AD7FF2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C2E8CE062410703E005ADA25 /* CourseGrab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CourseGrab.entitlements; sourceTree = "<group>"; };
 		C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCardTableViewCell.swift; sourceTree = "<group>"; };
 		C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		C87CA7A523EA0E6E00242E1F /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		0643489623DE1519007F5F9F /* CourseGrab */ = {
 			isa = PBXGroup;
 			children = (
+				C2E8CE062410703E005ADA25 /* CourseGrab.entitlements */,
 				0643489723DE1519007F5F9F /* AppDelegate.swift */,
 				0643489923DE1519007F5F9F /* SceneDelegate.swift */,
 				C8A3D53B23E23D610007E488 /* ViewControllers */,
@@ -197,6 +199,7 @@
 				B616503423F08ACF00B38C52 /* Endpoints.swift */,
 				B616503623F08CA100B38C52 /* Body.swift */,
 				B616503823F0945D00B38C52 /* Response.swift */,
+				C2E8CE0924107160005ADA25 /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */,
 				06B0A52923E247C7001ED66A /* Section.swift in Sources */,
 				06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */,
+				C2E8CE0A24107160005ADA25 /* NetworkManager.swift in Sources */,
 				06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */,
 				063C67D323E9089F00A40895 /* UIImage+Extensions.swift in Sources */,
 				B6435996240728F20049270B /* SessionAuthorization.swift in Sources */,
@@ -583,6 +587,7 @@
 			baseConfigurationReference = 96351132E2528A1085B69A7A /* Pods-CourseGrab.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CourseGrab/CourseGrab.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZGMCXU7X3U;
 				INFOPLIST_FILE = "$(SRCROOT)/CourseGrab/Supporting/Info.plist";
@@ -604,6 +609,7 @@
 			baseConfigurationReference = 4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CourseGrab/CourseGrab.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZGMCXU7X3U;
 				INFOPLIST_FILE = "$(SRCROOT)/CourseGrab/Supporting/Info.plist";

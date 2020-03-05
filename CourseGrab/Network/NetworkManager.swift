@@ -5,7 +5,6 @@
 //  Created by Mathew Scullin on 2/25/20.
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
-
 import Foundation
 import FutureNova
 
@@ -20,26 +19,26 @@ class NetworkManager {
     func initializeSession(googleToken: String) -> Future<Response<SessionAuthorization>> {
         return networking(Endpoint.initializeSession(with: googleToken)).decode()
     }
-    
+
     func updateSession() -> Future<Response<SessionAuthorization>> {
         return networking(Endpoint.updateSession()).decode()
     }
-    
+
     func getAllTrackedCourses() -> Future<Response<[Section]>> {
         return validateToken()
             .chained { self.networking(Endpoint.getAllTrackedCourses()).decode() }
     }
-    
+
     func trackCourse(catalogNum: Int) -> Future<Response<Section>> {
         return validateToken()
             .chained { self.networking(Endpoint.trackCourse(catalogNum: catalogNum)).decode() }
     }
-    
+
     func untrackCourse(catalogNum: Int) -> Future<Response<Section>> {
         return validateToken()
             .chained { self.networking(Endpoint.untrackCourse(catalogNum: catalogNum)).decode() }
     }
-    
+
     func searchCourse(query: String) -> Future<Response<[Course]>> {
         return validateToken()
             .chained { self.networking(Endpoint.searchCourse(query: query)).decode() }
