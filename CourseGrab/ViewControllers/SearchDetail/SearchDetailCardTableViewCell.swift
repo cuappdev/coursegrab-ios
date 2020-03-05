@@ -36,6 +36,7 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         containerView.addSubview(subtitleLabel)
 
         titleLabel.font = ._16Semibold
+        titleLabel.numberOfLines = 0
         titleLabel.textColor = .black
         containerView.addSubview(titleLabel)
 

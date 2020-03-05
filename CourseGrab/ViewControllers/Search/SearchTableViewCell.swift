@@ -12,11 +12,8 @@ class SearchTableViewCell: UITableViewCell {
 
     private let arrowImageView = UIImageView()
     private let containerView = UIView()
-    private let divider = UIView()
-    private let statusBadge = UIImageView()
-    private let subtitleLabel = UILabel()
     private let titleLabel = UILabel()
-    private let trackingButton = UIButton()
+    private let trackingStackView = UIStackView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,13 +22,10 @@ class SearchTableViewCell: UITableViewCell {
 
         selectionStyle = .none
 
-        arrowImageView.backgroundColor = .black
+        arrowImageView.image = .arrowIcon
+        arrowImageView.tintColor = .black
         arrowImageView.contentMode = .scaleAspectFit
         containerView.addSubview(arrowImageView)
-
-        divider.backgroundColor = .courseGrabBorder
-        containerView.addSubview(divider)
-        divider.isHidden = true
 
         containerView.clipsToBounds = false
         containerView.layer.cornerRadius = 5
@@ -46,24 +40,8 @@ class SearchTableViewCell: UITableViewCell {
         titleLabel.numberOfLines = 0
         containerView.addSubview(titleLabel)
 
-        trackingButton.isHidden = true
-        trackingButton.layer.cornerRadius = 2
-        trackingButton.layer.borderWidth = 1
-        trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
-        trackingButton.titleLabel?.font = ._12Medium
-        trackingButton.setTitle("REMOVE", for: .normal)
-        trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
-        trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
-        containerView.addSubview(trackingButton)
-
-        statusBadge.contentMode = .scaleAspectFit
-        statusBadge.isHidden = true
-        containerView.addSubview(statusBadge)
-
-        subtitleLabel.font = ._14Semibold
-        subtitleLabel.adjustsFontSizeToFitWidth = true
-        subtitleLabel.isHidden = true
-        containerView.addSubview(subtitleLabel)
+        trackingStackView.axis = .vertical
+        containerView.addSubview(trackingStackView)
 
         // Setup constraints
 
@@ -83,6 +61,82 @@ class SearchTableViewCell: UITableViewCell {
             make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
             make.top.bottom.leading.equalToSuperview().inset(16)
         }
+
+        trackingStackView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(11)
+            make.bottom.leading.trailing.equalToSuperview()
+        }
+
+    }
+
+    func configure(for course: Course) {
+        titleLabel.text = course.title
+
+        trackingStackView.subviews.forEach { $0.removeFromSuperview() }
+
+        let trackingSections = course.sections.filter { $0.isTracking }
+
+        for section in trackingSections {
+            let sectionView = TrackingSectionView()
+            sectionView.configure(for: section)
+            trackingStackView.addArrangedSubview(sectionView)
+        }
+
+        if trackingSections.count > 0 {
+            titleLabel.snp.remakeConstraints { make in
+                make.leading.top.equalToSuperview().inset(16)
+                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
+                make.bottom.equalTo(trackingStackView.snp.top).offset(-11)
+            }
+        } else {
+            titleLabel.snp.remakeConstraints { make in
+                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
+                make.top.bottom.leading.equalToSuperview().inset(16)
+            }
+        }
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
+private class TrackingSectionView: UIView {
+
+    private let divider = UIView()
+    private let statusBadge = UIImageView()
+    private let subtitleLabel = UILabel()
+    private let trackingButton = UIButton()
+
+    init() {
+        super.init(frame: .zero)
+
+        // Setup appearance
+
+        divider.backgroundColor = .courseGrabBorder
+        addSubview(divider)
+
+        trackingButton.isHidden = true
+        trackingButton.layer.cornerRadius = 2
+        trackingButton.layer.borderWidth = 1
+        trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+        trackingButton.titleLabel?.font = ._12Medium
+        trackingButton.setTitle("REMOVE", for: .normal)
+        trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
+        trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+        addSubview(trackingButton)
+
+        statusBadge.contentMode = .scaleAspectFit
+        statusBadge.isHidden = true
+        addSubview(statusBadge)
+
+        subtitleLabel.font = ._14Semibold
+        subtitleLabel.adjustsFontSizeToFitWidth = true
+        subtitleLabel.isHidden = true
+        addSubview(subtitleLabel)
+
+        // Setup constraints
 
         divider.snp.makeConstraints { make in
             make.width.equalToSuperview()
@@ -109,34 +163,15 @@ class SearchTableViewCell: UITableViewCell {
             make.trailing.equalTo(trackingButton.snp.leading).offset(-12)
             make.centerY.equalTo(statusBadge.snp.centerY)
         }
-
-    }
-
-    func configure(for section: Section) {
-        titleLabel.text = section.title
-        divider.isHidden = !section.isTracking
-        trackingButton.isHidden = !section.isTracking
-        statusBadge.isHidden = !section.isTracking
-        statusBadge.image = section.status.icon
-        subtitleLabel.isHidden = !section.isTracking
-        subtitleLabel.text = section.section
-
-        if section.isTracking {
-            titleLabel.snp.remakeConstraints { make in
-                make.leading.top.equalToSuperview().inset(16)
-                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
-                make.bottom.equalTo(divider.snp.top).offset(-11)
-            }
-        } else {
-            titleLabel.snp.remakeConstraints { make in
-                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
-                make.top.bottom.leading.equalToSuperview().inset(16)
-            }
-        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(for section: Section) {
+        statusBadge.image = section.status.icon
+        subtitleLabel.text = section.section
     }
 
 }
