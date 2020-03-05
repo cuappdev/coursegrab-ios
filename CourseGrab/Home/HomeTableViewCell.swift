@@ -10,15 +10,21 @@ import Foundation
 import SnapKit
 import UIKit
 
+protocol HomeTableViewCellDelegate {
+    func homeTableViewCellDidUnenroll()
+}
+
 class HomeTableViewCell: UITableViewCell {
     
     private let containerView = UIView()
     private let courseLabel = UILabel()
     private let enrollButton = UIButton(type: .roundedRect)
     private let removeButton = UIButton(type: .roundedRect)
+    private var section: Section!
     private let sectionLabel = UILabel()
     private let statusBadge = UIImageView()
     private let titleLabel = UILabel()
+    var delegate: HomeTableViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,6 +59,7 @@ class HomeTableViewCell: UITableViewCell {
         removeButton.titleLabel?.font = ._12Medium
         removeButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         removeButton.layer.borderWidth = 1
+        removeButton.on(.touchUpInside, removeCourse)
         containerView.addSubview(removeButton)
         
         sectionLabel.font = ._14Medium
@@ -117,6 +124,7 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func configure(for section: Section) {
+        self.section = section
         courseLabel.text = String(section.courseNum)
         enrollButton.isHidden = section.status != .open
         sectionLabel.text = section.section
@@ -137,6 +145,19 @@ class HomeTableViewCell: UITableViewCell {
                 make.leading.equalTo(16)
                 make.height.equalTo(24)
                 make.trailing.bottom.equalToSuperview().inset(16)
+            }
+        }
+    }
+
+    private func removeCourse(_ button: UIButton) {
+        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+            switch result {
+            case .value(let response):
+                print(response)
+                self.delegate?.homeTableViewCellDidUnenroll()
+                break
+            case .error(let error):
+                print(error)
             }
         }
     }

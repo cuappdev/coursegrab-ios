@@ -10,10 +10,10 @@ import UIKit
 
 class SearchDetailTableViewCell: UITableViewCell {
 
+    private var section: Section!
     private let statusView = UIView()
     private let titleLabel = UILabel()
     private let trackingButton = UIButton()
-    private var section: Section!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -102,15 +102,16 @@ class SearchDetailTableViewCell: UITableViewCell {
             switch result {
             case .value(let response):
                 print(response)
+                DispatchQueue.main.async {
+                    self.trackingButton.setTitle("REMOVE", for: .normal)
+                    self.trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
+                    self.trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+                    self.trackingButton.on(.touchUpInside, self.removeCourse)
+                }
             case .error(let error):
                 print(error)
             }
         }
-
-        trackingButton.setTitle("REMOVE", for: .normal)
-        trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
-        trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
-        trackingButton.on(.touchUpInside, removeCourse)
     }
 
     private func removeCourse(_ button: UIButton) {
@@ -118,16 +119,17 @@ class SearchDetailTableViewCell: UITableViewCell {
             switch result {
             case .value(let response):
                 print(response)
+                DispatchQueue.main.async {
+                    self.trackingButton.setTitle("TRACK", for: .normal)
+                    self.trackingButton.setTitleColor(.courseGrabBlack, for: .normal)
+                    self.trackingButton.layer.borderColor = UIColor.courseGrabBlack.cgColor
+                    self.trackingButton.on(.touchUpInside, self.trackCourse)
+                }
                 break
             case .error(let error):
                 break
             }
         }
-
-        trackingButton.setTitle("TRACK", for: .normal)
-        trackingButton.setTitleColor(.courseGrabBlack, for: .normal)
-        trackingButton.layer.borderColor = UIColor.courseGrabBlack.cgColor
-        trackingButton.on(.touchUpInside, trackCourse)
     }
 
 }

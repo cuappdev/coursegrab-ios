@@ -133,6 +133,22 @@ extension SearchTableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         textField.becomeFirstResponder()
+
+        if let text = textField.text, text.count > 2 {
+            NetworkManager.shared.searchCourse(query: text).observe { result in
+                switch result {
+                case .value(let response):
+                    DispatchQueue.main.async {
+                        if !response.data.isEmpty {
+                            self.courses = response.data
+                            self.tableView.reloadData()
+                        }
+                    }
+                case .error(let error):
+                    print(error)
+                }
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

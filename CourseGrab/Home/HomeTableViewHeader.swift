@@ -36,9 +36,10 @@ class HomeTableViewHeader: UITableViewHeaderFooterView {
             titleLabel.textColor = .black
         }
         let topPadding = section == 0 ? 24 : 6
+        let bottomPadding = section == 0 ? 6 : 4
         titleLabel.snp.remakeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(6)
+            make.bottom.equalToSuperview().inset(bottomPadding)
             make.top.equalToSuperview().inset(topPadding)
         }
     }

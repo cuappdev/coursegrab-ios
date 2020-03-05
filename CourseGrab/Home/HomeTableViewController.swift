@@ -23,7 +23,7 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getAllTrackedCourses()
+        //getAllTrackedCourses()
 
         // Setup navigation bar
         let titleLabel = UILabel()
@@ -52,6 +52,14 @@ class HomeTableViewController: UITableViewController {
 
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.tableSections = []
+            self.getAllTrackedCourses()
+            self.tableView.reloadData()
         }
     }
 
@@ -85,7 +93,9 @@ extension HomeTableViewController {
                 var newSections: IndexSet = []
                 (0..<self.tableSections.count).forEach { newSections.insert($0) }
                 if newSections.count > 0 {
-                    self.tableView.insertSections(newSections, with: .automatic)
+                    DispatchQueue.main.async {
+                        self.tableView.insertSections(newSections, with: .automatic)
+                    }
                 } else {
                     self.showEmptyState()
                 }
@@ -185,6 +195,7 @@ extension HomeTableViewController {
         switch tableSections[indexPath.section] {
         case .available(let sections), .awaiting(let sections):
             let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
+            cell.delegate = self
             cell.configure(for: sections[indexPath.row])
             return cell
         }
@@ -292,6 +303,18 @@ extension HomeTableViewController {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
             self.navigationItem.titleView = titleLabel
+        }
+    }
+
+}
+
+extension HomeTableViewController: HomeTableViewCellDelegate {
+
+    func homeTableViewCellDidUnenroll() {
+        DispatchQueue.main.async {
+            self.tableSections = []
+            self.getAllTrackedCourses()
+            self.tableView.reloadData()
         }
     }
 
