@@ -72,24 +72,23 @@ class SearchTableViewCell: UITableViewCell {
         }
 
         if trackingSections.count > 0 {
-            titleLabel.snp.makeConstraints { make in
+            titleLabel.snp.remakeConstraints { make in
                 make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
                 make.top.leading.equalToSuperview().inset(16)
+                make.bottom.equalTo(trackingStackView.snp.top).offset(-11)
             }
 
-            trackingStackView.snp.makeConstraints { make in
+            trackingStackView.snp.remakeConstraints { make in
                 make.top.equalTo(titleLabel.snp.bottom).offset(11)
                 make.bottom.leading.trailing.equalToSuperview()
             }
         } else {
-            titleLabel.snp.makeConstraints { make in
+            titleLabel.snp.remakeConstraints { make in
                 make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
                 make.top.bottom.leading.equalToSuperview().inset(16)
             }
 
-            trackingStackView.snp.makeConstraints { make in
-                
-            }
+            trackingStackView.snp.removeConstraints()
         }
     }
 
@@ -133,9 +132,8 @@ private class TrackingSectionView: UIView {
         // Setup constraints
 
         divider.snp.makeConstraints { make in
-            make.width.equalToSuperview()
+            make.top.width.equalToSuperview()
             make.height.equalTo(1)
-            make.bottom.equalToSuperview().inset(44)
         }
 
         statusBadge.snp.makeConstraints { make in
