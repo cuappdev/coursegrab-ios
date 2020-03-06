@@ -53,6 +53,14 @@ class HomeTableViewController: UITableViewController {
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
         }
+
+        // TODO: Set the view on error after networking is merged
+
+        // No Internet
+//        view = HomeErrorView(frame: .zero, title: "No Internet Connection", subtitle: "Tap the search icon to start adding courses", icon: Status.closed.icon)
+
+        // No Tracked Courses
+//        view = HomeErrorView(frame: .zero, title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
     }
 
     func displayPermissionModal() {
