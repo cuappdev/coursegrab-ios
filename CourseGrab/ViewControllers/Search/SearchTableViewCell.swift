@@ -103,7 +103,7 @@ private class TrackingSectionView: UIView {
     private let divider = UIView()
     private let statusBadge = UIImageView()
     private let subtitleLabel = UILabel()
-    private let trackingButton = UIButton()
+    private let trackingButton = UIButton(type: .roundedRect)
 
     init() {
         super.init(frame: .zero)
