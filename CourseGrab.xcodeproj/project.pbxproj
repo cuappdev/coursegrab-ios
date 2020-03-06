@@ -11,6 +11,7 @@
 		06287DBB2412EA590050C078 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06287DB72412EA590050C078 /* HomeTableViewController.swift */; };
 		06287DBC2412EA590050C078 /* HomeErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06287DB82412EA590050C078 /* HomeErrorView.swift */; };
 		06287DBD2412EA590050C078 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06287DB92412EA590050C078 /* HomeTableViewCell.swift */; };
+		06287DBE2412EAB60050C078 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C819FB9A240C3ED20071CB5C /* Keys.plist */; };
 		062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062891B623E8F51F00B6D698 /* SearchTableViewController.swift */; };
 		063C67D323E9089F00A40895 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063C67D223E9089F00A40895 /* UIImage+Extensions.swift */; };
 		0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0643489723DE1519007F5F9F /* AppDelegate.swift */; };
@@ -341,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06287DBE2412EAB60050C078 /* Keys.plist in Resources */,
 				067D5022240C28F400ADE062 /* GoogleService-Info.plist in Resources */,
 				064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */,
 				064348A123DE151D007F5F9F /* Assets.xcassets in Resources */,
