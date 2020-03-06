@@ -29,7 +29,7 @@ class SearchTableViewController: UITableViewController {
 
         // Setup navigationBar
         textField.frame.size.width = view.frame.width - 80
-//        textField.on(.editingChanged, textDidChange)
+        textField.on(.editingChanged, textDidChange)
         textField.attributedPlaceholder = NSAttributedString(
             string: "Search for a course",
             attributes: [
@@ -48,27 +48,6 @@ class SearchTableViewController: UITableViewController {
             UIBarButtonItem(customView: backButton),
             UIBarButtonItem(customView: textField)
         ]
-
-        courses = [
-//            Course(courseNum: 124, subjectCode: "FWS", sections: [
-//                Section(catalogNum: 0, courseNum: 0, isTracking: true, section: "LEC 001 / MWF 10:10", status: .closed, subjectCode: "FWS", title: ""),
-//                Section(catalogNum: 0, courseNum: 0, isTracking: false, section: "LEC 001 / MWF 10:10", status: .closed, subjectCode: "FWS", title: ""),
-//                Section(catalogNum: 0, courseNum: 0, isTracking: true, section: "LEC 001 / MWF 10:10", status: .closed, subjectCode: "FWS", title: "")
-//            ], title: "Banana Republic: A Case Study in \n\n\n\nRaising Chickens in the Wild"),
-//
-            Course(courseNum: 124, subjectCode: "FWS", sections: [
-                Section(catalogNum: 0, courseNum: 0, isTracking: false, section: "LEC 001 / MWF 10:10", status: .closed, subjectCode: "FWS", title: "")
-            ], title: "Banana Republic: A Case Study"),
-
-            Course(courseNum: 124, subjectCode: "FWS", sections: [
-                Section(catalogNum: 0, courseNum: 0, isTracking: true, section: "LEC 001 / MWF 10:10", status: .closed, subjectCode: "FWS", title: ""),
-                Section(catalogNum: 0, courseNum: 0, isTracking: true, section: "LEC 001 / MWF 10:10", status: .closed, subjectCode: "FWS", title: "")
-            ], title: "Banana Republic: A Case Study")
-        ]
-
-        for _ in 0..<4 {
-            courses += courses
-        }
     }
 
 }
