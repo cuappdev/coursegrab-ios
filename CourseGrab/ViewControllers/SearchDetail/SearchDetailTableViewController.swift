@@ -14,7 +14,7 @@ class SearchDetailTableViewController: UITableViewController {
         case card, section
     }
 
-    private let course: Course
+    private var course: Course
 
     init(course: Course) {
         self.course = course
@@ -64,8 +64,61 @@ class SearchDetailTableViewController: UITableViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.section.rawValue) as! SearchDetailTableViewCell
             cell.configure(section: course.sections[indexPath.row])
+            cell.updateTracking = updateTracking
             return cell
         }
+    }
+
+}
+
+extension SearchDetailTableViewController {
+
+    private func updateTracking(section: Section, track: Bool) {
+        if track {
+            NetworkManager.shared.trackCourse(catalogNum: section.catalogNum).observe { result in
+                switch result {
+                case .value(let response):
+                    guard response.success, let indexPath = self.updateData(newSection: response.data) else { return }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                case .error(let error):
+                    print(error)
+                }
+            }
+        } else {
+            NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+                switch result {
+                case .value(let response):
+                    guard response.success, let indexPath = self.updateData(newSection: response.data) else { return }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                case .error(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+
+    /// Updates the model and returns the index path in the table to update, if any.
+    private func updateData(newSection section: Section) -> IndexPath? {
+        var sections = course.sections
+
+        guard let index = sections.firstIndex(where: { $0.catalogNum == section.catalogNum }) else {
+            return nil
+        }
+
+        sections[index] = section
+
+        course = Course(
+            courseNum: course.courseNum,
+            subjectCode: course.subjectCode,
+            sections: sections,
+            title: course.title
+        )
+
+        return IndexPath(row: index, section: 1)
     }
 
 }
