@@ -97,6 +97,7 @@ extension SearchTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: searchCellReuseId, for: indexPath) as! SearchTableViewCell
         cell.configure(for: courses[indexPath.row])
+        cell.untrackSection = untrack(section:)
         return cell
     }
     
@@ -118,6 +119,44 @@ extension SearchTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(SearchDetailTableViewController(course: courses[indexPath.row]), animated: true)
+    }
+
+    private func untrack(section: Section) {
+        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+            switch result {
+            case .value(let response):
+                guard response.success, self.updateData(newSection: response.data) != nil else { return }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
+
+    /// Updates the model and returns the index path in the table to update, if any.
+    private func updateData(newSection section: Section) -> IndexPath? {
+        guard let courseIndex = courses.firstIndex(where: { $0.courseNum == section.courseNum }),
+            let sectionIndex = courses[courseIndex].sections.firstIndex(where: { $0.catalogNum == section.catalogNum }) else {
+            return nil
+        }
+
+        let oldCourse = courses[courseIndex]
+
+        var sections = oldCourse.sections
+        sections[sectionIndex] = section
+
+        let newCourse = Course(
+            courseNum: oldCourse.courseNum,
+            subjectCode: oldCourse.subjectCode,
+            sections: sections,
+            title: oldCourse.title
+        )
+
+        courses[courseIndex] = newCourse
+
+        return IndexPath(row: courseIndex, section: 0)
     }
 
 }

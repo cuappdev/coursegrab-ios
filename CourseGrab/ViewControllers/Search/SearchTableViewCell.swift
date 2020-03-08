@@ -15,6 +15,16 @@ class SearchTableViewCell: UITableViewCell {
     private let titleLabel = UILabel()
     private let trackingStackView = UIStackView()
 
+    var untrackSection: ((Section) -> Void)? {
+        didSet(handler) {
+            for subview in trackingStackView.subviews {
+                if let sectionView = subview as? TrackingSectionView {
+                    sectionView.untrackSection = handler
+                }
+            }
+        }
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -104,7 +114,9 @@ private class TrackingSectionView: UIView {
     private let statusBadge = UIImageView()
     private let subtitleLabel = UILabel()
     private let trackingButton = UIButton(type: .roundedRect)
-    private var section: Section!
+    private var section: Section?
+
+    var untrackSection: ((Section) -> Void)?
 
     init() {
         super.init(frame: .zero)
@@ -170,16 +182,8 @@ private class TrackingSectionView: UIView {
     }
 
     private func removeCourse(_ button: UIButton) {
-           NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
-               switch result {
-               case .value(let response):
-                   print(response)
-                   //self.delegate?.homeTableViewCellDidUnenroll()
-                   break
-               case .error(let error):
-                   print(error)
-               }
-           }
-       }
+        guard let section = section else { return }
+        untrackSection?(section)
+    }
 
 }
