@@ -13,7 +13,7 @@ class SearchDetailTableViewCell: UITableViewCell {
     private var section: Section!
     private let statusView = UIView()
     private let titleLabel = UILabel()
-    private let trackingButton = UIButton()
+    private let trackingButton = UIButton(type: .roundedRect)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

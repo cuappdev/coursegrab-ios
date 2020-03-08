@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06287DBA2412EA590050C078 /* HomeTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06287DB62412EA590050C078 /* HomeTableViewHeader.swift */; };
+		06287DBD2412EA590050C078 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06287DB92412EA590050C078 /* HomeTableViewCell.swift */; };
 		062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062891B623E8F51F00B6D698 /* SearchTableViewController.swift */; };
 		063C67D323E9089F00A40895 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063C67D223E9089F00A40895 /* UIImage+Extensions.swift */; };
 		0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0643489723DE1519007F5F9F /* AppDelegate.swift */; };
@@ -15,7 +17,6 @@
 		064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 064348A223DE151D007F5F9F /* LaunchScreen.storyboard */; };
 		0656EE9223EBA0A30031CB2A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0656EE9123EBA0A30031CB2A /* UIView+Extensions.swift */; };
 		0656EE9423EBBDEB0031CB2A /* SettingsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0656EE9323EBBDEB0031CB2A /* SettingsAnimator.swift */; };
-		06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06734A0023E246C800214A3D /* HomeTableViewCell.swift */; };
 		067D5022240C28F400ADE062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 067D5021240C28F400ADE062 /* GoogleService-Info.plist */; };
 		06B0A52923E247C7001ED66A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B0A52823E247C7001ED66A /* Section.swift */; };
 		06C9B9DA23FDF7900025CA8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B9D923FDF7900025CA8E /* User.swift */; };
@@ -29,8 +30,9 @@
 		B6435996240728F20049270B /* SessionAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6435995240728F20049270B /* SessionAuthorization.swift */; };
 		B654C59123DE38DB00F05141 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59023DE38DB00F05141 /* UIColor+Extensions.swift */; };
 		B654C59323DE38ED00F05141 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */; };
-		B6FAEF1B23E9FC5B0076B239 /* HomeTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */; };
 		B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1C23EB83C70076B239 /* Course.swift */; };
+		C81442A3241559AC004DC31A /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06287DB72412EA590050C078 /* HomeTableViewController.swift */; };
+		C81442A4241559B3004DC31A /* HomeErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06287DB82412EA590050C078 /* HomeErrorView.swift */; };
 		C853AC5A240C3D8600AD7FF2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C853AC59240C3D8600AD7FF2 /* NetworkManager.swift */; };
 		C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */; };
 		C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C877FC0F23DE6E07004D06EA /* MainNavigationController.swift */; };
@@ -40,12 +42,14 @@
 		C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */; };
 		C8A3D54223E24BEC0007E488 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D54123E24BEC0007E488 /* LoginViewController.swift */; };
 		C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */; };
-		C8E8A1A42409967A00A0D4D8 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */; };
-		C8FA8E7424105F51008DA6B5 /* HomeErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FA8E7324105F51008DA6B5 /* HomeErrorView.swift */; };
 		C8FA8E7A24109929008DA6B5 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8FA8E7924109929008DA6B5 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06287DB62412EA590050C078 /* HomeTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeTableViewHeader.swift; path = CourseGrab/ViewControllers/Home/HomeTableViewHeader.swift; sourceTree = SOURCE_ROOT; };
+		06287DB72412EA590050C078 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeTableViewController.swift; path = CourseGrab/ViewControllers/Home/HomeTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		06287DB82412EA590050C078 /* HomeErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeErrorView.swift; path = CourseGrab/ViewControllers/Home/HomeErrorView.swift; sourceTree = SOURCE_ROOT; };
+		06287DB92412EA590050C078 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeTableViewCell.swift; path = CourseGrab/ViewControllers/Home/HomeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		062891B623E8F51F00B6D698 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		063C67D223E9089F00A40895 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		0643489423DE1519007F5F9F /* CourseGrab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourseGrab.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,8 +60,6 @@
 		064348A523DE151D007F5F9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0656EE9123EBA0A30031CB2A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		0656EE9323EBBDEB0031CB2A /* SettingsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAnimator.swift; sourceTree = "<group>"; };
-		06675D0D23E2859F00AF1884 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
-		06734A0023E246C800214A3D /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		067D5021240C28F400ADE062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		067F000123E918C400F78B36 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		06B0A52823E247C7001ED66A /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -74,7 +76,6 @@
 		B6435995240728F20049270B /* SessionAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionAuthorization.swift; sourceTree = "<group>"; };
 		B654C59023DE38DB00F05141 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
-		B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewHeader.swift; sourceTree = "<group>"; };
 		B6FAEF1C23EB83C70076B239 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C2E8CE062410703E005ADA25 /* CourseGrab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CourseGrab.entitlements; sourceTree = "<group>"; };
 		C853AC59240C3D8600AD7FF2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -86,8 +87,6 @@
 		C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewCell.swift; sourceTree = "<group>"; };
 		C8A3D54123E24BEC0007E488 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModalViewController.swift; sourceTree = "<group>"; };
-		C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
-		C8FA8E7324105F51008DA6B5 /* HomeErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeErrorView.swift; sourceTree = "<group>"; };
 		C8FA8E7924109929008DA6B5 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -247,10 +246,10 @@
 		C8A3D54523E24C6C0007E488 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C8E8A1A32409967A00A0D4D8 /* HomeTableViewController.swift */,
-				C8FA8E7324105F51008DA6B5 /* HomeErrorView.swift */,
-				B6FAEF1A23E9FC5B0076B239 /* HomeTableViewHeader.swift */,
-				06734A0023E246C800214A3D /* HomeTableViewCell.swift */,
+				06287DB72412EA590050C078 /* HomeTableViewController.swift */,
+				06287DB62412EA590050C078 /* HomeTableViewHeader.swift */,
+				06287DB92412EA590050C078 /* HomeTableViewCell.swift */,
+				06287DB82412EA590050C078 /* HomeErrorView.swift */,
 			);
 			name = Home;
 			path = ../Home;
@@ -267,7 +266,6 @@
 		C8E8A1A22409964500A0D4D8 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				06675D0D23E2859F00AF1884 /* HomeTableViewController.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -424,24 +422,24 @@
 				C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */,
 				B616503923F0945D00B38C52 /* Response.swift in Sources */,
 				C877FC1023DE6E07004D06EA /* MainNavigationController.swift in Sources */,
+				06287DBA2412EA590050C078 /* HomeTableViewHeader.swift in Sources */,
 				B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */,
 				06B0A52923E247C7001ED66A /* Section.swift in Sources */,
-				06734A0123E246C900214A3D /* HomeTableViewCell.swift in Sources */,
 				06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */,
 				063C67D323E9089F00A40895 /* UIImage+Extensions.swift in Sources */,
+				06287DBD2412EA590050C078 /* HomeTableViewCell.swift in Sources */,
 				B6435996240728F20049270B /* SessionAuthorization.swift in Sources */,
 				B616503723F08CA100B38C52 /* Body.swift in Sources */,
 				0643489823DE1519007F5F9F /* AppDelegate.swift in Sources */,
 				C853AC5A240C3D8600AD7FF2 /* NetworkManager.swift in Sources */,
+				C81442A4241559B3004DC31A /* HomeErrorView.swift in Sources */,
 				B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */,
 				B616503D23F0C2E200B38C52 /* UserDefaults+Extensions.swift in Sources */,
 				B643598823FDF7940049270B /* SearchTableViewHeader.swift in Sources */,
-				B6FAEF1B23E9FC5B0076B239 /* HomeTableViewHeader.swift in Sources */,
-				C8E8A1A42409967A00A0D4D8 /* HomeTableViewController.swift in Sources */,
 				C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */,
 				062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */,
+				C81442A3241559AC004DC31A /* HomeTableViewController.swift in Sources */,
 				C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */,
-				C8FA8E7424105F51008DA6B5 /* HomeErrorView.swift in Sources */,
 				C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */,
 				B654C59123DE38DB00F05141 /* UIColor+Extensions.swift in Sources */,
 				C87CA7A623EA0E6E00242E1F /* SearchTableViewCell.swift in Sources */,

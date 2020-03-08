@@ -56,17 +56,6 @@ class SearchTableViewCell: UITableViewCell {
             make.leading.equalTo(20)
             make.trailing.equalToSuperview().inset(20)
         }
-
-        titleLabel.snp.makeConstraints { make in
-            make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
-            make.top.bottom.leading.equalToSuperview().inset(16)
-        }
-
-        trackingStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(11)
-            make.bottom.leading.trailing.equalToSuperview()
-        }
-
     }
 
     func configure(for course: Course) {
@@ -84,15 +73,22 @@ class SearchTableViewCell: UITableViewCell {
 
         if trackingSections.count > 0 {
             titleLabel.snp.remakeConstraints { make in
-                make.leading.top.equalToSuperview().inset(16)
                 make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
+                make.top.leading.equalToSuperview().inset(16)
                 make.bottom.equalTo(trackingStackView.snp.top).offset(-11)
+            }
+
+            trackingStackView.snp.remakeConstraints { make in
+                make.top.equalTo(titleLabel.snp.bottom).offset(11)
+                make.bottom.leading.trailing.equalToSuperview()
             }
         } else {
             titleLabel.snp.remakeConstraints { make in
-                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
+                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
                 make.top.bottom.leading.equalToSuperview().inset(16)
             }
+
+            trackingStackView.snp.removeConstraints()
         }
     }
 
@@ -107,7 +103,7 @@ private class TrackingSectionView: UIView {
     private let divider = UIView()
     private let statusBadge = UIImageView()
     private let subtitleLabel = UILabel()
-    private let trackingButton = UIButton()
+    private let trackingButton = UIButton(type: .roundedRect)
 
     init() {
         super.init(frame: .zero)
@@ -117,7 +113,6 @@ private class TrackingSectionView: UIView {
         divider.backgroundColor = .courseGrabBorder
         addSubview(divider)
 
-        trackingButton.isHidden = true
         trackingButton.layer.cornerRadius = 2
         trackingButton.layer.borderWidth = 1
         trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
@@ -128,20 +123,17 @@ private class TrackingSectionView: UIView {
         addSubview(trackingButton)
 
         statusBadge.contentMode = .scaleAspectFit
-        statusBadge.isHidden = true
         addSubview(statusBadge)
 
         subtitleLabel.font = ._14Semibold
         subtitleLabel.adjustsFontSizeToFitWidth = true
-        subtitleLabel.isHidden = true
         addSubview(subtitleLabel)
 
         // Setup constraints
 
         divider.snp.makeConstraints { make in
-            make.width.equalToSuperview()
+            make.top.width.equalToSuperview()
             make.height.equalTo(1)
-            make.bottom.equalToSuperview().inset(44)
         }
 
         statusBadge.snp.makeConstraints { make in

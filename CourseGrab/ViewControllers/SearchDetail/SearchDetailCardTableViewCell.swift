@@ -46,7 +46,6 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         containerView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(12)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.centerY.equalToSuperview()
         }
 
         subtitleLabel.snp.makeConstraints { make in
