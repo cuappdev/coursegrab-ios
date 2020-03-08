@@ -43,15 +43,14 @@ class SearchDetailCardTableViewCell: UITableViewCell {
         // Setup constraints
 
         containerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.bottom.equalToSuperview().inset(12)
+            make.top.bottom.equalToSuperview().inset(12)
             make.leading.trailing.equalToSuperview().inset(20)
         }
 
         subtitleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().offset(16)
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.bottom.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().inset(16)
         }
 
         titleLabel.snp.makeConstraints { make in
