@@ -46,7 +46,7 @@ class SearchDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 110 : 42
+        return indexPath.section == 0 ? UITableView.automaticDimension : 42
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
