@@ -14,8 +14,8 @@ class HomeErrorView: UIView {
     private let subtitleLabel = UILabel()
     private let titleLabel = UILabel()
 
-    init(frame: CGRect, title: String, subtitle: String, icon: UIImage) {
-        super.init(frame: frame)
+    init(title: String, subtitle: String, icon: UIImage) {
+        super.init(frame: .zero)
         backgroundColor = .white
 
         imageView.image = icon

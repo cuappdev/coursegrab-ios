@@ -10,21 +10,19 @@ import Foundation
 import SnapKit
 import UIKit
 
-protocol HomeTableViewCellDelegate {
-    func homeTableViewCellDidUnenroll()
-}
-
 class HomeTableViewCell: UITableViewCell {
-    
+
+    private var section: Section?
+
     private let containerView = UIView()
     private let courseLabel = UILabel()
     private let enrollButton = UIButton(type: .roundedRect)
     private let removeButton = UIButton(type: .roundedRect)
-    private var section: Section!
     private let sectionLabel = UILabel()
     private let statusBadge = UIImageView()
     private let titleLabel = UILabel()
-    var delegate: HomeTableViewCellDelegate?
+
+    var untrackSection: ((Section) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,7 +58,7 @@ class HomeTableViewCell: UITableViewCell {
         removeButton.titleLabel?.font = ._12Medium
         removeButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         removeButton.layer.borderWidth = 1
-        removeButton.on(.touchUpInside, removeCourse)
+        removeButton.on(.touchUpInside, removeSection)
         containerView.addSubview(removeButton)
         
         sectionLabel.font = ._14Medium
@@ -150,17 +148,9 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
 
-    private func removeCourse(_ button: UIButton) {
-        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
-            switch result {
-            case .value(let response):
-                print(response)
-                self.delegate?.homeTableViewCellDidUnenroll()
-                break
-            case .error(let error):
-                print(error)
-            }
-        }
+    private func removeSection(_ button: UIButton) {
+        guard let section = section else { return }
+        untrackSection?(section)
     }
 
     private func enroll(_ button: UIButton) {

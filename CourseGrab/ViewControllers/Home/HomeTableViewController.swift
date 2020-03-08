@@ -12,6 +12,10 @@ import UIKit
 
 class HomeTableViewController: UITableViewController {
 
+    enum State {
+        case normal, loading, empty, error
+    }
+
     enum TableSection {
         case available([Section]), awaiting([Section])
     }
@@ -51,12 +55,15 @@ class HomeTableViewController: UITableViewController {
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
         }
+
+        show(state: .loading)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
             self.tableSections = []
             self.tableView.reloadData()
+            self.show(state: .loading)
             self.getAllTrackedCourses()
         }
     }
@@ -92,28 +99,31 @@ extension HomeTableViewController {
                 (0..<self.tableSections.count).forEach { newSections.insert($0) }
                 if newSections.count > 0 {
                     DispatchQueue.main.async {
+                        self.show(state: .normal)
                         self.tableView.backgroundView = nil
-                        self.tableView.insertSections(newSections, with: .automatic)
+                        self.tableView.insertSections(newSections, with: .fade)
                     }
                 } else {
-                    self.showEmptyState()
+                    self.show(state: .empty)
                 }
-            case .error(let error):
-                print(error)
-                self.showErrorState()
+            case .error:
+                self.show(state: .error)
             }
         }
     }
 
-    private func showEmptyState() {
+    private func show(state: State) {
         DispatchQueue.main.async {
-            self.tableView.backgroundView = HomeErrorView(frame: .zero, title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
-        }
-    }
-
-    private func showErrorState() {
-        DispatchQueue.main.async {
-            self.tableView.backgroundView = HomeErrorView(frame: .zero, title: "No Internet Connection", subtitle: "Tap the search icon to start adding courses", icon: Status.closed.icon)
+            switch state {
+            case .normal:
+                self.tableView.backgroundView = nil
+            case .empty:
+                self.tableView.backgroundView = HomeErrorView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+            case .loading:
+                self.tableView.backgroundView = HomeErrorView(title: "Loading", subtitle: "Fetching your courses", icon: Status.closed.icon) // change icon
+            case .error:
+                self.tableView.backgroundView = HomeErrorView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
+            }
         }
     }
 
@@ -194,10 +204,52 @@ extension HomeTableViewController {
         switch tableSections[indexPath.section] {
         case .available(let sections), .awaiting(let sections):
             let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
-            cell.delegate = self
             cell.configure(for: sections[indexPath.row])
+            cell.untrackSection = untrack(section:)
             return cell
         }
+    }
+
+}
+
+// MARK: Untrack section
+
+extension HomeTableViewController {
+
+    func untrack(section: Section) {
+        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+            switch result {
+            case .value(let response):
+                guard response.success, let indexPath = self.updateData(newSection: response.data) else { return }
+                DispatchQueue.main.async {
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
+
+    /// Updates the model and returns the index path in the table to update, if any.
+    private func updateData(newSection section: Section) -> IndexPath? {
+        for (i, tableSection) in tableSections.enumerated() {
+            switch tableSection {
+            case .available(var sections):
+                if let j = sections.firstIndex(where: { $0.catalogNum == section.catalogNum }) {
+                    sections.remove(at: j)
+                    tableSections[i] = .available(sections)
+                    return IndexPath(row: j, section: i)
+                }
+            case .awaiting(var sections):
+                if let j = sections.firstIndex(where: { $0.catalogNum == section.catalogNum }) {
+                    sections.remove(at: j)
+                    tableSections[i] = .awaiting(sections)
+                    return IndexPath(row: j, section: i)
+                }
+            }
+        }
+
+        return nil
     }
 
 }
@@ -302,18 +354,6 @@ extension HomeTableViewController {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
             self.navigationItem.titleView = titleLabel
-        }
-    }
-
-}
-
-extension HomeTableViewController: HomeTableViewCellDelegate {
-
-    func homeTableViewCellDidUnenroll() {
-        DispatchQueue.main.async {
-            self.tableSections = []
-            self.getAllTrackedCourses()
-            self.tableView.reloadData()
         }
     }
 
