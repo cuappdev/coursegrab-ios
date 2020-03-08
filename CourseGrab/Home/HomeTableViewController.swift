@@ -23,8 +23,6 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //getAllTrackedCourses()
-
         // Setup navigation bar
         let titleLabel = UILabel()
         titleLabel.text = "CourseGrab"
@@ -58,8 +56,8 @@ class HomeTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
             self.tableSections = []
-            self.getAllTrackedCourses()
             self.tableView.reloadData()
+            self.getAllTrackedCourses()
         }
     }
 
@@ -94,6 +92,7 @@ extension HomeTableViewController {
                 (0..<self.tableSections.count).forEach { newSections.insert($0) }
                 if newSections.count > 0 {
                     DispatchQueue.main.async {
+                        self.tableView.backgroundView = nil
                         self.tableView.insertSections(newSections, with: .automatic)
                     }
                 } else {
@@ -108,13 +107,13 @@ extension HomeTableViewController {
 
     private func showEmptyState() {
         DispatchQueue.main.async {
-            self.view = HomeErrorView(frame: .zero, title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+            self.tableView.backgroundView = HomeErrorView(frame: .zero, title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
         }
     }
 
     private func showErrorState() {
         DispatchQueue.main.async {
-            self.view = HomeErrorView(frame: .zero, title: "No Internet Connection", subtitle: "Tap the search icon to start adding courses", icon: Status.closed.icon)
+            self.tableView.backgroundView = HomeErrorView(frame: .zero, title: "No Internet Connection", subtitle: "Tap the search icon to start adding courses", icon: Status.closed.icon)
         }
     }
 

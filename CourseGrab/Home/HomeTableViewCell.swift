@@ -51,6 +51,7 @@ class HomeTableViewCell: UITableViewCell {
         enrollButton.setTitle("ENROLL", for: .normal)
         enrollButton.titleLabel?.font = ._12Medium
         enrollButton.backgroundColor = .black
+        enrollButton.on(.touchUpInside, enroll)
         containerView.addSubview(enrollButton)
         
         removeButton.layer.cornerRadius = 2
@@ -159,6 +160,12 @@ class HomeTableViewCell: UITableViewCell {
             case .error(let error):
                 print(error)
             }
+        }
+    }
+
+    private func enroll(_ button: UIButton) {
+        if let url = URL(string: "https://studentcenter.cornell.edu") {
+            UIApplication.shared.open(url)
         }
     }
     
