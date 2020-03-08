@@ -73,7 +73,7 @@ class SearchTableViewCell: UITableViewCell {
 
         if trackingSections.count > 0 {
             titleLabel.snp.remakeConstraints { make in
-                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
+                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
                 make.top.leading.equalToSuperview().inset(16)
                 make.bottom.equalTo(trackingStackView.snp.top).offset(-11)
             }
@@ -84,7 +84,7 @@ class SearchTableViewCell: UITableViewCell {
             }
         } else {
             titleLabel.snp.remakeConstraints { make in
-                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
+                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
                 make.top.bottom.leading.equalToSuperview().inset(16)
             }
 
@@ -104,6 +104,7 @@ private class TrackingSectionView: UIView {
     private let statusBadge = UIImageView()
     private let subtitleLabel = UILabel()
     private let trackingButton = UIButton(type: .roundedRect)
+    private var section: Section!
 
     init() {
         super.init(frame: .zero)
@@ -120,6 +121,7 @@ private class TrackingSectionView: UIView {
         trackingButton.setTitle("REMOVE", for: .normal)
         trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
         trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+        trackingButton.on(.touchUpInside, removeCourse)
         addSubview(trackingButton)
 
         statusBadge.contentMode = .scaleAspectFit
@@ -162,8 +164,22 @@ private class TrackingSectionView: UIView {
     }
 
     func configure(for section: Section) {
+        self.section = section
         statusBadge.image = section.status.icon
         subtitleLabel.text = section.section
     }
+
+    private func removeCourse(_ button: UIButton) {
+           NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+               switch result {
+               case .value(let response):
+                   print(response)
+                   //self.delegate?.homeTableViewCellDidUnenroll()
+                   break
+               case .error(let error):
+                   print(error)
+               }
+           }
+       }
 
 }
