@@ -6,6 +6,7 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
+import DifferenceKit
 import SPPermissions
 import Tactile
 import UIKit
@@ -60,12 +61,7 @@ class HomeTableViewController: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            self.tableSections = []
-            self.tableView.reloadData()
-            self.show(state: .loading)
-            self.getAllTrackedCourses()
-        }
+        getAllTrackedCourses()
     }
 
     func displayPermissionModal() {
@@ -88,42 +84,104 @@ extension HomeTableViewController {
             switch result {
             case .value(let response):
                 let available = response.data.filter { $0.status == .open }
-                if !available.isEmpty {
-                    self.tableSections.append(.available(available))
-                }
                 let awaiting = response.data.filter { $0.status != .open }
-                if !awaiting.isEmpty {
-                    self.tableSections.append(.awaiting(awaiting))
-                }
-                var newSections: IndexSet = []
-                (0..<self.tableSections.count).forEach { newSections.insert($0) }
-                if newSections.count > 0 {
+
+                if available.count == 0, let index = self.index(of: .available([])) {
                     DispatchQueue.main.async {
-                        self.show(state: .normal)
-                        self.tableView.backgroundView = nil
-                        self.tableView.insertSections(newSections, with: .fade)
+                        self.tableSections.remove(at: index)
+                        self.tableView.reloadData()
                     }
-                } else {
-                    self.show(state: .empty)
+                }
+
+                if awaiting.count == 0, let index = self.index(of: .awaiting([])) {
+                    DispatchQueue.main.async {
+                        self.tableSections.remove(at: index)
+                        self.tableView.reloadData()
+                    }
+                }
+
+                guard available.count > 0 || awaiting.count > 0 else {
+                    DispatchQueue.main.async {
+                        self.show(state: .empty)
+                    }
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    self.show(state: .normal)
+
+                    print("Find changesets")
+                    print(self.tableSections.count, "sections")
+
+                    let availableChangeSet = StagedChangeset(source: self.availableSections(), target: available)
+                    self.tableView.reload(using: availableChangeSet, with: .top) { data in
+                        if let index = self.index(of: .available([])) {
+                            self.tableSections[index] = .available(data)
+                        } else {
+                            self.tableSections.insert(.available(data), at: 0)
+                        }
+                        print("Reload")
+                    }
+
+                    let awaitingChangeSet = StagedChangeset(source: self.awaitingSections(), target: awaiting)
+                    self.tableView.reload(using: awaitingChangeSet, with: .top) { data in
+                        if let index = self.index(of: .awaiting([])) {
+                            self.tableSections[index] = .awaiting(data)
+                        } else {
+                            self.tableSections.append(.awaiting(data))
+                        }
+                        print("Reload")
+                    }
+
+                    print(self.tableSections.count, "sections")
                 }
             case .error:
-                self.show(state: .error)
+                DispatchQueue.main.async {
+                    self.show(state: .error)
+                }
             }
         }
     }
 
-    private func show(state: State) {
-        DispatchQueue.main.async {
-            switch state {
-            case .normal:
-                self.tableView.backgroundView = nil
-            case .empty:
-                self.tableView.backgroundView = HomeErrorView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
-            case .loading:
-                self.tableView.backgroundView = HomeErrorView(title: "Loading", subtitle: "Fetching your courses", icon: Status.closed.icon) // change icon
-            case .error:
-                self.tableView.backgroundView = HomeErrorView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
+    private func availableSections() -> [Section] {
+        if let index = index(of: .available([])),
+            case .available(let sections) = tableSections[index] {
+            return sections
+        }
+        return []
+    }
+
+    private func awaitingSections() -> [Section] {
+        if let index = index(of: .awaiting([])),
+            case .awaiting(let sections) = tableSections[index] {
+            return sections
+        }
+        return []
+    }
+
+    private func index(of tableSection: TableSection) -> Int? {
+        for (i, section) in tableSections.enumerated() {
+            switch (tableSection, section) {
+            case (.awaiting, .awaiting), (.available, .available):
+                return i
+            default:
+                continue
             }
+        }
+
+        return nil
+    }
+
+    private func show(state: State) {
+        switch state {
+        case .normal:
+            tableView.backgroundView = nil
+        case .empty:
+            tableView.backgroundView = HomeErrorView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+        case .loading:
+            tableView.backgroundView = HomeErrorView(title: "Loading", subtitle: "Fetching your courses", icon: Status.closed.icon) // change icon
+        case .error:
+            tableView.backgroundView = HomeErrorView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
         }
     }
 
