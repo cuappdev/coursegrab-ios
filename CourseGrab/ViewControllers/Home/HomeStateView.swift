@@ -1,5 +1,5 @@
 //
-//  HomeErrorView.swift
+//  HomeStateView.swift
 //  CourseGrab
 //
 //  Created by Reade Plunkett on 3/4/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeErrorView: UIView {
+class HomeStateView: UIView {
 
     private let imageView = UIImageView()
     private let subtitleLabel = UILabel()
