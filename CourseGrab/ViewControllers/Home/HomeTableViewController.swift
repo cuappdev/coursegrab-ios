@@ -51,6 +51,7 @@ class HomeTableViewController: UITableViewController {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 0)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HomeTableViewHeader.self, forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
@@ -221,7 +222,7 @@ extension HomeTableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
-        headerView.configure(tableSection: tableSections[section], section: section)
+        headerView.configure(tableSection: tableSections[section])
         return headerView
     }
 
