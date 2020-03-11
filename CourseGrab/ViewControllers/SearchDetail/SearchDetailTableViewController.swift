@@ -60,7 +60,7 @@ class SearchDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.card.rawValue) as! SearchDetailCardTableViewCell
-            cell.configure(title: course.title, subtitle: "KEVIN CHAN") // TODO: Get PROF name
+            cell.configure(title: course.title, subtitle: course.instructors.joined(separator: ", "))
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.section.rawValue) as! SearchDetailTableViewCell

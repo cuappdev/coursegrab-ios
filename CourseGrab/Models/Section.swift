@@ -49,6 +49,7 @@ struct Section: Codable {
 
     let catalogNum: Int
     let courseNum: Int
+    let instructors: [String]
     let isTracking: Bool
     let section: String
     let status: Status

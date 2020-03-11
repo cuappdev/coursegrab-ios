@@ -20,16 +20,17 @@ class NotificationModalViewController: UIViewController {
     private let sectionLabel = UILabel()
     private let studentCenterButton = UIButton(type: .roundedRect)
 
-    private let section = Section(
-        catalogNum: 51,
-        courseNum: 29424,
-        isTracking: true,
-        section: "DIS 005 / TR 1:25PM",
-        status: .open,
-        subjectCode: "CS",
-        title: "CS 2112: Data Structures and Algorithms, a Very Long Title"
-    )
+    private let section: Section
 
+    init(section: Section) {
+        self.section = section
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

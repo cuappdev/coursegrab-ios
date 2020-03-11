@@ -33,6 +33,7 @@ class SearchDetailCardTableViewCell: UITableViewCell {
 
         subtitleLabel.font = ._14Medium
         subtitleLabel.textColor = .courseGrabGray
+        subtitleLabel.numberOfLines = 0
         containerView.addSubview(subtitleLabel)
 
         titleLabel.font = ._16Semibold
