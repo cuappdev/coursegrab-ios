@@ -13,7 +13,7 @@ import UIKit
 class SearchTableViewController: UITableViewController {
 
     private var courses: [Course] = []
-    private var lastSearchTimestamp: Date?
+    private var lastSearchTimestamp = Date()
     private var popRecognizer: InteractivePopRecognizer?
     private let searchCellReuseId = "searchCellReuseId"
     private let searchHeaderReuseId = "searchHeaderReuseId"
@@ -66,17 +66,17 @@ extension SearchTableViewController {
                 switch result {
                 case .value(let response):
                     DispatchQueue.main.async {
-                        if !response.data.isEmpty && (response.timestamp >= self.lastSearchTimestamp ?? Date(timeIntervalSince1970: 0)) {
+                        if !response.data.isEmpty && (response.timestamp >= self.lastSearchTimestamp) {
                             self.lastSearchTimestamp = response.timestamp
                             self.courses = response.data
                             self.tableView.reloadData()
-                        } else { return }
+                        }
                     }
                 case .error(let error):
                     print(error)
                 }
             }
-        } else { return }
+        }
     }
 
     private func textDidChange(_ textField: UITextField) {
