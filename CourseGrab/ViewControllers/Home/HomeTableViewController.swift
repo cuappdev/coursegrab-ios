@@ -165,7 +165,7 @@ extension HomeTableViewController {
         return []
     }
 
-    /// Gets the inex of a table section or `nil` if it is not in the local model.
+    /// Gets the index of a table section or `nil` if it is not in the local model.
     private func index(of tableSection: TableSection) -> Int? {
         for (i, section) in tableSections.enumerated() {
             switch (tableSection, section) {
@@ -186,7 +186,7 @@ extension HomeTableViewController {
         case .empty:
             tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
         case .loading:
-            tableView.backgroundView = HomeStateView(title: "Loading", subtitle: "Fetching your courses", icon: UIImage()) // change icon
+            tableView.backgroundView = HomeStateView(title: "Loading", subtitle: "Fetching your courses", icon: UIImage())
         case .error:
             tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
         }
