@@ -17,6 +17,7 @@ struct Response<T: Codable>: Codable {
 }
 
 extension Response {
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let rawDate = try values.decode(TimeInterval.self, forKey: .timestamp)
@@ -24,4 +25,5 @@ extension Response {
         success = try values.decode(Bool.self, forKey: .success)
         data = try values.decode(T.self, forKey: .data)
     }
+    
 }
