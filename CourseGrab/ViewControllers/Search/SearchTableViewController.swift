@@ -12,11 +12,13 @@ import UIKit
 
 class SearchTableViewController: UITableViewController {
 
+    private var courses: [Course] = []
+    private var lastSearchTimestamp: Int?
     private var popRecognizer: InteractivePopRecognizer?
     private let searchCellReuseId = "searchCellReuseId"
     private let searchHeaderReuseId = "searchHeaderReuseId"
-    private var courses: [Course] = []
     private let textField = UITextField()
+    private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +58,29 @@ class SearchTableViewController: UITableViewController {
 // MARK: - Networking
 
 extension SearchTableViewController {
+    
+    @objc private func getCourses(timer: Timer) {
+        if let userInfo = timer.userInfo as? [String: String],
+            let searchText = userInfo["searchText"] {
+            NetworkManager.shared.searchCourse(query: searchText).observe { result in
+                switch result {
+                case .value(let response):
+                    DispatchQueue.main.async {
+                        if !response.data.isEmpty && (response.timestamp >= self.lastSearchTimestamp ?? 0) {
+                            self.lastSearchTimestamp = response.timestamp
+                            self.courses = response.data
+                            self.tableView.reloadData()
+                        } else { return }
+                    }
+                case .error(let error):
+                    print(error)
+                }
+            }
+        } else { return }
+    }
 
     private func textDidChange(_ textField: UITextField) {
-        // TODO: Ignore old requests and skip every 0.2 seconds
-        guard let text = textField.text, text.count > 2 else {
+        guard let searchText = textField.text, searchText.count > 2 else {
             if courses.count > 0 {
                 DispatchQueue.main.async {
                     self.courses.removeAll()
@@ -69,19 +90,14 @@ extension SearchTableViewController {
             return
         }
 
-        NetworkManager.shared.searchCourse(query: text).observe { result in
-            switch result {
-            case .value(let response):
-                DispatchQueue.main.async {
-                    if !response.data.isEmpty {
-                        self.courses = response.data
-                        self.tableView.reloadData()
-                    }
-                }
-            case .error(let error):
-                print(error)
-            }
-        }
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(
+            timeInterval: 0.2,
+            target: self,
+            selector: #selector(getCourses),
+            userInfo: ["searchText": searchText],
+            repeats: false
+        )
     }
 
 }

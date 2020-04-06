@@ -12,5 +12,6 @@ struct Response<T: Codable>: Codable {
 
     var data: T
     var success: Bool
-
+    var timestamp: Int
+    
 }
