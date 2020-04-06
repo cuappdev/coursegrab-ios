@@ -15,6 +15,16 @@ class SearchTableViewCell: UITableViewCell {
     private let titleLabel = UILabel()
     private let trackingStackView = UIStackView()
 
+    var untrackSection: ((Section) -> Void)? {
+        didSet(handler) {
+            for subview in trackingStackView.subviews {
+                if let sectionView = subview as? TrackingSectionView {
+                    sectionView.untrackSection = handler
+                }
+            }
+        }
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -73,7 +83,7 @@ class SearchTableViewCell: UITableViewCell {
 
         if trackingSections.count > 0 {
             titleLabel.snp.remakeConstraints { make in
-                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
+                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
                 make.top.leading.equalToSuperview().inset(16)
                 make.bottom.equalTo(trackingStackView.snp.top).offset(-11)
             }
@@ -84,7 +94,7 @@ class SearchTableViewCell: UITableViewCell {
             }
         } else {
             titleLabel.snp.remakeConstraints { make in
-                make.trailing.equalTo(arrowImageView.snp.leading).inset(8)
+                make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
                 make.top.bottom.leading.equalToSuperview().inset(16)
             }
 
@@ -104,6 +114,9 @@ private class TrackingSectionView: UIView {
     private let statusBadge = UIImageView()
     private let subtitleLabel = UILabel()
     private let trackingButton = UIButton(type: .roundedRect)
+    private var section: Section?
+
+    var untrackSection: ((Section) -> Void)?
 
     init() {
         super.init(frame: .zero)
@@ -120,6 +133,7 @@ private class TrackingSectionView: UIView {
         trackingButton.setTitle("REMOVE", for: .normal)
         trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
         trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+        trackingButton.on(.touchUpInside, removeCourse)
         addSubview(trackingButton)
 
         statusBadge.contentMode = .scaleAspectFit
@@ -162,8 +176,14 @@ private class TrackingSectionView: UIView {
     }
 
     func configure(for section: Section) {
+        self.section = section
         statusBadge.image = section.status.icon
         subtitleLabel.text = section.section
+    }
+
+    private func removeCourse(_ button: UIButton) {
+        guard let section = section else { return }
+        untrackSection?(section)
     }
 
 }

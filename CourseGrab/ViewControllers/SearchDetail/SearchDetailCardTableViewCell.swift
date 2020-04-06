@@ -21,6 +21,7 @@ class SearchDetailCardTableViewCell: UITableViewCell {
 
         selectionStyle = .none
 
+        containerView.clipsToBounds = false
         containerView.layer.cornerRadius = 4
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.courseGrabBorder.cgColor

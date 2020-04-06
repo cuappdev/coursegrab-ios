@@ -6,12 +6,19 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
+import DifferenceKit
 import SPPermissions
 import Tactile
 import UIKit
 
 class HomeTableViewController: UITableViewController {
 
+    /// Describes the state of the entire view controller
+    private enum State {
+        case normal, loading, empty, error
+    }
+
+    /// A section in the table
     enum TableSection {
         case available([Section]), awaiting([Section])
     }
@@ -22,8 +29,6 @@ class HomeTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        getAllTrackedCourses()
 
         // Setup navigation bar
         let titleLabel = UILabel()
@@ -46,6 +51,7 @@ class HomeTableViewController: UITableViewController {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 0)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HomeTableViewHeader.self, forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
@@ -54,16 +60,14 @@ class HomeTableViewController: UITableViewController {
             displayPermissionModal()
         }
 
-        // TODO: Set the view on error after networking is merged
-
-        // No Internet
-//        view = HomeErrorView(frame: .zero, title: "No Internet Connection", subtitle: "Tap the search icon to start adding courses", icon: Status.closed.icon)
-
-        // No Tracked Courses
-//        view = HomeErrorView(frame: .zero, title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+        show(state: .loading)
     }
 
-    func displayPermissionModal() {
+    override func viewDidAppear(_ animated: Bool) {
+        getAllTrackedCourses()
+    }
+
+    private func displayPermissionModal() {
         let controller = SPPermissions.dialog([.notification])
         controller.titleText = "Get In Your Courses"
         controller.footerText = "Push notifications enhance the CourseGrab experience."
@@ -82,29 +86,110 @@ extension HomeTableViewController {
         NetworkManager.shared.getAllTrackedCourses().observe { result in
             switch result {
             case .value(let response):
+                // Section identifiers
+                let availableModel = "available"
+                let awaitingModel = "awaiting"
+
+                // Construct source array
+                let currentAvailable = self.availableSections()
+                let currentAwaiting = self.awaitingSections()
+                var source: [ArraySection<String, Section>] = []
+                if currentAvailable.count > 0 {
+                    source.append(ArraySection(model: availableModel, elements: currentAvailable))
+                }
+                if currentAwaiting.count > 0 {
+                    source.append(ArraySection(model: awaitingModel, elements: currentAwaiting))
+                }
+
+                // Construct target array
                 let available = response.data.filter { $0.status == .open }
-                if !available.isEmpty {
-                    self.tableSections.append(.available(available))
-                }
                 let awaiting = response.data.filter { $0.status != .open }
-                if !awaiting.isEmpty {
-                    self.tableSections.append(.awaiting(awaiting))
+                var target: [ArraySection<String, Section>] = []
+                if available.count > 0 {
+                    target.append(ArraySection(model: availableModel, elements: available))
                 }
-                var newSections: IndexSet = []
-                (0..<self.tableSections.count).forEach { newSections.insert($0) }
-                if newSections.count > 0 {
-                    self.tableView.insertSections(newSections, with: .automatic)
-                } else {
-                    self.showEmptyState()
+                if awaiting.count > 0 {
+                    target.append(ArraySection(model: awaitingModel, elements: awaiting))
                 }
-            case .error(let error):
-                print(error)
+
+                // Get change set
+                let changeSet = StagedChangeset(source: source, target: target)
+
+                // Apply updates to UI
+                DispatchQueue.main.async {
+                    // Update state if needed
+                    if available.count == 0 && awaiting.count == 0 {
+                        self.show(state: .empty)
+                    } else {
+                        self.show(state: .normal)
+                    }
+
+                    // Tell DifferenceKit to handle reloading the table
+                    self.tableView.reload(using: changeSet, with: .fade) { data in
+                        var newTableSections: [TableSection] = []
+                        // Add the available table section only if there are available sections
+                        if let newAvailable = data.first(where: { $0.model == availableModel })?.elements, newAvailable.count > 0 {
+                            newTableSections.append(.available(newAvailable))
+                        }
+                        // Add the awaiting table section only if there are awaiting sections
+                        if let newAwaiting = data.first(where: { $0.model == awaitingModel })?.elements, newAwaiting.count > 0 {
+                            newTableSections.append(.awaiting(newAwaiting))
+                        }
+                        // Update model
+                        self.tableSections = newTableSections
+                    }
+                }
+            case .error:
+                DispatchQueue.main.async {
+                    self.show(state: .error)
+                }
             }
         }
     }
 
-    private func showEmptyState() {
-        print("Empty!")
+    /// Gets the available sections currently stored locally in the model
+    private func availableSections() -> [Section] {
+        if let index = index(of: .available([])),
+            case .available(let sections) = tableSections[index] {
+            return sections
+        }
+        return []
+    }
+
+    /// Gets the awaiting sections currently stored locally in the model
+    private func awaitingSections() -> [Section] {
+        if let index = index(of: .awaiting([])),
+            case .awaiting(let sections) = tableSections[index] {
+            return sections
+        }
+        return []
+    }
+
+    /// Gets the index of a table section or `nil` if it is not in the local model.
+    private func index(of tableSection: TableSection) -> Int? {
+        for (i, section) in tableSections.enumerated() {
+            switch (tableSection, section) {
+            case (.awaiting, .awaiting), (.available, .available):
+                return i
+            default:
+                continue
+            }
+        }
+        return nil
+    }
+
+    /// Updates the table to reflect the given state.
+    private func show(state: State) {
+        switch state {
+        case .normal:
+            tableView.backgroundView = nil
+        case .empty:
+            tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+        case .loading:
+            tableView.backgroundView = HomeStateView(title: "Loading", subtitle: "Fetching your courses", icon: UIImage())
+        case .error:
+            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
+        }
     }
 
 }
@@ -125,6 +210,107 @@ extension HomeTableViewController: SPPermissionsDataSource {
         return cell
     }
     
+}
+
+// MARK: - UITableViewDataSource
+
+extension HomeTableViewController {
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return tableSections.count
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
+        headerView.configure(for: tableSections[section])
+        return headerView
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableSections[section] {
+        case .available(let sections), .awaiting(let sections):
+            return sections.count
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableSections[indexPath.section] {
+        case .available(let sections), .awaiting(let sections):
+            let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
+            cell.configure(for: sections[indexPath.row])
+            cell.untrackSection = untrack(section:)
+            return cell
+        }
+    }
+
+}
+
+// MARK: Untrack section
+
+extension HomeTableViewController {
+
+    /// Describes a change to the model that occurs during a call to `removeSectionFromModel`.
+    private enum UpdateDataChange {
+        case removedSection(Int), removedRow(IndexPath), none
+    }
+
+    private func untrack(section: Section) {
+        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+            switch result {
+            case .value(let response):
+                guard response.success else { return }
+                let change = self.removeSectionFromModel(response.data)
+                DispatchQueue.main.async {
+                    switch change {
+                    case .removedRow(let indexPath):
+                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    case .removedSection(let section):
+                        self.tableView.deleteSections([section], with: .automatic)
+                        if self.tableSections.count == 0 {
+                            self.show(state: .empty)
+                        }
+                    case .none:
+                        break
+                    }
+                }
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
+
+    /// Removes a section from the model and returns the change, if any.
+    private func removeSectionFromModel(_ section: Section) -> UpdateDataChange {
+        for (i, tableSection) in tableSections.enumerated() {
+            switch tableSection {
+            case .available(var sections):
+                if let j = sections.firstIndex(where: { $0.catalogNum == section.catalogNum }) {
+                    sections.remove(at: j)
+                    if sections.count > 0 {
+                        tableSections[i] = .available(sections)
+                        return .removedRow(IndexPath(row: j, section: i))
+                    } else {
+                        tableSections.remove(at: i)
+                        return .removedSection(i)
+                    }
+                }
+            case .awaiting(var sections):
+                if let j = sections.firstIndex(where: { $0.catalogNum == section.catalogNum }) {
+                    sections.remove(at: j)
+                    if sections.count > 0 {
+                        tableSections[i] = .awaiting(sections)
+                        return .removedRow(IndexPath(row: j, section: i))
+                    } else {
+                        tableSections.remove(at: i)
+                        return .removedSection(i)
+                    }
+                }
+            }
+        }
+
+        return .none
+    }
+
 }
 
 // MARK: - SPPermissionsDelegate
@@ -154,38 +340,6 @@ extension HomeTableViewController: SPPermissionsDelegate {
         } else {
             // If returned nil, alert will not show.
             return nil
-        }
-    }
-    
-}
-
-// MARK: - UITableViewDataSource
-
-extension HomeTableViewController {
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableSections.count
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
-        headerView.configure(tableSection: tableSections[section], section: section)
-        return headerView
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableSections[section] {
-        case .available(let sections), .awaiting(let sections):
-            return sections.count
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableSections[indexPath.section] {
-        case .available(let sections), .awaiting(let sections):
-            let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
-            cell.configure(for: sections[indexPath.row])
-            return cell
         }
     }
 

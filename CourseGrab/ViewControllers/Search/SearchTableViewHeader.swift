@@ -20,10 +20,10 @@ class SearchTableViewHeader: UITableViewHeaderFooterView {
         titleLabel.font = ._20Semibold
         titleLabel.textColor = .black
         contentView.addSubview(titleLabel)
-        
+
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(6)
+            make.bottom.equalToSuperview().inset(4)
             make.top.equalToSuperview().inset(24)
         }
     }

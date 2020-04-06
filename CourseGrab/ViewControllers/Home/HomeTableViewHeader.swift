@@ -20,13 +20,19 @@ class HomeTableViewHeader: UITableViewHeaderFooterView {
         
         titleLabel.font = ._20Semibold
         contentView.addSubview(titleLabel)
+
+        titleLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(6)
+            make.top.equalToSuperview().inset(6)
+        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(tableSection: HomeTableViewController.TableSection, section: Int) {
+    func configure(for tableSection: HomeTableViewController.TableSection) {
         switch tableSection {
         case .available(let sections):
             titleLabel.text = "\(sections.count) Available"
@@ -34,12 +40,6 @@ class HomeTableViewHeader: UITableViewHeaderFooterView {
         case .awaiting(let sections):
             titleLabel.text = "\(sections.count) Awaiting"
             titleLabel.textColor = .black
-        }
-        let topPadding = section == 0 ? 24 : 6
-        titleLabel.snp.remakeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(6)
-            make.top.equalToSuperview().inset(topPadding)
         }
     }
 

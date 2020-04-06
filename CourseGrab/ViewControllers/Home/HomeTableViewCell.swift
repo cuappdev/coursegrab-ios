@@ -11,7 +11,9 @@ import SnapKit
 import UIKit
 
 class HomeTableViewCell: UITableViewCell {
-    
+
+    private var section: Section?
+
     private let containerView = UIView()
     private let courseLabel = UILabel()
     private let enrollButton = UIButton(type: .roundedRect)
@@ -19,6 +21,8 @@ class HomeTableViewCell: UITableViewCell {
     private let sectionLabel = UILabel()
     private let statusBadge = UIImageView()
     private let titleLabel = UILabel()
+
+    var untrackSection: ((Section) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,6 +49,7 @@ class HomeTableViewCell: UITableViewCell {
         enrollButton.setTitle("ENROLL", for: .normal)
         enrollButton.titleLabel?.font = ._12Medium
         enrollButton.backgroundColor = .black
+        enrollButton.on(.touchUpInside, enroll)
         containerView.addSubview(enrollButton)
         
         removeButton.layer.cornerRadius = 2
@@ -53,6 +58,7 @@ class HomeTableViewCell: UITableViewCell {
         removeButton.titleLabel?.font = ._12Medium
         removeButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         removeButton.layer.borderWidth = 1
+        removeButton.on(.touchUpInside, removeSection)
         containerView.addSubview(removeButton)
         
         sectionLabel.font = ._14Medium
@@ -117,6 +123,7 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func configure(for section: Section) {
+        self.section = section
         courseLabel.text = String(section.courseNum)
         enrollButton.isHidden = section.status != .open
         sectionLabel.text = section.section
@@ -138,6 +145,17 @@ class HomeTableViewCell: UITableViewCell {
                 make.height.equalTo(24)
                 make.trailing.bottom.equalToSuperview().inset(16)
             }
+        }
+    }
+
+    private func removeSection(_ button: UIButton) {
+        guard let section = section else { return }
+        untrackSection?(section)
+    }
+
+    private func enroll(_ button: UIButton) {
+        if let url = URL(string: "https://studentcenter.cornell.edu") {
+            UIApplication.shared.open(url)
         }
     }
     

@@ -10,9 +10,12 @@ import UIKit
 
 class SearchDetailTableViewCell: UITableViewCell {
 
+    private var section: Section?
     private let statusView = UIView()
     private let titleLabel = UILabel()
     private let trackingButton = UIButton(type: .roundedRect)
+
+    var updateTracking: ((Section, Bool) -> Void)?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,6 +58,8 @@ class SearchDetailTableViewCell: UITableViewCell {
     // MARK: - Public configure
 
     func configure(section: Section) {
+        self.section = section
+
         titleLabel.text = section.section
         setupStatusView(status: section.status)
 
@@ -62,10 +67,12 @@ class SearchDetailTableViewCell: UITableViewCell {
             trackingButton.setTitle("REMOVE", for: .normal)
             trackingButton.setTitleColor(.courseGrabRuby, for: .normal)
             trackingButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
+            trackingButton.on(.touchUpInside, untrackCourse)
         } else {
             trackingButton.setTitle("TRACK", for: .normal)
             trackingButton.setTitleColor(.courseGrabBlack, for: .normal)
             trackingButton.layer.borderColor = UIColor.courseGrabBlack.cgColor
+            trackingButton.on(.touchUpInside, trackCourse)
         }
     }
 
@@ -90,6 +97,16 @@ class SearchDetailTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
         }
+    }
+
+    private func trackCourse(_ button: UIButton) {
+        guard let section = section else { return }
+        updateTracking?(section, true)
+    }
+
+    private func untrackCourse(_ button: UIButton) {
+        guard let section = section else { return }
+        updateTracking?(section, false)
     }
 
 }
