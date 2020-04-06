@@ -32,7 +32,7 @@ class HomeTableViewHeader: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(tableSection: HomeTableViewController.TableSection) {
+    func configure(for tableSection: HomeTableViewController.TableSection) {
         switch tableSection {
         case .available(let sections):
             titleLabel.text = "\(sections.count) Available"

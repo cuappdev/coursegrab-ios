@@ -222,7 +222,7 @@ extension HomeTableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
-        headerView.configure(tableSection: tableSections[section])
+        headerView.configure(for: tableSections[section])
         return headerView
     }
 
