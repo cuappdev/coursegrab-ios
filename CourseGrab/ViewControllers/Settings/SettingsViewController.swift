@@ -75,6 +75,7 @@ class SettingsViewController: UIViewController {
         mobileLabel.font = ._16Semibold
         mobileStackView.addArrangedSubview(mobileLabel)
         let mobileSwitch = UISwitch()
+        mobileSwitch.isOn = UIApplication.shared.isRegisteredForRemoteNotifications
         mobileSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
         mobileStackView.addArrangedSubview(mobileSwitch)
         
@@ -100,7 +101,7 @@ class SettingsViewController: UIViewController {
         let accountLabel = UILabel()
         accountLabel.font = ._16Semibold
         accountLabel.textColor = .courseGrabDarkGray
-        accountLabel.text = "dov3@cornell.edu" // placeholder
+        accountLabel.text = User.current?.email
         accountStackView.addArrangedSubview(accountLabel)
         
         let signOutButton = UIButton(type: .system)

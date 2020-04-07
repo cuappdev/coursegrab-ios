@@ -28,6 +28,11 @@ class NetworkManager {
         return validateToken()
             .chained { self.networking(Endpoint.getAllTrackedCourses()).decode() }
     }
+    
+    func sendDeviceToken(deviceToken: String) -> Future<DeviceTokenResponse> {
+        return validateToken()
+            .chained { self.networking(Endpoint.sendDeviceToken(with: deviceToken)).decode() }
+    }
 
     func trackCourse(catalogNum: Int) -> Future<Response<Section>> {
         return validateToken()

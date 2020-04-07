@@ -53,6 +53,11 @@ extension Endpoint {
     static func getAllTrackedCourses() -> Endpoint {
         return Endpoint(path: "/users/tracking/", headers: standardHeaders)
     }
+    
+    static func sendDeviceToken(with deviceToken: String) -> Endpoint {
+        let body = DeviceTokenBody(deviceToken: deviceToken)
+        return Endpoint(path: "/users/device-token/", headers: standardHeaders, body: body)
+    }
 
     static func trackCourse(catalogNum: Int) -> Endpoint {
         let body = CoursePostBody(courseId: catalogNum)

@@ -17,6 +17,13 @@ struct SessionBody: Codable {
     
 }
 
+struct DeviceTokenBody: Codable {
+    
+    let isIos = true
+    let deviceToken: String
+    
+}
+
 struct CoursePostBody: Codable {
     
     let courseId: Int
