@@ -33,7 +33,7 @@ class SearchTableViewHeader: UITableViewHeaderFooterView {
     }
 
     func configure(numResults: Int) {
-        titleLabel.text = "\(numResults) Results"
+        titleLabel.text = "\(numResults) Result\(numResults == 1 ? "" : "s")"
     }
     
 }
