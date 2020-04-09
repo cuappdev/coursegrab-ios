@@ -119,8 +119,8 @@
 			children = (
 				0643489623DE1519007F5F9F /* CourseGrab */,
 				0643489523DE1519007F5F9F /* Products */,
-				D0E2779A889C5714B178D99B /* Pods */,
 				7B5D621EDA87C295389BD920 /* Frameworks */,
+				D0E2779A889C5714B178D99B /* Pods */,
 				C8E8A1A22409964500A0D4D8 /* Recovered References */,
 			);
 			sourceTree = "<group>";

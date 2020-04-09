@@ -66,7 +66,7 @@ extension SearchTableViewController {
                 switch result {
                 case .value(let response):
                     DispatchQueue.main.async {
-                        if !response.data.isEmpty && (response.timestamp >= self.lastSearchTimestamp) {
+                        if response.timestamp >= self.lastSearchTimestamp {
                             self.lastSearchTimestamp = response.timestamp
                             self.courses = response.data
                             self.tableView.reloadData()
