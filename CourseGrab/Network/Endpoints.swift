@@ -54,9 +54,9 @@ extension Endpoint {
         return Endpoint(path: "/users/tracking/", headers: standardHeaders)
     }
     
-    static func sendDeviceToken(with deviceToken: String) -> Endpoint {
-        let body = DeviceTokenBody(deviceToken: deviceToken)
-        return Endpoint(path: "/users/device-token/", headers: standardHeaders, body: body)
+    static func searchCourse(query: String) -> Endpoint {
+        let body = QueryBody(query: query)
+        return Endpoint(path: "/courses/search/", headers: standardHeaders, body: body)
     }
 
     static func trackCourse(catalogNum: Int) -> Endpoint {
@@ -69,9 +69,9 @@ extension Endpoint {
         return Endpoint(path: "/sections/untrack/", headers: standardHeaders, body: body)
     }
     
-    static func searchCourse(query: String) -> Endpoint {
-        let body = QueryBody(query: query)
-        return Endpoint(path: "/courses/search/", headers: standardHeaders, body: body)
+    static func sendDeviceToken(with deviceToken: String) -> Endpoint {
+        let body = DeviceTokenBody(deviceToken: deviceToken)
+        return Endpoint(path: "/users/device-token/", headers: standardHeaders, body: body)
     }
 
 }

@@ -29,9 +29,9 @@ class NetworkManager {
             .chained { self.networking(Endpoint.getAllTrackedCourses()).decode() }
     }
     
-    func sendDeviceToken(deviceToken: String) -> Future<DeviceTokenResponse> {
+    func searchCourse(query: String) -> Future<Response<[Course]>> {
         return validateToken()
-            .chained { self.networking(Endpoint.sendDeviceToken(with: deviceToken)).decode() }
+            .chained { self.networking(Endpoint.searchCourse(query: query)).decode() }
     }
 
     func trackCourse(catalogNum: Int) -> Future<Response<Section>> {
@@ -43,10 +43,18 @@ class NetworkManager {
         return validateToken()
             .chained { self.networking(Endpoint.untrackCourse(catalogNum: catalogNum)).decode() }
     }
-
-    func searchCourse(query: String) -> Future<Response<[Course]>> {
+    
+    func sendDeviceToken(deviceToken: String) -> Future<DeviceTokenResponse> {
         return validateToken()
-            .chained { self.networking(Endpoint.searchCourse(query: query)).decode() }
+            .chained { self.networking(Endpoint.sendDeviceToken(with: deviceToken)).decode() }
+    }
+    
+    func enableNotifications(enabled: Bool) -> Future<Bool> {
+        let promise = Promise<Bool>()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+            promise.resolve(with: true)
+        }
+        return promise
     }
 
     private func validateToken() -> Future<Void> {
