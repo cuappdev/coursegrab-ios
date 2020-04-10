@@ -19,6 +19,7 @@ extension UIFont {
     static let _14Medium = UIFont.systemFont(ofSize: 14, weight: .medium)
     static let _18Medium = UIFont.systemFont(ofSize: 14, weight: .medium)
     static let _20Medium = UIFont.systemFont(ofSize: 20, weight: .medium)
+    static let _27Medium = UIFont.systemFont(ofSize: 27, weight: .medium)
 
     static let _12Semibold = UIFont.systemFont(ofSize: 12, weight: .semibold)
     static let _14Semibold = UIFont.systemFont(ofSize: 14, weight: .semibold)
@@ -32,6 +33,7 @@ extension UIFont {
     static let _24Bold = UIFont.boldSystemFont(ofSize: 24)
     static let _30Bold = UIFont.boldSystemFont(ofSize: 30)
     static let _36Bold = UIFont.boldSystemFont(ofSize: 36)
+    static let _40Bold = UIFont.boldSystemFont(ofSize: 40)
     static let _44Bold = UIFont.boldSystemFont(ofSize: 44)
     static let _60Bold = UIFont.boldSystemFont(ofSize: 60)
 
