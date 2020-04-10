@@ -73,5 +73,11 @@ extension Endpoint {
         let body = DeviceTokenBody(deviceToken: deviceToken)
         return Endpoint(path: "/users/device-token/", headers: standardHeaders, body: body)
     }
+    
+    static func enableNotifications(enabled: Bool) -> Endpoint {
+        let body = EnableNotificationsBody(enabled: enabled)
+        assertionFailure("We don't have the endpoint yet!") // delete this line once we have a path
+        return Endpoint(path: "", headers: standardHeaders, body: body)
+    }
 
 }

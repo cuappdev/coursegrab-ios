@@ -50,11 +50,8 @@ class NetworkManager {
     }
     
     func enableNotifications(enabled: Bool) -> Future<Bool> {
-        let promise = Promise<Bool>()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-            promise.resolve(with: true)
-        }
-        return promise
+        return validateToken()
+            .chained { self.networking(Endpoint.enableNotifications(enabled: enabled)).decode() }
     }
 
     private func validateToken() -> Future<Void> {
