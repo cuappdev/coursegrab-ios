@@ -85,7 +85,6 @@ class SearchTableViewCell: UITableViewCell {
             titleLabel.snp.remakeConstraints { make in
                 make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
                 make.top.leading.equalToSuperview().inset(16)
-                make.bottom.equalTo(trackingStackView.snp.top).offset(-11)
             }
 
             trackingStackView.snp.remakeConstraints { make in

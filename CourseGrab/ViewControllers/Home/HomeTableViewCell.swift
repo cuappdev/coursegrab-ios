@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SkeletonView
 import SnapKit
 import UIKit
 
@@ -42,6 +43,7 @@ class HomeTableViewCell: UITableViewCell {
         
         courseLabel.font = ._14Medium
         courseLabel.textColor = .courseGrabGray
+        courseLabel.isSkeletonable = true
         containerView.addSubview(courseLabel)
         
         enrollButton.layer.cornerRadius = 2
@@ -59,18 +61,26 @@ class HomeTableViewCell: UITableViewCell {
         removeButton.layer.borderColor = UIColor.courseGrabRuby.cgColor
         removeButton.layer.borderWidth = 1
         removeButton.on(.touchUpInside, removeSection)
+        removeButton.isSkeletonable = true
         containerView.addSubview(removeButton)
+        removeButton.showAnimatedSkeleton()
         
         sectionLabel.font = ._14Medium
         sectionLabel.textColor = .courseGrabGray
         containerView.addSubview(sectionLabel)
         
         statusBadge.contentMode = .scaleAspectFit
+        statusBadge.isSkeletonable = true
+        statusBadge.image = UIImage()
         containerView.addSubview(statusBadge)
+        statusBadge.showAnimatedSkeleton()
         
         titleLabel.font = ._16Semibold
         titleLabel.numberOfLines = 0
+        titleLabel.text = " "
+        titleLabel.isSkeletonable = true
         containerView.addSubview(titleLabel)
+        titleLabel.showAnimatedSkeleton()
         
         // Setup constraints
 
@@ -123,29 +133,29 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func configure(for section: Section) {
-        self.section = section
-        courseLabel.text = String(section.courseNum)
-        enrollButton.isHidden = section.status != .open
-        sectionLabel.text = section.section
-        statusBadge.image = section.status.icon
-        titleLabel.text = section.title
-
-        if section.status == .open {
-            removeButton.snp.remakeConstraints { make in
-                make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-                make.leading.equalTo(16)
-                make.height.equalTo(24)
-                make.trailing.equalTo(containerView.snp.centerX).inset(9)
-                make.bottom.equalToSuperview().inset(16)
-            }
-        } else {
-            removeButton.snp.remakeConstraints { make in
-                make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-                make.leading.equalTo(16)
-                make.height.equalTo(24)
-                make.trailing.bottom.equalToSuperview().inset(16)
-            }
-        }
+//        self.section = section
+//        //courseLabel.text = String(section.courseNum)
+//        enrollButton.isHidden = section.status != .open
+//        //sectionLabel.text = section.section
+//        statusBadge.image = section.status.icon
+//        titleLabel.text = section.title
+//
+//        if section.status == .open {
+//            removeButton.snp.remakeConstraints { make in
+//                make.top.equalTo(sectionLabel.snp.bottom).offset(12)
+//                make.leading.equalTo(16)
+//                make.height.equalTo(24)
+//                make.trailing.equalTo(containerView.snp.centerX).inset(9)
+//                make.bottom.equalToSuperview().inset(16)
+//            }
+//        } else {
+//            removeButton.snp.remakeConstraints { make in
+//                make.top.equalTo(sectionLabel.snp.bottom).offset(12)
+//                make.leading.equalTo(16)
+//                make.height.equalTo(24)
+//                make.trailing.bottom.equalToSuperview().inset(16)
+//            }
+//        }
     }
 
     private func removeSection(_ button: UIButton) {

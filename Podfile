@@ -9,6 +9,7 @@ target 'CourseGrab' do
   pod 'Firebase/Auth'
   pod 'FutureNova', :git => 'https://github.com/cuappdev/ios-networking.git'
   pod 'GoogleSignIn'
+  pod 'SkeletonView'
   pod 'SnapKit'
   pod 'SPPermissions/Notification'
   pod 'Tactile'
