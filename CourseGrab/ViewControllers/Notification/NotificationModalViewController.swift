@@ -22,8 +22,8 @@ class NotificationModalViewController: UIViewController {
 
     private let section: Section
 
-    init(section: Section) {
-        self.section = section
+    init(payload: APNPayload) {
+        self.section = payload.section
         super.init(nibName: nil, bundle: nil)
     }
     

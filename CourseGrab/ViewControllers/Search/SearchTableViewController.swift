@@ -13,7 +13,7 @@ import UIKit
 class SearchTableViewController: UITableViewController {
 
     private var courses: [Course] = []
-    private var lastSearchTimestamp = Date()
+    private var lastSearchTimestamp = Timestamp()
     private var popRecognizer: InteractivePopRecognizer?
     private let searchCellReuseId = "searchCellReuseId"
     private let searchHeaderReuseId = "searchHeaderReuseId"

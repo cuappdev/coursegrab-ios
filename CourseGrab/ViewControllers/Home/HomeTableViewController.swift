@@ -67,15 +67,6 @@ class HomeTableViewController: UITableViewController {
         getAllTrackedCourses()
     }
 
-    private func displayPermissionModal() {
-        let controller = SPPermissions.dialog([.notification])
-        controller.titleText = "Get In Your Courses"
-        controller.footerText = "Push notifications enhance the CourseGrab experience."
-        controller.dataSource = self
-        controller.delegate = self
-        controller.present(on: self)
-    }
-
 }
 
 // MARK: - Networking
@@ -212,6 +203,48 @@ extension HomeTableViewController: SPPermissionsDataSource {
     
 }
 
+// MARK: - SPPermissionsDelegate
+
+extension HomeTableViewController: SPPermissionsDelegate {
+    
+    private func displayPermissionModal() {
+        let controller = SPPermissions.dialog([.notification])
+        controller.titleText = "Get In Your Courses"
+        controller.footerText = "Push notifications enhance the CourseGrab experience."
+        controller.dataSource = self
+        controller.delegate = self
+        controller.present(on: self)
+    }
+
+    func didAllow(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+
+    func didDenied(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func didHide(permissions ids: [Int]) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func deniedData(for permission: SPPermission) -> SPPermissionDeniedAlertData? {
+        if permission == .notification {
+            let data = SPPermissionDeniedAlertData()
+            data.alertOpenSettingsDeniedPermissionTitle = "Permission denied"
+            data.alertOpenSettingsDeniedPermissionDescription = "If you would like to receive push notifications for your courses, go to settings."
+            data.alertOpenSettingsDeniedPermissionButtonTitle = "Settings"
+            data.alertOpenSettingsDeniedPermissionCancelTitle = "Cancel"
+            return data
+        } else {
+            // If returned nil, alert will not show.
+            return nil
+        }
+    }
+
+}
+
 // MARK: - UITableViewDataSource
 
 extension HomeTableViewController {
@@ -309,38 +342,6 @@ extension HomeTableViewController {
         }
 
         return .none
-    }
-
-}
-
-// MARK: - SPPermissionsDelegate
-
-extension HomeTableViewController: SPPermissionsDelegate {
-
-    func didAllow(permission: SPPermission) {
-        UserDefaults.standard.didPromptPermission = true
-    }
-
-    func didDenied(permission: SPPermission) {
-        UserDefaults.standard.didPromptPermission = true
-    }
-
-    func didHide(permissions ids: [Int]) {
-        UserDefaults.standard.didPromptPermission = true
-    }
-
-    func deniedData(for permission: SPPermission) -> SPPermissionDeniedAlertData? {
-        if permission == .notification {
-            let data = SPPermissionDeniedAlertData()
-            data.alertOpenSettingsDeniedPermissionTitle = "Permission denied"
-            data.alertOpenSettingsDeniedPermissionDescription = "If you would like to receive push notifications for your courses, go to settings."
-            data.alertOpenSettingsDeniedPermissionButtonTitle = "Settings"
-            data.alertOpenSettingsDeniedPermissionCancelTitle = "Cancel"
-            return data
-        } else {
-            // If returned nil, alert will not show.
-            return nil
-        }
     }
 
 }
