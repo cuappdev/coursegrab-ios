@@ -68,6 +68,19 @@ extension AppDelegate: GIDSignInDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
+    /**
+     Notifications flow:
+      1. Device receives notification
+        - If received when app is open: present banner
+        - If received when app is closed: OS handles presenting banner
+      2. User taps notification
+        - App opens/moves to foreground
+        - Navigation controller pushes a `NotificationModalViewController`
+        - All notifications already delivered are deleted, badge number set to 0
+      3. User opens app without tapping on notification
+        - All notifications already delivered are deleted, badge number set to 0
+     */
+    
     func application(
       _ application: UIApplication,
       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -89,8 +102,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       print("Failed to register: \(error)")
     }
     
-    // Called when ther user tapped the notification to open the app
-    // whether or not the app was terminated or in the background
+    // Called when the user taps the notification to open the app whether or not the app
+    // was in the foreground, in the background, or terminated
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
@@ -101,7 +114,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler()
     }
     
-    // Called when the user received a notification while the app is open
+    // Called when the user receives a notification while the app is open
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
