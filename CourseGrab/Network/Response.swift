@@ -23,3 +23,9 @@ struct DeviceTokenResponse: Codable {
     
 }
 
+struct EnableNotificationsResponse: Codable {
+    
+    let success: Bool
+    let timestamp: Timestamp
+    
+}

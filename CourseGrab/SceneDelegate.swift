@@ -22,8 +22,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = splash
 
         Auth.auth().addStateDidChangeListener { (auth, user) in
-            // TODO: Register user for notifications
+            // Register user for notifications
+            if user != nil {
+                UNUserNotificationCenter.current().getNotificationSettings { settings in
+                    if settings.authorizationStatus == .authorized {
+                        DispatchQueue.main.async {
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+                }
+            }
 
+            // Show appropriate view controller
             let newVC = user == nil ? LoginViewController() : MainNavigationController(rootViewController: HomeTableViewController())
             if let currentVC = self.topViewController() {
                 newVC.modalPresentationStyle = .fullScreen

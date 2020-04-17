@@ -50,7 +50,7 @@ extension Endpoint {
         return Endpoint(path: "/session/update/", headers: updateHeaders, method: .post)
     }
 
-    static func getAllTrackedCourses() -> Endpoint {
+    static func getAllTrackedSections() -> Endpoint {
         return Endpoint(path: "/users/tracking/", headers: standardHeaders)
     }
     
@@ -59,14 +59,18 @@ extension Endpoint {
         return Endpoint(path: "/courses/search/", headers: standardHeaders, body: body)
     }
 
-    static func trackCourse(catalogNum: Int) -> Endpoint {
+    static func trackSection(catalogNum: Int) -> Endpoint {
         let body = CoursePostBody(courseId: catalogNum)
         return Endpoint(path: "/sections/track/", headers: standardHeaders, body: body)
     }
 
-    static func untrackCourse(catalogNum: Int) -> Endpoint {
+    static func untrackSection(catalogNum: Int) -> Endpoint {
         let body = CoursePostBody(courseId: catalogNum)
         return Endpoint(path: "/sections/untrack/", headers: standardHeaders, body: body)
+    }
+    
+    static func getSection(catalogNum: Int) -> Endpoint {
+        return Endpoint(path: "/sections/\(catalogNum)/", headers: standardHeaders)
     }
     
     static func sendDeviceToken(with deviceToken: String) -> Endpoint {
@@ -75,9 +79,8 @@ extension Endpoint {
     }
     
     static func enableNotifications(enabled: Bool) -> Endpoint {
-        let body = EnableNotificationsBody(enabled: enabled)
-        assertionFailure("We don't have the endpoint yet!") // delete this line once we have a path
-        return Endpoint(path: "", headers: standardHeaders, body: body)
+        let body = EnableNotificationsBody(notification: enabled ? "IPHONE" : "NONE")
+        return Endpoint(path: "/users/notification/", headers: standardHeaders, body: body)
     }
 
 }

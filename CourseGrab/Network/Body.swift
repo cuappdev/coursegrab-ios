@@ -38,6 +38,6 @@ struct CoursePostBody: Codable {
 
 struct EnableNotificationsBody: Codable {
     
-    let enabled: Bool
+    let notification: String
     
 }

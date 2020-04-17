@@ -25,9 +25,9 @@ class NetworkManager {
         return networking(Endpoint.updateSession()).decode()
     }
 
-    func getAllTrackedCourses() -> Future<Response<[Section]>> {
+    func getAllTrackedSections() -> Future<Response<[Section]>> {
         return validateToken()
-            .chained { self.networking(Endpoint.getAllTrackedCourses()).decode() }
+            .chained { self.networking(Endpoint.getAllTrackedSections()).decode() }
     }
     
     func searchCourse(query: String) -> Future<Response<[Course]>> {
@@ -35,14 +35,19 @@ class NetworkManager {
             .chained { self.networking(Endpoint.searchCourse(query: query)).decode() }
     }
 
-    func trackCourse(catalogNum: Int) -> Future<Response<Section>> {
+    func trackSection(catalogNum: Int) -> Future<Response<Section>> {
         return validateToken()
-            .chained { self.networking(Endpoint.trackCourse(catalogNum: catalogNum)).decode() }
+            .chained { self.networking(Endpoint.trackSection(catalogNum: catalogNum)).decode() }
     }
 
-    func untrackCourse(catalogNum: Int) -> Future<Response<Section>> {
+    func untrackSection(catalogNum: Int) -> Future<Response<Section>> {
         return validateToken()
-            .chained { self.networking(Endpoint.untrackCourse(catalogNum: catalogNum)).decode() }
+            .chained { self.networking(Endpoint.untrackSection(catalogNum: catalogNum)).decode() }
+    }
+    
+    func getSection(catalogNum: Int) -> Future<Response<Section>> {
+        return validateToken()
+            .chained { self.networking(Endpoint.getSection(catalogNum: catalogNum)).decode() }
     }
     
     func sendDeviceToken(deviceToken: String) -> Future<DeviceTokenResponse> {
@@ -50,7 +55,7 @@ class NetworkManager {
             .chained { self.networking(Endpoint.sendDeviceToken(with: deviceToken)).decode() }
     }
     
-    func enableNotifications(enabled: Bool) -> Future<Bool> {
+    func enableNotifications(enabled: Bool) -> Future<EnableNotificationsResponse> {
         return validateToken()
             .chained { self.networking(Endpoint.enableNotifications(enabled: enabled)).decode() }
     }
@@ -75,7 +80,18 @@ class NetworkManager {
 
         if expiration <= Date() {
             return updateSession().transformed { response in
+                // update local session authorization
                 user.sessionAuthorization = response.data
+                
+                // update server notification settings to match local
+                // reasoning: we put this here because
+                // (1) it is called when the user first signs in
+                //     - we don't ever use `initializeSession` because the Google Auth flow is the
+                //       same for logging in for the first time as for logging in once the user has
+                //       already signed in before. It would be unnecessarily repetitive to update the
+                //       notification status on every app launch.g
+                // (2) it is not called often
+                _ = self.enableNotifications(enabled: UserDefaults.standard.areNotificationsEnabled)
             }
         } else {
             promise.resolve(with: ())

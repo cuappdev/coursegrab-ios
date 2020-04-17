@@ -31,13 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Setup push notifications
         UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            if settings.authorizationStatus == .authorized {
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
-                }
-            }
-        }
 
         return true
     }

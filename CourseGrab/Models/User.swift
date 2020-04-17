@@ -62,25 +62,6 @@ struct User {
 // MARK: - Methods
 
 extension User {
-    
-    func initializeSession() {
-        guard let token = googleToken else {
-            print("No token")
-            return
-        }
-        NetworkManager.shared.initializeSession(googleToken: token).observe { response in
-            switch response {
-            case .value(let value):
-                if value.success {
-                    User.current?.sessionAuthorization = value.data
-                } else {
-                    print("No success")
-                }
-            case .error(let error):
-                print(error)
-            }
-        }
-    }
 
     func signOut() {
         NetworkManager.shared.enableNotifications(enabled: false).observe { result in

@@ -138,7 +138,7 @@ extension SearchTableViewController {
     }
 
     private func untrack(section: Section) {
-        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+        NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):
                 guard response.success, self.updateData(newSection: response.data) != nil else { return }

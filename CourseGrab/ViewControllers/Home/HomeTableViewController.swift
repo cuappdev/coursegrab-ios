@@ -74,7 +74,7 @@ class HomeTableViewController: UITableViewController {
 extension HomeTableViewController {
 
     private func getAllTrackedCourses() {
-        NetworkManager.shared.getAllTrackedCourses().observe { result in
+        NetworkManager.shared.getAllTrackedSections().observe { result in
             switch result {
             case .value(let response):
                 // Section identifiers
@@ -288,7 +288,7 @@ extension HomeTableViewController {
     }
 
     private func untrack(section: Section) {
-        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+        NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):
                 guard response.success else { return }

@@ -66,7 +66,7 @@ class SettingsViewController: UIViewController {
         mobileStackView.addArrangedSubview(mobileLabel)
         let mobileSwitch = UISwitch()
         mobileSwitch.on(.touchUpInside, toggleNotificationsEnabled)
-        mobileSwitch.isOn = UIApplication.shared.isRegisteredForRemoteNotifications
+        mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
         mobileSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
         mobileStackView.addArrangedSubview(mobileSwitch)
         
@@ -136,14 +136,16 @@ extension SettingsViewController {
         sender.isUserInteractionEnabled = false
         
         NetworkManager.shared.enableNotifications(enabled: sender.isOn).observe { result in
-            switch result {
-            case .value(let areNotificationsEnabled):
-                DispatchQueue.main.async {
-                    sender.isUserInteractionEnabled = true
-                    sender.isOn = areNotificationsEnabled
+            DispatchQueue.main.async {
+                sender.isUserInteractionEnabled = true
+                switch result {
+                case .value(let response):
+                    if !response.success {
+                        sender.isOn = !sender.isOn
+                    }
+                case .error(let error):
+                    print(error)
                 }
-            case .error(let error):
-                print(error)
             }
         }
     }
