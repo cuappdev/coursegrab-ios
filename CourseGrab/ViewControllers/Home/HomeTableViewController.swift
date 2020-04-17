@@ -25,6 +25,7 @@ class HomeTableViewController: UITableViewController {
 
     private let homeCellReuseId = "homeCellReuseId"
     private let homeHeaderReuseId = "homeHeaderReuseId"
+    private let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
     private var tableSections: [TableSection] = []
 
     override func viewDidLoad() {
@@ -56,6 +57,9 @@ class HomeTableViewController: UITableViewController {
         tableView.register(HomeTableViewHeader.self, forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
 
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
         }
@@ -76,6 +80,10 @@ class HomeTableViewController: UITableViewController {
         controller.present(on: self)
     }
 
+    @objc func refreshTableView(_ sender: Any) {
+        getAllTrackedCourses()
+    }
+
 }
 
 // MARK: - Networking
@@ -83,6 +91,7 @@ class HomeTableViewController: UITableViewController {
 extension HomeTableViewController {
 
     private func getAllTrackedCourses() {
+        refreshControl!.endRefreshing()
         NetworkManager.shared.getAllTrackedCourses().observe { result in
             switch result {
             case .value(let response):
@@ -137,6 +146,9 @@ extension HomeTableViewController {
                         }
                         // Update model
                         self.tableSections = newTableSections
+
+                        self.impactFeedbackgenerator.prepare()
+                        self.impactFeedbackgenerator.impactOccurred()
                     }
                 }
             case .error:
@@ -185,10 +197,14 @@ extension HomeTableViewController {
             tableView.backgroundView = nil
         case .empty:
             tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+            impactFeedbackgenerator.prepare()
+            impactFeedbackgenerator.impactOccurred()
         case .loading:
-            tableView.backgroundView = HomeStateView(title: "Loading", subtitle: "Fetching your courses", icon: UIImage())
+            tableView.backgroundView = HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
         case .error:
-            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
+            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Swipe down to refresh", icon: Status.closed.icon)
+            let errorFeedbackGenerator = UINotificationFeedbackGenerator()
+            errorFeedbackGenerator.notificationOccurred(.error)
         }
     }
 
