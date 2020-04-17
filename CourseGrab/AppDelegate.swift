@@ -106,9 +106,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        if let userInfo = notification.request.content.userInfo as? [String: Any] {
-            handleNotification(userInfo: userInfo)
-        }
+        completionHandler([.alert, .badge, .sound])
     }
     
     private func handleNotification(userInfo: [String: Any]) {

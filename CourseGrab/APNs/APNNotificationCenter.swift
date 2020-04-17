@@ -11,8 +11,6 @@ import UIKit
 
 class APNNotificationCenter {
     
-    var gotSomething = false
-    
     typealias Listener = (APNPayload) -> Void
     
     static let `default` = APNNotificationCenter()

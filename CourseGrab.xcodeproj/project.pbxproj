@@ -147,6 +147,7 @@
 				0643489923DE1519007F5F9F /* SceneDelegate.swift */,
 				C8A3D53B23E23D610007E488 /* ViewControllers */,
 				06777ABB23E24E55005C74AC /* Models */,
+				06DE1F55244A1C7700052EDA /* APNs */,
 				B616503323F08A6900B38C52 /* Network */,
 				B654C59423DE38F400F05141 /* Extensions */,
 				06777ABC23E24E72005C74AC /* Supporting */,
@@ -199,6 +200,14 @@
 				0656EE9323EBBDEB0031CB2A /* SettingsAnimator.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		06DE1F55244A1C7700052EDA /* APNs */ = {
+			isa = PBXGroup;
+			children = (
+				06FC0F5524492F88001707F3 /* APNNotificationCenter.swift */,
+			);
+			path = APNs;
 			sourceTree = "<group>";
 		};
 		7B5D621EDA87C295389BD920 /* Frameworks */ = {
@@ -269,7 +278,6 @@
 			isa = PBXGroup;
 			children = (
 				C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */,
-				06FC0F5524492F88001707F3 /* APNNotificationCenter.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
