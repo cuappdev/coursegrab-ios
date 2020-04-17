@@ -107,6 +107,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .badge, .sound])
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     private func handleNotification(userInfo: [String: Any]) {
