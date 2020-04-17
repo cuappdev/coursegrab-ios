@@ -131,7 +131,7 @@ class HomeTableViewCell: UITableViewCell {
         enrollButton.isHidden = section.status != .open
         sectionLabel.text = section.section
         statusBadge.image = section.status.icon
-        titleLabel.text = section.title
+        titleLabel.text = "\(section.subjectCode) \(section.courseNum): \(section.title)"
 
         if section.status == .open {
             removeButton.snp.remakeConstraints { make in

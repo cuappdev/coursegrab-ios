@@ -69,7 +69,7 @@ class SearchTableViewCell: UITableViewCell {
     }
 
     func configure(for course: Course) {
-        titleLabel.text = course.title
+        titleLabel.text = "\(course.subjectCode) \(course.courseNum): \(course.title)"
 
         trackingStackView.subviews.forEach { $0.removeFromSuperview() }
 
