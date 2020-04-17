@@ -127,8 +127,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = Endpoint.config.keyDecodingStrategy
         guard let aps = userInfo["aps"] as? [String : Any],
-            let alert = aps["alert"] as? String,
-            let payload = try? decoder.decode(APNPayload.self, from: Data(alert.utf8))
+            let alert = aps["alert"],
+            let data = try? JSONSerialization.data(withJSONObject: alert, options: []),
+            let payload = try? decoder.decode(APNPayload.self, from: data)
             else { return }
 
         APNNotificationCenter.default.notify(payload: payload)
