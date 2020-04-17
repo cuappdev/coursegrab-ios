@@ -5,6 +5,7 @@ target 'CourseGrab' do
 
   # Pods for CourseGrab
   pod 'DifferenceKit'
+  pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'FutureNova', :git => 'https://github.com/cuappdev/ios-networking.git'
   pod 'GoogleSignIn'
