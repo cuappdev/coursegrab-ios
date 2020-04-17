@@ -14,7 +14,7 @@ enum Status: String, Codable {
     
     case closed = "CLOSED"
     case open = "OPEN"
-    case waitlist = "WAITLIST"
+    case waitlist = "WAITLISTED"
 
     var icon: UIImage {
         let contextSize = CGSize(width: 72, height: 72)

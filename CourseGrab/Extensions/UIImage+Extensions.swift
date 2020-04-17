@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 extension UIImage {
+    
+    static let courseGrabLogo = UIImage(named: "coursegrab-logo")
 
     static let arrowIcon = UIImage(named: "icon-arrow")
     static let backIcon = UIImage(named: "icon-back")

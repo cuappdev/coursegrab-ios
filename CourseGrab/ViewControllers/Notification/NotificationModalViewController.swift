@@ -20,10 +20,10 @@ class NotificationModalViewController: UIViewController {
     private let sectionLabel = UILabel()
     private let studentCenterButton = UIButton(type: .roundedRect)
 
-    private let section: Section
+    private let payload: APNPayload
 
-    init(section: Section) {
-        self.section = section
+    init(payload: APNPayload) {
+        self.payload = payload
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,6 +34,8 @@ class NotificationModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let section = payload.section
+        
         // Setup appearance
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.backgroundColor = .black
@@ -128,13 +130,18 @@ class NotificationModalViewController: UIViewController {
             make.height.equalTo(56)
             make.bottom.equalTo(homeButton.snp.top).offset(-24)
         }
+        
+        // Check availability if >2 mins past
+        if payload.timestamp.date.distance(to: Date()) > 2 * 60 {
+            checkAvailability()
+        }
     }
 
     private func isOlderModel() -> Bool {
-        if UIScreen.main.nativeBounds.height == 1136 || UIScreen.main.nativeBounds.height == 1334 || UIScreen.main.nativeBounds.height == 1920 || UIScreen.main.nativeBounds.height == 2208 {
-            return true
-        }
-        return false
+        return UIScreen.main.nativeBounds.height == 1136 ||
+            UIScreen.main.nativeBounds.height == 1334 ||
+            UIScreen.main.nativeBounds.height == 1920 ||
+            UIScreen.main.nativeBounds.height == 2208
     }
 
     private func presentHomeViewController(_ button: UIButton) {
@@ -150,6 +157,31 @@ class NotificationModalViewController: UIViewController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    func checkAvailability() {
+        availableLabel.text = "CHECKING STATUS"
+        availableLabel.textColor = .courseGrabLightGray
+        NetworkManager.shared.getSection(catalogNum: payload.section.catalogNum).observe { result in
+            switch result {
+            case .value(let response):
+                DispatchQueue.main.async {
+                    switch response.data.status {
+                    case .open:
+                        self.availableLabel.text = "AVAILABLE NOW"
+                        self.availableLabel.textColor = .courseGrabGreen
+                    case .closed:
+                        self.availableLabel.text = "SECTION CLOSED"
+                        self.availableLabel.textColor = .courseGrabRuby
+                    case .waitlist:
+                        self.availableLabel.text = "WAITLIST AVAILABLE"
+                        self.availableLabel.textColor = .courseGrabYellow
+                    }
+                }
+            case .error(let error):
+                print(error)
+            }
+        }
     }
 
 }
