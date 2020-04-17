@@ -34,7 +34,6 @@ extension UIFont {
     static let _30Bold = UIFont.boldSystemFont(ofSize: 30)
     static let _36Bold = UIFont.boldSystemFont(ofSize: 36)
     static let _40Bold = UIFont.boldSystemFont(ofSize: 40)
-    static let _44Bold = UIFont.boldSystemFont(ofSize: 44)
     static let _60Bold = UIFont.boldSystemFont(ofSize: 60)
 
 }

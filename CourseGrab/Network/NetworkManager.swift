@@ -89,7 +89,7 @@ class NetworkManager {
                 //     - we don't ever use `initializeSession` because the Google Auth flow is the
                 //       same for logging in for the first time as for logging in once the user has
                 //       already signed in before. It would be unnecessarily repetitive to update the
-                //       notification status on every app launch.g
+                //       notification status on every app launch.
                 // (2) it is not called often
                 _ = self.enableNotifications(enabled: UserDefaults.standard.areNotificationsEnabled)
             }
