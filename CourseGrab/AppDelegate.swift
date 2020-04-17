@@ -83,6 +83,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
     }
     
+    func application(
+      _ application: UIApplication,
+      didFailToRegisterForRemoteNotificationsWithError error: Error) {
+      print("Failed to register: \(error)")
+    }
+    
     // Called when ther user tapped the notification to open the app
     // whether or not the app was terminated or in the background
     func userNotificationCenter(
@@ -93,12 +99,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             handleNotification(userInfo: userInfo)
         }
         completionHandler()
-    }
-
-    func application(
-      _ application: UIApplication,
-      didFailToRegisterForRemoteNotificationsWithError error: Error) {
-      print("Failed to register: \(error)")
     }
     
     // Called when the user received a notification while the app is open
