@@ -140,7 +140,9 @@ extension SettingsViewController {
                 sender.isUserInteractionEnabled = true
                 switch result {
                 case .value(let response):
-                    if !response.success {
+                    if response.success {
+                        UserDefaults.standard.areNotificationsEnabled = sender.isOn
+                    } else {
                         sender.isOn = !sender.isOn
                     }
                 case .error(let error):
