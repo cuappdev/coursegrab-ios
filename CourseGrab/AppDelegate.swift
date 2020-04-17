@@ -13,6 +13,9 @@ import GoogleSignIn
 import UIKit
 import UserNotifications
 
+import NotificationCenter
+import UserNotificationsUI
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -34,16 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     application.registerForRemoteNotifications()
                 }
             }
-        }
-        
-        // Check if user tapped on a notification
-        if let userInfo = launchOptions?[.remoteNotification] as? [String: Any] {
-            handleNotification(userInfo: userInfo) // TODO: FINISH
-        }
-        
-        // Check all delivered notifications
-        UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
-            // TODO: FINISH
         }
 
         return true
@@ -96,6 +89,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             }
         }
     }
+    
+    // Called when ther user tapped the notification to open the app
+    // whether or not the app was terminated or in the background
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
+        if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
+            handleNotification(userInfo: userInfo)
+        }
+        completionHandler()
+    }
 
     func application(
       _ application: UIApplication,
@@ -103,12 +108,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       print("Failed to register: \(error)")
     }
     
+    // Called when the user received a notification while the app is open
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // Received a notification while the app is open
-        // TODO: open notification modal depending on payload
         if let userInfo = notification.request.content.userInfo as? [String: Any] {
             handleNotification(userInfo: userInfo)
         }
@@ -123,37 +127,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             else { return }
 
         APNNotificationCenter.default.notify(payload: payload)
-    }
-    
-}
-
-// MARK: - APNNotificationCenter
-
-class APNNotificationCenter {
-    
-    typealias Listener = (APNPayload) -> ()
-    
-    static let `default` = APNNotificationCenter()
-    
-    private init() { }
-    
-    private var listeners: [Listener] = []
-    private var payloads: [APNPayload] = []
-    
-    /// Adds a listener and notifies the listener of any prior notifications
-    func addListener(listener: @escaping Listener) {
-        listeners.append(listener)
-        // Notify the listener of any payloads they might have missed
-        for payload in payloads {
-            listener(payload)
-        }
-    }
-    
-    /// Notifies all listeners of the payload
-    func notify(payload: APNPayload) {
-        for listener in listeners {
-            listener(payload)
-        }
     }
     
 }

@@ -75,6 +75,7 @@ class MainNavigationController: UINavigationController {
         setViewControllers([rootViewController], animated: false)
         
         APNNotificationCenter.default.addListener { [weak self] payload in
+            print("Got payload")
             guard let self = self else { return }
             let vc = NotificationModalViewController(payload: payload)
             self.pushViewController(vc, animated: true)
