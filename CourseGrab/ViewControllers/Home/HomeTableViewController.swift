@@ -147,8 +147,10 @@ extension HomeTableViewController {
                         // Update model
                         self.tableSections = newTableSections
 
-                        self.impactFeedbackgenerator.prepare()
-                        self.impactFeedbackgenerator.impactOccurred()
+                        if self.tableSections.count > 0 {
+                            self.impactFeedbackgenerator.prepare()
+                            self.impactFeedbackgenerator.impactOccurred()
+                        }
                     }
                 }
             case .error:
