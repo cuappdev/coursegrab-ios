@@ -67,12 +67,10 @@ class HomeTableViewCell: UITableViewCell {
         containerView.addSubview(sectionLabel)
         
         statusBadge.contentMode = .scaleAspectFit
-        statusBadge.image = UIImage()
         containerView.addSubview(statusBadge)
         
         titleLabel.font = ._16Semibold
         titleLabel.numberOfLines = 0
-        titleLabel.text = " "
         containerView.addSubview(titleLabel)
         
         // Setup constraints
