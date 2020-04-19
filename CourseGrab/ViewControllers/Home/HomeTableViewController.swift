@@ -58,7 +58,7 @@ class HomeTableViewController: UITableViewController {
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
 
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        refreshControl?.on(.valueChanged, refreshTableView)
 
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
@@ -70,16 +70,7 @@ class HomeTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         getAllTrackedCourses()
     }
-
-    private func displayPermissionModal() {
-        let controller = SPPermissions.dialog([.notification])
-        controller.titleText = "Get In Your Courses"
-        controller.footerText = "Push notifications enhance the CourseGrab experience."
-        controller.dataSource = self
-        controller.delegate = self
-        controller.present(on: self)
-    }
-
+  
     @objc func refreshTableView(_ sender: Any) {
         getAllTrackedCourses()
     }
@@ -91,7 +82,7 @@ extension HomeTableViewController {
 
     private func getAllTrackedCourses() {
         refreshControl?.endRefreshing()
-        NetworkManager.shared.getAllTrackedCourses().observe { result in
+        NetworkManager.shared.getAllTrackedSections().observe { result in
             switch result {
             case .value(let response):
                 // Section identifiers
@@ -201,7 +192,7 @@ extension HomeTableViewController {
         case .loading:
             tableView.backgroundView = HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
         case .error:
-            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Swipe down to refresh", icon: Status.closed.icon)
+            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Pull down to refresh", icon: Status.closed.icon)
             let errorFeedbackGenerator = UINotificationFeedbackGenerator()
             errorFeedbackGenerator.notificationOccurred(.error)
         }
