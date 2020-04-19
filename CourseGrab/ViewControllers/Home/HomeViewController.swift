@@ -1,5 +1,5 @@
 //
-//  HomeTableViewController.swift
+//  HomeViewController.swift
 //  CourseGrab
 //
 //  Created by Reade Plunkett on 1/26/20.
@@ -7,11 +7,12 @@
 //
 
 import DifferenceKit
+import SkeletonView
 import SPPermissions
 import Tactile
 import UIKit
 
-class HomeTableViewController: UITableViewController {
+class HomeViewController: UIViewController {
 
     /// Describes the state of the entire view controller
     private enum State {
@@ -25,8 +26,8 @@ class HomeTableViewController: UITableViewController {
 
     private let homeCellReuseId = "homeCellReuseId"
     private let homeHeaderReuseId = "homeHeaderReuseId"
-    private let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
     private var tableSections: [TableSection] = []
+    private var tableView = UITableView(frame: .zero, style: .grouped)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,16 +50,16 @@ class HomeTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
 
         // Setup tableView
-        tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 0)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HomeTableViewHeader.self, forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.isSkeletonable = true
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
-
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        tableView.showAnimatedSkeleton()
 
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
@@ -80,17 +81,13 @@ class HomeTableViewController: UITableViewController {
         controller.present(on: self)
     }
 
-    @objc func refreshTableView(_ sender: Any) {
-        getAllTrackedCourses()
-    }
 }
 
 // MARK: - Networking
 
-extension HomeTableViewController {
+extension HomeViewController {
 
     private func getAllTrackedCourses() {
-        refreshControl?.endRefreshing()
         NetworkManager.shared.getAllTrackedCourses().observe { result in
             switch result {
             case .value(let response):
@@ -133,22 +130,19 @@ extension HomeTableViewController {
                     }
 
                     // Tell DifferenceKit to handle reloading the table
-                    self.tableView.reload(using: changeSet, with: .fade) { data in
-                        var newTableSections: [TableSection] = []
-                        // Add the available table section only if there are available sections
-                        if let newAvailable = data.first(where: { $0.model == availableModel })?.elements, newAvailable.count > 0 {
-                            newTableSections.append(.available(newAvailable))
-                        }
-                        // Add the awaiting table section only if there are awaiting sections
-                        if let newAwaiting = data.first(where: { $0.model == awaitingModel })?.elements, newAwaiting.count > 0 {
-                            newTableSections.append(.awaiting(newAwaiting))
-                        }
-                        // Update model
-                        self.tableSections = newTableSections
-
-                        self.impactFeedbackgenerator.prepare()
-                        self.impactFeedbackgenerator.impactOccurred()
-                    }
+//                    self.tableView.reload(using: changeSet, with: .fade) { data in
+//                        var newTableSections: [TableSection] = []
+//                        // Add the available table section only if there are available sections
+//                        if let newAvailable = data.first(where: { $0.model == availableModel })?.elements, newAvailable.count > 0 {
+//                            newTableSections.append(.available(newAvailable))
+//                        }
+//                        // Add the awaiting table section only if there are awaiting sections
+//                        if let newAwaiting = data.first(where: { $0.model == awaitingModel })?.elements, newAwaiting.count > 0 {
+//                            newTableSections.append(.awaiting(newAwaiting))
+//                        }
+//                        // Update model
+//                        self.tableSections = newTableSections
+//                    }
                 }
             case .error:
                 DispatchQueue.main.async {
@@ -194,16 +188,16 @@ extension HomeTableViewController {
         switch state {
         case .normal:
             tableView.backgroundView = nil
+            break
         case .empty:
-            tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
-            impactFeedbackgenerator.prepare()
-            impactFeedbackgenerator.impactOccurred()
+//            tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+            break
         case .loading:
-            tableView.backgroundView = HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
+//            tableView.backgroundView = nil
+            break
         case .error:
-            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Swipe down to refresh", icon: Status.closed.icon)
-            let errorFeedbackGenerator = UINotificationFeedbackGenerator()
-            errorFeedbackGenerator.notificationOccurred(.error)
+//            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
+            break
         }
     }
 
@@ -211,7 +205,7 @@ extension HomeTableViewController {
 
 // MARK: - SPPermissionsDataSource
 
-extension HomeTableViewController: SPPermissionsDataSource {
+extension HomeViewController: SPPermissionsDataSource {
 
     func configure(_ cell: SPPermissionTableViewCell, for permission: SPPermission) -> SPPermissionTableViewCell {
         cell.permissionTitleLabel.text = "Notifications"
@@ -227,70 +221,55 @@ extension HomeTableViewController: SPPermissionsDataSource {
     
 }
 
-// MARK: - SPPermissionsDelegate
+// MARK: - UITableViewDelegate
 
-extension HomeTableViewController: SPPermissionsDelegate {
-    
-    private func displayPermissionModal() {
-        let controller = SPPermissions.dialog([.notification])
-        controller.titleText = "Get In Your Courses"
-        controller.footerText = "Push notifications enhance the CourseGrab experience."
-        controller.dataSource = self
-        controller.delegate = self
-        controller.present(on: self)
-    }
+extension HomeViewController: SkeletonTableViewDelegate {
 
-    func didAllow(permission: SPPermission) {
-        UserDefaults.standard.didPromptPermission = true
-        UIApplication.shared.registerForRemoteNotifications()
-    }
-
-    func didDenied(permission: SPPermission) {
-        UserDefaults.standard.didPromptPermission = true
-    }
-
-    func didHide(permissions ids: [Int]) {
-        UserDefaults.standard.didPromptPermission = true
-    }
-
-    func deniedData(for permission: SPPermission) -> SPPermissionDeniedAlertData? {
-        if permission == .notification {
-            let data = SPPermissionDeniedAlertData()
-            data.alertOpenSettingsDeniedPermissionTitle = "Permission denied"
-            data.alertOpenSettingsDeniedPermissionDescription = "If you would like to receive push notifications for your courses, go to settings."
-            data.alertOpenSettingsDeniedPermissionButtonTitle = "Settings"
-            data.alertOpenSettingsDeniedPermissionCancelTitle = "Cancel"
-            return data
-        } else {
-            // If returned nil, alert will not show.
-            return nil
-        }
-    }
 
 }
 
+
 // MARK: - UITableViewDataSource
 
-extension HomeTableViewController {
+extension HomeViewController: SkeletonTableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableSections.count == 0 {
+            return 1
+        }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableSections.count
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
-        headerView.configure(for: tableSections[section])
-        return headerView
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableSections[section] {
         case .available(let sections), .awaiting(let sections):
             return sections.count
         }
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tableSections.count == 0 ? 1 : tableSections.count
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
+        //headerView.configure(for: tableSections[section])
+        return headerView
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return homeCellReuseId
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableSections.count == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
+//            cell.isSkeletonable = true
+//            cell.showAnimatedSkeleton()
+            return cell
+        }
+
         switch tableSections[indexPath.section] {
         case .available(let sections), .awaiting(let sections):
             let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
@@ -304,7 +283,7 @@ extension HomeTableViewController {
 
 // MARK: Untrack section
 
-extension HomeTableViewController {
+extension HomeViewController {
 
     /// Describes a change to the model that occurs during a call to `removeSectionFromModel`.
     private enum UpdateDataChange {
@@ -312,7 +291,7 @@ extension HomeTableViewController {
     }
 
     private func untrack(section: Section) {
-        NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
+        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):
                 guard response.success else { return }
@@ -370,9 +349,41 @@ extension HomeTableViewController {
 
 }
 
+// MARK: - SPPermissionsDelegate
+
+extension HomeViewController: SPPermissionsDelegate {
+
+    func didAllow(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func didDenied(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func didHide(permissions ids: [Int]) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func deniedData(for permission: SPPermission) -> SPPermissionDeniedAlertData? {
+        if permission == .notification {
+            let data = SPPermissionDeniedAlertData()
+            data.alertOpenSettingsDeniedPermissionTitle = "Permission denied"
+            data.alertOpenSettingsDeniedPermissionDescription = "If you would like to receive push notifications for your courses, go to settings."
+            data.alertOpenSettingsDeniedPermissionButtonTitle = "Settings"
+            data.alertOpenSettingsDeniedPermissionCancelTitle = "Cancel"
+            return data
+        } else {
+            // If returned nil, alert will not show.
+            return nil
+        }
+    }
+
+}
+
 // MARK: - Show view controllers
 
-extension HomeTableViewController {
+extension HomeViewController {
 
     private func showSettings(_ button: UIButton) {
         present(SettingsViewController(), animated: true)
