@@ -90,7 +90,7 @@ class HomeTableViewController: UITableViewController {
 extension HomeTableViewController {
 
     private func getAllTrackedCourses() {
-        refreshControl!.endRefreshing()
+        refreshControl?.endRefreshing()
         NetworkManager.shared.getAllTrackedCourses().observe { result in
             switch result {
             case .value(let response):
