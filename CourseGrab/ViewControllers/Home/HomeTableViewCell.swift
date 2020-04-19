@@ -13,7 +13,7 @@ import UIKit
 class HomeTableViewCell: UITableViewCell {
 
     private var section: Section?
-
+    
     private let containerView = UIView()
     private let courseLabel = UILabel()
     private let enrollButton = UIButton(type: .roundedRect)

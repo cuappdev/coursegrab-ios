@@ -58,16 +58,6 @@ class SettingsViewController: UIViewController {
         stackView.addArrangedSubview(settingsLabel)
         stackView.setCustomSpacing(27, after: settingsLabel)
 
-        let emailStackView = UIStackView()
-        stackView.addArrangedSubview(emailStackView)
-        let emailLabel = UILabel()
-        emailLabel.text = "Email Alerts"
-        emailLabel.font = ._16Semibold
-        emailStackView.addArrangedSubview(emailLabel)
-        let emailSwitch = UISwitch()
-        emailSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
-        emailStackView.addArrangedSubview(emailSwitch)
-
         let mobileStackView = UIStackView()
         stackView.addArrangedSubview(mobileStackView)
         let mobileLabel = UILabel()
@@ -75,7 +65,8 @@ class SettingsViewController: UIViewController {
         mobileLabel.font = ._16Semibold
         mobileStackView.addArrangedSubview(mobileLabel)
         let mobileSwitch = UISwitch()
-        mobileSwitch.isOn = UIApplication.shared.isRegisteredForRemoteNotifications
+        mobileSwitch.on(.touchUpInside, toggleNotificationsEnabled)
+        mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
         mobileSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
         mobileStackView.addArrangedSubview(mobileSwitch)
         
@@ -125,6 +116,8 @@ class SettingsViewController: UIViewController {
 
 }
 
+// MARK: - Sign out
+
 extension SettingsViewController {
 
     private func signOut(_ button: UIButton) {
@@ -133,6 +126,32 @@ extension SettingsViewController {
         }
     }
 
+}
+
+// MARK: - Toggle notifications enabled
+
+extension SettingsViewController {
+    
+    private func toggleNotificationsEnabled(_ sender: UISwitch) {
+        sender.isUserInteractionEnabled = false
+        
+        NetworkManager.shared.enableNotifications(enabled: sender.isOn).observe { result in
+            DispatchQueue.main.async {
+                sender.isUserInteractionEnabled = true
+                switch result {
+                case .value(let response):
+                    if response.success {
+                        UserDefaults.standard.areNotificationsEnabled = sender.isOn
+                    } else {
+                        sender.isOn = !sender.isOn
+                    }
+                case .error(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
 }
 
 // MARK: - Gesture recognizers

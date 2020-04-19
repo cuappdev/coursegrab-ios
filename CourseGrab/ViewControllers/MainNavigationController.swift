@@ -73,6 +73,12 @@ class MainNavigationController: UINavigationController {
         super.init(navigationBarClass: BigHitNavigationBar.self, toolbarClass: nil)
         (navigationBar as? BigHitNavigationBar)?.navigationController = self
         setViewControllers([rootViewController], animated: false)
+        
+        APNNotificationCenter.default.addListener { [weak self] payload in
+            guard let self = self else { return }
+            let vc = NotificationModalViewController(payload: payload)
+            self.pushViewController(vc, animated: true)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

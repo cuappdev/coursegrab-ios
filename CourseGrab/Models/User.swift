@@ -29,7 +29,7 @@ struct User {
                 let sessionToken = dict["sessionToken"] as? String,
                 let updateToken = dict["updateToken"] as? String,
                 let sessionExpiration = dict["sessionExpiration"] as? Date {
-                return SessionAuthorization(sessionExpiration: sessionExpiration, sessionToken: sessionToken, updateToken: updateToken)
+                return SessionAuthorization(sessionExpiration: Timestamp(sessionExpiration), sessionToken: sessionToken, updateToken: updateToken)
             } else {
                 return nil
             }
@@ -39,7 +39,7 @@ struct User {
                 let dict: [String: Any] = [
                     "sessionToken": token.sessionToken,
                     "updateToken": token.updateToken,
-                    "sessionExpiration": token.sessionExpiration,
+                    "sessionExpiration": token.sessionExpiration.date,
                 ]
                 UserDefaults.standard.set(dict, forKey: "sessionAuth")
             } else {
@@ -62,31 +62,14 @@ struct User {
 // MARK: - Methods
 
 extension User {
-    
-    func initializeSession() {
-        guard let token = googleToken else {
-            print("No token")
-            return
-        }
-        NetworkManager.shared.initializeSession(googleToken: token).observe { response in
-            switch response {
-            case .value(let value):
-                if value.success {
-                    User.current?.sessionAuthorization = value.data
-                } else {
-                    print("No success")
-                }
-            case .error(let error):
-                print(error)
-            }
-        }
-    }
 
     func signOut() {
+        NetworkManager.shared.enableNotifications(enabled: false).observe { result in
+            // should we ensure that notifications are disabled before signing out?
+        }
         sessionAuthorization = nil
         googleToken = nil
         do {
-            // TODO: Unsubscribe from notifications
             try Auth.auth().signOut()
         } catch {
             print(error)

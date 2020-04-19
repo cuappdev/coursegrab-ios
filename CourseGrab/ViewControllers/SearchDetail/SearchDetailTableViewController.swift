@@ -75,7 +75,7 @@ extension SearchDetailTableViewController {
 
     private func updateTracking(section: Section, track: Bool) {
         if track {
-            NetworkManager.shared.trackCourse(catalogNum: section.catalogNum).observe { result in
+            NetworkManager.shared.trackSection(catalogNum: section.catalogNum).observe { result in
                 switch result {
                 case .value(let response):
                     guard response.success, let indexPath = self.updateData(newSection: response.data) else { return }
@@ -87,7 +87,7 @@ extension SearchDetailTableViewController {
                 }
             }
         } else {
-            NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+            NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
                 switch result {
                 case .value(let response):
                     guard response.success, let indexPath = self.updateData(newSection: response.data) else { return }

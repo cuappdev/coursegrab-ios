@@ -13,7 +13,7 @@ import UIKit
 class SearchTableViewController: UITableViewController {
 
     private var courses: [Course] = []
-    private var lastSearchTimestamp = Date()
+    private var lastSearchTimestamp = Timestamp()
     private var popRecognizer: InteractivePopRecognizer?
     private let searchCellReuseId = "searchCellReuseId"
     private let searchHeaderReuseId = "searchHeaderReuseId"
@@ -66,7 +66,7 @@ extension SearchTableViewController {
                 switch result {
                 case .value(let response):
                     DispatchQueue.main.async {
-                        if !response.data.isEmpty && (response.timestamp >= self.lastSearchTimestamp) {
+                        if response.timestamp >= self.lastSearchTimestamp {
                             self.lastSearchTimestamp = response.timestamp
                             self.courses = response.data
                             self.tableView.reloadData()
@@ -138,7 +138,7 @@ extension SearchTableViewController {
     }
 
     private func untrack(section: Section) {
-        NetworkManager.shared.untrackCourse(catalogNum: section.catalogNum).observe { result in
+        NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):
                 guard response.success, self.updateData(newSection: response.data) != nil else { return }

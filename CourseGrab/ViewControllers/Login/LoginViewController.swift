@@ -12,10 +12,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    private let logoView = UIImageView()
-    private let signInButton = GIDSignInButton()
-    private let titleLabel = UILabel()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,38 +19,63 @@ class LoginViewController: UIViewController {
 
         // Setup appearance
 
-        view.backgroundColor = .white
+        view.backgroundColor = .courseGrabBlack
         
-        logoView.image = UIImage(named: "coursegrab-logo")
+        let subtitleLabel = UILabel()
+        subtitleLabel.text = "Welcome to"
+        subtitleLabel.textColor = .white
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.font = ._27Medium
+        view.addSubview(subtitleLabel)
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "CourseGrab"
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.font = ._40Bold
+        view.addSubview(titleLabel)
+        
+        let logoView = UIImageView()
+        logoView.image = .courseGrabLogo
         logoView.contentMode = .scaleAspectFit
         view.addSubview(logoView)
+        
+        let signInButton = GIDSignInButton()
+        signInButton.style = .wide
         view.addSubview(signInButton)
-
-        titleLabel.text = "CourseGrab"
-        titleLabel.textColor = .black
-        titleLabel.textAlignment = .center
-        titleLabel.font = ._44Bold
-        view.addSubview(titleLabel)
 
         // Setup constraints
 
-        logoView.snp.makeConstraints { make in
-            make.centerY.centerX.equalToSuperview()
-            make.size.equalTo(250)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(logoView.snp.top).offset(22)
+        subtitleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(titleLabel.snp.top).offset(-8)
             make.centerX.equalToSuperview()
         }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(logoView.snp.top).offset(-44)
+            make.centerX.equalToSuperview()
+        }
+        
+        logoView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-23)
+            make.width.equalTo(143.3)
+            make.height.equalTo(139.9)
+        }
+        
         signInButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(logoView.snp.bottom)
+            make.top.equalTo(logoView.snp.bottom).offset(44)
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
 }

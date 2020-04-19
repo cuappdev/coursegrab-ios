@@ -24,14 +24,20 @@ struct DeviceTokenBody: Codable {
     
 }
 
+struct QueryBody: Codable {
+    
+    let query: String
+    
+}
+
 struct CoursePostBody: Codable {
     
     let courseId: Int
     
 }
 
-struct QueryBody: Codable {
+struct EnableNotificationsBody: Codable {
     
-    let query: String
+    let notification: String
     
 }

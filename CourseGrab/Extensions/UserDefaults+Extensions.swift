@@ -19,4 +19,13 @@ extension UserDefaults {
         }
     }
     
+    var areNotificationsEnabled: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "areNotificationsEnabled")
+        }
+        set(bool) {
+            UserDefaults.standard.set(bool, forKey: "areNotificationsEnabled")
+        }
+    }
+    
 }
