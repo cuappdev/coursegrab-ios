@@ -65,7 +65,7 @@ class SettingsViewController: UIViewController {
         mobileLabel.font = ._16Semibold
         mobileStackView.addArrangedSubview(mobileLabel)
         let mobileSwitch = UISwitch()
-        mobileSwitch.on(.touchUpInside, toggleNotificationsEnabled)
+        mobileSwitch.on(.valueChanged, toggleNotificationsEnabled)
         mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
         mobileSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
         mobileStackView.addArrangedSubview(mobileSwitch)
