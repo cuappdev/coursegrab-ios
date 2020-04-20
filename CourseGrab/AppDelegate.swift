@@ -13,9 +13,6 @@ import GoogleSignIn
 import UIKit
 import UserNotifications
 
-import NotificationCenter
-import UserNotificationsUI
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

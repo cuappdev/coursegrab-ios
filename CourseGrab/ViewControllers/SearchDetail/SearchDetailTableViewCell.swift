@@ -12,7 +12,6 @@ class SearchDetailTableViewCell: UITableViewCell {
 
     private var section: Section?
     private let statusView = UIView()
-    private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private let titleLabel = UILabel()
     private let trackingButton = UIButton(type: .roundedRect)
 
@@ -103,13 +102,11 @@ class SearchDetailTableViewCell: UITableViewCell {
     private func trackCourse(_ button: UIButton) {
         guard let section = section else { return }
         updateTracking?(section, true)
-        selectionFeedbackGenerator.selectionChanged()
     }
 
     private func untrackCourse(_ button: UIButton) {
         guard let section = section else { return }
         updateTracking?(section, false)
-        selectionFeedbackGenerator.selectionChanged()
     }
 
 }

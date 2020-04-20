@@ -25,7 +25,8 @@ class HomeTableViewController: UITableViewController {
 
     private let homeCellReuseId = "homeCellReuseId"
     private let homeHeaderReuseId = "homeHeaderReuseId"
-    private let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
+    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    private var state: State = .loading
     private var tableSections: [TableSection] = []
 
     override func viewDidLoad() {
@@ -74,6 +75,7 @@ class HomeTableViewController: UITableViewController {
     @objc func refreshTableView(_ sender: Any) {
         getAllTrackedCourses()
     }
+
 }
 
 // MARK: - Networking
@@ -82,6 +84,8 @@ extension HomeTableViewController {
 
     private func getAllTrackedCourses() {
         refreshControl?.endRefreshing()
+        impactFeedbackGenerator.prepare()
+        
         NetworkManager.shared.getAllTrackedSections().observe { result in
             switch result {
             case .value(let response):
@@ -136,9 +140,6 @@ extension HomeTableViewController {
                         }
                         // Update model
                         self.tableSections = newTableSections
-
-                        self.impactFeedbackgenerator.prepare()
-                        self.impactFeedbackgenerator.impactOccurred()
                     }
                 }
             case .error:
@@ -182,20 +183,20 @@ extension HomeTableViewController {
 
     /// Updates the table to reflect the given state.
     private func show(state: State) {
+        if self.state != state {
+            impactFeedbackGenerator.impactOccurred()
+        }
         switch state {
         case .normal:
             tableView.backgroundView = nil
         case .empty:
             tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
-            impactFeedbackgenerator.prepare()
-            impactFeedbackgenerator.impactOccurred()
         case .loading:
             tableView.backgroundView = HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
         case .error:
             tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Pull down to refresh", icon: Status.closed.icon)
-            let errorFeedbackGenerator = UINotificationFeedbackGenerator()
-            errorFeedbackGenerator.notificationOccurred(.error)
         }
+        self.state = state
     }
 
 }
@@ -303,6 +304,7 @@ extension HomeTableViewController {
     }
 
     private func untrack(section: Section) {
+        impactFeedbackGenerator.impactOccurred()
         NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):

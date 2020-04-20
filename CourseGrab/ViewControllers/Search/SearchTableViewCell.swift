@@ -110,7 +110,6 @@ class SearchTableViewCell: UITableViewCell {
 private class TrackingSectionView: UIView {
 
     private let divider = UIView()
-    private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private let statusBadge = UIImageView()
     private let subtitleLabel = UILabel()
     private let trackingButton = UIButton(type: .roundedRect)
@@ -184,7 +183,6 @@ private class TrackingSectionView: UIView {
     private func removeCourse(_ button: UIButton) {
         guard let section = section else { return }
         untrackSection?(section)
-        selectionFeedbackGenerator.selectionChanged()
     }
 
 }

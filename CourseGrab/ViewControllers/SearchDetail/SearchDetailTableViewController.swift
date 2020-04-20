@@ -15,6 +15,7 @@ class SearchDetailTableViewController: UITableViewController {
     }
 
     private var course: Course
+    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
 
     init(course: Course) {
         self.course = course
@@ -74,6 +75,7 @@ class SearchDetailTableViewController: UITableViewController {
 extension SearchDetailTableViewController {
 
     private func updateTracking(section: Section, track: Bool) {
+        impactFeedbackGenerator.impactOccurred()
         if track {
             NetworkManager.shared.trackSection(catalogNum: section.catalogNum).observe { result in
                 switch result {
