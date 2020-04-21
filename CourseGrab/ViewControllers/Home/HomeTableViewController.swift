@@ -62,6 +62,10 @@ class HomeTableViewController: UITableViewController {
 
         if (!UserDefaults.standard.didPromptPermission) {
             displayPermissionModal()
+        } else {
+            // Present announcement if there are any new ones to present
+            // TODO: Add logging here for when we successfully present an announcement
+            presentAnnouncement(completion: nil)
         }
 
         show(state: .loading)
