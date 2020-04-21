@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MessageUI
 import SnapKit
 import UIKit
 
@@ -75,7 +76,6 @@ class SettingsViewController: UIViewController {
             NSAttributedString(
                 string: "Cornell Academic Calendar",
                 attributes: [
-                    .underlineStyle: NSUnderlineStyle.single.rawValue,
                     .foregroundColor: UIColor.courseGrabHotlink,
                     .font: UIFont._16Semibold
                 ]
@@ -85,6 +85,21 @@ class SettingsViewController: UIViewController {
         calendarButton.contentHorizontalAlignment = .left
         calendarButton.on(.touchUpInside, openCalendar)
         stackView.addArrangedSubview(calendarButton)
+        
+        let feedbackButton = UIButton(type: .system)
+        feedbackButton.setAttributedTitle(
+            NSAttributedString(
+                string: "Leave Feedback",
+                attributes: [
+                    .foregroundColor: UIColor.courseGrabHotlink,
+                    .font: UIFont._16Semibold
+                ]
+            ),
+            for: .normal
+        )
+        feedbackButton.contentHorizontalAlignment = .left
+        feedbackButton.on(.touchUpInside, leaveFeedback)
+        stackView.addArrangedSubview(feedbackButton)
         
         let accountStackView = UIStackView()
         stackView.addArrangedSubview(accountStackView)
@@ -102,6 +117,37 @@ class SettingsViewController: UIViewController {
         signOutButton.on(.touchUpInside, signOut)
         signOutButton.contentHorizontalAlignment = .right
         accountStackView.addArrangedSubview(signOutButton)
+    }
+    
+    private func leaveFeedback(_ button: UIButton) {
+        let emailAddress = "team@cornellappdev.com"
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self
+
+            let subject = "CourseGrab Feedback"
+
+            mailComposerVC.setToRecipients([emailAddress])
+            mailComposerVC.setSubject(subject)
+            mailComposerVC.setMessageBody("", isHTML: true)
+
+            present(mailComposerVC, animated: true)
+        } else {
+            let title = "Couldn't Send Email"
+            let message = "Please add an email account in Settings > Passwords & Accounts > Add Account. You can also contact us at \(emailAddress) to send feedback."
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Email Settings", style: .default, handler: { _ in
+                if let url = URL(string: "App-Prefs:") {
+                    UIApplication.shared.open(url)
+                }
+            }))
+            alertController.addAction(UIAlertAction(title: "Copy Address to Clipboard", style: .default, handler: { _ in
+                UIPasteboard.general.string = emailAddress
+            }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+            }))
+            present(alertController, animated: true)
+        }
     }
 
     private func openCalendar(_ button: UIButton) {
@@ -215,4 +261,16 @@ extension SettingsViewController: UIViewControllerTransitioningDelegate {
         return transitionAnimator
     }
     
+}
+
+// MARK: - MailComomposer delegate
+
+extension SettingsViewController: MFMailComposeViewControllerDelegate {
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Swift.Error?) {
+        controller.dismiss(animated: true)
+        if let error = error {
+            print("Mail error: " + error.localizedDescription)
+        }
+    }
 }
