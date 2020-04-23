@@ -73,6 +73,7 @@ class HomeTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         getAllTrackedCourses()
+        AppDevAnalytics.shared.logFirebase(NumberOfTrackedSectionsPayload(numberOfSections: tableSections.count))
     }
   
     @objc func refreshTableView(_ sender: Any) {
@@ -140,7 +141,7 @@ extension HomeTableViewController {
                         }
                         // Update model
                         self.tableSections = newTableSections
-
+                        
                         self.impactFeedbackgenerator.prepare()
                         self.impactFeedbackgenerator.impactOccurred()
                     }
@@ -237,7 +238,7 @@ extension HomeTableViewController: SPPermissionsDelegate {
 
     func didAllow(permission: SPPermission) {
         UserDefaults.standard.didPromptPermission = true
-        UIApplication.shared.registerForRemoteNotifications()
+        UIApplication.shared.registerForRemoteNotifications()        
     }
 
     func didDenied(permission: SPPermission) {
@@ -312,6 +313,8 @@ extension HomeTableViewController {
             case .value(let response):
                 guard response.success else { return }
                 let change = self.removeSectionFromModel(response.data)
+                let description = "\(section.subjectCode) \(section.courseNum): \(section.title) - \(section.section)"
+                AppDevAnalytics.shared.logFirebase(UntrackSectionPayload(courseTitle: description, catalogNum: section.catalogNum))
                 DispatchQueue.main.async {
                     switch change {
                     case .removedRow(let indexPath):
@@ -374,6 +377,8 @@ extension HomeTableViewController {
     }
 
     private func showSearch(_ button: UIButton) {
+        AppDevAnalytics.shared.logFirebase(SearchIconPressPayload())
+        
         // Grab navigation bar views and frames
         guard let navigationBar = navigationController?.navigationBar,
             let leftButton = navigationItem.leftBarButtonItem?.customView as? UIButton,

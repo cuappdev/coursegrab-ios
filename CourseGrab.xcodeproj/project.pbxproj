@@ -37,6 +37,8 @@
 		B654C59323DE38ED00F05141 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */; };
 		B67611FF244CC08E0065D568 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67611FE244CC08E0065D568 /* Analytics.swift */; };
 		B6761205244CFB340065D568 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6761204244CFB340065D568 /* GoogleService-Info.plist */; };
+		B6761207244F8E4F0065D568 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6761206244F8E4F0065D568 /* Keys.plist */; };
+		B6761209244F98540065D568 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6761208244F98540065D568 /* UIDevice+Extensions.swift */; };
 		B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1C23EB83C70076B239 /* Course.swift */; };
 		C853AC5A240C3D8600AD7FF2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C853AC59240C3D8600AD7FF2 /* NetworkManager.swift */; };
 		C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */; };
@@ -47,7 +49,6 @@
 		C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */; };
 		C8A3D54223E24BEC0007E488 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3D54123E24BEC0007E488 /* LoginViewController.swift */; };
 		C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */; };
-		C8FA8E7A24109929008DA6B5 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8FA8E7924109929008DA6B5 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,8 @@
 		B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		B67611FE244CC08E0065D568 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		B6761204244CFB340065D568 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B6761206244F8E4F0065D568 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		B6761208244F98540065D568 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		B6FAEF1C23EB83C70076B239 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C2E8CE062410703E005ADA25 /* CourseGrab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CourseGrab.entitlements; sourceTree = "<group>"; };
 		C853AC59240C3D8600AD7FF2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -97,7 +100,6 @@
 		C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailTableViewCell.swift; sourceTree = "<group>"; };
 		C8A3D54123E24BEC0007E488 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C8B3FD9623FDF2310001F961 /* NotificationModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModalViewController.swift; sourceTree = "<group>"; };
-		C8FA8E7924109929008DA6B5 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				064348A023DE151D007F5F9F /* Assets.xcassets */,
-				C8FA8E7924109929008DA6B5 /* Keys.plist */,
 				B6761204244CFB340065D568 /* GoogleService-Info.plist */,
+				B6761206244F8E4F0065D568 /* Keys.plist */,
 				064348A523DE151D007F5F9F /* Info.plist */,
 				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
@@ -237,6 +239,7 @@
 			children = (
 				06BE0FB82416DD00001CA829 /* String+Extensions.swift */,
 				B654C59023DE38DB00F05141 /* UIColor+Extensions.swift */,
+				B6761208244F98540065D568 /* UIDevice+Extensions.swift */,
 				B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */,
 				063C67D223E9089F00A40895 /* UIImage+Extensions.swift */,
 				0656EE9123EBA0A30031CB2A /* UIView+Extensions.swift */,
@@ -370,7 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8FA8E7A24109929008DA6B5 /* Keys.plist in Resources */,
+				B6761207244F8E4F0065D568 /* Keys.plist in Resources */,
 				B6761205244CFB340065D568 /* GoogleService-Info.plist in Resources */,
 				064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */,
 				064348A123DE151D007F5F9F /* Assets.xcassets in Resources */,
@@ -471,6 +474,7 @@
 				B643598823FDF7940049270B /* SearchTableViewHeader.swift in Sources */,
 				B67611FF244CC08E0065D568 /* Analytics.swift in Sources */,
 				C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */,
+				B6761209244F98540065D568 /* UIDevice+Extensions.swift in Sources */,
 				062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */,
 				C8A3D53823E23C2B0007E488 /* SearchDetailTableViewController.swift in Sources */,
 				C8A3D53A23E23D530007E488 /* SearchDetailTableViewCell.swift in Sources */,

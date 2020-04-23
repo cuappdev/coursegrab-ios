@@ -150,6 +150,7 @@ class NotificationModalViewController: UIViewController {
     }
 
     private func openStudentCenter(_ button: UIButton) {
+        AppDevAnalytics.shared.logFirebase(OpenStudentCenterPressPayload())
         if let url = URL(string: "https://www.studentcenter.cornell.edu/") {
             UIApplication.shared.open(url)
         }

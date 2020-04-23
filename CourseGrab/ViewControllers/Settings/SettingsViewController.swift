@@ -130,6 +130,8 @@ class SettingsViewController: UIViewController {
             mailComposerVC.setToRecipients([emailAddress])
             mailComposerVC.setSubject(subject)
             mailComposerVC.setMessageBody("", isHTML: true)
+            
+            AppDevAnalytics.shared.logFirebase(FeedbackSuccessPayload())
 
             present(mailComposerVC, animated: true)
         } else {
@@ -140,17 +142,21 @@ class SettingsViewController: UIViewController {
                 if let url = URL(string: "App-Prefs:") {
                     UIApplication.shared.open(url)
                 }
+                AppDevAnalytics.shared.logFirebase(FeedbackErrorPayload(description: "Opened Email Settings"))
             }))
             alertController.addAction(UIAlertAction(title: "Copy Address to Clipboard", style: .default, handler: { _ in
                 UIPasteboard.general.string = emailAddress
+                AppDevAnalytics.shared.logFirebase(FeedbackErrorPayload(description: "Copy Address to Clipboard"))
             }))
             alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+                AppDevAnalytics.shared.logFirebase(FeedbackErrorPayload(description: "Cancelled"))
             }))
             present(alertController, animated: true)
         }
     }
 
     private func openCalendar(_ button: UIButton) {
+        AppDevAnalytics.shared.logFirebase(CornellCalendarPressPayload())
         if let url = URL(string: "https://registrar.cornell.edu/academic-calendar") {
             UIApplication.shared.open(url)
         }
@@ -180,6 +186,7 @@ extension SettingsViewController {
     
     private func toggleNotificationsEnabled(_ sender: UISwitch) {
         sender.isUserInteractionEnabled = false
+        AppDevAnalytics.shared.logFirebase(MobileAlertPressPayload())
         
         NetworkManager.shared.enableNotifications(enabled: sender.isOn).observe { result in
             DispatchQueue.main.async {

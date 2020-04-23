@@ -42,7 +42,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window.rootViewController = newVC
             }
         }
-
+        
+        AppDevAnalytics.shared.logFirebase(AppLaunchedPayload())
+        
         self.window = window
         window.makeKeyAndVisible()
     }

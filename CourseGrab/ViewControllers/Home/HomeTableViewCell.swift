@@ -156,10 +156,12 @@ class HomeTableViewCell: UITableViewCell {
     }
 
     private func enroll(_ button: UIButton) {
+        let description = "\(section?.subjectCode) \(section?.courseNum): \(section?.title) - \(section?.section)"
+        AppDevAnalytics.shared.logFirebase(EnrollSectionPressPayload(courseTitle: description, catalogNum: section?.catalogNum ?? -1))
         if let url = URL(string: "https://studentcenter.cornell.edu") {
             UIApplication.shared.open(url)
         }
-        selectionFeedbackGenerator.selectionChanged()
+            self.selectionFeedbackGenerator.selectionChanged()
     }
     
 }

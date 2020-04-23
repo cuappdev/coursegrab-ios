@@ -16,15 +16,8 @@ struct Response<T: Codable>: Codable {
     
 }
 
-struct DeviceTokenResponse: Codable {
+struct SuccessResponse: Codable {
 
-    let success: Bool
-    let timestamp: Timestamp
-    
-}
-
-struct EnableNotificationsResponse: Codable {
-    
     let success: Bool
     let timestamp: Timestamp
     

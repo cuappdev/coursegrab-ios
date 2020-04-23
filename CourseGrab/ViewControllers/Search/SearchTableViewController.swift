@@ -71,6 +71,7 @@ extension SearchTableViewController {
                             self.courses = response.data
                             self.tableView.reloadData()
                         }
+                        AppDevAnalytics.shared.logFirebase(SearchedQueryPayload(query: searchText))
                     }
                 case .error(let error):
                     print(error)
@@ -134,13 +135,18 @@ extension SearchTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(SearchDetailTableViewController(course: courses[indexPath.row]), animated: true)
+        let course = courses[indexPath.row]
+        let description = "\(course.subjectCode) \(course.courseNum): \(course.title)"
+        AppDevAnalytics.shared.logFirebase(CourseDetailPressPayload(courseName: description))
+        navigationController?.pushViewController(SearchDetailTableViewController(course: course), animated: true)
     }
 
     private func untrack(section: Section) {
         NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):
+                let description = "\(section.subjectCode) \(section.courseNum): \(section.title) - \(section.section)"
+                AppDevAnalytics.shared.logFirebase(UntrackSectionPayload(courseTitle: description, catalogNum: section.catalogNum))
                 guard response.success, self.updateData(newSection: response.data) != nil else { return }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

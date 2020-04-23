@@ -79,6 +79,8 @@ extension SearchDetailTableViewController {
                 switch result {
                 case .value(let response):
                     guard response.success, let indexPath = self.updateData(newSection: response.data) else { return }
+                    let description = "\(section.subjectCode) \(section.courseNum): \(section.title) - \(section.section)"
+                    AppDevAnalytics.shared.logFirebase(UntrackSectionPayload(courseTitle: description, catalogNum: section.catalogNum))
                     DispatchQueue.main.async {
                         self.tableView.reloadRows(at: [indexPath], with: .automatic)
                     }
@@ -90,6 +92,8 @@ extension SearchDetailTableViewController {
             NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
                 switch result {
                 case .value(let response):
+                    let description = "\(section.subjectCode) \(section.courseNum): \(section.title) - \(section.section)"
+                    AppDevAnalytics.shared.logFirebase(UntrackSectionPayload(courseTitle: description, catalogNum: section.catalogNum))
                     guard response.success, let indexPath = self.updateData(newSection: response.data) else { return }
                     DispatchQueue.main.async {
                         self.tableView.reloadRows(at: [indexPath], with: .automatic)

@@ -7,6 +7,8 @@
 //
 
 import FirebaseAnalytics
+import Foundation
+import UIKit
 
 protocol Payload {
     var eventName: String { get }
@@ -35,105 +37,171 @@ class AppDevAnalytics {
 
 }
 
-// MARK: Event Payloads
-/// Log whenever Search icon is pressed
+// MARK: - Event Payloads
+
+/// Log app launch with device info
+struct AppLaunchedPayload: Payload {
+    
+    let eventName: String = "app_launched"
+    var parameters: [String : Any]? {
+        return ["device_info": UIDevice.modelName]
+    }
+
+}
+
+/// Log  app launch by notification
+struct NotificationPressPayload: Payload {
+    
+    let eventName = "notification_press"
+    var parameters: [String : Any]? {
+        return ["device_info": UIDevice.modelName]
+    }
+    
+}
+
+/// Log when search icon is pressed
 struct SearchIconPressPayload: Payload {
-    let eventName = "collegetown_pill_press"
+    
+    let eventName = "search_icon_press"
+    var parameters: [String : Any]? {
+        return ["device_info": UIDevice.modelName]
+    }
+    
 }
 
-/// Log whenever Open Student Center button is pressed
+/// Log when Open Student Center button is pressed
 struct OpenStudentCenterPressPayload: Payload {
-    let eventName = "campus_pill_press"
+    
+    let eventName = "open_student_center_press"
+    var parameters: [String : Any]? {
+        return ["device_info": UIDevice.modelName]
+    }
+    
 }
 
-/// Log whenever Cornell Academic Calendar  button is pressed
+/// Log when Cornell Academic Calendar  button is pressed
 struct CornellCalendarPressPayload: Payload {
-    let eventName = "lookahead_tab_press"
+    
+    let eventName = "cornell_calendar_press"
+    var parameters: [String : Any]? {
+        return ["device_info": UIDevice.modelName]
+    }
+    
 }
 
-/// Log whenever BRB Account tab bar button is pressed
-struct BRBPressPayload: Payload {
-    let eventName = "brb_tab_press"
+/// Log  mobile alert toggle
+struct MobileAlertPressPayload: Payload {
+    
+    let eventName = "mobile_alert_press"
+    var parameters: [String : Any]? {
+        return ["device_info": UIDevice.modelName]
+    }
+    
 }
 
-/// Log whenever homescreen map button is pressed
-struct MapPressPayload: Payload {
-    let eventName = "homescreen_map_press"
+/// Log any errors when sending feedback
+struct FeedbackErrorPayload: Payload {
+    
+    let eventName: String = "feedback_error"
+    let description: String
+    var parameters: [String : Any]? {
+        return ["description": description,
+                "device_info": UIDevice.modelName]
+    }
+    
 }
 
-/// Log whenever the Nearest filter is pressed (on x view)
-struct NearestFilterPressPayload: Payload {
-    let eventName = "nearest_filter_press"
+/// Log success when sending feedback
+struct FeedbackSuccessPayload: Payload {
+    
+    let eventName: String = "feedback_success"
+    var parameters: [String : Any]? {
+        return ["device_info": UIDevice.modelName]
+    }
+    
 }
 
-/// Log whenever the North filter is pressed
-struct NorthFilterPressPayload: Payload {
-    let eventName = "north_filter_press"
-}
-
-/// Log whenever the West filter is pressed
-struct WestFilterPressPayload: Payload {
-    let eventName = "west_filter_press"
-}
-
-/// Log whenever the Central filter is pressed
-struct CentralFilterPressPayload: Payload {
-    let eventName = "central_filter_press"
-}
-
-/// Log whenever the Swipes filter is pressed
-struct SwipesFilterPressPayload: Payload {
-    let eventName = "swipes_filter_press"
-}
-
-/// Log whenever the BRB filter is pressed
-struct BRBFilterPressPayload: Payload {
-    let eventName = "brb_filter_press"
-}
-
-/// Log whenever BRB Account login button is pressed
-struct BRBLoginPressPayload: Payload {
-    let eventName = "user_brb_login"
-}
-
-/// Log whenever any Collegetown filter is pressed
-struct CollegetownFilterPressPayload: Payload {
-    let eventName = "collegetown_filters_press"
-}
-
-/// Log whenever CourseDetailView is launched for a class
+/// Log when CourseDetailView is launched for a class
 struct CourseDetailPressPayload: Payload {
-    let eventName = "eatery_tab_press"
+    
+    let eventName = "course_detail_press"
     let courseName: String
     var parameters: [String : Any]? {
-        return ["course_name": courseName]
+        return ["course_name": courseName,
+                "device_info": UIDevice.modelName]
     }
+    
 }
 
-/// Log whenever any Campus dining cell is pressed
-struct CampusDiningCellPressPayload: Payload {
-    let eventName = "campus_dining_hall_press"
-    let diningHallName: String
+/// Log search query
+struct SearchedQueryPayload: Payload {
+    
+    let eventName = "search_query"
+    let query: String
     var parameters: [String : Any]? {
-        return ["dining_hall_name": diningHallName]
+        return ["search_query": query,
+                "device_info": UIDevice.modelName]
     }
+    
 }
 
-/// Log whenever any Campus cafe (no swipes) cell is pressed
-struct CampusCafeCellPressPayload: Payload {
-    let eventName = "campus_cafe_press"
-    let cafeName: String
+/// Log when section is tracked
+struct TrackSectionPayload: Payload {
+    
+    let eventName = "track_section_press"
+    let courseTitle: String
+    let catalogNum: Int
     var parameters: [String : Any]? {
-        return ["cafe_name": cafeName]
+        return ["catalog_num": catalogNum,
+                "course_name": courseTitle,
+                "device_info": UIDevice.modelName]
     }
+    
 }
 
-/// Log whenever any Collegetown cell is pressed
-struct CollegetownCellPressPayload: Payload {
-    let eventName = "collegetown_eatery_press"
+/// Log when section is untracked
+struct UntrackSectionPayload: Payload {
+    
+    let eventName = "untrack_section_press"
+    let courseTitle: String
+    let catalogNum: Int
+    var parameters: [String : Any]? {
+        return ["catalog_num": catalogNum,
+                "course_title": courseTitle,
+                "device_info": UIDevice.modelName]
+    }
+    
 }
 
-/// Log whenever an announcement is presented to the user
+/// Log enroll button press
+struct EnrollSectionPressPayload: Payload {
+    
+    let eventName = "enroll_section_press"
+    let courseTitle: String
+    let catalogNum: Int
+    var parameters: [String : Any]? {
+        return ["catalog_num": catalogNum,
+                "course_title": courseTitle,
+                "device_info": UIDevice.modelName]
+    }
+    
+}
+
+/// Log number of tracked sections
+struct NumberOfTrackedSectionsPayload: Payload {
+    
+    let eventName = "enroll_section_press"
+    let numberOfSections: Int
+    var parameters: [String : Any]? {
+        return ["number_of_sections": numberOfSections,
+                "device_info": UIDevice.modelName]
+    }
+    
+}
+
+/// Log when an announcement is presented to the user
 struct AnnouncementPresentedPayload: Payload {
+    
     let eventName = "announcement_presented"
+    
 }
