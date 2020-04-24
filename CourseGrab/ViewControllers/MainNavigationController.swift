@@ -100,5 +100,9 @@ class MainNavigationController: UINavigationController {
         navigationBar.backIndicatorImage = UIImage.backIcon?.with(insets: UIEdgeInsets(top: 0, left: 8, bottom: 2.5, right: 0))
         navigationBar.backIndicatorTransitionMaskImage = .backIcon
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
 }

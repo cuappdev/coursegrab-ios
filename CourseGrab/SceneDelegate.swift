@@ -37,6 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let newVC = user == nil ? LoginViewController() : MainNavigationController(rootViewController: HomeTableViewController())
             if let currentVC = self.topViewController() {
                 newVC.modalPresentationStyle = .overFullScreen
+                newVC.modalPresentationCapturesStatusBarAppearance = true
                 currentVC.present(newVC, animated: true)
             } else {
                 window.rootViewController = newVC

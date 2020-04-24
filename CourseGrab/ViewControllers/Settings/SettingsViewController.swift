@@ -121,6 +121,7 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController {
 
     private func signOut(_ button: UIButton) {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         dismiss(animated: true) {
             User.current?.signOut()
         }

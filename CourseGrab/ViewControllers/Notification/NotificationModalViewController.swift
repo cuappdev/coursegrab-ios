@@ -154,10 +154,6 @@ class NotificationModalViewController: UIViewController {
             UIApplication.shared.open(url)
         }
     }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     func checkAvailability() {
         availableLabel.text = "CHECKING STATUS"
