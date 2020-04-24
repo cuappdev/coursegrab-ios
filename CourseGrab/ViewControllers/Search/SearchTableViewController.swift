@@ -137,7 +137,7 @@ extension SearchTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let course = courses[indexPath.row]
         let description = "\(course.subjectCode) \(course.courseNum): \(course.title)"
-        AppDevAnalytics.shared.logFirebase(CourseDetailPressPayload(courseName: description))
+        AppDevAnalytics.shared.logFirebase(CourseDetailPressPayload(courseTitle: description))
         navigationController?.pushViewController(SearchDetailTableViewController(course: course), animated: true)
     }
 

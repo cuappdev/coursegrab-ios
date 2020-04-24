@@ -161,7 +161,7 @@ class HomeTableViewCell: UITableViewCell {
         if let url = URL(string: "https://studentcenter.cornell.edu") {
             UIApplication.shared.open(url)
         }
-            self.selectionFeedbackGenerator.selectionChanged()
+        selectionFeedbackGenerator.selectionChanged()
     }
     
 }

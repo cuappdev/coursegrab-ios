@@ -125,9 +125,9 @@ struct FeedbackSuccessPayload: Payload {
 struct CourseDetailPressPayload: Payload {
     
     let eventName = "course_detail_press"
-    let courseName: String
+    let courseTitle: String
     var parameters: [String : Any]? {
-        return ["course_name": courseName,
+        return ["course_title": courseTitle,
                 "device_info": UIDevice.modelName]
     }
     

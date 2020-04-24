@@ -1,6 +1,6 @@
 # CourseGrab - Get in to the Courses That You Want
 
-<p align="center"><img src=https://raw.githubusercontent.com/cuappdev/coursegrab-ios/master/    CourseGrab/Supporting/Assets.xcassets/Logos/CourseGrabIconReadMe.imageset/CourseGrabIconReadMe.png width=210 /></p>
+<p align="center"><img src=https://raw.githubusercontent.com/cuappdev/coursegrab-ios/master/    CourseGrab/Supporting/Assets.xcassets/Logos/coursegrab-readme.imageset/coursegrab-readme.png width=210 /></p>
 
 CourseGrab is one of the latest applications by [Cornell AppDev](http://cornellappdev.com), an engineering project team at Cornell University focused on mobile app development. Currently catering to Cornell University’s class roster, CourseGrab enhances the student enrollment experience by notifying students of available spots in courses they wish to enroll in. 
 

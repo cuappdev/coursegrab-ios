@@ -238,7 +238,7 @@ extension HomeTableViewController: SPPermissionsDelegate {
 
     func didAllow(permission: SPPermission) {
         UserDefaults.standard.didPromptPermission = true
-        UIApplication.shared.registerForRemoteNotifications()        
+        UIApplication.shared.registerForRemoteNotifications()
     }
 
     func didDenied(permission: SPPermission) {
