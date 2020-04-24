@@ -141,6 +141,8 @@ extension HomeTableViewController {
                         // Update model
                         self.tableSections = newTableSections
                     }
+                    // Reload table headers
+                    self.reloadSectionHeaders()
                 }
             case .error:
                 DispatchQueue.main.async {
@@ -291,6 +293,14 @@ extension HomeTableViewController {
             return cell
         }
     }
+    
+    private func reloadSectionHeaders() {
+        for (i, tableSection) in tableSections.enumerated() {
+            if let header = tableView.headerView(forSection: i) as? HomeTableViewHeader {
+                header.configure(for: tableSection)
+            }
+        }
+    }
 
 }
 
@@ -322,6 +332,7 @@ extension HomeTableViewController {
                     case .none:
                         break
                     }
+                    self.reloadSectionHeaders()
                 }
             case .error(let error):
                 print(error)
