@@ -6,6 +6,7 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
+import AppDevAnnouncements
 import Firebase
 import FirebaseAuth
 import FutureNova
@@ -25,6 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Setup networking
         Endpoint.setupEndpointConfig()
+
+        // Setup AppDevAnnouncements
+        AnnouncementNetworking.setupConfig(
+            scheme: Secrets.announcementsScheme,
+            host: Secrets.announcementsHost,
+            commonPath: Secrets.announcementsCommonPath,
+            announcementPath: Secrets.announcementsPath
+        )
         
         // Setup push notifications
         UNUserNotificationCenter.current().delegate = self

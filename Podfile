@@ -4,6 +4,7 @@ target 'CourseGrab' do
   use_frameworks!
 
   # Pods for CourseGrab
+  pod 'AppDevAnnouncements', :git => 'https://github.com/cuappdev/appdev-announcements.git'
   pod 'DifferenceKit'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'

@@ -4,6 +4,7 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.3.0)
   - AppAuth/Core (1.3.0)
   - AppAuth/ExternalUserAgent (1.3.0)
+  - AppDevAnnouncements (0.0.1)
   - DifferenceKit (1.1.5):
     - DifferenceKit/Core (= 1.1.5)
     - DifferenceKit/UIKitExtension (= 1.1.5)
@@ -109,6 +110,7 @@ PODS:
   - Wormholy (1.6.0)
 
 DEPENDENCIES:
+  - AppDevAnnouncements (from `https://github.com/cuappdev/appdev-announcements.git`)
   - DifferenceKit
   - Firebase/Analytics
   - Firebase/Auth
@@ -146,16 +148,22 @@ SPEC REPOS:
     - Wormholy
 
 EXTERNAL SOURCES:
+  AppDevAnnouncements:
+    :git: https://github.com/cuappdev/appdev-announcements.git
   FutureNova:
     :git: https://github.com/cuappdev/ios-networking.git
 
 CHECKOUT OPTIONS:
+  AppDevAnnouncements:
+    :commit: 4cfbcd46af092037ac6632fe5616a13e5f280615
+    :git: https://github.com/cuappdev/appdev-announcements.git
   FutureNova:
     :commit: db0540d78bd5bfb67f39945bbaf0fd3f2fbf56b5
     :git: https://github.com/cuappdev/ios-networking.git
 
 SPEC CHECKSUMS:
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
+  AppDevAnnouncements: e17a7f441fb0664583bb08e21dc709214d15b70f
   DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
   Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
   FirebaseAnalytics: 558f7a03d19de451093032c806f39d5f9dff096e
@@ -180,6 +188,6 @@ SPEC CHECKSUMS:
   Tactile: 266a3ddd39e670205de3987ded0414d9206ae300
   Wormholy: f52cd3c384fb49ae3e8fdb2b1398b66746a65104
 
-PODFILE CHECKSUM: 72c7fef62790017248355f22fb8b085855f9d70d
+PODFILE CHECKSUM: 1e4b3ee9272e038c2aa3a9e452fd491cf7c662ba
 
 COCOAPODS: 1.9.1
