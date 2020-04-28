@@ -124,11 +124,8 @@ class SettingsViewController: UIViewController {
         if MFMailComposeViewController.canSendMail() {
             let mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self
-
-            let subject = "CourseGrab Feedback"
-
             mailComposerVC.setToRecipients([emailAddress])
-            mailComposerVC.setSubject(subject)
+            mailComposerVC.setSubject("CourseGrab Feedback")
             mailComposerVC.setMessageBody("", isHTML: true)
             
             AppDevAnalytics.shared.logFirebase(FeedbackSuccessPayload())
@@ -274,10 +271,11 @@ extension SettingsViewController: UIViewControllerTransitioningDelegate {
 
 extension SettingsViewController: MFMailComposeViewControllerDelegate {
 
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Swift.Error?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
         if let error = error {
             print("Mail error: " + error.localizedDescription)
         }
     }
+    
 }

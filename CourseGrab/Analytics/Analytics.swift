@@ -11,14 +11,18 @@ import Foundation
 import UIKit
 
 protocol Payload {
+    
     var eventName: String { get }
     var parameters: [String: Any]? { get }
+    
 }
 
 extension Payload {
+    
     var parameters: [String: Any]? {
         return nil
     }
+    
 }
 
 class AppDevAnalytics {
@@ -42,9 +46,11 @@ class AppDevAnalytics {
 /// Log app launch with device info
 struct AppLaunchedPayload: Payload {
     
-    let eventName: String = "app_launched"
+    let eventName = "app_launched"
     var parameters: [String : Any]? {
-        return ["device_info": UIDevice.modelName]
+        return [
+            "device_info": UIDevice.modelName
+        ]
     }
 
 }
@@ -54,7 +60,9 @@ struct NotificationPressPayload: Payload {
     
     let eventName = "notification_press"
     var parameters: [String : Any]? {
-        return ["device_info": UIDevice.modelName]
+        return [
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -64,7 +72,9 @@ struct SearchIconPressPayload: Payload {
     
     let eventName = "search_icon_press"
     var parameters: [String : Any]? {
-        return ["device_info": UIDevice.modelName]
+        return [
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -74,7 +84,9 @@ struct OpenStudentCenterPressPayload: Payload {
     
     let eventName = "open_student_center_press"
     var parameters: [String : Any]? {
-        return ["device_info": UIDevice.modelName]
+        return [
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -84,7 +96,9 @@ struct CornellCalendarPressPayload: Payload {
     
     let eventName = "cornell_calendar_press"
     var parameters: [String : Any]? {
-        return ["device_info": UIDevice.modelName]
+        return [
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -94,7 +108,9 @@ struct MobileAlertPressPayload: Payload {
     
     let eventName = "mobile_alert_press"
     var parameters: [String : Any]? {
-        return ["device_info": UIDevice.modelName]
+        return [
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -102,11 +118,13 @@ struct MobileAlertPressPayload: Payload {
 /// Log any errors when sending feedback
 struct FeedbackErrorPayload: Payload {
     
-    let eventName: String = "feedback_error"
+    let eventName = "feedback_error"
     let description: String
     var parameters: [String : Any]? {
-        return ["description": description,
-                "device_info": UIDevice.modelName]
+        return [
+            "description": description,
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -114,9 +132,11 @@ struct FeedbackErrorPayload: Payload {
 /// Log success when sending feedback
 struct FeedbackSuccessPayload: Payload {
     
-    let eventName: String = "feedback_success"
+    let eventName = "feedback_success"
     var parameters: [String : Any]? {
-        return ["device_info": UIDevice.modelName]
+        return [
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -127,8 +147,10 @@ struct CourseDetailPressPayload: Payload {
     let eventName = "course_detail_press"
     let courseTitle: String
     var parameters: [String : Any]? {
-        return ["course_title": courseTitle,
-                "device_info": UIDevice.modelName]
+        return [
+            "course_title": courseTitle,
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -139,8 +161,10 @@ struct SearchedQueryPayload: Payload {
     let eventName = "search_query"
     let query: String
     var parameters: [String : Any]? {
-        return ["search_query": query,
-                "device_info": UIDevice.modelName]
+        return [
+            "search_query": query,
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -152,9 +176,11 @@ struct TrackSectionPayload: Payload {
     let courseTitle: String
     let catalogNum: Int
     var parameters: [String : Any]? {
-        return ["catalog_num": catalogNum,
-                "course_name": courseTitle,
-                "device_info": UIDevice.modelName]
+        return [
+            "catalog_num": catalogNum,
+            "course_name": courseTitle,
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -166,9 +192,11 @@ struct UntrackSectionPayload: Payload {
     let courseTitle: String
     let catalogNum: Int
     var parameters: [String : Any]? {
-        return ["catalog_num": catalogNum,
-                "course_title": courseTitle,
-                "device_info": UIDevice.modelName]
+        return [
+            "catalog_num": catalogNum,
+            "course_title": courseTitle,
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -180,9 +208,11 @@ struct EnrollSectionPressPayload: Payload {
     let courseTitle: String
     let catalogNum: Int
     var parameters: [String : Any]? {
-        return ["catalog_num": catalogNum,
-                "course_title": courseTitle,
-                "device_info": UIDevice.modelName]
+        return [
+            "catalog_num": catalogNum,
+            "course_title": courseTitle,
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }
@@ -193,8 +223,10 @@ struct NumberOfTrackedSectionsPayload: Payload {
     let eventName = "enroll_section_press"
     let numberOfSections: Int
     var parameters: [String : Any]? {
-        return ["number_of_sections": numberOfSections,
-                "device_info": UIDevice.modelName]
+        return [
+            "number_of_sections": numberOfSections,
+            "device_info": UIDevice.modelName
+        ]
     }
     
 }

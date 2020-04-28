@@ -95,17 +95,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
-        NetworkManager.shared.sendDeviceToken(deviceToken: token).chained { deviceTokenResponse -> Future<SuccessResponse> in
-            return NetworkManager.shared.enableNotifications(enabled: deviceTokenResponse.success)
-            }.observe { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .value(let response):
-                    UserDefaults.standard.areNotificationsEnabled = response.success
-                    AppDevAnalytics.shared.logFirebase(MobileAlertPressPayload())
+        NetworkManager.shared.sendDeviceToken(deviceToken: token).observe { result in
+            switch result {
+                case .value:
+                    break
                 case .error(let error):
                     print(error)
-                }
             }
         }
     }
