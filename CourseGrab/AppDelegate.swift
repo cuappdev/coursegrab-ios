@@ -94,10 +94,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let token = tokenParts.joined()
         NetworkManager.shared.sendDeviceToken(deviceToken: token).observe { result in
             switch result {
-            case .value:
-                break
-            case .error(let error):
-                print(error)
+                case .value:
+                    break
+                case .error(let error):
+                    print(error)
             }
         }
     }
@@ -114,6 +114,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void) {
+        AppDevAnalytics.shared.logFirebase(NotificationPressPayload())
         if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
             handleNotification(userInfo: userInfo)
         }
@@ -125,6 +126,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        AppDevAnalytics.shared.logFirebase(NotificationPressPayload())
         completionHandler([.alert, .badge, .sound])
         UIApplication.shared.applicationIconBadgeNumber = 0
     }

@@ -50,12 +50,12 @@ class NetworkManager {
             .chained { self.networking(Endpoint.getSection(catalogNum: catalogNum)).decode() }
     }
     
-    func sendDeviceToken(deviceToken: String) -> Future<DeviceTokenResponse> {
+    func sendDeviceToken(deviceToken: String) -> Future<SuccessResponse> {
         return validateToken()
             .chained { self.networking(Endpoint.sendDeviceToken(with: deviceToken)).decode() }
     }
     
-    func enableNotifications(enabled: Bool) -> Future<EnableNotificationsResponse> {
+    func enableNotifications(enabled: Bool) -> Future<SuccessResponse> {
         return validateToken()
             .chained { self.networking(Endpoint.enableNotifications(enabled: enabled)).decode() }
     }
