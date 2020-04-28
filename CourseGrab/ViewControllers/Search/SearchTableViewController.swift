@@ -13,6 +13,7 @@ import UIKit
 class SearchTableViewController: UITableViewController {
 
     private var courses: [Course] = []
+    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     private var lastSearchTimestamp = Timestamp()
     private var popRecognizer: InteractivePopRecognizer?
     private let searchCellReuseId = "searchCellReuseId"
@@ -142,6 +143,7 @@ extension SearchTableViewController {
     }
 
     private func untrack(section: Section) {
+        impactFeedbackGenerator.impactOccurred()
         NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):

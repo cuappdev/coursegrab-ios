@@ -68,11 +68,6 @@ class LoginViewController: UIViewController {
             make.top.equalTo(logoView.snp.bottom).offset(44)
         }
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
     
     override var prefersStatusBarHidden: Bool {
         return true

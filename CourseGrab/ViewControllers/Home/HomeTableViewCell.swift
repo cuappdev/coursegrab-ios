@@ -19,7 +19,6 @@ class HomeTableViewCell: UITableViewCell {
     private let enrollButton = UIButton(type: .roundedRect)
     private let removeButton = UIButton(type: .roundedRect)
     private let sectionLabel = UILabel()
-    private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private let statusBadge = UIImageView()
     private let titleLabel = UILabel()
 
@@ -152,16 +151,15 @@ class HomeTableViewCell: UITableViewCell {
     private func removeSection(_ button: UIButton) {
         guard let section = section else { return }
         untrackSection?(section)
-        selectionFeedbackGenerator.selectionChanged()
     }
 
     private func enroll(_ button: UIButton) {
         let description = "\(section?.subjectCode) \(section?.courseNum): \(section?.title) - \(section?.section)"
         AppDevAnalytics.shared.logFirebase(EnrollSectionPressPayload(courseTitle: description, catalogNum: section?.catalogNum ?? -1))
+        UISelectionFeedbackGenerator().selectionChanged()
         if let url = URL(string: "https://studentcenter.cornell.edu") {
             UIApplication.shared.open(url)
         }
-        selectionFeedbackGenerator.selectionChanged()
     }
     
 }
