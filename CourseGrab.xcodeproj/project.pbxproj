@@ -25,6 +25,7 @@
 		06BE0FB92416DD00001CA829 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BE0FB82416DD00001CA829 /* String+Extensions.swift */; };
 		06C9B9DA23FDF7900025CA8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B9D923FDF7900025CA8E /* User.swift */; };
 		06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */; };
+		06ED6088245A758500855B29 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06ED6087245A758500855B29 /* Keys.plist */; };
 		06FC0F5624492F88001707F3 /* APNNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FC0F5524492F88001707F3 /* APNNotificationCenter.swift */; };
 		85B7209D1C37F77FD0A7F126 /* Pods_CourseGrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */; };
 		B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503423F08ACF00B38C52 /* Endpoints.swift */; };
@@ -37,7 +38,6 @@
 		B654C59323DE38ED00F05141 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */; };
 		B67611FF244CC08E0065D568 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67611FE244CC08E0065D568 /* Analytics.swift */; };
 		B6761205244CFB340065D568 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6761204244CFB340065D568 /* GoogleService-Info.plist */; };
-		B6761207244F8E4F0065D568 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6761206244F8E4F0065D568 /* Keys.plist */; };
 		B6761209244F98540065D568 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6761208244F98540065D568 /* UIDevice+Extensions.swift */; };
 		B6FAEF1D23EB83C70076B239 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FAEF1C23EB83C70076B239 /* Course.swift */; };
 		C853AC5A240C3D8600AD7FF2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C853AC59240C3D8600AD7FF2 /* NetworkManager.swift */; };
@@ -73,6 +73,7 @@
 		06BE0FB82416DD00001CA829 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		06C9B9D923FDF7900025CA8E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		06ED6087245A758500855B29 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		06FC0F5524492F88001707F3 /* APNNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNNotificationCenter.swift; sourceTree = "<group>"; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +88,6 @@
 		B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		B67611FE244CC08E0065D568 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		B6761204244CFB340065D568 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B6761206244F8E4F0065D568 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		B6761208244F98540065D568 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		B6FAEF1C23EB83C70076B239 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C2E8CE062410703E005ADA25 /* CourseGrab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CourseGrab.entitlements; sourceTree = "<group>"; };
@@ -189,8 +189,8 @@
 			children = (
 				064348A023DE151D007F5F9F /* Assets.xcassets */,
 				B6761204244CFB340065D568 /* GoogleService-Info.plist */,
-				B6761206244F8E4F0065D568 /* Keys.plist */,
 				064348A523DE151D007F5F9F /* Info.plist */,
+				06ED6087245A758500855B29 /* Keys.plist */,
 				C8A3D52C23E0D70A0007E488 /* Keys.swift */,
 				064348A223DE151D007F5F9F /* LaunchScreen.storyboard */,
 				067F000123E918C400F78B36 /* Podfile */,
@@ -373,7 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6761207244F8E4F0065D568 /* Keys.plist in Resources */,
+				06ED6088245A758500855B29 /* Keys.plist in Resources */,
 				B6761205244CFB340065D568 /* GoogleService-Info.plist in Resources */,
 				064348A423DE151D007F5F9F /* LaunchScreen.storyboard in Resources */,
 				064348A123DE151D007F5F9F /* Assets.xcassets in Resources */,
