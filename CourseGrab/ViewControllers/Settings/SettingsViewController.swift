@@ -16,7 +16,6 @@ import UserNotifications
 class SettingsViewController: UIViewController {
 
     private let contentView = UIView()
-    private let stackView = UIStackView()
     private let mobileSwitch = UISwitch()
 
     private var lastPanFraction: CGFloat = 0
@@ -33,6 +32,12 @@ class SettingsViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(setMobileSwitchOn),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
+        
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.pan(pan)
         view.tap(tap)
@@ -40,6 +45,7 @@ class SettingsViewController: UIViewController {
         // Setup containers
         contentView.backgroundColor = .white
         view.addSubview(contentView)
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 17
         stackView.layoutMargins = UIEdgeInsets(top: 18, left: 20, bottom: 18, right: 20)
@@ -68,16 +74,9 @@ class SettingsViewController: UIViewController {
         mobileLabel.text = "Mobile Alerts"
         mobileLabel.font = ._16Semibold
         mobileStackView.addArrangedSubview(mobileLabel)
-        mobileSwitch.isUserInteractionEnabled = false
-        mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            DispatchQueue.main.async {
-                self.mobileSwitch.isOn = settings.authorizationStatus == .authorized && UserDefaults.standard.areNotificationsEnabled
-                self.mobileSwitch.isUserInteractionEnabled = true
-            }
-        }
         mobileSwitch.on(.valueChanged, toggleNotificationsEnabled)
         mobileSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
+        setMobileSwitchOn()
         mobileStackView.addArrangedSubview(mobileSwitch)
         
         let calendarButton = UIButton(type: .system)
@@ -193,9 +192,20 @@ extension SettingsViewController {
 
 }
 
-// MARK: - Toggle notifications enabled
+// MARK: - Notifications
 
 extension SettingsViewController {
+    
+    @objc private func setMobileSwitchOn() {
+        mobileSwitch.isUserInteractionEnabled = false
+        mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                self.mobileSwitch.isOn = settings.authorizationStatus == .authorized && UserDefaults.standard.areNotificationsEnabled
+                self.mobileSwitch.isUserInteractionEnabled = true
+            }
+        }
+    }
     
     private func toggleNotificationsEnabled(_ sender: UISwitch) {
         AppDevAnalytics.shared.logFirebase(MobileAlertPressPayload())
@@ -270,6 +280,7 @@ extension SettingsViewController: SPPermissionsDelegate {
     }
 
     func didAllow(permission: SPPermission) {
+        mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
         UserDefaults.standard.didPromptPermission = true
         UIApplication.shared.registerForRemoteNotifications()
     }
