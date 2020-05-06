@@ -45,6 +45,7 @@ class SettingsViewController: UIViewController {
         // Setup containers
         contentView.backgroundColor = .white
         view.addSubview(contentView)
+        
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 17
@@ -229,12 +230,6 @@ extension SettingsViewController {
                             print(error)
                         }
                     }
-                }
-            case .notDetermined:
-                DispatchQueue.main.async {
-                    sender.isOn = false
-                    sender.isUserInteractionEnabled = true
-                    self.displayPermissionModal()
                 }
             default:
                 DispatchQueue.main.async {
