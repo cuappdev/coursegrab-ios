@@ -13,7 +13,6 @@ class SearchTableViewCell: UITableViewCell {
     private let arrowImageView = UIImageView()
     private let containerView = UIView()
     private let headerStackView = UIStackView()
-    private let professorLabel = UILabel()
     private let titleLabel = UILabel()
     private let trackingStackView = UIStackView()
 
@@ -55,12 +54,6 @@ class SearchTableViewCell: UITableViewCell {
         titleLabel.font = ._16Semibold
         titleLabel.numberOfLines = 0
         headerStackView.addArrangedSubview(titleLabel)
-
-        professorLabel.font = ._14Medium
-        professorLabel.textColor = .courseGrabGray
-        professorLabel.numberOfLines = 0
-        headerStackView.addArrangedSubview(professorLabel)
-
         trackingStackView.axis = .vertical
         containerView.addSubview(trackingStackView)
 
@@ -81,7 +74,6 @@ class SearchTableViewCell: UITableViewCell {
 
     func configure(for course: Course) {
         titleLabel.text = "\(course.subjectCode) \(course.courseNum): \(course.title)"
-        professorLabel.text = course.instructors.joined(separator: ", ")
 
         trackingStackView.subviews.forEach { $0.removeFromSuperview() }
 
