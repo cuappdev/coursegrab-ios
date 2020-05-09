@@ -9,12 +9,14 @@
 import Foundation
 import MessageUI
 import SnapKit
+import SPPermissions
 import UIKit
+import UserNotifications
 
 class SettingsViewController: UIViewController {
 
     private let contentView = UIView()
-    private let stackView = UIStackView()
+    private let mobileSwitch = UISwitch()
 
     private var lastPanFraction: CGFloat = 0
     private var transitionAnimator = SettingsAnimator()
@@ -30,6 +32,12 @@ class SettingsViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(setMobileSwitchOn),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
+        
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.pan(pan)
         view.tap(tap)
@@ -37,6 +45,8 @@ class SettingsViewController: UIViewController {
         // Setup containers
         contentView.backgroundColor = .white
         view.addSubview(contentView)
+        
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 17
         stackView.layoutMargins = UIEdgeInsets(top: 18, left: 20, bottom: 18, right: 20)
@@ -65,10 +75,9 @@ class SettingsViewController: UIViewController {
         mobileLabel.text = "Mobile Alerts"
         mobileLabel.font = ._16Semibold
         mobileStackView.addArrangedSubview(mobileLabel)
-        let mobileSwitch = UISwitch()
         mobileSwitch.on(.valueChanged, toggleNotificationsEnabled)
-        mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
         mobileSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
+        setMobileSwitchOn()
         mobileStackView.addArrangedSubview(mobileSwitch)
         
         let calendarButton = UIButton(type: .system)
@@ -119,6 +128,16 @@ class SettingsViewController: UIViewController {
         accountStackView.addArrangedSubview(signOutButton)
     }
     
+    override func viewDidLayoutSubviews() {
+        contentView.roundCorners(corners: [.topLeft, .topRight], radius: 10)
+    }
+
+}
+
+// MARK: - Links
+
+extension SettingsViewController {
+    
     private func leaveFeedback(_ button: UIButton) {
         let emailAddress = "team@cornellappdev.com"
         if MFMailComposeViewController.canSendMail() {
@@ -129,7 +148,7 @@ class SettingsViewController: UIViewController {
             mailComposerVC.setMessageBody("", isHTML: true)
             
             AppDevAnalytics.shared.logFirebase(FeedbackSuccessPayload())
-
+            
             present(mailComposerVC, animated: true)
         } else {
             let title = "Couldn't Send Email"
@@ -151,7 +170,7 @@ class SettingsViewController: UIViewController {
             present(alertController, animated: true)
         }
     }
-
+    
     private func openCalendar(_ button: UIButton) {
         AppDevAnalytics.shared.logFirebase(CornellCalendarPressPayload())
         if let url = URL(string: "https://registrar.cornell.edu/academic-calendar") {
@@ -159,10 +178,6 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        contentView.roundCorners(corners: [.topLeft, .topRight], radius: 10)
-    }
-
 }
 
 // MARK: - Sign out
@@ -178,31 +193,115 @@ extension SettingsViewController {
 
 }
 
-// MARK: - Toggle notifications enabled
+// MARK: - Notifications
 
 extension SettingsViewController {
     
-    private func toggleNotificationsEnabled(_ sender: UISwitch) {
-        sender.isUserInteractionEnabled = false
-        AppDevAnalytics.shared.logFirebase(MobileAlertPressPayload())
-        
-        NetworkManager.shared.enableNotifications(enabled: sender.isOn).observe { result in
+    @objc private func setMobileSwitchOn() {
+        mobileSwitch.isUserInteractionEnabled = false
+        mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
-                sender.isUserInteractionEnabled = true
-                switch result {
-                case .value(let response):
-                    if response.success {
-                        UserDefaults.standard.areNotificationsEnabled = sender.isOn
-                    } else {
-                        sender.isOn = !sender.isOn
+                self.mobileSwitch.isOn = settings.authorizationStatus == .authorized && UserDefaults.standard.areNotificationsEnabled
+                self.mobileSwitch.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
+    private func toggleNotificationsEnabled(_ sender: UISwitch) {
+        AppDevAnalytics.shared.logFirebase(MobileAlertPressPayload())
+        sender.isUserInteractionEnabled = false
+        let enable = sender.isOn
+        
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                NetworkManager.shared.enableNotifications(enabled: enable).observe { result in
+                    DispatchQueue.main.async {
+                        sender.isUserInteractionEnabled = true
+                        switch result {
+                        case .value(let response):
+                            if response.success {
+                                UserDefaults.standard.areNotificationsEnabled = sender.isOn
+                            } else {
+                                sender.isOn = !sender.isOn
+                            }
+                        case .error(let error):
+                            print(error)
+                        }
                     }
-                case .error(let error):
-                    print(error)
+                }
+            default:
+                DispatchQueue.main.async {
+                    sender.isOn = false
+                    sender.isUserInteractionEnabled = true
+                    self.displayPermissionModal()
                 }
             }
         }
     }
     
+}
+
+// MARK: - SPPermissionsDataSource
+
+extension SettingsViewController: SPPermissionsDataSource {
+
+    func configure(_ cell: SPPermissionTableViewCell, for permission: SPPermission) -> SPPermissionTableViewCell {
+        cell.permissionTitleLabel.text = "Notifications"
+        cell.permissionDescriptionLabel.text = "We'll tell you when a section opens!"
+        cell.iconView.color = .courseGrabGreen
+        cell.button.allowTitle = "Allow"
+        cell.button.allowedTitle = "Allowed"
+        cell.button.allowedBackgroundColor = .courseGrabGreen
+        cell.button.allowBackgroundColor = .courseGrabGreen
+        cell.button.allowTitleColor = .white
+        return cell
+    }
+    
+}
+
+// MARK: - SPPermissionsDelegate
+
+extension SettingsViewController: SPPermissionsDelegate {
+    
+    private func displayPermissionModal() {
+        let controller = SPPermissions.dialog([.notification])
+        controller.titleText = "Get In Your Courses"
+        controller.footerText = "Push notifications enhance the CourseGrab experience."
+        controller.dataSource = self
+        controller.delegate = self
+        controller.present(on: self)
+    }
+
+    func didAllow(permission: SPPermission) {
+        mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
+        UserDefaults.standard.didPromptPermission = true
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+    func didHide(permissions ids: [Int]) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+    
+    func didDenied(permission: SPPermission) {
+        UserDefaults.standard.didPromptPermission = true
+    }
+
+    func deniedData(for permission: SPPermission) -> SPPermissionDeniedAlertData? {
+        if permission == .notification {
+            let data = SPPermissionDeniedAlertData()
+            data.alertOpenSettingsDeniedPermissionTitle = "Permission denied"
+            data.alertOpenSettingsDeniedPermissionDescription = "If you would like to receive push notifications for your courses, go to settings."
+            data.alertOpenSettingsDeniedPermissionButtonTitle = "Settings"
+            data.alertOpenSettingsDeniedPermissionCancelTitle = "Cancel"
+            return data
+        } else {
+            // If returned nil, alert will not show.
+            return nil
+        }
+    }
+
 }
 
 // MARK: - Gesture recognizers

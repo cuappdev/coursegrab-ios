@@ -21,7 +21,7 @@ extension UserDefaults {
     
     var areNotificationsEnabled: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "areNotificationsEnabled")
+            return UserDefaults.standard.value(forKey: "areNotificationsEnabled") as? Bool ?? true
         }
         set(bool) {
             UserDefaults.standard.set(bool, forKey: "areNotificationsEnabled")
