@@ -12,6 +12,7 @@ class SearchTableViewCell: UITableViewCell {
 
     private let arrowImageView = UIImageView()
     private let containerView = UIView()
+    private let headerStackView = UIStackView()
     private let titleLabel = UILabel()
     private let trackingStackView = UIStackView()
 
@@ -46,10 +47,13 @@ class SearchTableViewCell: UITableViewCell {
         containerView.backgroundColor = .white
         contentView.addSubview(containerView)
 
+        headerStackView.axis = .vertical
+        headerStackView.spacing = 10
+        containerView.addSubview(headerStackView)
+
         titleLabel.font = ._16Semibold
         titleLabel.numberOfLines = 0
-        containerView.addSubview(titleLabel)
-
+        headerStackView.addArrangedSubview(titleLabel)
         trackingStackView.axis = .vertical
         containerView.addSubview(trackingStackView)
 
@@ -57,7 +61,7 @@ class SearchTableViewCell: UITableViewCell {
 
         arrowImageView.snp.makeConstraints { make in
             make.size.equalTo(16)
-            make.centerY.equalTo(titleLabel)
+            make.centerY.equalTo(headerStackView.snp.centerY)
             make.trailing.equalToSuperview().inset(16)
         }
 
@@ -82,19 +86,19 @@ class SearchTableViewCell: UITableViewCell {
         }
 
         if trackingSections.count > 0 {
-            titleLabel.snp.remakeConstraints { make in
+            headerStackView.snp.remakeConstraints { make in
                 make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
                 make.top.leading.equalToSuperview().inset(16)
             }
 
             trackingStackView.snp.remakeConstraints { make in
-                make.top.equalTo(titleLabel.snp.bottom).offset(11)
+                make.top.equalTo(headerStackView.snp.bottom).offset(11)
                 make.bottom.leading.trailing.equalToSuperview()
             }
         } else {
-            titleLabel.snp.remakeConstraints { make in
+            headerStackView.snp.remakeConstraints { make in
                 make.trailing.equalTo(arrowImageView.snp.leading).offset(-8)
-                make.top.bottom.leading.equalToSuperview().inset(16)
+                make.top.leading.bottom.equalToSuperview().inset(16)
             }
 
             trackingStackView.snp.removeConstraints()
