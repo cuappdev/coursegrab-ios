@@ -22,14 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = splash
 
         Auth.auth().addStateDidChangeListener { (auth, user) in
-            if let userInfo = user, userInfo.email?.split(separator: "@").last != "cornell.edu" {
+            if let email = user?.email, email.split(separator: "@").last != "cornell.edu" {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Invalid Email", message: "You must use a Cornell email.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default))
-                    window.rootViewController = LoginViewController()
-                    self.topViewController()!.present(alert, animated: true, completion: nil)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in User.current?.signOut() }))
+                    self.topViewController()?.present(alert, animated: true)
                 }
-                User.current?.signOut()
                 return
             }
             // Register user for notifications
