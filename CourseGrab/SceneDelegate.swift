@@ -22,6 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = splash
 
         Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let email = user?.email, email.split(separator: "@").last != "cornell.edu" {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Invalid Email", message: "You must use a Cornell email.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in User.current?.signOut() }))
+                    self.topViewController()?.present(alert, animated: true)
+                }
+                return
+            }
             // Register user for notifications
             if user != nil {
                 UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -36,6 +44,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             // Show appropriate view controller
             let newVC = user == nil ? LoginViewController() : MainNavigationController(rootViewController: HomeTableViewController())
             if let currentVC = self.topViewController() {
+                guard !(currentVC is LoginViewController && newVC is LoginViewController) else {
+                    // If both are LoginViewController, don't bother presenting a new VC
+                    return
+                }
+
                 newVC.modalPresentationStyle = .overFullScreen
                 newVC.modalPresentationCapturesStatusBarAppearance = true
                 currentVC.present(newVC, animated: true)
