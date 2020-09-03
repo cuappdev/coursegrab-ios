@@ -8,6 +8,7 @@ target 'CourseGrab' do
   pod 'DifferenceKit'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Crashlytics'
   pod 'FutureNova', :git => 'https://github.com/cuappdev/ios-networking.git'
   pod 'GoogleSignIn'
   pod 'SnapKit'

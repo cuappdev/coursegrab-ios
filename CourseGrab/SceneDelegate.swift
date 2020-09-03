@@ -18,11 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: scene)
         let splash = UIViewController()
-        splash.view.backgroundColor = .white
+        splash.view.backgroundColor = .courseGrabBlack
         window.rootViewController = splash
 
         Auth.auth().addStateDidChangeListener { (auth, user) in
-            if let email = user?.email, email.split(separator: "@").last != "cornell.edu" {
+            if let email = user?.email, email.split(separator: "@").last != "cornell.edu" && email != "coursegrabappstore@gmail.com" {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Invalid Email", message: "You must use a Cornell email.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in User.current?.signOut() }))
@@ -48,10 +48,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     // If both are LoginViewController, don't bother presenting a new VC
                     return
                 }
-
+                
                 newVC.modalPresentationStyle = .overFullScreen
                 newVC.modalPresentationCapturesStatusBarAppearance = true
-                currentVC.present(newVC, animated: true)
+                currentVC.present(newVC, animated: user == nil || currentVC is LoginViewController)
             } else {
                 window.rootViewController = newVC
             }
