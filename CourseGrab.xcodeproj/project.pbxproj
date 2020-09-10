@@ -325,6 +325,7 @@
 				0643489223DE1519007F5F9F /* Resources */,
 				05EF7F1F3C4171EA9F0FBD7F /* [CP] Embed Pods Frameworks */,
 				40C9B7D125BB8D348445A5E5 /* [CP] Copy Pods Resources */,
+				B65436D624FFF08200FD4024 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -438,6 +439,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CourseGrab/Pods-CourseGrab-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B65436D624FFF08200FD4024 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -622,6 +640,7 @@
 				CODE_SIGN_ENTITLEMENTS = CourseGrab/CourseGrab.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZGMCXU7X3U;
 				INFOPLIST_FILE = "$(SRCROOT)/CourseGrab/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: scene)
         let splash = UIViewController()
-        splash.view.backgroundColor = .white
+        splash.view.backgroundColor = .courseGrabBlack
         window.rootViewController = splash
 
         Auth.auth().addStateDidChangeListener { (auth, user) in
@@ -48,10 +48,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     // If both are LoginViewController, don't bother presenting a new VC
                     return
                 }
-
+                
                 newVC.modalPresentationStyle = .overFullScreen
                 newVC.modalPresentationCapturesStatusBarAppearance = true
-                currentVC.present(newVC, animated: true)
+                // Only present currentVC modally for entering or exiting from HomeVC
+                currentVC.present(newVC, animated: user == nil || currentVC is LoginViewController)
             } else {
                 window.rootViewController = newVC
             }
