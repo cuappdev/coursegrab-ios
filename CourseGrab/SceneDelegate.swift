@@ -51,7 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 newVC.modalPresentationStyle = .overFullScreen
                 newVC.modalPresentationCapturesStatusBarAppearance = true
-                // Only present LoginViewController modally
+                // Only present currentVC modally for entering or exiting from HomeVC
                 currentVC.present(newVC, animated: user == nil || currentVC is LoginViewController)
             } else {
                 window.rootViewController = newVC
