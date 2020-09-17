@@ -11,7 +11,7 @@ import UIKit
 class SearchDetailTableViewCell: UITableViewCell {
 
     private var section: Section?
-    private let statusView = UIView()
+    private let statusImageView = UIImageView()
     private let titleLabel = UILabel()
     private let trackingButton = UIButton(type: .roundedRect)
 
@@ -23,7 +23,8 @@ class SearchDetailTableViewCell: UITableViewCell {
         // Setup appearance
 
         selectionStyle = .none
-        setupStatusView(status: .closed)
+
+        contentView.addSubview(statusImageView)
 
         titleLabel.font = ._14Semibold
         titleLabel.adjustsFontSizeToFitWidth = true
@@ -37,6 +38,12 @@ class SearchDetailTableViewCell: UITableViewCell {
 
         // Setup constraints
 
+        statusImageView.snp.makeConstraints { make in
+            make.size.equalTo(16)
+            make.leading.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+        }
+
         trackingButton.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.width.equalTo(90)
@@ -45,7 +52,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(statusView.snp.trailing).offset(12)
+            make.leading.equalTo(statusImageView.snp.trailing).offset(12)
             make.trailing.equalTo(trackingButton.snp.leading).offset(-12)
             make.centerY.equalToSuperview()
         }
@@ -60,8 +67,8 @@ class SearchDetailTableViewCell: UITableViewCell {
     func configure(section: Section) {
         self.section = section
 
+        statusImageView.image = section.status.icon
         titleLabel.text = section.section
-        setupStatusView(status: section.status)
 
         if section.isTracking {
             trackingButton.setTitle("REMOVE", for: .normal)
@@ -77,27 +84,6 @@ class SearchDetailTableViewCell: UITableViewCell {
     }
 
     // MARK: - Private helpers
-
-    private func setupStatusView(status: Status) {
-        switch status {
-        case .closed:
-            statusView.backgroundColor = .courseGrabRuby
-            statusView.layer.cornerRadius = 2
-        case .open:
-            statusView.backgroundColor = .courseGrabGreen
-            statusView.layer.cornerRadius = 8
-        case .waitlist:
-            statusView.backgroundColor = .yellow
-            statusView.layer.cornerRadius = 2
-        }
-        contentView.addSubview(statusView)
-
-        statusView.snp.makeConstraints { make in
-            make.size.equalTo(16)
-            make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-        }
-    }
 
     private func trackCourse(_ button: UIButton) {
         guard let section = section else { return }
