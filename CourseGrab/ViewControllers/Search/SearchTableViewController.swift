@@ -67,6 +67,9 @@ extension SearchTableViewController {
                 switch result {
                 case .value(let response):
                     DispatchQueue.main.async {
+                        guard let currentSearchText = self.textField.text, currentSearchText.count > 2  else {
+                            return
+                        }
                         if response.timestamp >= self.lastSearchTimestamp {
                             self.lastSearchTimestamp = response.timestamp
                             self.courses = response.data
@@ -89,6 +92,7 @@ extension SearchTableViewController {
                     self.tableView.reloadData()
                 }
             }
+            timer?.invalidate()
             return
         }
 
