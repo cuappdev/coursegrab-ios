@@ -25,12 +25,12 @@ class NetworkManager {
         return networking(Endpoint.updateSession()).decode()
     }
 
-    func getAllTrackedSections() -> Future<Response<[Section]>> {
+    func getAllTrackedSections() -> Future<Response<Sections>> {
         return validateToken()
             .chained { self.networking(Endpoint.getAllTrackedSections()).decode() }
     }
     
-    func searchCourse(query: String) -> Future<Response<[Course]>> {
+    func searchCourse(query: String) -> Future<Response<CourseSearch>> {
         return validateToken()
             .chained { self.networking(Endpoint.searchCourse(query: query)).decode() }
     }

@@ -110,8 +110,8 @@ extension HomeTableViewController {
                 }
 
                 // Construct target array
-                let available = response.data.filter { $0.status == .open }
-                let awaiting = response.data.filter { $0.status != .open }
+                let available = response.data.sections.filter { $0.status == .open }
+                let awaiting = response.data.sections.filter { $0.status != .open }
                 var target: [ArraySection<String, Section>] = []
                 if available.count > 0 {
                     target.append(ArraySection(model: availableModel, elements: available))
