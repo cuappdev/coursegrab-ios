@@ -20,3 +20,10 @@ struct Course: Codable {
     }
     
 }
+
+struct CourseSearch: Codable {
+
+    let courses: [Course]
+    let query: String
+
+}

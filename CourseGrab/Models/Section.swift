@@ -46,6 +46,12 @@ enum Status: String, Codable {
     
 }
 
+struct Sections: Codable {
+
+    let sections: [Section]
+
+}
+
 struct Section: Codable {
 
     let catalogNum: Int
