@@ -126,7 +126,7 @@ class HomeTableViewCell: UITableViewCell {
         self.section = section
         courseLabel.text = String(section.courseNum)
         enrollButton.isHidden = section.status != .open
-        sectionLabel.text = section.section
+        sectionLabel.text = "\(section.catalogNum)"
         statusBadge.image = section.status.icon
         titleLabel.text = "\(section.subjectCode) \(section.courseNum): \(section.title)"
 

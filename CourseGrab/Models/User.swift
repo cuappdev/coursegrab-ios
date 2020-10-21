@@ -67,6 +67,7 @@ extension User {
         NetworkManager.shared.enableNotifications(enabled: false).observe { result in
             // should we ensure that notifications are disabled before signing out?
         }
+        UserDefaults.standard.removeObject(forKey: "storedDeviceToken")
         sessionAuthorization = nil
         googleToken = nil
         do {
