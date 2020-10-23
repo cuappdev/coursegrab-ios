@@ -21,13 +21,14 @@ class InteractivePopRecognizer: NSObject, UIGestureRecognizerDelegate {
     }
 
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return navigationController.viewControllers.count > 1
+        navigationController.viewControllers.count > 1
     }
 
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
-    
+
 }
 
 // MARK: - BigHitNavigationBar
@@ -73,18 +74,18 @@ class MainNavigationController: UINavigationController {
         super.init(navigationBarClass: BigHitNavigationBar.self, toolbarClass: nil)
         (navigationBar as? BigHitNavigationBar)?.navigationController = self
         setViewControllers([rootViewController], animated: false)
-        
+
         APNNotificationCenter.default.addListener { [weak self] payload in
             guard let self = self else { return }
             let vc = NotificationModalViewController(payload: payload)
             self.pushViewController(vc, animated: true)
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -100,9 +101,9 @@ class MainNavigationController: UINavigationController {
         navigationBar.backIndicatorImage = UIImage.backIcon?.with(insets: UIEdgeInsets(top: 0, left: 8, bottom: 2.5, right: 0))
         navigationBar.backIndicatorTransitionMaskImage = .backIcon
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        .lightContent
     }
 
 }

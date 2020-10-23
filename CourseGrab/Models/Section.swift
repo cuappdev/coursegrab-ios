@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 enum Status: String, Codable {
-    
+
     case closed = "CLOSED"
     case open = "OPEN"
     case waitlist = "WAITLISTED"
@@ -43,7 +43,7 @@ enum Status: String, Codable {
             }
         }
     }
-    
+
 }
 
 struct Sections: Codable {
@@ -62,7 +62,7 @@ struct Section: Codable {
     let status: Status
     let subjectCode: String
     let title: String
-    
+
 }
 
 extension Section: Differentiable {
@@ -77,7 +77,7 @@ extension Section: Differentiable {
     }
 
     func isContentEqual(to source: Section) -> Bool {
-        return differenceIdentifier == source.differenceIdentifier
+        differenceIdentifier == source.differenceIdentifier
     }
 
 }

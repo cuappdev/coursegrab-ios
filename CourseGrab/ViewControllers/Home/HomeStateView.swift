@@ -32,7 +32,6 @@ class HomeStateView: UIView {
         subtitleLabel.text = subtitle
         addSubview(subtitleLabel)
 
-
         imageView.snp.makeConstraints { make in
             make.size.equalTo(60)
             make.centerX.equalToSuperview()

@@ -16,9 +16,9 @@ struct Course: Codable {
     let title: String
 
     var instructors: [String] {
-        return Array(Set(sections.reduce(into: [], { $0 += $1.instructors })))
+        Array(Set(sections.reduce(into: [], { $0 += $1.instructors })))
     }
-    
+
 }
 
 struct CourseSearch: Codable {

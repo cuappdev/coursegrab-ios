@@ -12,20 +12,20 @@ extension UserDefaults {
 
     var didPromptPermission: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "didPromptPermission")
+            UserDefaults.standard.bool(forKey: "didPromptPermission")
         }
         set(bool) {
             UserDefaults.standard.set(bool, forKey: "didPromptPermission")
         }
     }
-    
+
     var areNotificationsEnabled: Bool {
         get {
-            return UserDefaults.standard.value(forKey: "areNotificationsEnabled") as? Bool ?? true
+            UserDefaults.standard.value(forKey: "areNotificationsEnabled") as? Bool ?? true
         }
         set(bool) {
             UserDefaults.standard.set(bool, forKey: "areNotificationsEnabled")
         }
     }
-    
+
 }

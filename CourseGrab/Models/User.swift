@@ -22,7 +22,7 @@ struct User {
     let email: String
     let name: String
     let id: String
-    
+
     var sessionAuthorization: SessionAuthorization? {
         get {
             if let dict = UserDefaults.standard.value(forKey: "sessionAuth") as? [String: Any],
@@ -39,7 +39,7 @@ struct User {
                 let dict: [String: Any] = [
                     "sessionToken": token.sessionToken,
                     "updateToken": token.updateToken,
-                    "sessionExpiration": token.sessionExpiration.date,
+                    "sessionExpiration": token.sessionExpiration.date
                 ]
                 UserDefaults.standard.set(dict, forKey: "sessionAuth")
             } else {
@@ -47,10 +47,10 @@ struct User {
             }
         }
     }
-    
+
     var googleToken: String? {
         get {
-            return UserDefaults.standard.string(forKey: "googleToken")
+            UserDefaults.standard.string(forKey: "googleToken")
         }
         nonmutating set(token) {
             UserDefaults.standard.set(token, forKey: "googleToken")
@@ -64,7 +64,7 @@ struct User {
 extension User {
 
     func signOut() {
-        NetworkManager.shared.enableNotifications(enabled: false).observe { result in
+        NetworkManager.shared.enableNotifications(enabled: false).observe { _ in
             // should we ensure that notifications are disabled before signing out?
         }
         sessionAuthorization = nil

@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 class APNNotificationCenter {
-    
+
     typealias Listener = (APNPayload) -> Void
-    
+
     static let `default` = APNNotificationCenter()
-    
+
     private init() { }
-    
+
     private var listeners: [Listener] = []
     private var payloads: [APNPayload] = []
-    
+
     /// Adds a listener and notifies the listener of any prior notifications
     func addListener(listener: @escaping Listener) {
         listeners.append(listener)
@@ -28,7 +28,7 @@ class APNNotificationCenter {
             listener(payload)
         }
     }
-    
+
     /// Notifies all listeners of the payload
     func notify(payload: APNPayload) {
         payloads.append(payload)
@@ -36,6 +36,5 @@ class APNNotificationCenter {
             listener(payload)
         }
     }
-    
-}
 
+}
