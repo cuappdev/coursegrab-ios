@@ -326,7 +326,7 @@
 				05EF7F1F3C4171EA9F0FBD7F /* [CP] Embed Pods Frameworks */,
 				40C9B7D125BB8D348445A5E5 /* [CP] Copy Pods Resources */,
 				B65436D624FFF08200FD4024 /* ShellScript */,
-				7E86D9D725429C9E00F429C3 /* ShellScript */,
+				7E86D9D725429C9E00F429C3 /* SwiftLint Run Script */,
 			);
 			buildRules = (
 			);
@@ -441,7 +441,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CourseGrab/Pods-CourseGrab-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7E86D9D725429C9E00F429C3 /* ShellScript */ = {
+		7E86D9D725429C9E00F429C3 /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -450,6 +450,7 @@
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
