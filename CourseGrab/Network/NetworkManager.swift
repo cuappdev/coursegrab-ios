@@ -74,8 +74,7 @@ class NetworkManager {
 
         guard let expiration = user.sessionAuthorization?.sessionExpiration else {
             return initializeSession(googleToken: googleToken).transformed { response in
-                if !response.success { print("error")}
-                user.sessionAuthorization = response.data
+                if response.success { user.sessionAuthorization = response.data }
             }
         }
 
