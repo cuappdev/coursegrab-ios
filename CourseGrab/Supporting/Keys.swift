@@ -9,7 +9,7 @@
 import Foundation
 
 struct Secrets {
-    
+
     static let announcementsCommonPath = Secrets.keyDict["announcements-common-path"] as! String
     static let announcementsHost = Secrets.keyDict["announcements-host"] as! String
     static let announcementsPath = Secrets.keyDict["announcements-path"] as! String

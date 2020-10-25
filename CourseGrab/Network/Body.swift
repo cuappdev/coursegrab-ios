@@ -11,33 +11,33 @@ import Foundation
 // MARK: - Request Bodies
 
 struct SessionBody: Codable {
-    
+
     let token: String
     let isIos = true
-    
+
 }
 
 struct DeviceTokenBody: Codable {
-    
+
     let isIos = true
     let deviceToken: String
-    
+
 }
 
 struct QueryBody: Codable {
-    
+
     let query: String
-    
+
 }
 
 struct CoursePostBody: Codable {
-    
+
     let courseId: Int
-    
+
 }
 
 struct EnableNotificationsBody: Codable {
-    
+
     let notification: String
-    
+
 }

@@ -26,16 +26,16 @@ class NotificationModalViewController: UIViewController {
         self.payload = payload
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let section = payload.section
-        
+
         // Setup appearance
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.backgroundColor = .black
@@ -130,7 +130,7 @@ class NotificationModalViewController: UIViewController {
             make.height.equalTo(56)
             make.bottom.equalTo(homeButton.snp.top).offset(-24)
         }
-        
+
         // Check availability if >2 mins past
         if payload.timestamp.date.distance(to: Date()) > 2 * 60 {
             checkAvailability()
@@ -138,7 +138,7 @@ class NotificationModalViewController: UIViewController {
     }
 
     private func isOlderModel() -> Bool {
-        return UIScreen.main.nativeBounds.height == 1136 ||
+        UIScreen.main.nativeBounds.height == 1136 ||
             UIScreen.main.nativeBounds.height == 1334 ||
             UIScreen.main.nativeBounds.height == 1920 ||
             UIScreen.main.nativeBounds.height == 2208
@@ -155,7 +155,7 @@ class NotificationModalViewController: UIViewController {
             UIApplication.shared.open(url)
         }
     }
-    
+
     func checkAvailability() {
         availableLabel.text = "CHECKING STATUS"
         availableLabel.textColor = .courseGrabLightGray

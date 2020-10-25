@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
         tableView.showAnimatedSkeleton()
 
-        if (!UserDefaults.standard.didPromptPermission) {
+        if !UserDefaults.standard.didPromptPermission {
             displayPermissionModal()
         }
 
@@ -190,13 +190,13 @@ extension HomeViewController {
             tableView.backgroundView = nil
             break
         case .empty:
-//            tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+            // tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
             break
         case .loading:
-//            tableView.backgroundView = nil
+            // tableView.backgroundView = nil
             break
         case .error:
-//            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
+            // tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Please try again later", icon: Status.closed.icon)
             break
         }
     }
@@ -218,16 +218,14 @@ extension HomeViewController: SPPermissionsDataSource {
         cell.button.allowTitleColor = .white
         return cell
     }
-    
+
 }
 
 // MARK: - UITableViewDelegate
 
 extension HomeViewController: SkeletonTableViewDelegate {
 
-
 }
-
 
 // MARK: - UITableViewDataSource
 
@@ -243,30 +241,29 @@ extension HomeViewController: SkeletonTableViewDataSource {
         }
     }
 
-
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableSections.count == 0 ? 1 : tableSections.count
+        tableSections.count == 0 ? 1 : tableSections.count
     }
 
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        3
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
-        //headerView.configure(for: tableSections[section])
+        // headerView.configure(for: tableSections[section])
         return headerView
     }
 
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return homeCellReuseId
+        homeCellReuseId
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableSections.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: homeCellReuseId, for: indexPath) as! HomeTableViewCell
-//            cell.isSkeletonable = true
-//            cell.showAnimatedSkeleton()
+            // cell.isSkeletonable = true
+            // cell.showAnimatedSkeleton()
             return cell
         }
 
@@ -453,7 +450,7 @@ extension HomeViewController {
 
             textField.alpha = 1
             textField.transform = .identity
-        }) { _ in
+        }, completion: { _ in
             // Remove the views from the navigationBar. We don't want them staying there!
             leftButton.removeFromSuperview()
             rightButton.removeFromSuperview()
@@ -463,7 +460,7 @@ extension HomeViewController {
             // Remove the transform from the right button so it doesn't affect us when
             // we don't expect it.
             rightButton.transform = .identity
-        }
+        })
 
         // Create and present the SearchViewController by fading it in.
         let searchViewController = SearchTableViewController()
