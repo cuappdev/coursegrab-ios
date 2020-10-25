@@ -15,7 +15,7 @@ extension Endpoint {
         Endpoint.config.keyDecodingStrategy = .convertFromSnakeCase
         Endpoint.config.keyEncodingStrategy = .convertToSnakeCase
 
-        #if DEBUG
+        #if LOCAL
         Endpoint.config.scheme = "http"
         Endpoint.config.port = 5000
         #else
