@@ -10,53 +10,53 @@ import Foundation
 import FutureNova
 
 class NetworkManager {
-    
+
     static let shared: NetworkManager = NetworkManager()
 
     private let networking: Networking = URLSession.shared.request
-    
+
     private init() { }
-    
+
     func initializeSession(googleToken: String) -> Future<Response<SessionAuthorization>> {
-        return networking(Endpoint.initializeSession(with: googleToken)).decode()
+        networking(Endpoint.initializeSession(with: googleToken)).decode()
     }
 
     func updateSession() -> Future<Response<SessionAuthorization>> {
-        return networking(Endpoint.updateSession()).decode()
+        networking(Endpoint.updateSession()).decode()
     }
 
-    func getAllTrackedSections() -> Future<Response<[Section]>> {
-        return validateToken()
+    func getAllTrackedSections() -> Future<Response<Sections>> {
+        validateToken()
             .chained { self.networking(Endpoint.getAllTrackedSections()).decode() }
     }
-    
-    func searchCourse(query: String) -> Future<Response<[Course]>> {
-        return validateToken()
+
+    func searchCourse(query: String) -> Future<Response<CourseSearch>> {
+        validateToken()
             .chained { self.networking(Endpoint.searchCourse(query: query)).decode() }
     }
 
     func trackSection(catalogNum: Int) -> Future<Response<Section>> {
-        return validateToken()
+        validateToken()
             .chained { self.networking(Endpoint.trackSection(catalogNum: catalogNum)).decode() }
     }
 
     func untrackSection(catalogNum: Int) -> Future<Response<Section>> {
-        return validateToken()
+        validateToken()
             .chained { self.networking(Endpoint.untrackSection(catalogNum: catalogNum)).decode() }
     }
-    
+
     func getSection(catalogNum: Int) -> Future<Response<Section>> {
-        return validateToken()
+        validateToken()
             .chained { self.networking(Endpoint.getSection(catalogNum: catalogNum)).decode() }
     }
-    
+
     func sendDeviceToken(deviceToken: String) -> Future<SuccessResponse> {
-        return validateToken()
+        validateToken()
             .chained { self.networking(Endpoint.sendDeviceToken(with: deviceToken)).decode() }
     }
-    
+
     func enableNotifications(enabled: Bool) -> Future<SuccessResponse> {
-        return validateToken()
+        validateToken()
             .chained { self.networking(Endpoint.enableNotifications(enabled: enabled)).decode() }
     }
 
@@ -67,14 +67,14 @@ class NetworkManager {
             promise.reject(with: NSError(
                 domain: "",
                 code: 400,
-                userInfo: [NSLocalizedDescriptionKey : "There is either no current user or google token."]
+                userInfo: [NSLocalizedDescriptionKey: "There is either no current user or google token."]
             ))
             return promise
         }
 
         guard let expiration = user.sessionAuthorization?.sessionExpiration else {
             return initializeSession(googleToken: googleToken).transformed { response in
-                user.sessionAuthorization = response.data
+                if response.success { user.sessionAuthorization = response.data }
             }
         }
 
@@ -82,7 +82,7 @@ class NetworkManager {
             return updateSession().transformed { response in
                 // update local session authorization
                 user.sessionAuthorization = response.data
-                
+
                 // update server notification settings to match local
                 // reasoning: we put this here because
                 // (1) it is called when the user first signs in

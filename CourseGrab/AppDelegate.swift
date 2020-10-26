@@ -92,6 +92,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
+        UserDefaults.standard.storedDeviceToken = token
         NetworkManager.shared.sendDeviceToken(deviceToken: token).observe { result in
             switch result {
                 case .value:

@@ -18,10 +18,11 @@ extension Endpoint {
         #if LOCAL
         Endpoint.config.scheme = "http"
         Endpoint.config.port = 5000
+        Endpoint.config.host = "0.0.0.0"
         #else
         Endpoint.config.scheme = "https"
-        #endif
         Endpoint.config.host = Secrets.serverHost
+        #endif
         Endpoint.config.commonPath = "/api"
     }
 
@@ -42,18 +43,19 @@ extension Endpoint {
     }
 
     static func initializeSession(with token: String) -> Endpoint {
-        let body = SessionBody(token: token)
+        let deviceToken = UserDefaults.standard.storedDeviceToken == "" ? nil : UserDefaults.standard.storedDeviceToken
+        let body = SessionBody(deviceToken: deviceToken, deviceType: "IOS", token: token)
         return Endpoint(path: "/session/initialize/", body: body)
     }
 
     static func updateSession() -> Endpoint {
-        return Endpoint(path: "/session/update/", headers: updateHeaders, method: .post)
+        Endpoint(path: "/session/update/", headers: updateHeaders, method: .post)
     }
 
     static func getAllTrackedSections() -> Endpoint {
-        return Endpoint(path: "/users/tracking/", headers: standardHeaders)
+        Endpoint(path: "/users/tracking/", headers: standardHeaders)
     }
-    
+
     static func searchCourse(query: String) -> Endpoint {
         let body = QueryBody(query: query)
         return Endpoint(path: "/courses/search/", headers: standardHeaders, body: body)
@@ -68,18 +70,18 @@ extension Endpoint {
         let body = CoursePostBody(courseId: catalogNum)
         return Endpoint(path: "/sections/untrack/", headers: standardHeaders, body: body)
     }
-    
+
     static func getSection(catalogNum: Int) -> Endpoint {
-        return Endpoint(path: "/sections/\(catalogNum)/", headers: standardHeaders)
+        Endpoint(path: "/sections/\(catalogNum)/", headers: standardHeaders)
     }
-    
+
     static func sendDeviceToken(with deviceToken: String) -> Endpoint {
         let body = DeviceTokenBody(deviceToken: deviceToken)
         return Endpoint(path: "/users/device-token/", headers: standardHeaders, body: body)
     }
-    
+
     static func enableNotifications(enabled: Bool) -> Endpoint {
-        let body = EnableNotificationsBody(notification: enabled ? "IPHONE" : "NONE")
+        let body = EnableNotificationsBody(notification: enabled ? "IOS" : "NONE")
         return Endpoint(path: "/users/notification/", headers: standardHeaders, body: body)
     }
 

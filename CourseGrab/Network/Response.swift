@@ -13,12 +13,12 @@ struct Response<T: Codable>: Codable {
     let data: T
     let success: Bool
     let timestamp: Timestamp
-    
+
 }
 
 struct SuccessResponse: Codable {
 
     let success: Bool
     let timestamp: Timestamp
-    
+
 }

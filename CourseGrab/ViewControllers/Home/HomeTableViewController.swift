@@ -63,7 +63,7 @@ class HomeTableViewController: UITableViewController {
         refreshControl = UIRefreshControl()
         refreshControl?.on(.valueChanged, refreshTableView)
 
-        if (!UserDefaults.standard.didPromptPermission) {
+        if !UserDefaults.standard.didPromptPermission {
             displayPermissionModal()
         } else {
             // Present announcement if there are any new ones to present
@@ -94,7 +94,7 @@ class HomeTableViewController: UITableViewController {
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
     }
-  
+
     @objc func refreshTableView(_ sender: Any) {
         getAllTrackedCourses()
     }
@@ -118,7 +118,7 @@ extension HomeTableViewController {
     private func getAllTrackedCourses() {
         refreshControl?.endRefreshing()
         impactFeedbackGenerator.prepare()
-        
+
         NetworkManager.shared.getAllTrackedSections().observe { result in
             switch result {
             case .value(let response):
@@ -138,8 +138,8 @@ extension HomeTableViewController {
                 }
 
                 // Construct target array
-                let available = response.data.filter { $0.status == .open }
-                let awaiting = response.data.filter { $0.status != .open }
+                let available = response.data.sections.filter { $0.status == .open }
+                let awaiting = response.data.sections.filter { $0.status != .open }
                 var target: [ArraySection<String, Section>] = []
                 if available.count > 0 {
                     target.append(ArraySection(model: availableModel, elements: available))
@@ -225,7 +225,9 @@ extension HomeTableViewController {
         case .normal:
             tableView.backgroundView = nil
         case .empty:
-            tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked", subtitle: "Tap the search icon to start adding courses", icon: Status.open.icon)
+            tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked",
+                                                     subtitle: "Tap the search icon to start adding courses",
+                                                     icon: Status.open.icon)
         case .loading:
             tableView.backgroundView = HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
         case .error:
@@ -253,13 +255,13 @@ extension HomeTableViewController: SPPermissionsDataSource {
         cell.button.allowTitleColor = .white
         return cell
     }
-    
+
 }
 
 // MARK: - SPPermissionsDelegate
 
 extension HomeTableViewController: SPPermissionsDelegate {
-    
+
     private func displayPermissionModal() {
         let controller = SPPermissions.dialog([.notification])
         controller.titleText = "Get In Your Courses"
@@ -303,7 +305,7 @@ extension HomeTableViewController: SPPermissionsDelegate {
 extension HomeTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableSections.count
+        tableSections.count
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -328,7 +330,7 @@ extension HomeTableViewController {
             return cell
         }
     }
-    
+
     private func reloadSectionHeaders() {
         for (i, tableSection) in tableSections.enumerated() {
             if let header = tableView.headerView(forSection: i) as? HomeTableViewHeader {
@@ -421,7 +423,7 @@ extension HomeTableViewController {
 
     private func showSearch(_ button: UIButton) {
         AppDevAnalytics.shared.logFirebase(SearchIconPressPayload())
-        
+
         // Grab navigation bar views and frames
         guard let navigationBar = navigationController?.navigationBar,
             let leftButton = navigationItem.leftBarButtonItem?.customView as? UIButton,
@@ -485,7 +487,7 @@ extension HomeTableViewController {
 
             textField.alpha = 1
             textField.transform = .identity
-        }) { _ in
+        }, completion: { _ in
             // Remove the views from the navigationBar. We don't want them staying there!
             leftButton.removeFromSuperview()
             rightButton.removeFromSuperview()
@@ -495,7 +497,7 @@ extension HomeTableViewController {
             // Remove the transform from the right button so it doesn't affect us when
             // we don't expect it.
             rightButton.transform = .identity
-        }
+        })
 
         // Create and present the SearchViewController by fading it in.
         let searchViewController = SearchTableViewController()

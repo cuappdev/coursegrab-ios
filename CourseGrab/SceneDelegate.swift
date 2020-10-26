@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         splash.view.backgroundColor = .courseGrabBlack
         window.rootViewController = splash
 
-        Auth.auth().addStateDidChangeListener { (auth, user) in
+        Auth.auth().addStateDidChangeListener { (_, user) in
             if let email = user?.email, email.split(separator: "@").last != "cornell.edu" {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Invalid Email", message: "You must use a Cornell email.", preferredStyle: .alert)
@@ -48,7 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     // If both are LoginViewController, don't bother presenting a new VC
                     return
                 }
-                
+
                 newVC.modalPresentationStyle = .overFullScreen
                 newVC.modalPresentationCapturesStatusBarAppearance = true
                 // Only present currentVC modally for entering or exiting from HomeVC
@@ -57,13 +57,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window.rootViewController = newVC
             }
         }
-        
+
         AppDevAnalytics.shared.logFirebase(AppLaunchedPayload())
-        
+
         self.window = window
         window.makeKeyAndVisible()
     }
-    
+
     func sceneDidBecomeActive(_ scene: UIScene) {
         UIApplication.shared.applicationIconBadgeNumber = 0
     }

@@ -37,7 +37,7 @@ class SettingsViewController: UIViewController {
             selector: #selector(setMobileSwitchOn),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
-        
+
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.pan(pan)
         view.tap(tap)
@@ -45,23 +45,23 @@ class SettingsViewController: UIViewController {
         // Setup containers
         contentView.backgroundColor = .white
         view.addSubview(contentView)
-        
+
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 17
         stackView.layoutMargins = UIEdgeInsets(top: 18, left: 20, bottom: 18, right: 20)
         stackView.isLayoutMarginsRelativeArrangement = true
         contentView.addSubview(stackView)
-        
+
         // Setup constraints
         contentView.snp.makeConstraints { make in
             make.bottom.width.equalToSuperview()
         }
-        
+
         stackView.snp.makeConstraints { make in
             make.size.equalToSuperview()
         }
-        
+
         // Setup children
         let settingsLabel = UILabel()
         settingsLabel.text = "Settings"
@@ -79,7 +79,7 @@ class SettingsViewController: UIViewController {
         mobileSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
         setMobileSwitchOn()
         mobileStackView.addArrangedSubview(mobileSwitch)
-        
+
         let calendarButton = UIButton(type: .system)
         calendarButton.setAttributedTitle(
             NSAttributedString(
@@ -94,7 +94,7 @@ class SettingsViewController: UIViewController {
         calendarButton.contentHorizontalAlignment = .left
         calendarButton.on(.touchUpInside, openCalendar)
         stackView.addArrangedSubview(calendarButton)
-        
+
         let feedbackButton = UIButton(type: .system)
         feedbackButton.setAttributedTitle(
             NSAttributedString(
@@ -109,7 +109,7 @@ class SettingsViewController: UIViewController {
         feedbackButton.contentHorizontalAlignment = .left
         feedbackButton.on(.touchUpInside, leaveFeedback)
         stackView.addArrangedSubview(feedbackButton)
-        
+
         let accountStackView = UIStackView()
         stackView.addArrangedSubview(accountStackView)
 
@@ -118,7 +118,7 @@ class SettingsViewController: UIViewController {
         accountLabel.textColor = .courseGrabDarkGray
         accountLabel.text = User.current?.email
         accountStackView.addArrangedSubview(accountLabel)
-        
+
         let signOutButton = UIButton(type: .system)
         signOutButton.setTitle("Sign Out", for: .normal)
         signOutButton.setTitleColor(.courseGrabRuby, for: .normal)
@@ -127,7 +127,7 @@ class SettingsViewController: UIViewController {
         signOutButton.contentHorizontalAlignment = .right
         accountStackView.addArrangedSubview(signOutButton)
     }
-    
+
     override func viewDidLayoutSubviews() {
         contentView.roundCorners(corners: [.topLeft, .topRight], radius: 10)
     }
@@ -137,7 +137,7 @@ class SettingsViewController: UIViewController {
 // MARK: - Links
 
 extension SettingsViewController {
-    
+
     private func leaveFeedback(_ button: UIButton) {
         let emailAddress = "team@cornellappdev.com"
         if MFMailComposeViewController.canSendMail() {
@@ -146,9 +146,9 @@ extension SettingsViewController {
             mailComposerVC.setToRecipients([emailAddress])
             mailComposerVC.setSubject("CourseGrab Feedback")
             mailComposerVC.setMessageBody("", isHTML: true)
-            
+
             AppDevAnalytics.shared.logFirebase(FeedbackSuccessPayload())
-            
+
             present(mailComposerVC, animated: true)
         } else {
             let title = "Couldn't Send Email"
@@ -170,14 +170,14 @@ extension SettingsViewController {
             present(alertController, animated: true)
         }
     }
-    
+
     private func openCalendar(_ button: UIButton) {
         AppDevAnalytics.shared.logFirebase(CornellCalendarPressPayload())
         if let url = URL(string: "https://registrar.cornell.edu/academic-calendar") {
             UIApplication.shared.open(url)
         }
     }
-    
+
 }
 
 // MARK: - Sign out
@@ -196,7 +196,7 @@ extension SettingsViewController {
 // MARK: - Notifications
 
 extension SettingsViewController {
-    
+
     @objc private func setMobileSwitchOn() {
         mobileSwitch.isUserInteractionEnabled = false
         mobileSwitch.isOn = UserDefaults.standard.areNotificationsEnabled
@@ -207,12 +207,12 @@ extension SettingsViewController {
             }
         }
     }
-    
+
     private func toggleNotificationsEnabled(_ sender: UISwitch) {
         AppDevAnalytics.shared.logFirebase(MobileAlertPressPayload())
         sender.isUserInteractionEnabled = false
         let enable = sender.isOn
-        
+
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .authorized:
@@ -240,7 +240,7 @@ extension SettingsViewController {
             }
         }
     }
-    
+
 }
 
 // MARK: - SPPermissionsDataSource
@@ -258,13 +258,13 @@ extension SettingsViewController: SPPermissionsDataSource {
         cell.button.allowTitleColor = .white
         return cell
     }
-    
+
 }
 
 // MARK: - SPPermissionsDelegate
 
 extension SettingsViewController: SPPermissionsDelegate {
-    
+
     private func displayPermissionModal() {
         let controller = SPPermissions.dialog([.notification])
         controller.titleText = "Get In Your Courses"
@@ -279,11 +279,11 @@ extension SettingsViewController: SPPermissionsDelegate {
         UserDefaults.standard.didPromptPermission = true
         UIApplication.shared.registerForRemoteNotifications()
     }
-    
+
     func didHide(permissions ids: [Int]) {
         UserDefaults.standard.didPromptPermission = true
     }
-    
+
     func didDenied(permission: SPPermission) {
         UserDefaults.standard.didPromptPermission = true
     }
@@ -307,19 +307,19 @@ extension SettingsViewController: SPPermissionsDelegate {
 // MARK: - Gesture recognizers
 
 extension SettingsViewController {
-    
+
     private func pan(_ gesture: UIPanGestureRecognizer) {
         let dismissalFraction: CGFloat = 20 / contentView.frame.height
-        
+
         let translation = gesture.translation(in: view).y
         let velocity = gesture.velocity(in: view).y
         let panFraction = translation / contentView.frame.height
-        
+
         switch gesture.state {
         case .changed:
             contentView.transform = CGAffineTransform(translationX: 0, y: min(max(0, translation), contentView.frame.height))
             view.backgroundColor = UIColor.black.withAlphaComponent(min(0.4, 0.4 - panFraction * 0.4))
-            
+
             if velocity > 0 && lastPanFraction < dismissalFraction && panFraction > dismissalFraction {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             }
@@ -335,10 +335,10 @@ extension SettingsViewController {
         default:
             break
         }
-        
+
         lastPanFraction = panFraction
     }
-    
+
     private func tap(_ gesture: UITapGestureRecognizer) {
         if !contentView.frame.contains(gesture.location(in: view)) {
             dismiss(animated: true)
@@ -346,25 +346,27 @@ extension SettingsViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        .lightContent
     }
-    
+
 }
 
 // MARK: - Transitioning delegate
 
 extension SettingsViewController: UIViewControllerTransitioningDelegate {
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+
+    func animationController(forPresented presented: UIViewController,
+                             presenting: UIViewController,
+                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transitionAnimator.isPresenting = true
         return transitionAnimator
     }
-    
+
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transitionAnimator.isPresenting = false
         return transitionAnimator
     }
-    
+
 }
 
 // MARK: - MailComomposer delegate
@@ -377,5 +379,5 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
             print("Mail error: " + error.localizedDescription)
         }
     }
-    
+
 }

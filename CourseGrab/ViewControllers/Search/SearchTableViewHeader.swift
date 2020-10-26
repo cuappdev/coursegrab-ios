@@ -16,7 +16,7 @@ class SearchTableViewHeader: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
 
         contentView.backgroundColor = .white
-        
+
         titleLabel.font = ._20Semibold
         titleLabel.textColor = .black
         contentView.addSubview(titleLabel)
@@ -35,5 +35,5 @@ class SearchTableViewHeader: UITableViewHeaderFooterView {
     func configure(numResults: Int) {
         titleLabel.text = "\(numResults) Result\(numResults == 1 ? "" : "s")"
     }
-    
+
 }

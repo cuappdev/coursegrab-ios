@@ -12,32 +12,32 @@ import Foundation
 
 struct SessionBody: Codable {
     
+    let deviceToken: String?
+    let deviceType: String
     let token: String
-    let isIos = true
     
 }
 
 struct DeviceTokenBody: Codable {
     
-    let isIos = true
     let deviceToken: String
-    
+
 }
 
 struct QueryBody: Codable {
-    
+
     let query: String
-    
+
 }
 
 struct CoursePostBody: Codable {
-    
+
     let courseId: Int
-    
+
 }
 
 struct EnableNotificationsBody: Codable {
-    
+
     let notification: String
-    
+
 }

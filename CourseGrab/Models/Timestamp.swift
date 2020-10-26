@@ -10,89 +10,89 @@ import Foundation
 import UIKit
 
 struct Timestamp: Codable {
-    
+
     let date: Date
-    
+
     init() {
         self.date = Date()
     }
-    
+
     init(_ date: Date) {
         self.date = date
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let rawDate = try container.decode(TimeInterval.self)
         date = Date(timeIntervalSince1970: rawDate)
     }
-    
+
 }
 
 extension Timestamp: Equatable {
-    
+
     static func == (lhs: Timestamp, rhs: Timestamp) -> Bool {
-        return lhs.date == rhs.date
+        lhs.date == rhs.date
     }
-    
+
     static func <= (lhs: Timestamp, rhs: Timestamp) -> Bool {
-        return lhs.date <= rhs.date
+        lhs.date <= rhs.date
     }
-    
+
     static func >= (lhs: Timestamp, rhs: Timestamp) -> Bool {
-        return lhs.date >= rhs.date
+        lhs.date >= rhs.date
     }
-    
+
     static func < (lhs: Timestamp, rhs: Timestamp) -> Bool {
-        return lhs.date < rhs.date
+        lhs.date < rhs.date
     }
-    
+
     static func > (lhs: Timestamp, rhs: Timestamp) -> Bool {
-        return lhs.date > rhs.date
+        lhs.date > rhs.date
     }
-    
+
 }
 
 extension Timestamp {
-    
+
     static func == (lhs: Timestamp, rhs: Date) -> Bool {
-        return lhs.date == rhs
+        lhs.date == rhs
     }
-    
+
     static func == (lhs: Date, rhs: Timestamp) -> Bool {
-        return lhs == rhs.date
+        lhs == rhs.date
     }
-    
+
     static func <= (lhs: Timestamp, rhs: Date) -> Bool {
-        return lhs.date <= rhs
+        lhs.date <= rhs
     }
-    
+
     static func <= (lhs: Date, rhs: Timestamp) -> Bool {
-        return lhs <= rhs.date
+        lhs <= rhs.date
     }
-    
+
     static func >= (lhs: Timestamp, rhs: Date) -> Bool {
-        return lhs.date >= rhs
+        lhs.date >= rhs
     }
-    
+
     static func >= (lhs: Date, rhs: Timestamp) -> Bool {
-        return lhs >= rhs.date
+        lhs >= rhs.date
     }
-    
+
     static func < (lhs: Timestamp, rhs: Date) -> Bool {
-        return lhs.date < rhs
+        lhs.date < rhs
     }
-    
+
     static func < (lhs: Date, rhs: Timestamp) -> Bool {
-        return lhs < rhs.date
+        lhs < rhs.date
     }
-    
+
     static func > (lhs: Timestamp, rhs: Date) -> Bool {
-        return lhs.date > rhs
+        lhs.date > rhs
     }
-    
+
     static func > (lhs: Date, rhs: Timestamp) -> Bool {
-        return lhs > rhs.date
+        lhs > rhs.date
     }
-    
+
 }

@@ -17,7 +17,7 @@ class HomeTableViewHeader: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
 
         contentView.backgroundColor = .white
-        
+
         titleLabel.font = ._20Semibold
         contentView.addSubview(titleLabel)
 
