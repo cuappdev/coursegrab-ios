@@ -18,10 +18,11 @@ extension Endpoint {
         #if LOCAL
         Endpoint.config.scheme = "http"
         Endpoint.config.port = 5000
+        Endpoint.config.host = "0.0.0.0"
         #else
         Endpoint.config.scheme = "https"
-        #endif
         Endpoint.config.host = Secrets.serverHost
+        #endif
         Endpoint.config.commonPath = "/api"
     }
 
@@ -42,7 +43,8 @@ extension Endpoint {
     }
 
     static func initializeSession(with token: String) -> Endpoint {
-        let body = SessionBody(token: token)
+        let deviceToken = UserDefaults.standard.storedDeviceToken == "" ? nil : UserDefaults.standard.storedDeviceToken
+        let body = SessionBody(deviceToken: deviceToken, deviceType: "IOS", token: token)
         return Endpoint(path: "/session/initialize/", body: body)
     }
 
@@ -79,7 +81,7 @@ extension Endpoint {
     }
 
     static func enableNotifications(enabled: Bool) -> Endpoint {
-        let body = EnableNotificationsBody(notification: enabled ? "IPHONE" : "NONE")
+        let body = EnableNotificationsBody(notification: enabled ? "IOS" : "NONE")
         return Endpoint(path: "/users/notification/", headers: standardHeaders, body: body)
     }
 

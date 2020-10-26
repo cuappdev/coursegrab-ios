@@ -124,7 +124,7 @@ class HomeTableViewCell: UITableViewCell {
 
     func configure(for section: Section) {
         self.section = section
-        courseLabel.text = String(section.courseNum)
+        courseLabel.text = String(section.catalogNum)
         enrollButton.isHidden = section.status != .open
         sectionLabel.text = section.section
         statusBadge.image = section.status.icon

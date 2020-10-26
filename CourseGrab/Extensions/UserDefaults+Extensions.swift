@@ -9,6 +9,15 @@
 import Foundation
 
 extension UserDefaults {
+    
+    var areNotificationsEnabled: Bool {
+        get {
+            return UserDefaults.standard.value(forKey: "areNotificationsEnabled") as? Bool ?? true
+        }
+        set(bool) {
+            UserDefaults.standard.set(bool, forKey: "areNotificationsEnabled")
+        }
+    }
 
     var didPromptPermission: Bool {
         get {
@@ -18,13 +27,13 @@ extension UserDefaults {
             UserDefaults.standard.set(bool, forKey: "didPromptPermission")
         }
     }
-
-    var areNotificationsEnabled: Bool {
+    
+    var storedDeviceToken: String {
         get {
-            UserDefaults.standard.value(forKey: "areNotificationsEnabled") as? Bool ?? true
+            return UserDefaults.standard.string(forKey: "storeDeviceToken") ?? ""
         }
-        set(bool) {
-            UserDefaults.standard.set(bool, forKey: "areNotificationsEnabled")
+        set(string) {
+            UserDefaults.standard.set(string, forKey: "storeDeviceToken")
         }
     }
 

@@ -11,15 +11,15 @@ import Foundation
 // MARK: - Request Bodies
 
 struct SessionBody: Codable {
-
+    
+    let deviceToken: String?
+    let deviceType: String
     let token: String
-    let isIos = true
-
+    
 }
 
 struct DeviceTokenBody: Codable {
-
-    let isIos = true
+    
     let deviceToken: String
 
 }
