@@ -59,7 +59,7 @@ class SearchTableViewController: UITableViewController {
 // MARK: - Networking
 
 extension SearchTableViewController {
-    
+
     @objc private func getCourses(timer: Timer) {
         if let userInfo = timer.userInfo as? [String: String],
             let searchText = userInfo["searchText"] {
@@ -111,7 +111,7 @@ extension SearchTableViewController {
 extension SearchTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courses.count
+        courses.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,13 +120,13 @@ extension SearchTableViewController {
         cell.untrackSection = untrack(section:)
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: searchHeaderReuseId) as! SearchTableViewHeader
         headerView.configure(numResults: courses.count)
         return headerView
     }
-    
+
 }
 
 // MARK: - Delegate
@@ -190,17 +190,17 @@ extension SearchTableViewController {
 // MARK: - View lifecycle
 
 extension SearchTableViewController {
-    
+
     override func viewWillAppear(_ animated: Bool) {
         setupPopGesture()
         tableView.isScrollEnabled = true
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         textField.becomeFirstResponder()
         textDidChange(textField)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         textField.resignFirstResponder()
         tableView.isScrollEnabled = false
@@ -209,11 +209,11 @@ extension SearchTableViewController {
     private func back(_ button: UIButton) {
         navigationController?.popViewController(animated: true)
     }
-    
+
     private func setupPopGesture() {
         guard let navigationController = navigationController, popRecognizer == nil else { return }
         popRecognizer = InteractivePopRecognizer(navigationController: navigationController)
         navigationController.interactivePopGestureRecognizer?.delegate = popRecognizer
     }
-    
+
 }

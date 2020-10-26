@@ -21,7 +21,7 @@ extension UserDefaults {
 
     var didPromptPermission: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "didPromptPermission")
+            UserDefaults.standard.bool(forKey: "didPromptPermission")
         }
         set(bool) {
             UserDefaults.standard.set(bool, forKey: "didPromptPermission")
@@ -36,5 +36,5 @@ extension UserDefaults {
             UserDefaults.standard.set(string, forKey: "storeDeviceToken")
         }
     }
-    
+
 }

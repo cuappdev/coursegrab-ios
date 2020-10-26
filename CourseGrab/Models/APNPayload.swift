@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 struct APNPayload: Codable {
-    
+
     let section: Section
     let timestamp: Timestamp
-    
+
 }

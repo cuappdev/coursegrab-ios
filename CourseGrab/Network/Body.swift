@@ -21,23 +21,23 @@ struct SessionBody: Codable {
 struct DeviceTokenBody: Codable {
     
     let deviceToken: String
-    
+
 }
 
 struct QueryBody: Codable {
-    
+
     let query: String
-    
+
 }
 
 struct CoursePostBody: Codable {
-    
+
     let courseId: Int
-    
+
 }
 
 struct EnableNotificationsBody: Codable {
-    
+
     let notification: String
-    
+
 }
