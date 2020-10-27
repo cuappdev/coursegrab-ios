@@ -231,7 +231,7 @@ extension HomeTableViewController {
         case .loading:
             tableView.backgroundView = HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
         case .error:
-            tableView.backgroundView = HomeStateView(title: "An error occured", subtitle: "Pull down to refresh", icon: Status.closed.icon)
+            tableView.backgroundView = HomeStateView(title: "Could Not Connect to Server", subtitle: "Pull down to refresh", icon: Status.closed.icon)
         case .noConnection:
             tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Pull down to refresh", icon: Status.closed.icon)
         }
