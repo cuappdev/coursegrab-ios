@@ -1,9 +1,9 @@
 PODS:
-  - AppAuth (1.3.0):
-    - AppAuth/Core (= 1.3.0)
-    - AppAuth/ExternalUserAgent (= 1.3.0)
-  - AppAuth/Core (1.3.0)
-  - AppAuth/ExternalUserAgent (1.3.0)
+  - AppAuth (1.4.0):
+    - AppAuth/Core (= 1.4.0)
+    - AppAuth/ExternalUserAgent (= 1.4.0)
+  - AppAuth/Core (1.4.0)
+  - AppAuth/ExternalUserAgent (1.4.0)
   - AppDevAnnouncements (0.0.1)
   - DifferenceKit (1.1.5):
     - DifferenceKit/Core (= 1.1.5)
@@ -12,116 +12,106 @@ PODS:
   - DifferenceKit/UIKitExtension (1.1.5):
     - DifferenceKit/Core
   - DZNEmptyDataSet (1.8.1)
-  - Firebase/Analytics (6.23.0):
+  - Firebase/Analytics (6.32.0):
     - Firebase/Core
-  - Firebase/Auth (6.23.0):
+  - Firebase/Auth (6.32.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 6.5.2)
-  - Firebase/Core (6.23.0):
+    - FirebaseAuth (~> 6.9.1)
+  - Firebase/Core (6.32.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.4.2)
-  - Firebase/CoreOnly (6.23.0):
-    - FirebaseCore (= 6.6.7)
-  - Firebase/Crashlytics (6.23.0):
+    - FirebaseAnalytics (= 6.8.1)
+  - Firebase/CoreOnly (6.32.0):
+    - FirebaseCore (= 6.10.2)
+  - Firebase/Crashlytics (6.32.0):
     - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 4.0.0)
-  - FirebaseAnalytics (6.4.2):
-    - FirebaseCore (~> 6.6)
-    - FirebaseInstallations (~> 1.2)
-    - GoogleAppMeasurement (= 6.4.2)
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
-    - GoogleUtilities/MethodSwizzler (~> 6.0)
-    - GoogleUtilities/Network (~> 6.0)
-    - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (= 0.3.9011)
-  - FirebaseAnalyticsInterop (1.5.0)
-  - FirebaseAuth (6.5.2):
-    - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 6.6)
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.5)
-    - GoogleUtilities/Environment (~> 6.5)
+    - FirebaseCrashlytics (~> 4.6.0)
+  - FirebaseAnalytics (6.8.1):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstallations (~> 1.6)
+    - GoogleAppMeasurement (= 6.8.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30906.0)
+  - FirebaseAuth (6.9.1):
+    - FirebaseCore (~> 6.10)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/Environment (~> 6.7)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseAuthInterop (1.1.0)
-  - FirebaseCore (6.6.7):
-    - FirebaseCoreDiagnostics (~> 1.2)
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-  - FirebaseCoreDiagnostics (1.2.4):
-    - FirebaseCoreDiagnosticsInterop (~> 1.2)
-    - GoogleDataTransportCCTSupport (~> 3.0)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
-    - nanopb (~> 0.3.901)
-  - FirebaseCoreDiagnosticsInterop (1.2.0)
-  - FirebaseCrashlytics (4.0.0):
-    - FirebaseAnalyticsInterop (~> 1.2)
-    - FirebaseCore (~> 6.6)
-    - FirebaseInstallations (~> 1.1)
-    - GoogleDataTransport (~> 6.0)
-    - GoogleDataTransportCCTSupport (~> 3.0)
-    - nanopb (~> 0.3.901)
+  - FirebaseCore (6.10.2):
+    - FirebaseCoreDiagnostics (~> 1.6)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+  - FirebaseCoreDiagnostics (1.6.0):
+    - GoogleDataTransport (~> 7.2)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+    - nanopb (~> 1.30906.0)
+  - FirebaseCrashlytics (4.6.1):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstallations (~> 1.6)
+    - GoogleDataTransport (~> 7.2)
+    - nanopb (~> 1.30906.0)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstallations (1.2.0):
-    - FirebaseCore (~> 6.6)
-    - GoogleUtilities/Environment (~> 6.6)
-    - GoogleUtilities/UserDefaults (~> 6.6)
+  - FirebaseInstallations (1.7.0):
+    - FirebaseCore (~> 6.10)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
     - PromisesObjC (~> 1.2)
   - FutureNova (0.1.6)
-  - GoogleAppMeasurement (6.4.2):
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
-    - GoogleUtilities/MethodSwizzler (~> 6.0)
-    - GoogleUtilities/Network (~> 6.0)
-    - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (= 0.3.9011)
-  - GoogleDataTransport (6.0.0)
-  - GoogleDataTransportCCTSupport (3.0.0):
-    - GoogleDataTransport (~> 6.0)
-    - nanopb (~> 0.3.901)
+  - GoogleAppMeasurement (6.8.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30906.0)
+  - GoogleDataTransport (7.3.0):
+    - nanopb (~> 1.30906.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleUtilities/AppDelegateSwizzler (6.6.0):
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.6.0):
+  - GoogleUtilities/Environment (6.7.2):
     - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (6.6.0):
+  - GoogleUtilities/Logger (6.7.2):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.6.0):
+  - GoogleUtilities/MethodSwizzler (6.7.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.6.0):
+  - GoogleUtilities/Network (6.7.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.6.0)"
-  - GoogleUtilities/Reachability (6.6.0):
+  - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.6.0):
+  - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
   - GTMAppAuth (1.0.0):
     - AppAuth/Core (~> 1.0)
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.3.1):
-    - GTMSessionFetcher/Full (= 1.3.1)
-  - GTMSessionFetcher/Core (1.3.1)
-  - GTMSessionFetcher/Full (1.3.1):
-    - GTMSessionFetcher/Core (= 1.3.1)
-  - nanopb (0.3.9011):
-    - nanopb/decode (= 0.3.9011)
-    - nanopb/encode (= 0.3.9011)
-  - nanopb/decode (0.3.9011)
-  - nanopb/encode (0.3.9011)
-  - PromisesObjC (1.2.8)
+  - GTMSessionFetcher (1.4.0):
+    - GTMSessionFetcher/Full (= 1.4.0)
+  - GTMSessionFetcher/Core (1.4.0)
+  - GTMSessionFetcher/Full (1.4.0):
+    - GTMSessionFetcher/Core (= 1.4.0)
+  - nanopb (1.30906.0):
+    - nanopb/decode (= 1.30906.0)
+    - nanopb/encode (= 1.30906.0)
+  - nanopb/decode (1.30906.0)
+  - nanopb/encode (1.30906.0)
+  - PromisesObjC (1.2.10)
   - ReachabilitySwift (5.0.0)
   - SnapKit (5.0.1)
-  - SPPermissions/Core (5.3.2)
-  - SPPermissions/Notification (5.3.2):
+  - SPPermissions/Core (5.3.5)
+  - SPPermissions/Notification (5.3.5):
     - SPPermissions/Core
   - Tactile (3.0.1)
-  - Wormholy (1.6.1)
+  - Wormholy (1.6.3)
 
 DEPENDENCIES:
   - AppDevAnnouncements (from `https://github.com/cuappdev/appdev-announcements.git`)
@@ -145,17 +135,13 @@ SPEC REPOS:
     - DZNEmptyDataSet
     - Firebase
     - FirebaseAnalytics
-    - FirebaseAnalyticsInterop
     - FirebaseAuth
-    - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
-    - FirebaseCoreDiagnosticsInterop
     - FirebaseCrashlytics
     - FirebaseInstallations
     - GoogleAppMeasurement
     - GoogleDataTransport
-    - GoogleDataTransportCCTSupport
     - GoogleSignIn
     - GoogleUtilities
     - GTMAppAuth
@@ -183,40 +169,32 @@ CHECKOUT OPTIONS:
     :git: https://github.com/cuappdev/ios-networking.git
 
 SPEC CHECKSUMS:
-  AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
+  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   AppDevAnnouncements: e17a7f441fb0664583bb08e21dc709214d15b70f
   DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
-  FirebaseAnalytics: 558f7a03d19de451093032c806f39d5f9dff096e
-  FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
-  FirebaseAuth: e50319ecc114acf93c2b9581e15d6604ddd7eeb2
-  FirebaseAuthInterop: a0f37ae05833af156e72028f648d313f7e7592e9
-  FirebaseCore: a2788a0d5f6c1dff17b8f79b4a73654a8d4bfdbd
-  FirebaseCoreDiagnostics: b59c024493a409f8aecba02c99928d0d8431d159
-  FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
-  FirebaseCrashlytics: 941608d2a3475b48fb7010b998703d07696b8db1
-  FirebaseInstallations: 2119fb3e46b0a88bfdbf12562f855ee3252462fa
+  Firebase: afa030f17f5421810f379a42b0e5d3302d27eb26
+  FirebaseAnalytics: a4d98464f455f5056063932123fa441025322f30
+  FirebaseAuth: f7b269b33c1e842a35400ddc9bbc8b03cdc47ba3
+  FirebaseCore: 1d697bb944bf2af5fc248f1a66e165c9dd88bf97
+  FirebaseCoreDiagnostics: 7415bfb3883b3500c5a95c42b6ba66baae78f600
+  FirebaseCrashlytics: 5777d3462fb8c3ab9e80a2473bd7d667a2e8411c
+  FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FutureNova: 95f9aa352b2c250253b96fdf380754afcc87c7f3
-  GoogleAppMeasurement: 2253e99c1f22638cf234c059144660c338ad76c3
-  GoogleDataTransport: 061fe7d9b476710e3cd8ea51e8e07d8b67c2b420
-  GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
+  GoogleAppMeasurement: e3618c6e9f5166a6b320b03b759da3b04ec2a101
+  GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
-  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
-  GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
-  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SPPermissions: f1f82ba07d1a07e1d73521b19e7c3550b0bc0ddb
+  SPPermissions: 5cccac81eea5afa7b78de5846bf3d33fd6adcf57
   Tactile: 266a3ddd39e670205de3987ded0414d9206ae300
-  Wormholy: 0fd599c7efb09bb96af8cdfbe81a716932caf67e
+  Wormholy: bfc1c8679eefd0edd92638758e21c3961b1b3b50
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 84156e1a3dfbd5948af829e299aa23a37ed3073d
-=======
-PODFILE CHECKSUM: 11d17178c69a2529910018a80678514289059a30
->>>>>>> master
+PODFILE CHECKSUM: bccb4bc345e8537821dd23a640a458b0937b501b
 
 COCOAPODS: 1.9.3
