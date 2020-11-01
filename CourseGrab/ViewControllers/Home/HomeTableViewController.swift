@@ -7,6 +7,7 @@
 //
 
 import DifferenceKit
+import DZNEmptyDataSet
 import SPPermissions
 import Tactile
 import UIKit
@@ -57,6 +58,8 @@ class HomeTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HomeTableViewHeader.self, forHeaderFooterViewReuseIdentifier: homeHeaderReuseId)
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: homeCellReuseId)
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
 
         refreshControl = UIRefreshControl()
         refreshControl?.on(.valueChanged, refreshTableView)
@@ -69,7 +72,7 @@ class HomeTableViewController: UITableViewController {
             presentAnnouncement(completion: nil)
         }
 
-        show(state: .loading)
+//        show(state: .loading)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -127,10 +130,13 @@ extension HomeTableViewController {
                 DispatchQueue.main.async {
                     // Update state if needed
                     if available.count == 0 && awaiting.count == 0 {
-                        self.show(state: .empty)
+//                        self.show(state: .empty)
+                        self.state = .empty
                     } else {
-                        self.show(state: .normal)
+//                        self.show(state: .normal)
+                        self.state = .normal
                     }
+                    self.tableView.reloadEmptyDataSet()
 
                     // Tell DifferenceKit to handle reloading the table
                     self.tableView.reload(using: changeSet, with: .fade) { data in
@@ -151,7 +157,8 @@ extension HomeTableViewController {
                 }
             case .error:
                 DispatchQueue.main.async {
-                    self.show(state: .error)
+//                    self.show(state: .error)
+                    self.state = .error
                 }
             }
         }
@@ -336,7 +343,9 @@ extension HomeTableViewController {
                     case .removedSection(let section):
                         self.tableView.deleteSections([section], with: .automatic)
                         if self.tableSections.count == 0 {
-                            self.show(state: .empty)
+//                            self.show(state: .empty)
+                            self.state = .empty
+                            self.tableView.reloadEmptyDataSet()
                         }
                     case .none:
                         break
@@ -488,4 +497,32 @@ extension HomeTableViewController {
         }
     }
 
+}
+
+// MARK: - DZNEmptyDataSet
+
+extension HomeTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+
+    func customView(forEmptyDataSet scrollView: UIScrollView!) -> UIView! {
+        switch state {
+        case .normal:
+            return UIView()
+        case .empty:
+            return HomeStateView(title: "No Courses Currently Tracked",
+                                                     subtitle: "Tap the search icon to start adding courses",
+                                                     icon: Status.open.icon)
+        case .loading:
+            return HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
+        case .error:
+            return HomeStateView(title: "No Internet Connection", subtitle: "Pull down to refresh", icon: Status.closed.icon)
+        }
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return -tableView.frame.size.height / 4
+    }
+
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return state == .error
+    }
 }
