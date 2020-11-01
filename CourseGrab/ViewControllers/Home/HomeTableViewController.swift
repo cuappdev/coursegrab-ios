@@ -80,7 +80,7 @@ class HomeTableViewController: UITableViewController {
         do {
             try reachability.startNotifier()
         } catch {
-            print("could not start reachability notifier")
+            print("Could not start reachability notifier")
         }
     }
 
