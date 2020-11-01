@@ -8,6 +8,7 @@
 
 import DifferenceKit
 import DZNEmptyDataSet
+import Reachability
 import SPPermissions
 import Tactile
 import UIKit
@@ -16,7 +17,7 @@ class HomeTableViewController: UITableViewController {
 
     /// Describes the state of the entire view controller
     private enum State {
-        case normal, loading, empty, error
+        case empty, error, loading, noConnection, normal
     }
 
     /// A section in the table
@@ -27,6 +28,7 @@ class HomeTableViewController: UITableViewController {
     private let homeCellReuseId = "homeCellReuseId"
     private let homeHeaderReuseId = "homeHeaderReuseId"
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    private let reachability = try! Reachability()
     private var state: State = .loading
     private var tableSections: [TableSection] = []
 
@@ -75,13 +77,39 @@ class HomeTableViewController: UITableViewController {
 //        show(state: .loading)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Could not start reachability notifier")
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         getAllTrackedCourses()
         AppDevAnalytics.shared.logFirebase(NumberOfTrackedSectionsPayload(numberOfSections: tableSections.count))
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+    }
+
     @objc func refreshTableView(_ sender: Any) {
         getAllTrackedCourses()
+    }
+
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        switch reachability.connection {
+        case .wifi, .cellular:
+            getAllTrackedCourses()
+        case .unavailable, .none:
+            show(state: .noConnection)
+        }
     }
 
 }
@@ -210,6 +238,8 @@ extension HomeTableViewController {
         case .loading:
             tableView.backgroundView = HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
         case .error:
+            tableView.backgroundView = HomeStateView(title: "Could Not Connect to Server", subtitle: "Pull down to refresh", icon: Status.closed.icon)
+        case .noConnection:
             tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Pull down to refresh", icon: Status.closed.icon)
         }
         self.state = state
