@@ -73,8 +73,6 @@ class HomeTableViewController: UITableViewController {
             // TODO: Add logging here for when we successfully present an announcement
             presentAnnouncement(completion: nil)
         }
-
-//        show(state: .loading)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -108,7 +106,8 @@ class HomeTableViewController: UITableViewController {
         case .wifi, .cellular:
             getAllTrackedCourses()
         case .unavailable, .none:
-            show(state: .noConnection)
+            state = .noConnection
+            tableView.reloadEmptyDataSet()
         }
     }
 
@@ -158,10 +157,8 @@ extension HomeTableViewController {
                 DispatchQueue.main.async {
                     // Update state if needed
                     if available.count == 0 && awaiting.count == 0 {
-//                        self.show(state: .empty)
                         self.state = .empty
                     } else {
-//                        self.show(state: .normal)
                         self.state = .normal
                     }
                     self.tableView.reloadEmptyDataSet()
@@ -185,8 +182,8 @@ extension HomeTableViewController {
                 }
             case .error:
                 DispatchQueue.main.async {
-//                    self.show(state: .error)
                     self.state = .error
+                    self.tableView.reloadEmptyDataSet()
                 }
             }
         }
@@ -221,28 +218,6 @@ extension HomeTableViewController {
             }
         }
         return nil
-    }
-
-    /// Updates the table to reflect the given state.
-    private func show(state: State) {
-        if self.state != state {
-            impactFeedbackGenerator.impactOccurred()
-        }
-        switch state {
-        case .normal:
-            tableView.backgroundView = nil
-        case .empty:
-            tableView.backgroundView = HomeStateView(title: "No Courses Currently Tracked",
-                                                     subtitle: "Tap the search icon to start adding courses",
-                                                     icon: Status.open.icon)
-        case .loading:
-            tableView.backgroundView = HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
-        case .error:
-            tableView.backgroundView = HomeStateView(title: "Could Not Connect to Server", subtitle: "Pull down to refresh", icon: Status.closed.icon)
-        case .noConnection:
-            tableView.backgroundView = HomeStateView(title: "No Internet Connection", subtitle: "Pull down to refresh", icon: Status.closed.icon)
-        }
-        self.state = state
     }
 
 }
@@ -373,7 +348,6 @@ extension HomeTableViewController {
                     case .removedSection(let section):
                         self.tableView.deleteSections([section], with: .automatic)
                         if self.tableSections.count == 0 {
-//                            self.show(state: .empty)
                             self.state = .empty
                             self.tableView.reloadEmptyDataSet()
                         }
@@ -538,13 +512,24 @@ extension HomeTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegat
         case .normal:
             return UIView()
         case .empty:
+            // Reset content offset to avoid refresh control to stay after pull to refresh
+            tableView.setContentOffset(.zero, animated: false)
             return HomeStateView(title: "No Courses Currently Tracked",
-                                                     subtitle: "Tap the search icon to start adding courses",
-                                                     icon: Status.open.icon)
+                                 subtitle: "Tap the search icon to start adding courses",
+                                 icon: Status.open.icon)
         case .loading:
-            return HomeStateView(title: "Loading...", subtitle: "Fetching your courses", icon: UIImage())
+            tableView.setContentOffset(.zero, animated: false)
+            return HomeStateView(title: "Loading...",
+                                 subtitle: "Fetching your courses",
+                                 icon: UIImage())
         case .error:
-            return HomeStateView(title: "No Internet Connection", subtitle: "Pull down to refresh", icon: Status.closed.icon)
+            return HomeStateView(title: "Could Not Connect to Server",
+                                 subtitle: "Pull down to refresh",
+                                 icon: Status.closed.icon)
+        case .noConnection:
+            return HomeStateView(title: "No Internet Connection",
+                                 subtitle: "Pull down to refresh",
+                                 icon: Status.closed.icon)
         }
     }
 
@@ -553,6 +538,10 @@ extension HomeTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegat
     }
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
-        return state == .error
+        return state != .empty && state != .loading
+    }
+
+    func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
+        return true
     }
 }
