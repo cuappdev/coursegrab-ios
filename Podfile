@@ -6,6 +6,7 @@ target 'CourseGrab' do
   # Pods for CourseGrab
   pod 'AppDevAnnouncements', :git => 'https://github.com/cuappdev/appdev-announcements.git'
   pod 'DifferenceKit'
+  pod 'DZNEmptyDataSet'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Crashlytics'

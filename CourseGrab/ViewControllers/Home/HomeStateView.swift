@@ -35,7 +35,7 @@ class HomeStateView: UIView {
         imageView.snp.makeConstraints { make in
             make.size.equalTo(60)
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(198)
+            make.top.equalToSuperview()
         }
 
         titleLabel.snp.makeConstraints { make in
