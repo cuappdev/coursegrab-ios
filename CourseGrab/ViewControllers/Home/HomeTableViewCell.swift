@@ -86,10 +86,8 @@ class HomeTableViewCell: UITableViewCell {
         // Setup constraints
 
         containerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(6)
-            make.bottom.equalToSuperview().inset(6)
-            make.leading.equalTo(20)
-            make.trailing.equalToSuperview().inset(20)
+            make.top.bottom.equalToSuperview().inset(6)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
 
         courseLabel.snp.makeConstraints { make in
@@ -113,10 +111,9 @@ class HomeTableViewCell: UITableViewCell {
 
         removeButton.snp.makeConstraints { make in
             make.top.equalTo(sectionLabel.snp.bottom).offset(18)
-            make.leading.equalTo(18)
             make.height.equalTo(37)
             make.trailing.equalTo(containerView.snp.centerX).inset(4)
-            make.bottom.equalToSuperview().inset(18)
+            make.leading.bottom.equalToSuperview().inset(18)
         }
 
         sectionLabel.snp.makeConstraints { make in
@@ -125,14 +122,14 @@ class HomeTableViewCell: UITableViewCell {
         }
 
         statusBadge.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel).offset(20)
+            make.top.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(18)
             make.size.equalTo(16)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(17)
-            make.trailing.equalToSuperview().inset(18)
+            make.top.leading.equalTo(18)
+            make.trailing.equalToSuperview().inset(40)
         }
     }
 
@@ -152,10 +149,9 @@ class HomeTableViewCell: UITableViewCell {
         if section.status == .open {
             removeButton.snp.remakeConstraints { make in
                 make.top.equalTo(sectionLabel.snp.bottom).offset(18)
-                make.leading.equalTo(18)
                 make.height.equalTo(37)
                 make.trailing.equalTo(containerView.snp.centerX).inset(4)
-                make.bottom.equalToSuperview().inset(18)
+                make.leading.bottom.equalToSuperview().inset(18)
             }
         } else {
             removeButton.snp.remakeConstraints { make in
@@ -184,10 +180,10 @@ class HomeTableViewCell: UITableViewCell {
 
 class PillLabel: UILabel {
     
-    @IBInspectable var topInset: CGFloat = 0.0
-    @IBInspectable var bottomInset: CGFloat = 0.0
-    @IBInspectable var leftInset: CGFloat = 10.0
-    @IBInspectable var rightInset: CGFloat = 10.0
+    @IBInspectable private let topInset: CGFloat = 0.0
+    @IBInspectable private let bottomInset: CGFloat = 0.0
+    @IBInspectable private let leftInset: CGFloat = 10.0
+    @IBInspectable private let rightInset: CGFloat = 10.0
 
    override func drawText(in rect: CGRect) {
       let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
