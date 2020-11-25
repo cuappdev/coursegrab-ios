@@ -15,8 +15,9 @@ class HomeTableViewCell: UITableViewCell {
     private var section: Section?
 
     private let containerView = UIView()
-    private let courseLabel = UILabel()
+    private let courseLabel = PillLabel()
     private let enrollButton = UIButton(type: .roundedRect)
+    private let modalityLabel = PillLabel()
     private let removeButton = UIButton(type: .roundedRect)
     private let sectionLabel = UILabel()
     private let statusBadge = UIImageView()
@@ -39,9 +40,12 @@ class HomeTableViewCell: UITableViewCell {
         containerView.layer.shadowOffset = .zero
         containerView.backgroundColor = .white
         contentView.addSubview(containerView)
-
+        
+        courseLabel.clipsToBounds = true
+        courseLabel.layer.cornerRadius = 12
+        courseLabel.backgroundColor = .courseGrabVeryLightGray
         courseLabel.font = ._14Medium
-        courseLabel.textColor = .courseGrabGray
+        courseLabel.textColor = .courseGrabBlack
         containerView.addSubview(courseLabel)
 
         enrollButton.layer.cornerRadius = 2
@@ -51,6 +55,13 @@ class HomeTableViewCell: UITableViewCell {
         enrollButton.backgroundColor = .black
         enrollButton.on(.touchUpInside, enroll)
         containerView.addSubview(enrollButton)
+        
+        modalityLabel.clipsToBounds = true
+        modalityLabel.layer.cornerRadius = 12
+        modalityLabel.backgroundColor = .courseGrabGray
+        modalityLabel.font = ._12Semibold
+        modalityLabel.textColor = .courseGrabWhite
+        containerView.addSubview(modalityLabel)
 
         removeButton.layer.cornerRadius = 2
         removeButton.setTitleColor(.courseGrabRuby, for: .normal)
@@ -75,46 +86,50 @@ class HomeTableViewCell: UITableViewCell {
         // Setup constraints
 
         containerView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(6)
-            make.bottom.equalToSuperview().inset(6)
-            make.leading.equalTo(20)
-            make.trailing.equalToSuperview().inset(20)
+            make.top.bottom.equalToSuperview().inset(6)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
 
         courseLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(12)
-            make.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().inset(18)
+            make.height.equalTo(24)
         }
 
         enrollButton.snp.makeConstraints { make in
-            make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-            make.leading.equalTo(containerView.snp.centerX).offset(9)
+            make.top.equalTo(sectionLabel.snp.bottom).offset(18)
+            make.leading.equalTo(containerView.snp.centerX).offset(4)
+            make.height.equalTo(37)
+            make.trailing.bottom.equalToSuperview().inset(18)
+        }
+        
+        modalityLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.leading.equalTo(courseLabel.snp.trailing).offset(5)
             make.height.equalTo(24)
-            make.trailing.bottom.equalToSuperview().inset(16)
         }
 
         removeButton.snp.makeConstraints { make in
-            make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-            make.leading.equalTo(16)
-            make.height.equalTo(24)
-            make.trailing.equalTo(containerView.snp.centerX).inset(9)
-            make.bottom.equalToSuperview().inset(16)
+            make.top.equalTo(sectionLabel.snp.bottom).offset(18)
+            make.height.equalTo(37)
+            make.trailing.equalTo(containerView.snp.centerX).inset(4)
+            make.leading.bottom.equalToSuperview().inset(18)
         }
 
         sectionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(12)
-            make.leading.equalTo(16)
+            make.top.equalTo(courseLabel.snp.bottom).offset(8)
+            make.leading.equalTo(18)
         }
 
         statusBadge.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel).offset(2)
-            make.trailing.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(18)
             make.size.equalTo(16)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(16)
-            make.trailing.equalTo(statusBadge.snp.leading).offset(-12)
+            make.top.leading.equalTo(18)
+            make.trailing.equalToSuperview().inset(40)
         }
     }
 
@@ -126,24 +141,23 @@ class HomeTableViewCell: UITableViewCell {
         self.section = section
         courseLabel.text = String(section.catalogNum)
         enrollButton.isHidden = section.status != .open
+        modalityLabel.text = section.mode
         sectionLabel.text = section.section
         statusBadge.image = section.status.icon
         titleLabel.text = "\(section.subjectCode) \(section.courseNum): \(section.title)"
 
         if section.status == .open {
             removeButton.snp.remakeConstraints { make in
-                make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-                make.leading.equalTo(16)
-                make.height.equalTo(24)
-                make.trailing.equalTo(containerView.snp.centerX).inset(9)
-                make.bottom.equalToSuperview().inset(16)
+                make.top.equalTo(sectionLabel.snp.bottom).offset(18)
+                make.height.equalTo(37)
+                make.trailing.equalTo(containerView.snp.centerX).inset(4)
+                make.leading.bottom.equalToSuperview().inset(18)
             }
         } else {
             removeButton.snp.remakeConstraints { make in
-                make.top.equalTo(sectionLabel.snp.bottom).offset(12)
-                make.leading.equalTo(16)
-                make.height.equalTo(24)
-                make.trailing.bottom.equalToSuperview().inset(16)
+                make.top.equalTo(sectionLabel.snp.bottom).offset(18)
+                make.height.equalTo(37)
+                make.leading.trailing.bottom.equalToSuperview().inset(18)
             }
         }
     }
@@ -162,4 +176,27 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
 
+}
+
+class PillLabel: UILabel {
+    
+    @IBInspectable private let topInset: CGFloat = 0.0
+    @IBInspectable private let bottomInset: CGFloat = 0.0
+    @IBInspectable private let leftInset: CGFloat = 10.0
+    @IBInspectable private let rightInset: CGFloat = 10.0
+
+   override func drawText(in rect: CGRect) {
+      let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: rect.inset(by: insets))
+   }
+
+   override var intrinsicContentSize: CGSize {
+      get {
+         var contentSize = super.intrinsicContentSize
+         contentSize.height += topInset + bottomInset
+         contentSize.width += leftInset + rightInset
+         return contentSize
+      }
+   }
+    
 }

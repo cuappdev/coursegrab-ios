@@ -161,7 +161,6 @@ extension HomeTableViewController {
                     } else {
                         self.state = .normal
                     }
-                    self.tableView.reloadEmptyDataSet()
 
                     // Tell DifferenceKit to handle reloading the table
                     self.tableView.reload(using: changeSet, with: .fade) { data in
@@ -177,6 +176,7 @@ extension HomeTableViewController {
                         // Update model
                         self.tableSections = newTableSections
                     }
+                    self.tableView.reloadEmptyDataSet()
                     // Reload table headers
                     self.reloadSectionHeaders()
                 }
