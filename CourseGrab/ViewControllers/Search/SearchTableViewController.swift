@@ -6,6 +6,7 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
+import DZNEmptyDataSet
 import Foundation
 import Tactile
 import UIKit
@@ -29,6 +30,7 @@ class SearchTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: searchCellReuseId)
         tableView.register(SearchTableViewHeader.self, forHeaderFooterViewReuseIdentifier: searchHeaderReuseId)
+        tableView.emptyDataSetSource = self
 
         // Setup navigationBar
         textField.frame.size.width = view.frame.width - 80
@@ -85,10 +87,11 @@ extension SearchTableViewController {
     private func textDidChange(_ textField: UITextField) {
         guard let searchText = textField.text, searchText.count > 2 else {
             if courses.count > 0 {
-                DispatchQueue.main.async {
-                    self.courses.removeAll()
-                    self.tableView.reloadData()
-                }
+                courses.removeAll()
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.tableView.reloadEmptyDataSet()
             }
             timer?.invalidate()
             return
@@ -122,6 +125,9 @@ extension SearchTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if 1...2 ~= textField.text?.count ?? 0 {
+            return UIView()
+        }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: searchHeaderReuseId) as! SearchTableViewHeader
         headerView.configure(numResults: courses.count)
         return headerView
@@ -214,6 +220,26 @@ extension SearchTableViewController {
         guard let navigationController = navigationController, popRecognizer == nil else { return }
         popRecognizer = InteractivePopRecognizer(navigationController: navigationController)
         navigationController.interactivePopGestureRecognizer?.delegate = popRecognizer
+    }
+
+}
+
+// MARK: - DZNEmptyDataSet
+
+extension SearchTableViewController: DZNEmptyDataSetSource {
+
+    func customView(forEmptyDataSet scrollView: UIScrollView!) -> UIView! {
+        if 1...2 ~= textField.text?.count ?? 0 {
+            return HomeStateView(title: "3 characters needed",
+                                 subtitle: "Please add more",
+                                 icon: Status.waitlist.icon)
+        } else {
+            return UIView()
+        }
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return -tableView.frame.size.height / 4
     }
 
 }
