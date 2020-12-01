@@ -10,6 +10,8 @@ import UIKit
 
 class SearchDetailTableViewCell: UITableViewCell {
 
+    private let popularityImageView = UIImageView()
+    private let popularityLabel = UILabel()
     private var section: Section?
     private let statusImageView = UIImageView()
     private let titleLabel = UILabel()
@@ -23,6 +25,14 @@ class SearchDetailTableViewCell: UITableViewCell {
         // Setup appearance
 
         selectionStyle = .none
+
+        popularityImageView.image = UIImage.popularityIcon
+        popularityImageView.tintColor = .courseGrabMediumGray
+        contentView.addSubview(popularityImageView)
+
+        popularityLabel.font = ._12Medium
+        popularityLabel.textColor = .courseGrabMediumGray
+        contentView.addSubview(popularityLabel)
 
         contentView.addSubview(statusImageView)
 
@@ -38,10 +48,22 @@ class SearchDetailTableViewCell: UITableViewCell {
 
         // Setup constraints
 
+        popularityImageView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(9)
+            make.leading.equalTo(statusImageView.snp.trailing).offset(12)
+            make.width.equalTo(16)
+            make.height.equalTo(12)
+        }
+
+        popularityLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.leading.equalTo(popularityImageView.snp.trailing).offset(3)
+        }
+
         statusImageView.snp.makeConstraints { make in
             make.size.equalTo(16)
             make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
         }
 
         trackingButton.snp.makeConstraints { make in
@@ -54,7 +76,7 @@ class SearchDetailTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(statusImageView.snp.trailing).offset(12)
             make.trailing.equalTo(trackingButton.snp.leading).offset(-12)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
         }
     }
 
@@ -67,6 +89,7 @@ class SearchDetailTableViewCell: UITableViewCell {
     func configure(section: Section) {
         self.section = section
 
+        popularityLabel.text = "\(section.numTracking) tracking"
         statusImageView.image = section.status.icon
         titleLabel.text = section.section
 

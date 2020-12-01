@@ -17,6 +17,7 @@ extension UIColor {
     static let courseGrabGray = UIColor(red: 106 / 255, green: 115 / 255, blue: 125 / 255, alpha: 1)
     static let courseGrabHotlink = UIColor(red: 74 / 255, green: 144 / 255, blue: 226 / 255, alpha: 1)
     static let courseGrabLightGray = UIColor(red: 158 / 255, green: 167 / 255, blue: 179 / 255, alpha: 1)
+    static let courseGrabMediumGray = UIColor(red: 118 / 255, green: 118 / 255, blue: 118 / 255, alpha: 1)
     static let courseGrabVeryLightGray = UIColor(red: 225 / 255, green: 228 / 255, blue: 232 / 255, alpha: 1)
     static let courseGrabRuby = UIColor(red: 202 / 255, green: 66 / 255, blue: 56 / 255, alpha: 1)
     static let courseGrabYellow = UIColor(red: 253 / 255, green: 195 / 255, blue: 41 / 255, alpha: 1)
