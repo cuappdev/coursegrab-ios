@@ -27,7 +27,6 @@ class SearchDetailTableViewCell: UITableViewCell {
         selectionStyle = .none
 
         popularityImageView.image = UIImage.popularityIcon
-        popularityImageView.tintColor = .courseGrabMediumGray
         contentView.addSubview(popularityImageView)
 
         popularityLabel.font = ._12Medium
