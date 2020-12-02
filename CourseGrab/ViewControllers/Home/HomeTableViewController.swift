@@ -13,6 +13,10 @@ import SPPermissions
 import Tactile
 import UIKit
 
+protocol LocalTimezoneDelegate {
+    func updateTimezones()
+}
+
 class HomeTableViewController: UITableViewController {
 
     /// Describes the state of the entire view controller
@@ -339,7 +343,7 @@ extension HomeTableViewController {
             case .value(let response):
                 guard response.success else { return }
                 let change = self.removeSectionFromModel(response.data)
-                let description = "\(section.subjectCode) \(section.courseNum): \(section.title) - \(section.section)"
+                let description = "\(section.subjectCode) \(section.courseNum): \(section.title) - \(section.getSectionByTimezone())"
                 AppDevAnalytics.shared.logFirebase(UntrackSectionPayload(courseTitle: description, catalogNum: section.catalogNum))
                 DispatchQueue.main.async {
                     switch change {
@@ -401,7 +405,9 @@ extension HomeTableViewController {
 extension HomeTableViewController {
 
     private func showSettings(_ button: UIButton) {
-        present(SettingsViewController(), animated: true)
+        let settingsViewController = SettingsViewController()
+        settingsViewController.localTimezoneDelegate = self
+        present(settingsViewController, animated: true)
     }
 
     private func showSearch(_ button: UIButton) {
@@ -543,5 +549,13 @@ extension HomeTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegat
 
     func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
         return true
+    }
+}
+
+// MARK: - LocalTimezoneDelegate
+
+extension HomeTableViewController: LocalTimezoneDelegate {
+    func updateTimezones() {
+        self.tableView.reloadData()
     }
 }

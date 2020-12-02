@@ -155,7 +155,7 @@ extension SearchTableViewController {
         NetworkManager.shared.untrackSection(catalogNum: section.catalogNum).observe { result in
             switch result {
             case .value(let response):
-                let description = "\(section.subjectCode) \(section.courseNum): \(section.title) - \(section.section)"
+                let description = "\(section.subjectCode) \(section.courseNum): \(section.title) - \(section.getSectionByTimezone())"
                 AppDevAnalytics.shared.logFirebase(UntrackSectionPayload(courseTitle: description, catalogNum: section.catalogNum))
                 guard response.success, self.updateData(newSection: response.data) != nil else { return }
                 DispatchQueue.main.async {

@@ -14,6 +14,8 @@ import UIKit
 import UserNotifications
 
 class SettingsViewController: UIViewController {
+    
+    var localTimezoneDelegate: LocalTimezoneDelegate?
 
     private let contentView = UIView()
     private let mobileSwitch = UISwitch()
@@ -89,8 +91,8 @@ class SettingsViewController: UIViewController {
         timezoneStackView.addArrangedSubview(timezoneLabel)
         timezoneSwitch.on(.valueChanged, toggleTimezoneEnabled)
         timezoneSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
-        setTimezoneSwitchOn()
         timezoneStackView.addArrangedSubview(timezoneSwitch)
+        timezoneSwitch.isOn = UserDefaults.standard.isLocalTimezoneEnabled
         
         let calendarButton = UIButton(type: .system)
         calendarButton.setAttributedTitle(
@@ -259,12 +261,9 @@ extension SettingsViewController {
 
 extension SettingsViewController {
 
-    @objc private func setTimezoneSwitchOn() {
-        // TODO
-    }
-
     private func toggleTimezoneEnabled(_ sender: UISwitch) {
-        // TODO
+        UserDefaults.standard.isLocalTimezoneEnabled = sender.isOn
+        localTimezoneDelegate?.updateTimezones()
     }
 
 }

@@ -55,7 +55,7 @@ class NotificationModalViewController: UIViewController {
         courseTitleLabel.textColor = .white
         view.addSubview(courseTitleLabel)
 
-        sectionLabel.text = section.section.uppercased()
+        sectionLabel.text = section.getSectionByTimezone().uppercased()
         sectionLabel.textAlignment = .center
         sectionLabel.adjustsFontSizeToFitWidth = true
         sectionLabel.font = ._20Semibold

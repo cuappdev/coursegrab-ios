@@ -64,6 +64,27 @@ struct Section: Codable {
     let status: Status
     let subjectCode: String
     let title: String
+    
+    func getSectionByTimezone() -> String {
+        if let index = section.lastIndex(of: " ") {
+            let timeIndexStart = section.index(after: index)
+            let sectionString = String(section[..<timeIndexStart])
+            let timeString = String(section[timeIndexStart...])
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "h:mma"
+            dateFormatter.timeZone = TimeZone(abbreviation: "EST")
+            guard let date = dateFormatter.date(from: timeString) else {
+                return section
+            }
+            if UserDefaults.standard.isLocalTimezoneEnabled {
+                dateFormatter.timeZone = TimeZone.current
+            }
+            dateFormatter.dateFormat = "h:mma zzz"
+            return sectionString + dateFormatter.string(from: date)
+        }
+        return section
+    }
 
 }
 

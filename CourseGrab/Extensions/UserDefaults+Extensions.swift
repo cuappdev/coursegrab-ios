@@ -28,6 +28,15 @@ extension UserDefaults {
         }
     }
     
+    var isLocalTimezoneEnabled: Bool {
+        get {
+            return UserDefaults.standard.value(forKey: "localTimezoneEnabled") as? Bool ?? false
+        }
+        set(bool) {
+            UserDefaults.standard.set(bool, forKey: "localTimezoneEnabled")
+        }
+    }
+    
     var storedDeviceToken: String {
         get {
             return UserDefaults.standard.string(forKey: "storeDeviceToken") ?? ""
@@ -36,5 +45,5 @@ extension UserDefaults {
             UserDefaults.standard.set(string, forKey: "storeDeviceToken")
         }
     }
-
+    
 }
