@@ -9,13 +9,12 @@
 import Foundation
 
 extension UserDefaults {
-    
     var areNotificationsEnabled: Bool {
         get {
-            return UserDefaults.standard.value(forKey: "areNotificationsEnabled") as? Bool ?? true
+            UserDefaults.standard.value(forKey: "areNotificationsEnabled") as? Bool ?? true
         }
-        set(bool) {
-            UserDefaults.standard.set(bool, forKey: "areNotificationsEnabled")
+        set(newValue) {
+            UserDefaults.standard.set(newValue, forKey: "areNotificationsEnabled")
         }
     }
 
@@ -23,27 +22,26 @@ extension UserDefaults {
         get {
             UserDefaults.standard.bool(forKey: "didPromptPermission")
         }
-        set(bool) {
-            UserDefaults.standard.set(bool, forKey: "didPromptPermission")
+        set(newValue) {
+            UserDefaults.standard.set(newValue, forKey: "didPromptPermission")
         }
     }
     
     var isLocalTimezoneEnabled: Bool {
         get {
-            return UserDefaults.standard.value(forKey: "localTimezoneEnabled") as? Bool ?? false
+            UserDefaults.standard.value(forKey: "localTimezoneEnabled") as? Bool ?? false
         }
-        set(bool) {
-            UserDefaults.standard.set(bool, forKey: "localTimezoneEnabled")
+        set(newValue) {
+            UserDefaults.standard.set(newValue, forKey: "localTimezoneEnabled")
         }
     }
     
     var storedDeviceToken: String {
         get {
-            return UserDefaults.standard.string(forKey: "storeDeviceToken") ?? ""
+            UserDefaults.standard.string(forKey: "storeDeviceToken") ?? ""
         }
-        set(string) {
-            UserDefaults.standard.set(string, forKey: "storeDeviceToken")
+        set(newValue) {
+            UserDefaults.standard.set(newValue, forKey: "storeDeviceToken")
         }
     }
-    
 }

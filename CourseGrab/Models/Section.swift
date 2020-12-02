@@ -73,7 +73,7 @@ struct Section: Codable {
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "h:mma"
-            dateFormatter.timeZone = TimeZone(abbreviation: "EST")
+            dateFormatter.timeZone = TimeZone(identifier: "America/New_York")
             guard let date = dateFormatter.date(from: timeString) else {
                 return section
             }

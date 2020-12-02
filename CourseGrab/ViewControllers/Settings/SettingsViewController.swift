@@ -15,7 +15,7 @@ import UserNotifications
 
 class SettingsViewController: UIViewController {
     
-    var localTimezoneDelegate: LocalTimezoneDelegate?
+    var updateHomeTableViewTimezones: (() -> Void)?
 
     private let contentView = UIView()
     private let mobileSwitch = UISwitch()
@@ -263,7 +263,7 @@ extension SettingsViewController {
 
     private func toggleTimezoneEnabled(_ sender: UISwitch) {
         UserDefaults.standard.isLocalTimezoneEnabled = sender.isOn
-        localTimezoneDelegate?.updateTimezones()
+        updateHomeTableViewTimezones?()
     }
 
 }

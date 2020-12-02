@@ -13,10 +13,6 @@ import SPPermissions
 import Tactile
 import UIKit
 
-protocol LocalTimezoneDelegate {
-    func updateTimezones()
-}
-
 class HomeTableViewController: UITableViewController {
 
     /// Describes the state of the entire view controller
@@ -406,7 +402,10 @@ extension HomeTableViewController {
 
     private func showSettings(_ button: UIButton) {
         let settingsViewController = SettingsViewController()
-        settingsViewController.localTimezoneDelegate = self
+        settingsViewController.updateHomeTableViewTimezones = { () -> Void in
+            self.tableView.reloadData()
+        }
+        
         present(settingsViewController, animated: true)
     }
 
@@ -549,13 +548,5 @@ extension HomeTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegat
 
     func emptyDataSetShouldAllowTouch(_ scrollView: UIScrollView!) -> Bool {
         return true
-    }
-}
-
-// MARK: - LocalTimezoneDelegate
-
-extension HomeTableViewController: LocalTimezoneDelegate {
-    func updateTimezones() {
-        self.tableView.reloadData()
     }
 }
