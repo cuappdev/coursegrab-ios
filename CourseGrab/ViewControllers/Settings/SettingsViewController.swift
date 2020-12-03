@@ -14,9 +14,12 @@ import UIKit
 import UserNotifications
 
 class SettingsViewController: UIViewController {
+    
+    var updateHomeTableViewTimezones: (() -> Void)?
 
     private let contentView = UIView()
     private let mobileSwitch = UISwitch()
+    private let timezoneSwitch = UISwitch()
 
     private var lastPanFraction: CGFloat = 0
     private var transitionAnimator = SettingsAnimator()
@@ -79,7 +82,18 @@ class SettingsViewController: UIViewController {
         mobileSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
         setMobileSwitchOn()
         mobileStackView.addArrangedSubview(mobileSwitch)
-
+        
+        let timezoneStackView = UIStackView()
+        stackView.addArrangedSubview(timezoneStackView)
+        let timezoneLabel = UILabel()
+        timezoneLabel.text = "Display Local Timezone"
+        timezoneLabel.font = ._16Semibold
+        timezoneStackView.addArrangedSubview(timezoneLabel)
+        timezoneSwitch.on(.valueChanged, toggleTimezoneEnabled)
+        timezoneSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
+        timezoneStackView.addArrangedSubview(timezoneSwitch)
+        timezoneSwitch.isOn = UserDefaults.standard.isLocalTimezoneEnabled
+        
         let calendarButton = UIButton(type: .system)
         calendarButton.setAttributedTitle(
             NSAttributedString(
@@ -239,6 +253,17 @@ extension SettingsViewController {
                 }
             }
         }
+    }
+
+}
+
+// MARK: - Timezone
+
+extension SettingsViewController {
+
+    private func toggleTimezoneEnabled(_ sender: UISwitch) {
+        UserDefaults.standard.isLocalTimezoneEnabled = sender.isOn
+        updateHomeTableViewTimezones?()
     }
 
 }
