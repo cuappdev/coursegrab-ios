@@ -15,6 +15,7 @@ extension UIImage {
 
     static let arrowIcon = UIImage(named: "icon-arrow")
     static let backIcon = UIImage(named: "icon-back")
+    static let popularityIcon = UIImage(named: "icon-popularity")
     static let searchIcon = UIImage(named: "icon-search")
     static let settingsIcon = UIImage(named: "icon-settings")
 
