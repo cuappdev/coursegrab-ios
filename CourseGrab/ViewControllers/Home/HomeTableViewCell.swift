@@ -142,7 +142,7 @@ class HomeTableViewCell: UITableViewCell {
         courseLabel.text = String(section.catalogNum)
         enrollButton.isHidden = section.status != .open
         modalityLabel.text = section.mode
-        sectionLabel.text = section.section
+        sectionLabel.text = section.getSectionByTimezone()
         statusBadge.image = section.status.icon
         titleLabel.text = "\(section.subjectCode) \(section.courseNum): \(section.title)"
 

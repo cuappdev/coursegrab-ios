@@ -181,7 +181,7 @@ private class TrackingSectionView: UIView {
     func configure(for section: Section) {
         self.section = section
         statusBadge.image = section.status.icon
-        subtitleLabel.text = section.section
+        subtitleLabel.text = section.getSectionByTimezone()
     }
 
     private func removeCourse(_ button: UIButton) {

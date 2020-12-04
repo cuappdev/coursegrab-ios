@@ -90,7 +90,7 @@ class SearchDetailTableViewCell: UITableViewCell {
 
         popularityLabel.text = "\(section.numTracking) tracking"
         statusImageView.image = section.status.icon
-        titleLabel.text = section.section
+        titleLabel.text = section.getSectionByTimezone()
 
         if section.isTracking {
             trackingButton.setTitle("REMOVE", for: .normal)

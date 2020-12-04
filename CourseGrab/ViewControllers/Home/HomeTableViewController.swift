@@ -401,7 +401,12 @@ extension HomeTableViewController {
 extension HomeTableViewController {
 
     private func showSettings(_ button: UIButton) {
-        present(SettingsViewController(), animated: true)
+        let settingsViewController = SettingsViewController()
+        settingsViewController.updateHomeTableViewTimezones = { () -> Void in
+            self.tableView.reloadData()
+        }
+        
+        present(settingsViewController, animated: true)
     }
 
     private func showSearch(_ button: UIButton) {
