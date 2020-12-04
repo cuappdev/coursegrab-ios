@@ -34,7 +34,6 @@ class TrackingBannerView: UIView {
     }
 
     func setupConstraints() {
-
         containerView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
         }
@@ -42,7 +41,6 @@ class TrackingBannerView: UIView {
         notificationLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-
     }
 
 }
