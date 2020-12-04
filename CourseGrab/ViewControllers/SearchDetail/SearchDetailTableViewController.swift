@@ -6,6 +6,7 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
+import NotificationBannerSwift
 import UIKit
 
 class SearchDetailTableViewController: UITableViewController {
@@ -76,6 +77,7 @@ extension SearchDetailTableViewController {
 
     private func updateTracking(section: Section, track: Bool) {
         impactFeedbackGenerator.impactOccurred()
+        let bannerQueue = NotificationBannerQueue(maxBannersOnScreenSimultaneously: 1)
         if track {
             NetworkManager.shared.trackSection(catalogNum: section.catalogNum).observe { result in
                 switch result {
@@ -85,6 +87,8 @@ extension SearchDetailTableViewController {
                     AppDevAnalytics.shared.logFirebase(UntrackSectionPayload(courseTitle: description, catalogNum: section.catalogNum))
                     DispatchQueue.main.async {
                         self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        let banner = NotificationBanner(customView: TrackingBannerView(section: section, isTracking: true))
+                        banner.show(queuePosition: .front, queue: bannerQueue)
                     }
                 case .error(let error):
                     print(error)
@@ -99,6 +103,8 @@ extension SearchDetailTableViewController {
                     guard response.success, let indexPath = self.updateData(newSection: response.data) else { return }
                     DispatchQueue.main.async {
                         self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        let banner = NotificationBanner(customView: TrackingBannerView(section: section, isTracking: false))
+                        banner.show(queuePosition: .front, queue: bannerQueue)
                     }
                 case .error(let error):
                     print(error)

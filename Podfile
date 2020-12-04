@@ -12,6 +12,7 @@ target 'CourseGrab' do
   pod 'Firebase/Crashlytics'
   pod 'FutureNova', :git => 'https://github.com/cuappdev/ios-networking.git'
   pod 'GoogleSignIn'
+  pod 'NotificationBannerSwift'
   pod 'ReachabilitySwift'
   pod 'SnapKit'
   pod 'SPPermissions/Notification'

@@ -26,6 +26,7 @@
 		06C9B9DA23FDF7900025CA8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B9D923FDF7900025CA8E /* User.swift */; };
 		06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */; };
 		06FC0F5624492F88001707F3 /* APNNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FC0F5524492F88001707F3 /* APNNotificationCenter.swift */; };
+		80A4552325774F1E006D1C1A /* TrackingBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A4552225774F1E006D1C1A /* TrackingBannerView.swift */; };
 		85B7209D1C37F77FD0A7F126 /* Pods_CourseGrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */; };
 		B616503523F08ACF00B38C52 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503423F08ACF00B38C52 /* Endpoints.swift */; };
 		B616503723F08CA100B38C52 /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = B616503623F08CA100B38C52 /* Body.swift */; };
@@ -75,6 +76,7 @@
 		06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		06FC0F5524492F88001707F3 /* APNNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNNotificationCenter.swift; sourceTree = "<group>"; };
 		4A0876CB3C16675F30651B4B /* Pods-CourseGrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.release.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.release.xcconfig"; sourceTree = "<group>"; };
+		80A4552225774F1E006D1C1A /* TrackingBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingBannerView.swift; sourceTree = "<group>"; };
 		8FE3425F1D82C2F91324A7D8 /* Pods_CourseGrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CourseGrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96351132E2528A1085B69A7A /* Pods-CourseGrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CourseGrab.debug.xcconfig"; path = "Target Support Files/Pods-CourseGrab/Pods-CourseGrab.debug.xcconfig"; sourceTree = "<group>"; };
 		B616503423F08ACF00B38C52 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				C8A3D53723E23C2B0007E488 /* SearchDetailTableViewController.swift */,
 				C8626A0C23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift */,
 				C8A3D53923E23D530007E488 /* SearchDetailTableViewCell.swift */,
+				80A4552225774F1E006D1C1A /* TrackingBannerView.swift */,
 			);
 			path = SearchDetail;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				B616503D23F0C2E200B38C52 /* UserDefaults+Extensions.swift in Sources */,
 				B643598823FDF7940049270B /* SearchTableViewHeader.swift in Sources */,
 				B67611FF244CC08E0065D568 /* Analytics.swift in Sources */,
+				80A4552325774F1E006D1C1A /* TrackingBannerView.swift in Sources */,
 				C8B3FD9723FDF2310001F961 /* NotificationModalViewController.swift in Sources */,
 				B6761209244F98540065D568 /* UIDevice+Extensions.swift in Sources */,
 				062891B723E8F51F00B6D698 /* SearchTableViewController.swift in Sources */,
