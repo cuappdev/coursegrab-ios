@@ -14,6 +14,7 @@ target 'CourseGrab' do
   pod 'GoogleSignIn'
   pod 'NotificationBannerSwift'
   pod 'ReachabilitySwift'
+  pod 'Siren'
   pod 'SnapKit'
   pod 'SPPermissions/Notification'
   pod 'Tactile'

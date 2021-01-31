@@ -7,6 +7,7 @@
 //
 
 import FirebaseAuth
+import Siren
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -63,6 +64,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         self.window = window
         window.makeKeyAndVisible()
+
+        // Notify user of any update available
+        Siren.shared.wail()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {

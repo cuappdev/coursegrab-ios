@@ -61,13 +61,22 @@ extension AppDelegate: GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signIn(with: credential) { (result, error) in
             User.current?.googleToken = authentication.idToken
+            // Enable notifications when user successfully signs in
+            NetworkManager.shared.enableNotifications(enabled: true).observe { result in
+                switch result {
+                case .value:
+                    UserDefaults.standard.areNotificationsEnabled = true
+                case .error(let error):
+                    print(error)
+                }
+            }
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
         }
     }
-    
+
 }
 
 // MARK: - UNUserNotificationCenterDelegate + notification registration
