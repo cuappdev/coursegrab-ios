@@ -83,17 +83,6 @@ class SettingsViewController: UIViewController {
         setMobileSwitchOn()
         mobileStackView.addArrangedSubview(mobileSwitch)
         
-        let timezoneStackView = UIStackView()
-        stackView.addArrangedSubview(timezoneStackView)
-        let timezoneLabel = UILabel()
-        timezoneLabel.text = "Display Local Timezone"
-        timezoneLabel.font = ._16Semibold
-        timezoneStackView.addArrangedSubview(timezoneLabel)
-        timezoneSwitch.on(.valueChanged, toggleTimezoneEnabled)
-        timezoneSwitch.transform = CGAffineTransform(scaleX: 24 / 31, y: 24 / 31).translatedBy(x: 5.5, y: 0)
-        timezoneStackView.addArrangedSubview(timezoneSwitch)
-        timezoneSwitch.isOn = UserDefaults.standard.isLocalTimezoneEnabled
-        
         let calendarButton = UIButton(type: .system)
         calendarButton.setAttributedTitle(
             NSAttributedString(

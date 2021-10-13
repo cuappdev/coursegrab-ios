@@ -80,7 +80,7 @@ struct Section: Codable {
             if UserDefaults.standard.isLocalTimezoneEnabled {
                 dateFormatter.timeZone = TimeZone.current
             }
-            dateFormatter.dateFormat = "h:mma zzz"
+            dateFormatter.dateFormat = "h:mma"
             return sectionString + dateFormatter.string(from: date)
         }
         return section
