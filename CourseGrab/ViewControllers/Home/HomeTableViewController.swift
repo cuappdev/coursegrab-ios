@@ -464,7 +464,7 @@ extension HomeTableViewController {
 
         // Perform the animations, where we hide the views we don't want anymore and
         // transform them to create the swiping effect.
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             leftButton.alpha = 0
             leftButton.transform = CGAffineTransform(translationX: -20, y: 0)
 
@@ -475,8 +475,9 @@ extension HomeTableViewController {
 
             textField.alpha = 1
             textField.transform = .identity
-        }, completion: { _ in
-            // Remove the views from the navigationBar. We don't want them staying there!
+        },
+        completion: { _ in
+//             Remove the views from the navigationBar. We don't want them staying there!
             leftButton.removeFromSuperview()
             rightButton.removeFromSuperview()
             titleLabel.removeFromSuperview()
@@ -490,7 +491,7 @@ extension HomeTableViewController {
         // Create and present the SearchViewController by fading it in.
         let searchViewController = SearchTableViewController()
         searchViewController.view.frame = view.frame
-        UIView.transition(from: view, to: searchViewController.view, duration: 0.3, options: .transitionCrossDissolve) { _ in
+        UIView.transition(from: view, to: searchViewController.view, duration: 0.2, options: .transitionCrossDissolve) { _ in
             self.navigationController?.pushViewController(searchViewController, animated: false)
 
             // Reset the navigationBar for when the user swipes back.
@@ -504,6 +505,7 @@ extension HomeTableViewController {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
             self.navigationItem.titleView = titleLabel
         }
+        
     }
 
 }

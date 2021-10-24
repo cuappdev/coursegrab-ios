@@ -61,7 +61,6 @@ class SearchTableViewController: UITableViewController {
 // MARK: - Networking
 
 extension SearchTableViewController {
-
     @objc private func getCourses(timer: Timer) {
         if let userInfo = timer.userInfo as? [String: String],
             let searchText = userInfo["searchText"] {
@@ -201,10 +200,15 @@ extension SearchTableViewController {
         setupPopGesture()
         tableView.isScrollEnabled = true
     }
+    
 
     override func viewDidAppear(_ animated: Bool) {
-        textField.becomeFirstResponder()
-        textDidChange(textField)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+            self.textField.becomeFirstResponder()
+            self.textDidChange(self.textField)
+        }
+        
     }
 
     override func viewWillDisappear(_ animated: Bool) {
