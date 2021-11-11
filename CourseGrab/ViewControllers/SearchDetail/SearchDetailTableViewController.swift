@@ -89,7 +89,11 @@ extension SearchDetailTableViewController {
                         self.tableView.reloadRows(at: [indexPath], with: .automatic)
                         let banner = NotificationBanner(customView: TrackingBannerView(section: section, isTracking: true))
                         banner.show(queuePosition: .front, queue: bannerQueue)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
+                            banner.dismiss()
+                        }
                     }
+               
                 case .error(let error):
                     print(error)
                 }
@@ -105,7 +109,11 @@ extension SearchDetailTableViewController {
                         self.tableView.reloadRows(at: [indexPath], with: .automatic)
                         let banner = NotificationBanner(customView: TrackingBannerView(section: section, isTracking: false))
                         banner.show(queuePosition: .front, queue: bannerQueue)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.15) {
+                            banner.dismiss()
+                        }
                     }
+                    
                 case .error(let error):
                     print(error)
                 }
