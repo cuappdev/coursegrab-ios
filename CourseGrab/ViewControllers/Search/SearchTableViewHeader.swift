@@ -24,7 +24,7 @@ class SearchTableViewHeader: UITableViewHeaderFooterView {
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().inset(4)
-            make.top.equalToSuperview().inset(24)
+            make.top.equalToSuperview().inset(3)
         }
     }
 
