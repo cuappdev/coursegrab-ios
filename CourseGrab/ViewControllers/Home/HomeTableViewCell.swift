@@ -22,6 +22,8 @@ class HomeTableViewCell: UITableViewCell {
     private let sectionLabel = UILabel()
     private let statusBadge = UIImageView()
     private let titleLabel = UILabel()
+    private let popularityImageView = UIImageView()
+    private let popularityLabel = UILabel()
 
     var untrackSection: ((Section) -> Void)?
 
@@ -40,6 +42,13 @@ class HomeTableViewCell: UITableViewCell {
         containerView.layer.shadowOffset = .zero
         containerView.backgroundColor = .white
         contentView.addSubview(containerView)
+        
+        popularityImageView.image = UIImage.popularityIcon
+        containerView.addSubview(popularityImageView)
+
+        popularityLabel.font = ._12Medium
+        popularityLabel.textColor = .courseGrabMediumGray
+        containerView.addSubview(popularityLabel)
         
         courseLabel.clipsToBounds = true
         courseLabel.layer.cornerRadius = 12
@@ -131,6 +140,17 @@ class HomeTableViewCell: UITableViewCell {
             make.top.leading.equalTo(18)
             make.trailing.equalToSuperview().inset(40)
         }
+        
+        popularityImageView.snp.makeConstraints { make in
+            make.top.equalTo(courseLabel.snp.bottom).offset(9)
+            make.trailing.equalTo(popularityLabel.snp.leading).offset(-6)
+            make.width.equalTo(16)
+            make.height.equalTo(12)
+        }
+        popularityLabel.snp.makeConstraints { make in
+            make.top.equalTo(courseLabel.snp.bottom).offset(8)
+            make.trailing.equalTo(statusBadge.snp.trailing)
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -145,6 +165,8 @@ class HomeTableViewCell: UITableViewCell {
         sectionLabel.text = section.getSectionByTimezone()
         statusBadge.image = section.status.icon
         titleLabel.text = "\(section.subjectCode) \(section.courseNum): \(section.title)"
+        popularityLabel.text = "\(section.numTracking) tracking"
+
 
         if section.status == .open {
             removeButton.snp.remakeConstraints { make in
