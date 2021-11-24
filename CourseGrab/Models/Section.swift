@@ -56,6 +56,7 @@ struct Section: Codable {
 
     let catalogNum: Int
     let courseNum: Int
+    let courseId: Int
     let instructors: [String]
     let isTracking: Bool
     let mode: String
@@ -64,6 +65,7 @@ struct Section: Codable {
     let status: Status
     let subjectCode: String
     let title: String
+    
 
     func getSectionByTimezone() -> String {
         if let index = section.lastIndex(of: " ") {

@@ -31,6 +31,8 @@ class HomeTableViewController: UITableViewController {
     private let reachability = try! Reachability()
     private var state: State = .loading
     private var tableSections: [TableSection] = []
+    private var coursePresent: Course!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -294,6 +296,34 @@ extension HomeTableViewController {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: homeHeaderReuseId) as! HomeTableViewHeader
         headerView.configure(for: tableSections[section])
         return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
+        cell.changeBackground(isHighlighted: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+            let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
+            cell.changeBackground(isHighlighted: false)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableSections[indexPath.section] {
+        case .available(let sections), .awaiting(let sections):
+            NetworkManager.shared.getCourse(courseNum: sections[indexPath.row].courseId).observe { result in
+                switch result{
+                case .value(let response):
+                    guard response.success else{ return }
+                    let courseDetailViewController = SearchDetailTableViewController(course: response.data)
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(courseDetailViewController, animated: true)
+                    }
+                case .error(let error):
+                    print(error)
+                }
+            }
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -183,6 +183,15 @@ class HomeTableViewCell: UITableViewCell {
             }
         }
     }
+    func changeBackground(isHighlighted: Bool){
+        if isHighlighted{
+            self.containerView.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
+        }
+        else{
+         self.containerView.backgroundColor = .white
+        }
+    }
+    
 
     private func removeSection(_ button: UIButton) {
         guard let section = section else { return }
@@ -197,7 +206,6 @@ class HomeTableViewCell: UITableViewCell {
             UIApplication.shared.open(url)
         }
     }
-
 }
 
 class PillLabel: UILabel {
@@ -220,5 +228,4 @@ class PillLabel: UILabel {
          return contentSize
       }
    }
-    
 }
