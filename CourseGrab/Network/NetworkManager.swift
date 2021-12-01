@@ -59,9 +59,10 @@ class NetworkManager {
         validateToken()
             .chained { self.networking(Endpoint.enableNotifications(enabled: enabled)).decode() }
     }
+    
     func getCourse(courseNum: Int)-> Future<Response<Course>> {
         validateToken()
-            .chained{self.networking(Endpoint.getCourse(courseNum: courseNum)).decode() }
+            .chained { self.networking(Endpoint.getCourse(courseNum: courseNum)).decode() }
     }
 
     private func validateToken() -> Future<Void> {
