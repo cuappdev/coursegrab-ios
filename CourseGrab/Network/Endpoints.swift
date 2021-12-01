@@ -88,4 +88,5 @@ extension Endpoint {
     static func getCourse(courseNum: Int) -> Endpoint{
         return Endpoint(path: "/courses/\(courseNum)/", headers: standardHeaders)
     }
+    
 }
