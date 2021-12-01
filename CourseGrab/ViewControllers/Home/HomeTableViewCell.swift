@@ -143,7 +143,7 @@ class HomeTableViewCell: UITableViewCell {
         
         popularityImageView.snp.makeConstraints { make in
             make.top.equalTo(courseLabel.snp.bottom).offset(9)
-            make.trailing.equalTo(popularityLabel.snp.leading).offset(-6)
+            make.trailing.equalTo(popularityLabel.snp.leading).inset(-4)
             make.width.equalTo(16)
             make.height.equalTo(12)
         }
