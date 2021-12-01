@@ -84,7 +84,8 @@ extension Endpoint {
         let body = EnableNotificationsBody(notification: enabled ? "IOS" : "NONE")
         return Endpoint(path: "/users/notification/", headers: standardHeaders, body: body)
     }
+    
     static func getCourse(courseNum: Int) -> Endpoint{
-        return Endpoint(path: "/courses/\(courseNum)/", headers: standardHeaders )
+        return Endpoint(path: "/courses/\(courseNum)/", headers: standardHeaders)
     }
 }
