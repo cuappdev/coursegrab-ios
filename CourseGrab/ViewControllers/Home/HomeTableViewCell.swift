@@ -183,7 +183,7 @@ class HomeTableViewCell: UITableViewCell {
             }
         }
     }
-    func changeBackground(isHighlighted: Bool){
+    func setBackgroundColor(isHighlighted: Bool){
         if isHighlighted{
             self.containerView.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
         }
