@@ -147,6 +147,7 @@ class HomeTableViewCell: UITableViewCell {
             make.width.equalTo(16)
             make.height.equalTo(12)
         }
+        
         popularityLabel.snp.makeConstraints { make in
             make.top.equalTo(courseLabel.snp.bottom).offset(8)
             make.trailing.equalTo(statusBadge.snp.trailing)
