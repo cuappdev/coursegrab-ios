@@ -30,9 +30,7 @@ class HomeTableViewController: UITableViewController {
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     private let reachability = try! Reachability()
     private var state: State = .loading
-    private var tableSections: [TableSection] = []
-    private var coursePresent: Course!
-    
+    private var tableSections: [TableSection] = []    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -304,17 +302,17 @@ extension HomeTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-            let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
-            cell.setBackgroundColor(isHighlighted: false)
+        let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
+        cell.setBackgroundColor(isHighlighted: false)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableSections[indexPath.section] {
         case .available(let sections), .awaiting(let sections):
             NetworkManager.shared.getCourse(courseNum: sections[indexPath.row].courseId).observe { result in
-                switch result{
+                switch result {
                 case .value(let response):
-                    guard response.success else{ return }
+                    guard response.success else { return }
                     let courseDetailViewController = SearchDetailTableViewController(course: response.data)
                     DispatchQueue.main.async {
                         self.navigationController?.pushViewController(courseDetailViewController, animated: true)
