@@ -85,7 +85,7 @@ extension Endpoint {
         return Endpoint(path: "/users/notification/", headers: standardHeaders, body: body)
     }
     
-    static func getCourse(courseNum: Int) -> Endpoint{
+    static func getCourse(courseNum: Int) -> Endpoint {
         return Endpoint(path: "/courses/\(courseNum)/", headers: standardHeaders)
     }
     
