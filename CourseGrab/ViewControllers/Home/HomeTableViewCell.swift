@@ -168,7 +168,6 @@ class HomeTableViewCell: UITableViewCell {
         titleLabel.text = "\(section.subjectCode) \(section.courseNum): \(section.title)"
         popularityLabel.text = "\(section.numTracking) tracking"
 
-
         if section.status == .open {
             removeButton.snp.remakeConstraints { make in
                 make.top.equalTo(sectionLabel.snp.bottom).offset(18)
@@ -184,15 +183,10 @@ class HomeTableViewCell: UITableViewCell {
             }
         }
     }
-    func setBackgroundColor(isHighlighted: Bool){
-        if isHighlighted{
-            self.containerView.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
-        }
-        else{
-         self.containerView.backgroundColor = .white
-        }
-    }
     
+    func setBackgroundColor(isHighlighted: Bool){
+        isHighlighted ? (containerView.backgroundColor =  [#colorLiteral(red: 0.8064131141, green: 0.8065492511, blue: 0.8063951135, alpha: 1)].first) : (containerView.backgroundColor = .white)
+    }
 
     private func removeSection(_ button: UIButton) {
         guard let section = section else { return }
