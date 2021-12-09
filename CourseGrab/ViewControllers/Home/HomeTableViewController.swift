@@ -298,12 +298,12 @@ extension HomeTableViewController {
     
     override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
-        cell.setBackgroundColor(isHighlighted: true)
+        cell.isHighlighted = true
     }
     
     override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! HomeTableViewCell
-        cell.setBackgroundColor(isHighlighted: false)
+        cell.isHighlighted = false
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
