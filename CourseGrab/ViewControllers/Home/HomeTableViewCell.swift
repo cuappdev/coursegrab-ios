@@ -184,8 +184,10 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
     
-    func setBackgroundColor(isHighlighted: Bool){
-        isHighlighted ? (containerView.backgroundColor =  [#colorLiteral(red: 0.8064131141, green: 0.8065492511, blue: 0.8063951135, alpha: 1)].first) : (containerView.backgroundColor = .white)
+    override var isHighlighted: Bool {
+        didSet{
+            containerView.backgroundColor =  isHighlighted ? UIColor(red: 220 / 255, green: 220 / 255, blue: 220 / 255, alpha: 1) : (.white)
+        }
     }
 
     private func removeSection(_ button: UIButton) {
