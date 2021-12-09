@@ -30,7 +30,7 @@ class HomeTableViewController: UITableViewController {
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     private let reachability = try! Reachability()
     private var state: State = .loading
-    private var tableSections: [TableSection] = []    
+    private var tableSections: [TableSection] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
