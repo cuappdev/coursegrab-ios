@@ -143,10 +143,11 @@ class HomeTableViewCell: UITableViewCell {
         
         popularityImageView.snp.makeConstraints { make in
             make.top.equalTo(courseLabel.snp.bottom).offset(9)
-            make.trailing.equalTo(popularityLabel.snp.leading).offset(-6)
+            make.trailing.equalTo(popularityLabel.snp.leading).inset(-4)
             make.width.equalTo(16)
             make.height.equalTo(12)
         }
+        
         popularityLabel.snp.makeConstraints { make in
             make.top.equalTo(courseLabel.snp.bottom).offset(8)
             make.trailing.equalTo(statusBadge.snp.trailing)
@@ -167,7 +168,6 @@ class HomeTableViewCell: UITableViewCell {
         titleLabel.text = "\(section.subjectCode) \(section.courseNum): \(section.title)"
         popularityLabel.text = "\(section.numTracking) tracking"
 
-
         if section.status == .open {
             removeButton.snp.remakeConstraints { make in
                 make.top.equalTo(sectionLabel.snp.bottom).offset(18)
@@ -181,6 +181,12 @@ class HomeTableViewCell: UITableViewCell {
                 make.height.equalTo(37)
                 make.leading.trailing.bottom.equalToSuperview().inset(18)
             }
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            containerView.backgroundColor = isHighlighted ? UIColor(red: 220 / 255, green: 220 / 255, blue: 220 / 255, alpha: 1) : .white
         }
     }
 
@@ -197,7 +203,6 @@ class HomeTableViewCell: UITableViewCell {
             UIApplication.shared.open(url)
         }
     }
-
 }
 
 class PillLabel: UILabel {
@@ -220,5 +225,4 @@ class PillLabel: UILabel {
          return contentSize
       }
    }
-    
 }

@@ -55,6 +55,7 @@ struct Sections: Codable {
 struct Section: Codable {
 
     let catalogNum: Int
+    let courseId: Int
     let courseNum: Int
     let instructors: [String]
     let isTracking: Bool
