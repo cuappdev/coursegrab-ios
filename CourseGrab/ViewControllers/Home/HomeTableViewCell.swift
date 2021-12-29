@@ -185,7 +185,7 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     override var isHighlighted: Bool {
-        didSet{
+        didSet {
             containerView.backgroundColor =  isHighlighted ? UIColor(red: 220 / 255, green: 220 / 255, blue: 220 / 255, alpha: 1) : .white
         }
     }
