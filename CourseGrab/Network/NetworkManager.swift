@@ -65,6 +65,14 @@ class NetworkManager {
             .chained { self.networking(Endpoint.getCourse(courseNum: courseNum)).decode() }
     }
 
+    func blockValidateToken() {
+        let semaphore = DispatchSemaphore(value: 0)
+        validateToken().observe { result in
+            semaphore.signal()
+        }
+        semaphore.wait()
+    }
+
     private func validateToken() -> Future<Void> {
         let promise = Promise<Void>()
 

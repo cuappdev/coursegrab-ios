@@ -184,6 +184,7 @@ extension HomeTableViewController {
                 DispatchQueue.main.async {
                     self.state = .error
                     self.tableView.reloadEmptyDataSet()
+                    User.current?.signOut()
                 }
             }
         }

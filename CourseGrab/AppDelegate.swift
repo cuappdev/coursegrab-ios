@@ -38,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setup push notifications
         UNUserNotificationCenter.current().delegate = self
 
+        NetworkManager.shared.blockValidateToken()
+
         return true
     }
 
