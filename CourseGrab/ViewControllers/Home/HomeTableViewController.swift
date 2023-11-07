@@ -135,7 +135,7 @@ extension HomeTableViewController {
                 if awaiting.count > 0 {
                     sections.append(.awaiting(awaiting))
                 }
-                
+              
                 DispatchQueue.main.async {
                     if available.count == 0 && awaiting.count == 0 {
                         self.state = .empty
