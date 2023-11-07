@@ -126,8 +126,16 @@ extension HomeTableViewController {
                 
                 let available = response.data.sections.filter { $0.status == .open }
                 let awaiting = response.data.sections.filter { $0.status != .open }
-                let sections: [TableSection] = [.available(available), .awaiting(awaiting)]
+                var sections = [TableSection]()
                 
+                if available.count > 0 {
+                    sections.append(.available(available))
+                }
+                
+                if awaiting.count > 0 {
+                    sections.append(.awaiting(awaiting))
+                }
+              
                 DispatchQueue.main.async {
                     if available.count == 0 && awaiting.count == 0 {
                         self.state = .empty
