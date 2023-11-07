@@ -6,7 +6,6 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
-import DifferenceKit
 import Foundation
 import UIKit
 
@@ -90,23 +89,6 @@ struct Section: Codable {
     func getSectionNum() -> String {
         let sectionNum = self.section.components(separatedBy: "/")[0]
         return sectionNum.trimmingCharacters(in: .whitespaces)
-    }
-
-}
-
-extension Section: Differentiable {
-
-    typealias DifferenceIdentifier = Data
-
-    var differenceIdentifier: Data {
-        if let data = try? JSONEncoder().encode(self) {
-            return data
-        }
-        return Data()
-    }
-
-    func isContentEqual(to source: Section) -> Bool {
-        differenceIdentifier == source.differenceIdentifier
     }
 
 }

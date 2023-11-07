@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,7 +22,6 @@
 		065D2B752449174B00A8BC3A /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D2B712449174B00A8BC3A /* HomeTableViewController.swift */; };
 		065D2B762449174B00A8BC3A /* HomeTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D2B722449174B00A8BC3A /* HomeTableViewHeader.swift */; };
 		06B0A52923E247C7001ED66A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B0A52823E247C7001ED66A /* Section.swift */; };
-		06BE0FB92416DD00001CA829 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BE0FB82416DD00001CA829 /* String+Extensions.swift */; };
 		06C9B9DA23FDF7900025CA8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9B9D923FDF7900025CA8E /* User.swift */; };
 		06DB5E8523EB77A300F8D924 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */; };
 		06FC0F5624492F88001707F3 /* APNNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FC0F5524492F88001707F3 /* APNNotificationCenter.swift */; };
@@ -71,7 +70,6 @@
 		065D2B722449174B00A8BC3A /* HomeTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewHeader.swift; sourceTree = "<group>"; };
 		067F000123E918C400F78B36 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		06B0A52823E247C7001ED66A /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		06BE0FB82416DD00001CA829 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		06C9B9D923FDF7900025CA8E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		06DB5E8423EB77A300F8D924 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		06FC0F5524492F88001707F3 /* APNNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNNotificationCenter.swift; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 		B654C59423DE38F400F05141 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				06BE0FB82416DD00001CA829 /* String+Extensions.swift */,
 				B654C59023DE38DB00F05141 /* UIColor+Extensions.swift */,
 				B6761208244F98540065D568 /* UIDevice+Extensions.swift */,
 				B654C59223DE38ED00F05141 /* UIFont+Extensions.swift */,
@@ -492,7 +489,6 @@
 				06FC0F5624492F88001707F3 /* APNNotificationCenter.swift in Sources */,
 				065D2B752449174B00A8BC3A /* HomeTableViewController.swift in Sources */,
 				0656EE9423EBBDEB0031CB2A /* SettingsAnimator.swift in Sources */,
-				06BE0FB92416DD00001CA829 /* String+Extensions.swift in Sources */,
 				C8626A0D23E34FC20039CC14 /* SearchDetailCardTableViewCell.swift in Sources */,
 				06C9B9DA23FDF7900025CA8E /* User.swift in Sources */,
 				C8A3D52E23E0D70B0007E488 /* Keys.swift in Sources */,

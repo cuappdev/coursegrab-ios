@@ -6,7 +6,6 @@
 //  Copyright © 2020 Cornell AppDev. All rights reserved.
 //
 
-import DifferenceKit
 import DZNEmptyDataSet
 import Reachability
 import SPPermissions
@@ -124,60 +123,22 @@ extension HomeTableViewController {
         NetworkManager.shared.getAllTrackedSections().observe { result in
             switch result {
             case .value(let response):
-                // Section identifiers
-                let availableModel = "available"
-                let awaitingModel = "awaiting"
-
-                // Construct source array
-                let currentAvailable = self.availableSections()
-                let currentAwaiting = self.awaitingSections()
-                var source: [ArraySection<String, Section>] = []
-                if currentAvailable.count > 0 {
-                    source.append(ArraySection(model: availableModel, elements: currentAvailable))
-                }
-                if currentAwaiting.count > 0 {
-                    source.append(ArraySection(model: awaitingModel, elements: currentAwaiting))
-                }
-
-                // Construct target array
+                
                 let available = response.data.sections.filter { $0.status == .open }
                 let awaiting = response.data.sections.filter { $0.status != .open }
-                var target: [ArraySection<String, Section>] = []
-                if available.count > 0 {
-                    target.append(ArraySection(model: availableModel, elements: available))
-                }
-                if awaiting.count > 0 {
-                    target.append(ArraySection(model: awaitingModel, elements: awaiting))
-                }
-
-                // Get change set
-                let changeSet = StagedChangeset(source: source, target: target)
-
-                // Apply updates to UI
+                let sections: [TableSection] = [.available(available), .awaiting(awaiting)]
+                
                 DispatchQueue.main.async {
-                    // Update state if needed
                     if available.count == 0 && awaiting.count == 0 {
                         self.state = .empty
                     } else {
                         self.state = .normal
                     }
-
-                    // Tell DifferenceKit to handle reloading the table
-                    self.tableView.reload(using: changeSet, with: .fade) { data in
-                        var newTableSections: [TableSection] = []
-                        // Add the available table section only if there are available sections
-                        if let newAvailable = data.first(where: { $0.model == availableModel })?.elements, newAvailable.count > 0 {
-                            newTableSections.append(.available(newAvailable))
-                        }
-                        // Add the awaiting table section only if there are awaiting sections
-                        if let newAwaiting = data.first(where: { $0.model == awaitingModel })?.elements, newAwaiting.count > 0 {
-                            newTableSections.append(.awaiting(newAwaiting))
-                        }
-                        // Update model
-                        self.tableSections = newTableSections
-                    }
+                    
+                    self.tableSections = sections
+                    
+                    self.tableView.reloadData()
                     self.tableView.reloadEmptyDataSet()
-                    // Reload table headers
                     self.reloadSectionHeaders()
                 }
             case .error:
