@@ -6,6 +6,11 @@
 #  Created by Vin Bui on 1/4/24.
 #  Copyright © 2024 Cornell AppDev. All rights reserved.
 
+echo "Installing Cocoapods Dependencies"
+brew install cocoapods
+pod deintegrate
+pod install
+
 echo "Downloading Secrets"
 brew install wget
 cd $CI_WORKSPACE/ci_scripts
