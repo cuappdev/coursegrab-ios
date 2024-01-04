@@ -5,12 +5,6 @@ PODS:
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
   - AppDevAnnouncements (0.0.1)
-  - DifferenceKit (1.1.5):
-    - DifferenceKit/Core (= 1.1.5)
-    - DifferenceKit/UIKitExtension (= 1.1.5)
-  - DifferenceKit/Core (1.1.5)
-  - DifferenceKit/UIKitExtension (1.1.5):
-    - DifferenceKit/Core
   - DZNEmptyDataSet (1.8.1)
   - Firebase/Analytics (6.32.0):
     - Firebase/Core
@@ -120,7 +114,6 @@ PODS:
 
 DEPENDENCIES:
   - AppDevAnnouncements (from `https://github.com/cuappdev/appdev-announcements.git`)
-  - DifferenceKit
   - DZNEmptyDataSet
   - Firebase/Analytics
   - Firebase/Auth
@@ -138,7 +131,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppAuth
-    - DifferenceKit
     - DZNEmptyDataSet
     - Firebase
     - FirebaseAnalytics
@@ -181,7 +173,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   AppDevAnnouncements: e17a7f441fb0664583bb08e21dc709214d15b70f
-  DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: afa030f17f5421810f379a42b0e5d3302d27eb26
   FirebaseAnalytics: a4d98464f455f5056063932123fa441025322f30
@@ -208,6 +199,6 @@ SPEC CHECKSUMS:
   Tactile: 266a3ddd39e670205de3987ded0414d9206ae300
   Wormholy: bfc1c8679eefd0edd92638758e21c3961b1b3b50
 
-PODFILE CHECKSUM: 7ec3eaa274da0b55aaf4e2721b42b5ca194aee72
+PODFILE CHECKSUM: 008528f8cafa667c67a9e6c07b273789a6613031
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.12.1
