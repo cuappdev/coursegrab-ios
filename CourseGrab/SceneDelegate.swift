@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         Auth.auth().addStateDidChangeListener { (_, user) in
             if let email = user?.email, email.split(separator: "@").last != "cornell.edu" &&
-                email != "coursegrabappstore@gmail.com" {
+                email != "appstoreappdev@gmail.com" {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Invalid Email", message: "You must use a Cornell email.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in User.current?.signOut() }))
